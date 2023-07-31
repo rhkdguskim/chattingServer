@@ -25,6 +25,7 @@
     "@nestjs/core": "^9.0.0",
     "@nestjs/jwt": "^10.1.0",
     "@nestjs/platform-express": "^9.0.0",
+    "@nestjs/swagger": "^7.1.4",
     "@nestjs/typeorm": "^10.0.0",
     "bcrypt": "^5.1.0",
     "class-transformer": "^0.5.1",
@@ -32,6 +33,7 @@
     "mysql2": "^3.5.2",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.2.0",
+    "swagger-ui-express": "^5.0.0",
     "typeorm": "^0.3.17"
   },
   "devDependencies": {
