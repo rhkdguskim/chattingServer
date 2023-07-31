@@ -1,5 +1,6 @@
-import { Entity, Column, PrimaryGeneratedColumn, BeforeInsert , CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, BeforeInsert , CreateDateColumn, UpdateDateColumn, OneToMany } from 'typeorm';
 import * as bsrypt from 'bcrypt'
+import { Friend } from 'src/friend/friend.entity';
 
 @Entity()
 export class User {
@@ -35,4 +36,6 @@ export class User {
   @UpdateDateColumn()
   updateAt!: Date;
 
+  @OneToMany(type => Friend, friend => friend.user, { eager: true })
+    friends: Friend[]
 }
