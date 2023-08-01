@@ -1,4 +1,4 @@
-import { ForbiddenException, Injectable, UnauthorizedException, HttpStatus } from '@nestjs/common';
+import { ForbiddenException, Injectable, UnauthorizedException, HttpStatus, Res, Req, Response } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
 import { User } from '../users/users.entity';
@@ -20,14 +20,12 @@ export class AuthService {
     
         
         if (!user) {
-            console.log("No usererror")
             throw new UnauthorizedException();
         }
         
         const isPasswordValid = await bcrypt.compare(loginUser.password, user.password);
 
         if (!isPasswordValid) {
-            console.log("password error")
             throw new UnauthorizedException();
         }
     
@@ -35,6 +33,10 @@ export class AuthService {
         return {
             access_token: await this.jwtService.signAsync(payload)
         };
+    }
+
+    async signOut(@Req() req, @Res() res:Response): Promise<any> {
+
     }
 
     async create(createUserDto: CreateUserDto) : Promise<any> {

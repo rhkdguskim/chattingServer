@@ -20,6 +20,13 @@ export class AuthController {
         return this.authService.signIn(loginUser);
     }
 
+    @Post('logout')
+    @ApiOperation({ summary: '사용자 로그아웃 API', description: '사용자가 로그아웃 한다.' })
+    @ApiCreatedResponse({ description: 'JWT 토큰을 폐기합니다.', type: LoginUserDto })
+    signOut(@Body() loginUser: LoginUserDto) {
+        return this.authService.signIn(loginUser);
+    }
+
     @Post('signup')
     @ApiOperation({ summary: '사용자 생성 API', description: '사용자를 생성한다.' })
     @ApiCreatedResponse({ description: '사용자를 생성한다.', type: User })
