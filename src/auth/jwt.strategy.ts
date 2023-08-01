@@ -24,6 +24,9 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
             throw new UnauthorizedException();
         }
 
+        // 패스워드 정보는 보내지 않는다.
+        user.password = ""
+
         return user;
     }
 }

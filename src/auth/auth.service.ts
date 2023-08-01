@@ -35,10 +35,6 @@ export class AuthService {
         };
     }
 
-    async signOut(@Req() req, @Res() res:Response): Promise<any> {
-
-    }
-
     async create(createUserDto: CreateUserDto) : Promise<any> {
         const isExist = await this.userService.findbyUserId(createUserDto.user_id)
         if (isExist) {
@@ -50,13 +46,5 @@ export class AuthService {
         }
 
         return this.userService.createUser(createUserDto)
-    }
-
-    async saveUser(user: UpdateUserDto): Promise<User> {
-        return await this.userService.saveUser(user);
-    }
-
-    async remove(id: number): Promise<DeleteResult> {
-        return await this.userService.remove(id);
     }
 }
