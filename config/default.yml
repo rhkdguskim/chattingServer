@@ -3,8 +3,8 @@ server:
 
 db:
   type: 'mysql'
-  host : 'localhost'
-  port: 13306
+  host : '110.110.10.102'
+  port: 3306
   username: 'root'
   password: 'root'
   database: 'kakaotalk'
