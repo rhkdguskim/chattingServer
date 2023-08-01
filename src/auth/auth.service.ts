@@ -18,18 +18,20 @@ export class AuthService {
     async signIn(loginUser: LoginUserDto): Promise<any> {
         const user = await this.userService.findbyUserId(loginUser.user_id);
     
+        
         if (!user) {
+            console.log("No usererror")
             throw new UnauthorizedException();
         }
         
         const isPasswordValid = await bcrypt.compare(loginUser.password, user.password);
 
         if (!isPasswordValid) {
+            console.log("password error")
             throw new UnauthorizedException();
         }
     
-        const payload = { id: user.id, user_id: user.user_id, name: user.name };
-    
+        const payload = { id: user.id, user_id: user.user_id};
         return {
             access_token: await this.jwtService.signAsync(payload)
         };
