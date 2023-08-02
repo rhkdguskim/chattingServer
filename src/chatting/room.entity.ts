@@ -1,4 +1,6 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne , CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany , CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { Participant } from './participant.entity';
+import { Chatting } from './chatting.entity';
 
 @Entity()
 export class Room {
@@ -6,7 +8,13 @@ export class Room {
   id!: number;
 
   @Column()
-  identifier!: number;
+  owner_id!: string;
+
+  @Column()
+  identifier!: string;
+
+  @Column()
+  room_name!: string;
 
   @Column()
   type!: number;
@@ -19,4 +27,10 @@ export class Room {
 
   @UpdateDateColumn()
   updateAt!: Date;
+
+  @OneToMany(type => Participant, participant => participant.room, { eager: true })
+  participants: Participant[]
+
+  @OneToMany(type => Chatting, chatting => chatting.room, {eager: true})
+  chattings:Chatting[]
 }

@@ -1,12 +1,12 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne , CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn , CreateDateColumn, UpdateDateColumn, ManyToOne } from 'typeorm';
+import { Participant } from './participant.entity';
+import { Room } from './room.entity';
+import { User } from 'src/users/users.entity';
 
 @Entity()
 export class Chatting {
   @PrimaryGeneratedColumn()
   id!: number;
-
-  @Column()
-  room_id!: number;
 
   @Column()
   message!: string;
@@ -19,4 +19,10 @@ export class Chatting {
 
   @UpdateDateColumn()
   updateAt!: Date;
+
+  @ManyToOne(() => Room, room => room.chattings)
+  room!: Room;
+
+  @ManyToOne(() => User, user => user.chattings)
+  user: User;
 }

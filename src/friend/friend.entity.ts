@@ -15,7 +15,7 @@ export class Friend {
   friend_name!: string;
 
   @ManyToOne(() => User)
-  user?: User;
+  user!: User;
   
   @CreateDateColumn()
   createdAt!: Date;

@@ -18,5 +18,5 @@ export class CreateRoom {
   room_name: string;
 
   @ApiProperty({ description: '참가유저목록' })
-  participant: User[];
+  participants: User[];
 }

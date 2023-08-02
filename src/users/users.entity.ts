@@ -1,6 +1,8 @@
 import { Entity, Column, PrimaryGeneratedColumn, BeforeInsert , CreateDateColumn, UpdateDateColumn, OneToMany } from 'typeorm';
 import * as bsrypt from 'bcrypt'
 import { Friend } from 'src/friend/friend.entity';
+import { Chatting } from 'src/chatting/chatting.entity';
+import { Participant } from 'src/chatting/participant.entity';
 
 @Entity()
 export class User {
@@ -38,4 +40,10 @@ export class User {
 
   @OneToMany(type => Friend, friend => friend.user, { eager: true })
     friends: Friend[]
+
+  @OneToMany(type => Chatting, chatting => chatting.user, { eager: true })
+    chattings: Chatting[] 
+
+  @OneToMany(type => Participant, participant => participant.user, { eager: true })
+    participants: Participant[]
 }
