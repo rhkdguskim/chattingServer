@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany , CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany , CreateDateColumn, UpdateDateColumn, Unique } from 'typeorm';
 import { Participant } from './participant.entity';
 import { Chatting } from './chatting.entity';
 
@@ -11,6 +11,7 @@ export class Room {
   owner_id!: string;
 
   @Column()
+  @Unique(['identifier']) // identifier 필드를 고유하게 만듦
   identifier!: string;
 
   @Column()

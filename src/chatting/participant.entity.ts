@@ -7,9 +7,6 @@ export class Participant {
   @PrimaryGeneratedColumn()
   id!: number;
   
-  @Column()
-  user_id!: string;
-  
   @CreateDateColumn()
   createdAt!: Date;
 

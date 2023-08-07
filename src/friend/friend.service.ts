@@ -54,23 +54,33 @@ export class FriendService {
 
     async delFriend(delFriend: Friend, user:User): Promise<DeleteResult> {
         // 자기자신은 친구추가 불가
-        if (user.user_id != delFriend.my_id) {
-            throw new ForbiddenException({
-                statusCode: HttpStatus.FORBIDDEN,
-                message: [`자기자신이외에는 친구를 삭제 할 수 없습니다.`],
-                error: 'Forbidden'
-            })
-        }
+        // if (user.user_id != delFriend.my_id) {
+        //     throw new ForbiddenException({
+        //         statusCode: HttpStatus.FORBIDDEN,
+        //         message: [`자기자신이외에는 친구를 삭제 할 수 없습니다.`],
+        //         error: 'Forbidden'
+        //     })
+        // }
         
         return this.friendRepository.delete(delFriend) 
     }
 
     async changeFriendName(createFriend: CreateFriendDto, user:User): Promise<Friend> {
         const {friend_id, friend_name} = createFriend;
-        const friend = this.friendRepository.create({
-            friend_name,
-            user,
-        })
-        return this.friendRepository.save(friend)
+        const friend : Friend = await this.friendRepository.findOne({where : {
+            my_id:user.user_id,
+            friend_id
+        }})
+        if (friend) {
+            friend.friend_name = friend_name;
+            return await this.friendRepository.save(friend)
+        } else {
+            throw new ForbiddenException({
+                statusCode: HttpStatus.FORBIDDEN,
+                message: [`해당하는 친구가 없습니다.`],
+                error: 'Forbidden'
+            })
+        }
+
     }
 }

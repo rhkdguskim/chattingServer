@@ -23,14 +23,13 @@ export class FriendController {
     @ApiOperation({ summary: '친구 추가하기 API', description: '친구를 추가합니다.' })
     @ApiCreatedResponse({ description: '새로운 친구를 추가합니다.'})
     async AddFriend(@Body() createFriend: CreateFriendDto, @GetUser() user: User) : Promise<Friend> {
-        console.log(createFriend)
         return this.friendService.addFriend(createFriend, user);
     }
 
     @Post('mod')
     @ApiOperation({ summary: '친구 이름 변경하기 API', description: '등록된 친구중 친구정보를 변경합니다.' })
     @ApiCreatedResponse({ description: '등록된 친구중 친구정보를 변경합니다.'})
-    async ModFriend(createFriend: CreateFriendDto, @GetUser() user: User) : Promise<Friend> {
+    async ModFriend(@Body() createFriend: CreateFriendDto, @GetUser() user: User) : Promise<Friend> {
         return this.friendService.changeFriendName(createFriend, user)
     }
 

@@ -4,10 +4,6 @@ import { RoomType } from "./room.type.dto";
 import { User } from "src/users/users.entity";
 
 export class CreateRoom {
-  @IsString()
-  @ApiProperty({ description: '아이디' })
-  my_id: string;
-
   @ApiProperty({ description: '방 타입' })
   type: RoomType;
 
