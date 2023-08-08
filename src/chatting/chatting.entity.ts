@@ -1,5 +1,4 @@
 import { Entity, Column, PrimaryGeneratedColumn , CreateDateColumn, UpdateDateColumn, ManyToOne } from 'typeorm';
-import { Participant } from './participant.entity';
 import { Room } from './room.entity';
 import { User } from 'src/users/users.entity';
 

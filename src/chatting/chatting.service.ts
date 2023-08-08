@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, ForbiddenException, HttpStatus } from '@nestjs/common';
 import { Chatting } from './chatting.entity';
 import { Room } from './room.entity';
 import { Participant } from './participant.entity';
@@ -20,45 +20,26 @@ constructor(
 
 ) {}
     
-    async createRoom(createRoom : CreateRoom, user : User) :Promise<Room> {
-        const {type, identifier} = createRoom
-        const findRoom = await this.roomRepository.findOne({where : {
-            identifier
-        }});
-
-        if (findRoom) { // 방이 존재하는 경우
-            return findRoom
-        } else { // 방이 존재하지않는경우 방을 새로 생성
-
-            const room = await this.roomRepository.create({owner_id:user.user_id, type, identifier, last_chat:''}) // 채팅방을 생성한다.
-            return await this.roomRepository.save(room);
-        } 
-
-    }
-
-    async inviteToRoom(inviteToRoom : InviteToRoom) : Promise<Room> {
-        const participants : Participant[] = []
-        const room : Room = await this.roomRepository.findOne({where : {
-            identifier : inviteToRoom.identifier
-        }})
-
-        if (inviteToRoom.participants) {
-            inviteToRoom.participants.forEach( async (user) => {
-                const newparticipant = this.participantRepository.create( {
-                    user,
-                    room,
-                    room_name:inviteToRoom.room_name,
-                    not_read_chat:0,
-                })
-                const result = await this.participantRepository.save(newparticipant);
-                participants.push(result)
-            })
+    async createRoom(createRoom: CreateRoom, user: User): Promise<Room> {
+        const { type, participants, room_name } = createRoom;
+        // 채팅방을 생성하고 저장
+        const newRoom = this.roomRepository.create({
+        owner_id: user.user_id,
+        type,
+        last_chat: '',
+        });
+        const room = await this.roomRepository.save(newRoom);
+        // 참가자들을 생성하고 채팅방과 연결하여 저장
+        for (const participantUser of participants) {
+        const newParticipant = this.participantRepository.create({
+            user: participantUser,
+            room,
+            room_name,
+            not_read_chat: 0,
+        });
+        await this.participantRepository.save(newParticipant);
         }
-        participants.forEach(person => {
-            room.participants.push(person)
-        })
-        const result = await this.roomRepository.save(room);
-        return result
+        return this.roomRepository.save(room);
     }
 
     // 자기자신이 참가한 채팅방 Participant와 Room와 Join 하여 결과 출력

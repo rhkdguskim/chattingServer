@@ -11,11 +11,6 @@ export class Room {
   owner_id!: string;
 
   @Column()
-  @Unique(['identifier']) // identifier 필드를 고유하게 만듦
-  @Generated('uuid')
-  identifier!: string;
-
-  @Column()
   type!: number;
 
   @Column()
@@ -27,8 +22,8 @@ export class Room {
   @UpdateDateColumn()
   updateAt!: Date;
 
-  @OneToMany(type => Participant, participant => participant.room, { eager: true })
-  participants: Participant[]
+  @OneToMany(type => Participant, participant => participant.room, { eager: true, cascade: true })
+  participants: Participant[]; // 관련된 참가자들을 eager 로딩하고, 채팅방이 저장될 때 함께 저장(cascade)
 
   @OneToMany(type => Chatting, chatting => chatting.room, {eager: true})
   chattings:Chatting[]

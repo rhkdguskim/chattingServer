@@ -28,11 +28,4 @@ export class ChattingController {
     async CreateRoom(@Body() createRoom: CreateRoom, @GetUser() user: User) : Promise<Room> {
         return this.chattingService.createRoom(createRoom, user)
     }
-
-    @Post('invite')
-    @ApiOperation({ summary: '방에 초대하기 API', description: '방에 초대합니다.' })
-    @ApiCreatedResponse({ description: '등록된 친구중 친구정보를 변경합니다.'})
-    async Invite(@Body() inviteToRoom: InviteToRoom, @GetUser() user: User) : Promise<Room> {
-        return this.chattingService.inviteToRoom(inviteToRoom)
-    }
 }
