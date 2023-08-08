@@ -12,7 +12,7 @@ export class Chatting {
   message!: string;
 
   @Column()
-  not_read!: boolean;
+  not_read!: number;
   
   @CreateDateColumn()
   createdAt!: Date;

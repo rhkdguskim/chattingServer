@@ -21,26 +21,18 @@ constructor(
 ) {}
     
     async createRoom(createRoom : CreateRoom, user : User) :Promise<Room> {
-        const {type, room_name, identifier, participants} = createRoom
-        const room = await this.roomRepository.create({owner_id:user.user_id, type, identifier, last_chat:'', room_name}) // 채팅방을 생성한다.
-        const resultRoom = await this.roomRepository.save(room);
-        const resultParticipants = []
-        if (participants) {
-            await participants.forEach( async (person) => {
-                const participant = this.participantRepository.create({
-                    user:person,
-                    room:resultRoom
-                })
-                const resultPerson =  await this.participantRepository.save(participant)
-                resultParticipants.push(resultPerson)
-            })
-            resultRoom.participants = resultParticipants
-            const newRoom = await this.roomRepository.save(resultRoom);
-            return newRoom
-        }
-        else {
-            return resultRoom
-        }
+        const {type, identifier} = createRoom
+        const findRoom = await this.roomRepository.findOne({where : {
+            identifier
+        }});
+
+        if (findRoom) { // 방이 존재하는 경우
+            return findRoom
+        } else { // 방이 존재하지않는경우 방을 새로 생성
+
+            const room = await this.roomRepository.create({owner_id:user.user_id, type, identifier, last_chat:''}) // 채팅방을 생성한다.
+            return await this.roomRepository.save(room);
+        } 
 
     }
 
@@ -49,11 +41,14 @@ constructor(
         const room : Room = await this.roomRepository.findOne({where : {
             identifier : inviteToRoom.identifier
         }})
+
         if (inviteToRoom.participants) {
             inviteToRoom.participants.forEach( async (user) => {
                 const newparticipant = this.participantRepository.create( {
                     user,
-                    room
+                    room,
+                    room_name:inviteToRoom.room_name,
+                    not_read_chat:0,
                 })
                 const result = await this.participantRepository.save(newparticipant);
                 participants.push(result)
@@ -66,10 +61,13 @@ constructor(
         return result
     }
 
-    async getRoom( user: User ): Promise<Participant[]> {
-        const participant = await this.participantRepository.find({where : {
-            user:user
-        }})
-        return participant;
+    // 자기자신이 참가한 채팅방 Participant와 Room와 Join 하여 결과 출력
+    async getRoomList( user: User ): Promise<Participant[]> {
+        const rommInfo = this.participantRepository
+        .createQueryBuilder('participant')
+        .where({user})
+        .innerJoinAndSelect('participant.room', 'room')
+        .getMany();
+        return rommInfo;
     }
 }

@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany , CreateDateColumn, UpdateDateColumn, Unique } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany , CreateDateColumn, UpdateDateColumn, Unique, Generated } from 'typeorm';
 import { Participant } from './participant.entity';
 import { Chatting } from './chatting.entity';
 
@@ -12,10 +12,8 @@ export class Room {
 
   @Column()
   @Unique(['identifier']) // identifier 필드를 고유하게 만듦
+  @Generated('uuid')
   identifier!: string;
-
-  @Column()
-  room_name!: string;
 
   @Column()
   type!: number;
