@@ -8,8 +8,8 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
  */
 export function setupSwagger(app: INestApplication): void {
   const options = new DocumentBuilder()
-    .setTitle('KaKaoTalk API Docs')
-    .setDescription('KaKaoTalk API description')
+    .setTitle('KwangsTalk API Docs')
+    .setDescription('KwangsTalk API description')
     .setVersion('1.0.0')
     .build();
 

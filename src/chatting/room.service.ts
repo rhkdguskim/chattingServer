@@ -5,6 +5,7 @@ import { Repository, FindOneOptions } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateRoom } from './dto/chatting.createRoom.dto';
 import { User } from 'src/users/users.entity';
+import { InviteToRoom } from './dto/chatting.inviteToRoom.dto';
 
 @Injectable()
 export class RoomService {
@@ -36,6 +37,22 @@ constructor(
         await this.participantRepository.save(newParticipant);
         }
         return this.roomRepository.save(room);
+    }
+
+    async InviteRoom(inviteToRoom: InviteToRoom): Promise<Participant[]> {
+        const results :Participant[] = []
+        const { room, room_name, participants} = inviteToRoom;
+        participants.forEach(async (user) => {
+            const instnace = this.participantRepository.create({
+                user,
+                room,
+                room_name,
+            })
+
+            const participant = await this.participantRepository.save(instnace);
+            results.push(participant)
+        })
+        return results
     }
 
     // 자기자신이 참가한 채팅방 Participant와 Room와 Join 하여 결과 출력
