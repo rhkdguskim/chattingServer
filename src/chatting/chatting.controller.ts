@@ -1,7 +1,7 @@
 import { Body, Controller, Post, Get } from '@nestjs/common';
 import { UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { ChattingService } from './chatting.service';
+import { RoomService } from './room.service';
 import { ApiOperation, ApiCreatedResponse } from '@nestjs/swagger';
 import { CreateRoom } from './dto/chatting.createRoom.dto';
 import { GetUser } from 'src/auth/get-user.decorator';
@@ -13,7 +13,7 @@ import { Participant } from './participant.entity';
 @Controller('chatting')
 @UseGuards(AuthGuard())
 export class ChattingController {
-    constructor(private chattingService : ChattingService) {}
+    constructor(private chattingService : RoomService) {}
 
     @Get('')
     @ApiOperation({ summary: '유저의 방 리스트 API', description: '유저의 방 리스트를 불러옵니다.' })

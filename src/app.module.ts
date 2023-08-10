@@ -12,6 +12,7 @@ import { UsersModule } from './users/users.module';
 import { Chatting } from './chatting/chatting.entity';
 import { Room } from './chatting/room.entity';
 import { Participant } from './chatting/participant.entity';
+import { FileModule } from './file/file.module';
 
 const dbConfig = config.get('db')
 @Module({
@@ -20,6 +21,7 @@ const dbConfig = config.get('db')
     UsersModule,
     FriendModule,
     ChattingModule,
+    FileModule,
   TypeOrmModule.forRoot({
     type: dbConfig.type,
     host: dbConfig.host,
@@ -30,6 +32,7 @@ const dbConfig = config.get('db')
     entities: [User, Friend, Chatting, Room, Participant],
     synchronize: dbConfig.synchronize,
   }),
+  FileModule,
   ],
   controllers: [AppController],
   providers: [AppService],

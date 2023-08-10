@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn , CreateDateColumn, UpdateDateColumn, ManyToOne } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn , CreateDateColumn, UpdateDateColumn, ManyToOne, JoinColumn } from 'typeorm';
 import { Room } from './room.entity';
 import { User } from 'src/users/users.entity';
 
@@ -20,8 +20,10 @@ export class Chatting {
   updateAt!: Date;
 
   @ManyToOne(() => Room, room => room.chattings)
+  @JoinColumn({ name: 'room_id' })
   room!: Room;
 
   @ManyToOne(() => User, user => user.chattings)
+  @JoinColumn({ name: 'user_id' })
   user: User;
 }

@@ -9,9 +9,11 @@ export class Participant {
   id!: number;
 
   @ManyToOne(() => Room, room => room.participants, { nullable: false })
+  @JoinColumn({ name: 'room_id' })
   room!: Room;
 
   @ManyToOne(() => User, user => user.participants, { nullable: false })
+  @JoinColumn({ name: 'user_id' })
   user!: User;
 
   @Column()
