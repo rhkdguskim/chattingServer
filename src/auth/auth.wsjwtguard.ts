@@ -9,7 +9,7 @@ const jwtConstants = config.get('jwt')
 @Injectable()
 export class WsJwtGuard implements CanActivate {
 
-    constructor(private jwtService: JwtService) { }
+    constructor(private jwtService: JwtService, private userService : UsersService) { }
 
     async canActivate(context: ExecutionContext): Promise<boolean> {
 
@@ -24,12 +24,8 @@ export class WsJwtGuard implements CanActivate {
             const payload = await this.jwtService.verifyAsync(authToken, {
                 secret: jwtConstants.secret,
             });
-            const user = {
-                id:payload.id,
-                user_id : payload.user_id
-            }
+            const user = await this.userService.findOne(payload.id);
             client.data.user = user
-            
             return true;
         } catch (err) {
             throw new WsException(err.message);

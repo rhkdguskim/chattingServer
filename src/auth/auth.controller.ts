@@ -4,8 +4,10 @@ import { AuthService } from './auth.service';
 import { LoginUserDto } from '../users/dto/users.loginuser.dto';
 import { CreateUserDto } from '../users/dto/users.createuser.dto'
 import { ApiTags, ApiOperation, ApiCreatedResponse } from '@nestjs/swagger';
+import { GetUser } from './get-user.decorator';
 
 @Controller('auth')
+@ApiTags('권한')
 export class AuthController {
     constructor(
         private authService: AuthService,
@@ -23,5 +25,12 @@ export class AuthController {
     @ApiCreatedResponse({ description: '사용자를 생성한다.', type: User })
     async createUser(@Body() user:CreateUserDto): Promise<User> {
         return await this.authService.create(user)
+    }
+
+    @Post('token')
+    @ApiOperation({ summary: '사용자 Token 재발급 API', description: 'Refresh Token을 사용한 access Token 재발급' })
+    @ApiCreatedResponse({ description: 'Refresh Token을 사용한 access Token 재발급 합니다'})
+    getNewToken(@Body() refresh_Token:string, @GetUser() user: User) {
+        return this.authService.getNewAccessToken(refresh_Token, user);
     }
 }

@@ -26,7 +26,6 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 
         // 패스워드 정보는 보내지 않는다.
         user.password = ""
-
         return user;
     }
 }

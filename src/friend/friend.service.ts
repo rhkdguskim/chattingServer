@@ -12,25 +12,21 @@ export class FriendService {
         private friendRepository : Repository<Friend>
     ) {}
 
-    async getFriends(user : User): Promise<Friend[]> {
-        const query = this.friendRepository.createQueryBuilder('friend');
-        query.where('friend.my_id = :user_id', { user_id: user.user_id});
-        const friends = await query.getMany();
-        return friends;
+    async getFriends(user: User): Promise<Friend[]> {
+        return await this.friendRepository.find({ where: { user: { id: user.id } } });
     }
-
 
     async addFriend(createFriend: CreateFriendDto, user:User): Promise<Friend> {
         const {friend_id, friend_name} = createFriend;
         const friend = this.friendRepository.create({
             friend_id,
             friend_name,
-            my_id : user.user_id,
             user,
         })
 
         // 이미 등록된 친구라면
         const friends : Friend[]  = await this.getFriends(user)
+        console.log(friends)
         friends.map(( (myfriend : Friend) => {
             if (myfriend.friend_id == friend_id) {
                 throw new ForbiddenException({
@@ -49,28 +45,31 @@ export class FriendService {
                 error: 'Forbidden'
             })
         }
-        return this.friendRepository.save(friend)
+        return await this.friendRepository.save(friend)
     }
 
     async delFriend(delFriend: Friend, user:User): Promise<DeleteResult> {
-        // 자기자신은 친구추가 불가
-        // if (user.user_id != delFriend.my_id) {
-        //     throw new ForbiddenException({
-        //         statusCode: HttpStatus.FORBIDDEN,
-        //         message: [`자기자신이외에는 친구를 삭제 할 수 없습니다.`],
-        //         error: 'Forbidden'
-        //     })
-        // }
-        
-        return this.friendRepository.delete(delFriend) 
+        // 해당 Friend가 현재 유저에 속하는지 확인
+        const foundFriend = await this.friendRepository.findOne({where:{ id: delFriend.id, user: { id: user.id }  }});
+        if (!foundFriend) {
+            throw new ForbiddenException({
+                statusCode: HttpStatus.FORBIDDEN,
+                message: [`이 친구는 삭제할 수 없습니다.`],
+                error: 'Forbidden'
+            });
+        }
+    
+        return this.friendRepository.delete(foundFriend.id);
     }
 
     async changeFriendName(createFriend: CreateFriendDto, user:User): Promise<Friend> {
         const {friend_id, friend_name} = createFriend;
+        console.log(user, friend_id)
         const friend : Friend = await this.friendRepository.findOne({where : {
-            my_id:user.user_id,
-            friend_id
+            friend_id,
+            user : {id:user.id},
         }})
+        console.log(friend)
         if (friend) {
             friend.friend_name = friend_name;
             return await this.friendRepository.save(friend)

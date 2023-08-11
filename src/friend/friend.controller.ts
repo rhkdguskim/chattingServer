@@ -1,14 +1,15 @@
-import { Controller, Get, Post,  Param, UseGuards, Body, Delete } from '@nestjs/common';
+import { Controller, Get, Post,  Put, UseGuards, Body, Delete } from '@nestjs/common';
 import { FriendService } from './friend.service';
 import { Friend } from './friend.entity';
 import { User } from 'src/users/users.entity';
 import { AuthGuard } from '@nestjs/passport';
 import { GetUser } from 'src/auth/get-user.decorator';
-import { ApiOperation, ApiCreatedResponse } from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiCreatedResponse } from '@nestjs/swagger';
 import { CreateFriendDto } from './dto/friend.createfriend.dto';
 
 @Controller('friend')
 @UseGuards(AuthGuard())
+@ApiTags('친구')
 export class FriendController {
     constructor(private friendService : FriendService) {}
 
@@ -26,7 +27,7 @@ export class FriendController {
         return this.friendService.addFriend(createFriend, user);
     }
 
-    @Post('mod')
+    @Put('mod')
     @ApiOperation({ summary: '친구 이름 변경하기 API', description: '등록된 친구중 친구정보를 변경합니다.' })
     @ApiCreatedResponse({ description: '등록된 친구중 친구정보를 변경합니다.'})
     async ModFriend(@Body() createFriend: CreateFriendDto, @GetUser() user: User) : Promise<Friend> {

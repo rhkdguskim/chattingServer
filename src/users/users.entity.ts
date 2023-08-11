@@ -38,12 +38,18 @@ export class User {
   @UpdateDateColumn()
   updateAt!: Date;
 
-  @OneToMany(type => Friend, friend => friend.user, { eager: true })
+  @OneToMany(type => Friend, friend => friend.user, { eager: false })
     friends: Friend[]
 
-  @OneToMany(type => Chatting, chatting => chatting.user, { eager: true })
+  @OneToMany(type => Chatting, chatting => chatting.user, { eager: false })
     chattings: Chatting[] 
 
-  @OneToMany(type => Participant, participant => participant.user, { eager: true })
+  @OneToMany(type => Participant, participant => participant.user, { eager: false })
     participants: Participant[]
+
+  @Column({ nullable: true })
+  refreshToken!: string;
+  
+  @Column({ type: 'timestamp', nullable: true })
+  refreshTokenExpiry!: Date;
 }

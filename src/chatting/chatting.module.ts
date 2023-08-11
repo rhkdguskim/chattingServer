@@ -8,13 +8,15 @@ import { Chatting } from './chatting.entity';
 import { Room } from './room.entity';
 import { ChattingGateway } from './chatting.gateway';
 import { ChattingService } from './chatting.service';
-import { WsJwtGuard } from './chatting.wsjwtguard';
+import { UsersModule } from 'src/users/users.module';
+import { ReadBy } from './readby.entity';
 
 @Module({
   imports : [
-    TypeOrmModule.forFeature([Chatting,Room,Participant]),
-  AuthModule],
+    TypeOrmModule.forFeature([Chatting,Room,Participant, ReadBy]),
+  AuthModule,
+  UsersModule],
   controllers: [ChattingController],
-  providers: [RoomService, ChattingService, ChattingGateway, WsJwtGuard]
+  providers: [RoomService, ChattingService, ChattingGateway]
 })
 export class ChattingModule {}

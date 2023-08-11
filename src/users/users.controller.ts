@@ -1,4 +1,4 @@
-import { Controller, Get, Put, Body, UseInterceptors, UploadedFiles } from '@nestjs/common';
+import { Controller, Get, Put, Body} from '@nestjs/common';
 import { UsersService } from './users.service';
 import { User } from './users.entity';
 import { UseGuards } from '@nestjs/common';
@@ -7,13 +7,12 @@ import { AuthGuard } from '@nestjs/passport';
 import { UpdateUserDto } from 'src/users/dto/users.updateuser.dto';
 import { ApiTags, ApiOperation, ApiCreatedResponse } from '@nestjs/swagger';
 import { GetUser } from './../auth/get-user.decorator';
-import { FileInterceptor } from '@nestjs/platform-express';
-import { FileService } from 'src/file/file.service';
 
 @UseGuards(AuthGuard())
 @Controller('users')
+@ApiTags('유저')
 export class UsersController {
-    constructor (private usersService : UsersService, private fileService : FileService) {}
+    constructor (private usersService : UsersService) {}
 
     @Get('')
     @ApiOperation({ summary: '모든 유저 정보 API', description: '모든 사용자의 정보를 가져옵니다.' })
@@ -32,9 +31,7 @@ export class UsersController {
     @Put('update')
     @ApiOperation({ summary: '사용자 정보 업데이트 API', description: '사용자 정보를 업데이트 합니다.' })
     @ApiCreatedResponse({ description: '사용자 정보를 업데이트 합니다.'})
-    @UseInterceptors(FileInterceptor('files')) // 여러 개의 파일을 업로드하기 위해 FilesInterceptor를 사용
-    async updateUser(@Body() user:UpdateUserDto, @UploadedFiles() files: Express.Multer.File[]): Promise<User> {
-        const result = this.fileService.uploadFiles(files);
+    async updateUser(@Body() user:UpdateUserDto): Promise<User> {
         return await this.usersService.saveUser(user);
     }
 

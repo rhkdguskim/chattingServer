@@ -23,9 +23,6 @@ export class RequestMessage {
   @ApiProperty({ description: '메세지' })
   message: string;
 
-  @ApiProperty({ description: '읽지않은메세지' })
-  not_read_chat: number;
-
 }
 
 export class ResponseMessage {

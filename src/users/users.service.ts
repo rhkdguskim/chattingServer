@@ -37,4 +37,8 @@ export class UsersService {
         return await this.userReposity.delete(id);
     }
 
+    async updateUser(id: number, updateData: Partial<User>) {
+        return await this.userReposity.update(id, updateData);
+    }
+
 }

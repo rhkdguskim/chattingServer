@@ -13,6 +13,7 @@ import { Chatting } from './chatting/chatting.entity';
 import { Room } from './chatting/room.entity';
 import { Participant } from './chatting/participant.entity';
 import { FileModule } from './file/file.module';
+import { ReadBy } from './chatting/readby.entity';
 
 const dbConfig = config.get('db')
 @Module({
@@ -29,7 +30,8 @@ const dbConfig = config.get('db')
     username: dbConfig.username,
     password: dbConfig.password,
     database: dbConfig.database,
-    entities: [User, Friend, Chatting, Room, Participant],
+    logging: true,
+    entities: [User, Friend, Chatting, Room, Participant, ReadBy],
     synchronize: dbConfig.synchronize,
   }),
   FileModule,

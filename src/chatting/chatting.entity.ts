@@ -1,6 +1,7 @@
-import { Entity, Column, PrimaryGeneratedColumn , CreateDateColumn, UpdateDateColumn, ManyToOne, JoinColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn , CreateDateColumn, UpdateDateColumn, ManyToOne, JoinColumn, OneToMany} from 'typeorm';
 import { Room } from './room.entity';
 import { User } from 'src/users/users.entity';
+import { ReadBy } from './readby.entity';
 
 @Entity()
 export class Chatting {
@@ -26,4 +27,7 @@ export class Chatting {
   @ManyToOne(() => User, user => user.chattings)
   @JoinColumn({ name: 'user_id' })
   user: User;
+
+  @OneToMany(type => ReadBy, readBy => readBy.chatting, { eager: false })
+  readBys: ReadBy[];
 }
