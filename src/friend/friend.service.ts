@@ -4,20 +4,34 @@ import { Friend } from './friend.entity';
 import { DeleteResult, Repository } from 'typeorm';
 import { User } from 'src/users/users.entity';
 import { CreateFriendDto } from './dto/friend.createfriend.dto';
+import { UsersService } from 'src/users/users.service';
 
 @Injectable()
 export class FriendService {
     constructor(
         @InjectRepository(Friend)
-        private friendRepository : Repository<Friend>
+        private friendRepository : Repository<Friend>,
+        private userService : UsersService
     ) {}
 
-    async getFriends(user: User): Promise<Friend[]> {
+    async getFriends(user: User): Promise<User[]> {
+        const friends: Friend[] = await this.friendRepository.find({ where: { user: { id: user.id } } });
+    
+        const userPromises = friends.map(async (friend) => {
+            const user: User = await this.userService.findOne(friend.friend_id);
+            return user;
+        });
+    
+        return Promise.all(userPromises);
+    }
+
+    async getMyFriends(user: User): Promise<Friend[]> {
         return await this.friendRepository.find({ where: { user: { id: user.id } } });
     }
 
     async addFriend(createFriend: CreateFriendDto, user:User): Promise<Friend> {
         const {friend_id, friend_name} = createFriend;
+        console.log(friend_id, friend_name)
         const friend = this.friendRepository.create({
             friend_id,
             friend_name,
@@ -25,7 +39,7 @@ export class FriendService {
         })
 
         // 이미 등록된 친구라면
-        const friends : Friend[]  = await this.getFriends(user)
+        const friends : Friend[]  = await this.getMyFriends(user)
         console.log(friends)
         friends.map(( (myfriend : Friend) => {
             if (myfriend.friend_id == friend_id) {
@@ -38,13 +52,13 @@ export class FriendService {
         }))
 
         // 자기자신은 친구추가 불가
-        if (user.user_id == friend_id) {
-            throw new ForbiddenException({
-                statusCode: HttpStatus.FORBIDDEN,
-                message: [`자기자신은 친구가 될 수 없습니다.`],
-                error: 'Forbidden'
-            })
-        }
+        // if (user.user_id == friend_id) {
+        //     throw new ForbiddenException({
+        //         statusCode: HttpStatus.FORBIDDEN,
+        //         message: [`자기자신은 친구가 될 수 없습니다.`],
+        //         error: 'Forbidden'
+        //     })
+        // }
         return await this.friendRepository.save(friend)
     }
 

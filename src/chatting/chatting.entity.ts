@@ -24,7 +24,7 @@ export class Chatting {
   @JoinColumn({ name: 'room_id' })
   room!: Room;
 
-  @ManyToOne(() => User, user => user.chattings)
+  @ManyToOne(() => User, user => user.chattings, { eager: false })
   @JoinColumn({ name: 'user_id' })
   user: User;
 

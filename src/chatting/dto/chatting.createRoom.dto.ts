@@ -5,8 +5,8 @@ import { User } from "src/users/users.entity";
 
 export class CreateRoom {
   @ApiProperty({ description: '방 이름' })
-  room_name!: string;
+  room_name!: string;z
 
   @ApiProperty({ description: '참가유저목록' })
-  participants!: User[];
+  participant!: User[];
 }

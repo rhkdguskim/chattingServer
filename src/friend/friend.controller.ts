@@ -16,7 +16,7 @@ export class FriendController {
     @Get('')
     @ApiOperation({ summary: '친구 목록 가져오기 API', description: '친구 목록을 가져온다.' })
     @ApiCreatedResponse({ description: '사용자가 등록한 등록된 친구 목록을 가져옵니다.'})
-    async FindAll(@GetUser() user: User) : Promise<Friend[]> {
+    async FindAll(@GetUser() user: User) : Promise<User[]> {
         return this.friendService.getFriends(user);
     }
 

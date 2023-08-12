@@ -15,6 +15,7 @@ export class FileController {
     @ApiCreatedResponse({ description: '프로필, 배경화면에 설정할 이미지를 업로드 합니다.'})
     @UseInterceptors(FileInterceptor('file'))
     uploadFile(@UploadedFile() file: Express.Multer.File) {
+        console.log('upload file request')
       return this.fileService.uploadFile(file);
     }
 }

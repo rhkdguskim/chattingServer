@@ -32,8 +32,8 @@ export class ResponseMessage {
   @ApiProperty({ description: '방 ID' })
   room_id: number;
 
-  @ApiProperty({ description: '보낸사람' })
-  send_user_id: string;
+  @ApiProperty({ description: '보낸사람 ID' })
+  user_id: number;
 
   @IsString()
   @ApiProperty({ description: '메세지' })

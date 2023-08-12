@@ -6,7 +6,7 @@ export class Friend {
   id!: number;
 
   @Column()
-  friend_id!: string;
+  friend_id!: number;
 
   @Column()
   friend_name!: string;

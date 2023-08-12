@@ -1,10 +1,11 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Post,  Res } from '@nestjs/common';
 import { User } from '../users/users.entity';
 import { AuthService } from './auth.service';
 import { LoginUserDto } from '../users/dto/users.loginuser.dto';
 import { CreateUserDto } from '../users/dto/users.createuser.dto'
 import { ApiTags, ApiOperation, ApiCreatedResponse } from '@nestjs/swagger';
 import { GetUser } from './get-user.decorator';
+import { Response } from 'express';
 
 @Controller('auth')
 @ApiTags('권한')
@@ -16,8 +17,12 @@ export class AuthController {
     @Post('login')
     @ApiOperation({ summary: '사용자 로그인 API', description: '사용자가 로그인을 한다.' })
     @ApiCreatedResponse({ description: 'JWT 토큰을 발급합니다', type: LoginUserDto })
-    signIn(@Body() loginUser: LoginUserDto) {
-        return this.authService.signIn(loginUser);
+    async signIn(@Res({ passthrough: true }) response: Response, @Body() loginUser: LoginUserDto) {
+        const {access_token, refresh_token} = await this.authService.signIn(loginUser);
+        response.cookie('jwt', access_token, {
+            httpOnly: true,
+          });
+        return await {access_token, refresh_token}
     }
 
     @Post('signup')

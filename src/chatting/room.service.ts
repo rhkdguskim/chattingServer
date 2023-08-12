@@ -7,6 +7,7 @@ import { CreateRoom } from './dto/chatting.createRoom.dto';
 import { User } from 'src/users/users.entity';
 import { InviteToRoom } from './dto/chatting.inviteToRoom.dto';
 import { RoomType } from './dto/room.type.dto';
+import { Chatting } from './chatting.entity';
 
 @Injectable()
 export class RoomService {
@@ -15,11 +16,14 @@ constructor(
     private roomRepository : Repository<Room>,
     @InjectRepository(Participant)
     private participantRepository : Repository<Participant>,
+    @InjectRepository(Chatting)
+    private chattingRepository : Repository<Chatting>,
 
 ) {}
     
     async createRoom(createRoomDto: CreateRoom, user: User): Promise<Room> {
-        const participantCount = createRoomDto.participants.length;
+        console.log(createRoomDto.participant)
+        const participantCount = createRoomDto.participant.length;
         let determinedType: RoomType;
         if (participantCount === 1) {
             determinedType = RoomType.Individual;
@@ -29,21 +33,21 @@ constructor(
             determinedType = RoomType.Group;
         }
 
-        await this.validateRoomCreation(createRoomDto,determinedType);
+        const alreadyRoom = await this.validateRoomCreation(createRoomDto,determinedType);
+        if (alreadyRoom) {
+            return alreadyRoom;
+        }
         const room = await this.createBaseRoom(determinedType, user);
-        await this.addParticipantsToRoom(room, createRoomDto.participants, createRoomDto.room_name);
+        await this.addParticipantsToRoom(room, createRoomDto.participant, createRoomDto.room_name);
         return room;
     }
 
-    private async validateRoomCreation(createRoomDto: CreateRoom,roomType: RoomType): Promise<void> {
-        const {participants } = createRoomDto;
+    private async validateRoomCreation(createRoomDto: CreateRoom,roomType: RoomType): Promise<Room> {
+        const {participant } = createRoomDto;
 
         // 개인 및 1:1 채팅방의 경우 중복 체크
         if (roomType === RoomType.Individual || roomType === RoomType.two) {
-            const existingRoom = await this.findExistingRoom(participants, roomType);
-            if (existingRoom) {
-                throw new ConflictException('방이 이미 존재합니다.');
-            }
+            return await this.findExistingRoom(participant, roomType);
         }
     }
 
@@ -104,13 +108,27 @@ constructor(
     }
 
     // 자기자신이 참가한 채팅방 Participant와 Room와 Join 하여 결과 출력
-    async getRoomList( user: User ): Promise<Participant[]> {
-        const rommInfo = this.participantRepository
+    async GetParticipants( user: User ): Promise<Participant[]> {
+        const rommInfo = await this.participantRepository
         .createQueryBuilder('participant')
         .where({user:{id:user.id}})
         .innerJoinAndSelect('participant.room', 'room')
         .getMany();
         return rommInfo;
+    }
+
+    async GetRooms(user: User) : Promise<Room[]> {
+        const rommInfo = await this.participantRepository
+        .createQueryBuilder('participant')
+        .where({user:{id:user.id}})
+        .innerJoinAndSelect('participant.room', 'room')
+        .getMany();
+        
+        const RoomList :Room[] = [] 
+        ;(await rommInfo).forEach((room)=> {
+            RoomList.push(room.room)
+        })
+        return RoomList;
     }
 
     async getRoom(id: number): Promise<Room | undefined> {
@@ -120,4 +138,20 @@ constructor(
     async updateRoomStatus(room: Room): Promise<Room> {
         return this.roomRepository.save(room)
     }
+    async getChattingList(id: number): Promise<any[]> {
+        const chatList = await this.chattingRepository.createQueryBuilder('chatting')
+          .where('chatting.room_id = :id', { id })
+          .leftJoinAndSelect('chatting.user', 'user')
+          .select(['chatting.id', 'chatting.message', 'chatting.not_read', 'chatting.createdAt', 'user.id'])
+          .getRawMany();
+      
+        return chatList.map(chat => ({
+          id: chat.chatting_id,
+          message: chat.chatting_message,
+          not_read: chat.chatting_not_read,
+          createdAt: chat.chatting_createdAt,
+          user_id: chat.user_id
+        }));
+      }
+    
 }

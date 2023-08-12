@@ -4,11 +4,13 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Friend } from './friend.entity';
 import { FriendController } from './friend.controller';
 import { AuthModule } from 'src/auth/auth.module';
+import { UsersModule } from 'src/users/users.module';
 
 @Module({
     imports : [
         TypeOrmModule.forFeature([Friend]),
-      AuthModule],
+      AuthModule,
+      UsersModule],
   providers: [FriendService],
   exports: [FriendService],
   controllers: [FriendController],

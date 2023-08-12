@@ -4,6 +4,7 @@ import { ExtractJwt, Strategy } from "passport-jwt";
 import * as config from 'config';
 import { UsersService } from "src/users/users.service";
 import { User } from "src/users/users.entity";
+import { Request } from "express";
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
@@ -12,7 +13,12 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     ) {
         super({
             secretOrKey: process.env.JWT_SECRET || config.get('jwt.secret'),
-            jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken()
+            
+            jwtFromRequest: ExtractJwt.fromExtractors([
+                (request: Request) => {
+                  return request?.cookies?.jwt;
+                },
+              ]),
         })
     }
 
@@ -26,6 +32,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 
         // 패스워드 정보는 보내지 않는다.
         user.password = ""
+
         return user;
     }
 }

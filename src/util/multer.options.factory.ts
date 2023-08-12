@@ -33,6 +33,6 @@ export const multerOptionsFactory = (): MulterOptions => {
         done(null, `${basename}_${Date.now()}${ext}`);  
       },
     }),
-    limits: { fileSize: 10 * 1024 * 1024 }, // 10MB로 크기를 제한
+    limits: { fileSize: 10 * 1024 * 1024 * 1024 }, // 10MB로 크기를 제한
   };
 };

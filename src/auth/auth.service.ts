@@ -29,8 +29,10 @@ export class AuthService {
         if (!isPasswordValid) {
             throw new UnauthorizedException();
         }
-    
+        
+        
         const payload = { id: user.id, user_id: user.user_id};
+
         return {
             access_token: await this.jwtService.signAsync(payload),
             refresh_token: await this.generateRefreshToken(user.id)

@@ -1,11 +1,11 @@
-import { Controller, Get, Put, Body} from '@nestjs/common';
+import { Controller, Get, Put, Body, Param} from '@nestjs/common';
 import { UsersService } from './users.service';
 import { User } from './users.entity';
 import { UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 
 import { UpdateUserDto } from 'src/users/dto/users.updateuser.dto';
-import { ApiTags, ApiOperation, ApiCreatedResponse } from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiCreatedResponse, ApiParam, ApiOkResponse, ApiNotFoundResponse } from '@nestjs/swagger';
 import { GetUser } from './../auth/get-user.decorator';
 
 @UseGuards(AuthGuard())
@@ -21,11 +21,12 @@ export class UsersController {
         return this.usersService.findAll();
     }
 
-    @Get('search')
+    @Get('search:id')
     @ApiOperation({ summary: '유저 찾기기능 API', description: '특정 사용자를 찾는 기능입니다.' })
     @ApiCreatedResponse({ description: '특정 사용자를 찾는 기능입니다.'})
-    async SearchUser() :Promise<User[]> {
-        return this.usersService.findAll();
+    async SearchUser(@Param('id') user_id: string) :Promise<User> {
+        console.log(user_id)
+        return this.usersService.findbyUserId(user_id);
     }
 
     @Put('update')

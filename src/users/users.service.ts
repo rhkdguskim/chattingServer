@@ -20,8 +20,10 @@ export class UsersService {
         return this.userReposity.findOneBy({id});
     }
 
-    findbyUserId(user_id: string): Promise<User | null> {
-        return this.userReposity.findOneBy({user_id});
+    async findbyUserId(user_id: string): Promise<User | null> {
+        const result = await this.userReposity.findOneBy({user_id});
+        console.log(result)
+        return result;
     }
 
     async saveUser(user: UpdateUserDto): Promise<User> {
