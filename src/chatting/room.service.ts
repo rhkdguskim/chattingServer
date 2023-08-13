@@ -57,13 +57,16 @@ constructor(
 
     private async findExistingRoom(participants: User[], type: RoomType): Promise<Room | undefined> {
         const participantIds = participants.map(p => p.id);
+        console.log(participantIds)
         return await this.roomRepository
-            .createQueryBuilder('room')
-            .innerJoin('room.participant', 'participant')
-            .innerJoin('participant.user', 'user')
-            .where('room.type = :type', { type })
-            .andWhere('user.id IN (:...participantIds)', { participantIds })
-            .getOne();
+                .createQueryBuilder('room')
+                .innerJoin('room.participant', 'participant')
+                .innerJoin('participant.user', 'user')
+                .where('room.type = :type', { type })
+                .andWhere('user.id IN (:...participantIds)', { participantIds }) // AND 조건으로 추가
+                .groupBy('room.id') // 그룹화 추가
+                .having(`COUNT(participant.id) = ${participants.length}`) // 참가자 수와 비교하여 필터링
+                .getOne();
     }
 
     private async createBaseRoom(type: RoomType, user: User): Promise<Room> {
