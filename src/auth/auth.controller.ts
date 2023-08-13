@@ -29,6 +29,7 @@ export class AuthController {
     @ApiOperation({ summary: '사용자 생성 API', description: '사용자를 생성한다.' })
     @ApiCreatedResponse({ description: '사용자를 생성한다.', type: User })
     async createUser(@Body() user:CreateUserDto): Promise<User> {
+        console.log(user)
         return await this.authService.create(user)
     }
 

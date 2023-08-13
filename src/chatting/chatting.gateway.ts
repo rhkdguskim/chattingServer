@@ -11,6 +11,7 @@ import { WsJwtGuard } from '../auth/auth.wsjwtguard';
 import { Socket } from 'socket.io';
 import { Logger } from '@nestjs/common';
 import { GetWsUser } from 'src/auth/get-user.decorator';
+import { RoomType } from './dto/room.type.dto';
 
 @WebSocketGateway({ cors: true })
 @UseGuards(WsJwtGuard)
@@ -53,16 +54,16 @@ export class ChattingGateway implements OnGatewayConnection, OnGatewayDisconnect
   async handleMessage(@GetWsUser() user:User, @MessageBody() message: RequestMessage): Promise<void>  {
     const room : Room = await this.roomService.getRoom(message.room_id);
     room.last_chat = message.message;
-    console.log(room.last_chat)
     await this.roomService.updateRoomStatus(room);
-
+    const not_read_chat : number = room.type !== RoomType.Individual ? room.participant.length : 0
     const ChattingMessage : Chatting = await this.chattingService.createChatting(message, user, room);
     const responseMessage : ResponseMessage = {id:ChattingMessage.id,
                                               room_id:room.id,
                                               user_id:user.id,
                                               message:message.message,
-                                              not_read_chat:ChattingMessage.not_read,
-                                              createdAt:ChattingMessage.createdAt }
+                                              not_read_chat,
+                                              createdAt:ChattingMessage.createdAt}
+
     this.server.to(String(message.room_id)).emit('SendMessage', responseMessage);
   }
 }

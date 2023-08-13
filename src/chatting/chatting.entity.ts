@@ -18,13 +18,13 @@ export class Chatting {
   createdAt!: Date;
 
   @UpdateDateColumn()
-  updateAt!: Date;
+  updatedAt!: Date;
 
-  @ManyToOne(() => Room, room => room.chattings)
+  @ManyToOne(() => Room, room => room.chatting, {nullable : false})
   @JoinColumn({ name: 'room_id' })
   room!: Room;
 
-  @ManyToOne(() => User, user => user.chattings, { eager: false })
+  @ManyToOne(() => User, user => user.chatting, { eager: true , nullable : false})
   @JoinColumn({ name: 'user_id' })
   user: User;
 

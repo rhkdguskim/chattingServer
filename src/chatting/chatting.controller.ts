@@ -1,4 +1,4 @@
-import { Body, Controller, Post, Get, Param } from '@nestjs/common';
+import { Body, Controller, Post, Get, Param, Query } from '@nestjs/common';
 import { UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { RoomService } from './room.service';
@@ -10,6 +10,7 @@ import { Room } from './room.entity';
 import { InviteToRoom } from './dto/chatting.inviteToRoom.dto';
 import { Participant } from './participant.entity';
 import { Chatting } from './chatting.entity';
+import { RoomListResponse } from './dto/room.roomListResponse.dto';
 
 @Controller('chatting')
 @UseGuards(AuthGuard())
@@ -20,16 +21,15 @@ export class ChattingController {
     @Get('')
     @ApiOperation({ summary: '유저의 채팅방 리스트 API', description: '유저의 채팅방 리스트를 불러옵니다.' })
     @ApiCreatedResponse({ description: '등록된 친구중 친구정보를 변경합니다.'})
-    async GetRoomList(@GetUser() user: User) : Promise<Room[]> {
+    async GetRoomList(@GetUser() user: User) : Promise<Array<RoomListResponse>> {
         return await this.chattingService.GetRooms(user)
     }
 
-    @Get('chattings:id')
+    @Get('chattings/:id')
     @ApiOperation({ summary: '유저의 채팅방 대화를 가져옵니다. API', description: '유저의 채팅방 리스트를 불러옵니다.' })
     @ApiCreatedResponse({ description: '등록된 친구중 친구정보를 변경합니다.'})
-    async GetChattingList(@Param('id') id: number) : Promise<Chatting[]> {
-        console.log("id", id)
-        return await this.chattingService.getChattingList(id)
+    async GetChattingList(@Param('id') id: number, @Query('cursor') cursor: number) : Promise<Chatting[]> {
+        return await this.chattingService.getChattingList(id, cursor)
     }
 
     @Post('add')

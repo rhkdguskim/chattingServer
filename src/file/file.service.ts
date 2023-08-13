@@ -7,7 +7,7 @@ export class FileService {
       throw new BadRequestException('파일이 존재하지 않습니다.');
     }
 
-    return { filePath: file.path };
+    return file.path
   }
 
   uploadFiles(files: Express.Multer.File[]) {

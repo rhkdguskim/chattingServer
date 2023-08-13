@@ -21,11 +21,17 @@ export class UsersController {
         return this.usersService.findAll();
     }
 
+    @Get('find:id')
+    @ApiOperation({ summary: '유저 찾기기능 API', description: '특정 사용자를 찾는 기능입니다.' })
+    @ApiCreatedResponse({ description: '특정 사용자를 찾는 기능입니다.'})
+    async SearchUserByID(@Param('id') id: number) :Promise<User> {
+        return this.usersService.findOne(id);
+    }
+
     @Get('search:id')
     @ApiOperation({ summary: '유저 찾기기능 API', description: '특정 사용자를 찾는 기능입니다.' })
     @ApiCreatedResponse({ description: '특정 사용자를 찾는 기능입니다.'})
     async SearchUser(@Param('id') user_id: string) :Promise<User> {
-        console.log(user_id)
         return this.usersService.findbyUserId(user_id);
     }
 

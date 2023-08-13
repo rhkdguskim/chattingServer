@@ -42,10 +42,10 @@ export class User {
     friends: Friend[]
 
   @OneToMany(type => Chatting, chatting => chatting.user, { eager: false })
-    chattings: Chatting[] 
+    chatting: Chatting[] 
 
   @OneToMany(type => Participant, participant => participant.user, { eager: false })
-    participants: Participant[]
+    participant: Participant[]
 
   @Column({ nullable: true })
   refreshToken!: string;

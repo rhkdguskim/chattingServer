@@ -14,6 +14,8 @@ import { Room } from './chatting/room.entity';
 import { Participant } from './chatting/participant.entity';
 import { FileModule } from './file/file.module';
 import { ReadBy } from './chatting/readby.entity';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import * as path from 'path';
 
 const dbConfig = config.get('db')
 @Module({
@@ -23,6 +25,9 @@ const dbConfig = config.get('db')
     FriendModule,
     ChattingModule,
     FileModule,
+    ServeStaticModule.forRoot({
+      rootPath: path.join(__dirname, 'uploads'),
+    }),
   TypeOrmModule.forRoot({
     type: dbConfig.type,
     host: dbConfig.host,
@@ -30,7 +35,7 @@ const dbConfig = config.get('db')
     username: dbConfig.username,
     password: dbConfig.password,
     database: dbConfig.database,
-    logging: true,
+    // logging: true,
     entities: [User, Friend, Chatting, Room, Participant, ReadBy],
     synchronize: dbConfig.synchronize,
   }),

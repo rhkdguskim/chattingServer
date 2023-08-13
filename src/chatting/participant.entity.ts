@@ -8,19 +8,16 @@ export class Participant {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @ManyToOne(() => Room, room => room.participants, { nullable: false })
+  @ManyToOne(() => Room, room => room.participant, { eager: false, nullable: false })
   @JoinColumn({ name: 'room_id' })
   room!: Room;
 
-  @ManyToOne(() => User, user => user.participants, { nullable: false })
+  @ManyToOne(() => User, user => user.participant, { eager: false, nullable: false })
   @JoinColumn({ name: 'user_id' })
   user!: User;
 
   @Column()
   room_name!: string;
-
-  @Column()
-  not_read_chat!: number;
   
   @CreateDateColumn()
   createdAt!: Date;
