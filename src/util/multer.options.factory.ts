@@ -8,12 +8,12 @@ import * as fs from 'fs';
 const mkdir = (directory: string) => {
   const logger = new Logger('Mkdir');
   try {
-    fs.readdirSync(path.join(__dirname, directory));
+    fs.readdirSync(path.join(process.cwd(), directory));
   } catch (err) {
     logger.log(
       `지정한 경로에 ${directory}가 존재하지 않아 ${directory}를 생성합니다.`,
     );
-    fs.mkdirSync(path.join(__dirname, directory));
+    fs.mkdirSync(path.join(process.cwd(), directory));
   }
 };
 
@@ -23,7 +23,7 @@ export const multerOptionsFactory = (): MulterOptions => {
   return {
     storage: multer.diskStorage({
       destination(req, file, done) { // 파일을 저장할 위치를 설정합니다
-        done(null, path.join(__dirname, 'uploads'));
+        done(null, path.join(process.cwd(), 'uploads'));
       },
 
       filename(req, file, done) { // 파일의 이름을 설정합니다.

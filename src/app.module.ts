@@ -26,7 +26,10 @@ const dbConfig = config.get('db')
     ChattingModule,
     FileModule,
     ServeStaticModule.forRoot({
-      rootPath: path.join(__dirname, 'uploads'),
+      rootPath: path.join(process.cwd(), 'build'),
+    }),
+    ServeStaticModule.forRoot({
+      rootPath: path.join(process.cwd(), 'uploads'),
     }),
   TypeOrmModule.forRoot({
     type: dbConfig.type,

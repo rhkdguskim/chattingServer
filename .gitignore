@@ -5,7 +5,7 @@
 .pnp.js
 /dist
 /db
-
+/config/db
 # testing
 /coverage
 
