@@ -1,12 +1,10 @@
-  secret: 'bigkwangs'
-
-  server:
+server:
   port: 3000
 
 db:
-  type: 'mariadb'
-  host : '127.0.0.1'
-  port: 3306
+  type: 'mysql'
+  host : 'svc.sel3.cloudtype.app'
+  port: 32002
   username: 'root'
   password: 'root'
   database: 'kakaotalk'
