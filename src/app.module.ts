@@ -17,6 +17,7 @@ import { ReadBy } from './chatting/readby.entity';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import * as path from 'path';
 
+
 const dbConfig = config.get('db')
 @Module({
   imports: [
@@ -33,10 +34,10 @@ const dbConfig = config.get('db')
     }),
   TypeOrmModule.forRoot({
     type: dbConfig.type,
-    host: dbConfig.host,
-    port: dbConfig.port,
-    username: dbConfig.username,
-    password: dbConfig.password,
+    host: process.env.DB_HOST ||dbConfig.host,
+    port: parseInt(process.env.PORT) || dbConfig.port,
+    username: process.env.DB_USER || dbConfig.username,
+    password: process.env.DB_PASSWORD || dbConfig.password,
     database: dbConfig.database,
     // logging: true,
     entities: [User, Friend, Chatting, Room, Participant, ReadBy],
@@ -47,4 +48,5 @@ const dbConfig = config.get('db')
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }
+
