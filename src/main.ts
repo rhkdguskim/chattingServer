@@ -11,7 +11,7 @@ async function bootstrap() {
   const serverConfig = config.get('server')
   app.use(cookieParser())
   app.enableCors({
-    origin: ['http://localhost:3001'],
+    origin: ['http://localhost:3001',process.env.FRONT_END_HOST],
     credentials: true,
   });
   setupSwagger(app);
