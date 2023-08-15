@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import type { RedisClientOptions } from 'redis';
 import { User } from './users/users.entity';
 import { AuthModule } from './auth/auth.module';
 import { FriendModule } from './friend/friend.module';
@@ -16,9 +17,12 @@ import { FileModule } from './file/file.module';
 import { ReadBy } from './chatting/readby.entity';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import * as path from 'path';
-
+import { CacheModule } from '@nestjs/cache-manager';
+const redisStore = require('cache-manager-redis-store').redisStore;
 
 const dbConfig = config.get('db')
+const redisConfig = config.get('redis')
+
 @Module({
   imports: [
     AuthModule,
@@ -43,7 +47,13 @@ const dbConfig = config.get('db')
     entities: [User, Friend, Chatting, Room, Participant, ReadBy],
     synchronize: dbConfig.synchronize,
   }),
-  FileModule,
+  CacheModule.registerAsync({
+    useFactory: () => ({
+      store : redisStore,
+      host: process.env.REDIS_HOST || redisConfig.host,
+      port: process.env.REDIS_PORT || redisConfig.port,
+    }),
+  }),
   ],
   controllers: [AppController],
   providers: [AppService],

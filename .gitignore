@@ -4,8 +4,9 @@
 /.pnp
 .pnp.js
 /dist
-/db
 /config/db
+/config/mysql/db
+/config/redis/db
 # testing
 /coverage
 
