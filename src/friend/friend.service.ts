@@ -35,7 +35,6 @@ export class FriendService {
 
   async addFriend(createFriend: CreateFriendDto, user: User): Promise<Friend> {
     const { friend_id, friend_name } = createFriend;
-    console.log(friend_id, friend_name);
     const friend = this.friendRepository.create({
       friend_id,
       friend_name,
@@ -44,7 +43,6 @@ export class FriendService {
 
     // 이미 등록된 친구라면
     const friends: Friend[] = await this.getMyFriends(user);
-    console.log(friends);
     friends.map((myfriend: Friend) => {
       if (myfriend.friend_id == friend_id) {
         throw new ForbiddenException({
@@ -87,14 +85,12 @@ export class FriendService {
     user: User
   ): Promise<Friend> {
     const { friend_id, friend_name } = createFriend;
-    console.log(user, friend_id);
     const friend: Friend = await this.friendRepository.findOne({
       where: {
         friend_id,
         user: { id: user.id },
       },
     });
-    console.log(friend);
     if (friend) {
       friend.friend_name = friend_name;
       return await this.friendRepository.save(friend);

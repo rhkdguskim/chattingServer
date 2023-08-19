@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Inject, Injectable, Logger, LoggerService } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { User } from "./users.entity";
 import { CreateUserDto } from "./dto/users.createuser.dto";
@@ -9,7 +9,9 @@ import { DeleteResult, Repository } from "typeorm";
 export class UsersService {
   constructor(
     @InjectRepository(User)
-    private userReposity: Repository<User>
+    private userReposity: Repository<User>,
+    @Inject(Logger)
+    private readonly logger : LoggerService,
   ) {}
 
   findAll(): Promise<User[]> {
@@ -24,7 +26,6 @@ export class UsersService {
 
   async findbyUserId(user_id: string): Promise<User | null> {
     const result = await this.userReposity.findOneBy({ user_id });
-    console.log(result);
     return result;
   }
 

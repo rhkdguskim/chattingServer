@@ -18,6 +18,8 @@ import { ReadBy } from "./chatting/readby.entity";
 import { ServeStaticModule } from "@nestjs/serve-static";
 import * as path from "path";
 import { CacheModule } from "@nestjs/cache-manager";
+import { LoggingInterceptor } from "./core/interceptors/logging.interceptor";
+import { APP_INTERCEPTOR } from "@nestjs/core";
 const redisStore = require("cache-manager-redis-store").redisStore;
 
 const dbConfig = config.get("db");
@@ -57,6 +59,7 @@ const redisConfig = config.get("redis");
     }),
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService,
+  ],
 })
 export class AppModule {}

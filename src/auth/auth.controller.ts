@@ -41,7 +41,6 @@ export class AuthController {
   })
   @ApiCreatedResponse({ description: "사용자를 생성한다.", type: User })
   async createUser(@Body() user: CreateUserDto): Promise<User> {
-    console.log(user);
     return await this.authService.create(user);
   }
 

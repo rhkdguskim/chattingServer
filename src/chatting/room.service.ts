@@ -46,7 +46,6 @@ export class RoomService {
       determinedType
     );
     if (alreadyRoom) {
-      console.log("방은 이미 생성되었습니다.", alreadyRoom);
       return alreadyRoom;
     }
     const room = await this.createBaseRoom(determinedType, user);
@@ -55,7 +54,6 @@ export class RoomService {
       createRoomDto.participant,
       createRoomDto.room_name
     );
-    console.log("방을 생성하였습니다.");
     return room;
   }
 
@@ -76,7 +74,6 @@ export class RoomService {
     type: RoomType
   ): Promise<Room | undefined> {
     const participantIds = participants.map((p) => p.id);
-    console.log(participantIds);
     return await this.roomRepository
       .createQueryBuilder("room")
       .innerJoin("room.participant", "participant")
@@ -201,7 +198,6 @@ export class RoomService {
   }
 
   async updateRoomStatus(room: Room): Promise<Room> {
-    console.log(room);
     return this.roomRepository.save(room);
   }
 
