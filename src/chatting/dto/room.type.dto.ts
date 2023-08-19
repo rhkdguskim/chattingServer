@@ -1,5 +1,5 @@
 export enum RoomType {
-    Individual,
-    two,
-    Group
+  Individual,
+  two,
+  Group,
 }

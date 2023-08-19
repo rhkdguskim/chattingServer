@@ -1,17 +1,16 @@
-import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
-import { setupSwagger } from 'src/util/swagger';
-import * as config from 'config'
-import * as cookieParser from 'cookie-parser';
-
+import { NestFactory } from "@nestjs/core";
+import { AppModule } from "./app.module";
+import { setupSwagger } from "src/util/swagger";
+import * as config from "config";
+import * as cookieParser from "cookie-parser";
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  const serverConfig = config.get('server')
-  app.use(cookieParser())
+  const serverConfig = config.get("server");
+  app.use(cookieParser());
   app.enableCors({
-    origin: ['http://localhost:3001',process.env.FRONT_END_HOST],
+    origin: ["http://localhost:3001", process.env.FRONT_END_HOST],
     credentials: true,
   });
   setupSwagger(app);
