@@ -10,13 +10,14 @@ import { ChattingGateway } from "./chatting.gateway";
 import { ChattingService } from "./chatting.service";
 import { UsersModule } from "src/users/users.module";
 import { ReadBy } from "./readby.entity";
+import { RoomController } from "./room.controller";
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([Chatting, Room, Participant, ReadBy]),
     UsersModule,
   ],
-  controllers: [ChattingController],
+  controllers: [ChattingController, RoomController],
   providers: [RoomService, ChattingService, ChattingGateway, Logger],
 })
 export class ChattingModule {}
