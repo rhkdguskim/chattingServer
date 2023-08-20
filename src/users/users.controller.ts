@@ -33,7 +33,7 @@ export class UsersController {
     return await this.usersService.findAll();
   }
 
-  @Put("")
+  @Put(":id")
   @ApiOperation({
     summary: "사용자 정보 업데이트 API",
     description: "사용자 정보를 업데이트 합니다.",

@@ -1,4 +1,4 @@
-import { Module } from "@nestjs/common";
+import { Logger, Module } from "@nestjs/common";
 import { ChattingController } from "./chatting.controller";
 import { RoomService } from "./room.service";
 import { AuthModule } from "src/auth/auth.module";
@@ -17,6 +17,6 @@ import { ReadBy } from "./readby.entity";
     UsersModule,
   ],
   controllers: [ChattingController],
-  providers: [RoomService, ChattingService, ChattingGateway],
+  providers: [RoomService, ChattingService, ChattingGateway, Logger],
 })
 export class ChattingModule {}

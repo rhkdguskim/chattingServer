@@ -1,4 +1,4 @@
-import { UseGuards } from "@nestjs/common";
+import { UseGuards, UseInterceptors } from "@nestjs/common";
 import {
   SubscribeMessage,
   WebSocketGateway,
@@ -24,6 +24,7 @@ import { Socket } from "socket.io";
 import { Logger } from "@nestjs/common";
 import { GetWsUser } from "src/auth/get-user.decorator";
 import { RoomType } from "./dto/room.type.dto";
+import { ChatCacheInterceptor } from "src/core/interceptors/chatcache.interceptor";
 
 @WebSocketGateway({ cors: true })
 @UseGuards(WsJwtGuard)
@@ -70,10 +71,11 @@ export class ChattingGateway
   ): void {}
 
   @SubscribeMessage("SendMessage")
+  @UseInterceptors(ChatCacheInterceptor)
   async handleMessage(
     @GetWsUser() user: User,
     @MessageBody() message: RequestMessage
-  ): Promise<void> {
+  ): Promise<ResponseMessage> {
     const room: Room = await this.roomService.getRoom(message.room_id);
     room.last_chat = message.message;
     await this.roomService.updateRoomStatus(room);
@@ -96,5 +98,7 @@ export class ChattingGateway
     this.server
       .to(String(message.room_id))
       .emit("SendMessage", responseMessage);
+
+    return responseMessage;
   }
 }
