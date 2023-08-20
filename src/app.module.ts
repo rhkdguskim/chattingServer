@@ -1,8 +1,7 @@
-import { Module } from "@nestjs/common";
+import { Logger, Module } from "@nestjs/common";
 import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import type { RedisClientOptions } from "redis";
 import { User } from "./users/users.entity";
 import { AuthModule } from "./auth/auth.module";
 import { FriendModule } from "./friend/friend.module";
@@ -18,8 +17,6 @@ import { ReadBy } from "./chatting/readby.entity";
 import { ServeStaticModule } from "@nestjs/serve-static";
 import * as path from "path";
 import { CacheModule } from "@nestjs/cache-manager";
-import { LoggingInterceptor } from "./core/interceptors/logging.interceptor";
-import { APP_INTERCEPTOR } from "@nestjs/core";
 const redisStore = require("cache-manager-redis-store").redisStore;
 
 const dbConfig = config.get("db");
@@ -27,11 +24,6 @@ const redisConfig = config.get("redis");
 
 @Module({
   imports: [
-    AuthModule,
-    UsersModule,
-    FriendModule,
-    ChattingModule,
-    FileModule,
     ServeStaticModule.forRoot({
       rootPath: path.join(process.cwd(), "build"),
     }),
@@ -49,17 +41,20 @@ const redisConfig = config.get("redis");
       entities: [User, Friend, Chatting, Room, Participant, ReadBy],
       synchronize: dbConfig.synchronize,
     }),
-    CacheModule.registerAsync({
-      useFactory: () => ({
+    CacheModule.register({
         store: redisStore,
         host: process.env.REDIS_HOST || redisConfig.host,
         port: process.env.REDIS_PORT || redisConfig.port,
-        isGlobal:true, // 하위에 있는 모든 모듈에도 DI 가능하다.
-      }),
+        ttl:15,
+        isGlobal:true,
     }),
+    AuthModule,
+    UsersModule,
+    FriendModule,
+    ChattingModule,
+    FileModule,
   ],
-  controllers: [AppController],
-  providers: [AppService,
-  ],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}

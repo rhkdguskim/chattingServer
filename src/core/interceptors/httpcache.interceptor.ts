@@ -1,15 +1,21 @@
 import {
     CallHandler,
     ExecutionContext,
+    Inject,
     Injectable,
+    Logger,
+    LoggerService,
   } from '@nestjs/common';
   import { Request } from 'express';
-  import { Cluster } from 'ioredis';
   import { Observable, tap } from 'rxjs';
   import { CacheInterceptor } from '@nestjs/cache-manager';
+import { CACHE_EVICT_METADATA } from './cache.constants';
   
   @Injectable()
   export class HttpCacheInterceptor extends CacheInterceptor {
+    @Inject(Logger)
+    private readonly logger: LoggerService
+
     private readonly CACHE_EVICT_METHODS = [
       'POST', 'PATCH', 'PUT', 'DELETE'
     ];
@@ -19,31 +25,34 @@ import {
       next: CallHandler<any>,
     ): Promise<Observable<any>> {
       const req = context.switchToHttp().getRequest<Request>();
+      const evictKeys = this.reflector.getAllAndMerge(CACHE_EVICT_METADATA, [
+        context.getClass(),
+        context.getHandler(),
+      ]);
       if (this.CACHE_EVICT_METHODS.includes(req.method)) {
         // 캐시 무효화 처리
-        return next.handle().pipe(tap(() => this._clearCaches(req.originalUrl as any as string[])));
+        return next.handle().pipe(tap(() =>  {
+          this.logger.log(`캐시 무효화 ${req.originalUrl}`,`${context.getClass().name}.${context.getHandler().name}`)
+          if (evictKeys.length > 0) {
+            evictKeys.forEach( (keys : string) => {
+              this.logger.log(`캐시 무효화 ${keys}`,`${context.getClass().name}.${context.getHandler().name}`)
+              this._clearCaches(keys)
+            })
+          }
+          else {
+            this._clearCaches(req.originalUrl)
+          }
+        }));
       }
-  
       // 기존 캐싱 처리
+      this.logger.log(`Caching Request ${req.originalUrl}`,`${context.getClass().name}.${context.getHandler().name}`)
       return super.intercept(context, next);
     }
   
     /**
      * @param cacheKeys 삭제할 캐시 키 목록
      */
-    private async _clearCaches(cacheKeys: string[]): Promise<boolean> {
-      const client: Cluster = await this.cacheManager.store.getClient();
-      const redisNodes = client.nodes();
-  
-      const result2 = await Promise.all(
-        redisNodes.map(async (redis) => {
-          const _keys = await Promise.all(
-            cacheKeys.map((cacheKey) => redis.keys(`*${cacheKey}*`)),
-          );
-          const keys = _keys.flat();
-          return Promise.all(keys.map((key) => !!this.cacheManager.del(key)));
-        }),
-      );
-      return result2.flat().every((r) => !!r);
-    }
+    private async _clearCaches(cacheKeys: string): Promise<boolean> {
+      return this.cacheManager.del(cacheKeys);
   }
+}

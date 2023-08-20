@@ -7,12 +7,11 @@ import { AuthModule } from "src/auth/auth.module";
 
 @Module({
   imports: [
-    forwardRef(() => AuthModule), // 순환참조 방지
     TypeOrmModule.forFeature([User]),
   ],
 
   providers: [UsersService, Logger],
-  exports: [UsersService],
   controllers: [UsersController],
+  exports: [UsersService],
 })
 export class UsersModule {}

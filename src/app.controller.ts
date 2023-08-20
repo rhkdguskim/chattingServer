@@ -1,22 +1,24 @@
-import { Body, Controller, Get, Post } from "@nestjs/common";
+import { Body, Controller, Get, Inject, Logger, LoggerService, Post, UseInterceptors } from "@nestjs/common";
 import { AppService } from "./app.service";
+import { HttpCacheInterceptor } from "./core/interceptors/httpcache.interceptor";
 
 @Controller()
+@UseInterceptors(HttpCacheInterceptor)
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private readonly appService: AppService,
+              @Inject(Logger)
+              private readonly logger: LoggerService
+             ) {}
 
-  @Get("cache")
-  async getCache(): Promise<number> {
-    return this.appService.get();
+  @Get("")
+  Test(): number {
+    this.logger.log('캐싱을 하기 전입니다.')
+    return 5;
   }
 
-  @Get("cache/reset")
-  async resetCache(): Promise<void> {
-    return this.appService.reset();
-  }
-
-  @Post("cache")
-  async setCache(@Body() number: number): Promise<void> {
-    return this.appService.set(number);
+  @Post("")
+  Test2(): number {
+    this.logger.log('캐싱 무효화를 합니다.')
+    return 5;
   }
 }

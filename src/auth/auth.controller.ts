@@ -1,4 +1,4 @@
-import { Body, Controller, Post, Res } from "@nestjs/common";
+import { Body, Controller, Post, Res, UseInterceptors } from "@nestjs/common";
 import { User } from "../users/users.entity";
 import { AuthService } from "./auth.service";
 import { LoginUserDto } from "../users/dto/users.loginuser.dto";
@@ -6,6 +6,8 @@ import { CreateUserDto } from "../users/dto/users.createuser.dto";
 import { ApiTags, ApiOperation, ApiCreatedResponse } from "@nestjs/swagger";
 import { GetUser } from "./get-user.decorator";
 import { Response } from "express";
+import { HttpCacheInterceptor } from "src/core/interceptors/httpcache.interceptor";
+import { CacheEvict } from "src/core/interceptors/cache-evict-decorator";
 
 @Controller("auth")
 @ApiTags("권한")
@@ -34,6 +36,8 @@ export class AuthController {
     return await { access_token, refresh_token };
   }
 
+  @UseInterceptors(HttpCacheInterceptor)
+  @CacheEvict('/users/')
   @Post("signup")
   @ApiOperation({
     summary: "사용자 생성 API",

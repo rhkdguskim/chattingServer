@@ -9,12 +9,12 @@ export class LoggingInterceptor implements NestInterceptor {
 
     }
     intercept(context: ExecutionContext, next: CallHandler<any>): Observable<any> | Promise<Observable<any>> {
-        this.logger.log(`Start Handler {${context.getHandler().name}}`)
+        this.logger.log(`Start`,`${context.getClass().name}.${context.getHandler().name}`)
         const now = Date.now()
         return next
             .handle()
             .pipe(tap(() => {
-                this.logger.log(`End Handler : {${context.getHandler().name}, ${Date.now() - now} ms}`)
+                this.logger.log(`End: Time : {${Date.now() - now} ms}`, `${context.getClass().name}.${context.getHandler().name}`)
             }))
     }
 }

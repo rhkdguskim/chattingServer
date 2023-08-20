@@ -8,19 +8,19 @@ import {
   UseInterceptors,
 } from "@nestjs/common";
 import { UseGuards } from "@nestjs/common";
-import { AuthGuard } from "@nestjs/passport";
 import { ApiOperation, ApiCreatedResponse, ApiTags } from "@nestjs/swagger";
 import { FileService } from "./file.service";
 import { FileInterceptor } from "@nestjs/platform-express";
 import * as path from "path";
 import { Response } from "express";
+import { JwtAuthGuard } from "src/auth/jwt.auth.guard";
 
 @Controller("file")
-@UseGuards(AuthGuard())
+@UseGuards(JwtAuthGuard)
 @ApiTags("파일업로드")
 export class FileController {
   constructor(private readonly fileService: FileService) {}
-  @Post("upload")
+  @Post("")
   @ApiOperation({
     summary: "파일업로드 API",
     description: "프로필, 배경화면에 설정할 이미지를 업로드 합니다.",

@@ -14,13 +14,11 @@ export class UsersService {
     private readonly logger : LoggerService,
   ) {}
 
-  findAll(): Promise<User[]> {
-    // Read
-    return this.userReposity.find();
+  async findAll(): Promise<User[]> {
+    return await this.userReposity.find();
   }
 
   findOne(id: number): Promise<User | null> {
-    // ReadOne
     return this.userReposity.findOneBy({ id });
   }
 

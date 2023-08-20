@@ -11,9 +11,10 @@ import { InviteToRoom } from "./dto/chatting.inviteToRoom.dto";
 import { Participant } from "./participant.entity";
 import { Chatting } from "./chatting.entity";
 import { RoomListResponse } from "./dto/room.roomListResponse.dto";
+import { JwtAuthGuard } from "src/auth/jwt.auth.guard";
 
 @Controller("chatting")
-@UseGuards(AuthGuard())
+@UseGuards(JwtAuthGuard)
 @ApiTags("채팅방")
 export class ChattingController {
   constructor(private chattingService: RoomService) {}

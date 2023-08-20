@@ -6,6 +6,7 @@ import {
   UseGuards,
   Body,
   Delete,
+  UseInterceptors,
 } from "@nestjs/common";
 import { FriendService } from "./friend.service";
 import { Friend } from "./friend.entity";
@@ -14,14 +15,18 @@ import { AuthGuard } from "@nestjs/passport";
 import { GetUser } from "src/auth/get-user.decorator";
 import { ApiTags, ApiOperation, ApiCreatedResponse } from "@nestjs/swagger";
 import { CreateFriendDto } from "./dto/friend.createfriend.dto";
+import { HttpCacheInterceptor } from "src/core/interceptors/httpcache.interceptor";
+import { JwtAuthGuard } from "src/auth/jwt.auth.guard";
 
 @Controller("friend")
-@UseGuards(AuthGuard())
+
+@UseGuards(JwtAuthGuard)
+@UseInterceptors(HttpCacheInterceptor)
 @ApiTags("친구")
 export class FriendController {
   constructor(private friendService: FriendService) {}
 
-  @Get("")
+  @Get(":id")
   @ApiOperation({
     summary: "친구 목록 가져오기 API",
     description: "친구 목록을 가져온다.",
@@ -33,7 +38,7 @@ export class FriendController {
     return this.friendService.getFriends(user);
   }
 
-  @Post("add")
+  @Post("")
   @ApiOperation({
     summary: "친구 추가하기 API",
     description: "친구를 추가합니다.",
@@ -46,7 +51,7 @@ export class FriendController {
     return this.friendService.addFriend(createFriend, user);
   }
 
-  @Put("mod")
+  @Put("")
   @ApiOperation({
     summary: "친구 이름 변경하기 API",
     description: "등록된 친구중 친구정보를 변경합니다.",
@@ -59,7 +64,7 @@ export class FriendController {
     return this.friendService.changeFriendName(createFriend, user);
   }
 
-  @Delete("del")
+  @Delete("")
   @ApiOperation({
     summary: "친구 삭제 API",
     description: "등록된 친구중 친구를 삭제합니다.",

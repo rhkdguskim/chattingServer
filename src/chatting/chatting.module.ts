@@ -14,7 +14,6 @@ import { ReadBy } from "./readby.entity";
 @Module({
   imports: [
     TypeOrmModule.forFeature([Chatting, Room, Participant, ReadBy]),
-    AuthModule,
     UsersModule,
   ],
   controllers: [ChattingController],
