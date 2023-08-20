@@ -5,6 +5,8 @@ import {
   ConflictException,
   BadRequestException,
   Logger,
+  Inject,
+  LoggerService,
 } from "@nestjs/common";
 import { Room } from "./room.entity";
 import { Participant } from "./participant.entity";
@@ -27,7 +29,10 @@ export class RoomService {
     @InjectRepository(Participant)
     private participantRepository: Repository<Participant>,
     @InjectRepository(Chatting)
-    private chattingRepository: Repository<Chatting>
+    private chattingRepository: Repository<Chatting>,
+
+    @Inject(Logger)
+    private readonly logger: LoggerService
   ) {}
 
   async createRoom(createRoomDto: CreateRoom, user: User): Promise<Room> {
@@ -206,6 +211,7 @@ export class RoomService {
       cursor = 9999999999;
     }
 
+    this.logger.log(`DB에서 채팅 기록을 조회 합니다. RoomID : ${id}`)
     const chatList = await this.chattingRepository
       .createQueryBuilder("chatting")
       .where("chatting.room_id = :id", { id })

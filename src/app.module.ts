@@ -17,7 +17,7 @@ import { ReadBy } from "./chatting/readby.entity";
 import { ServeStaticModule } from "@nestjs/serve-static";
 import * as path from "path";
 import { CacheModule } from "@nestjs/cache-manager";
-import * as redisCacheStore from 'cache-manager-ioredis';
+import * as redisCacheStore from "cache-manager-ioredis";
 
 const dbConfig = config.get("db");
 const redisConfig = config.get("redis");
@@ -42,11 +42,11 @@ const redisConfig = config.get("redis");
       synchronize: dbConfig.synchronize,
     }),
     CacheModule.register({
-        store: redisCacheStore,
-        host: process.env.REDIS_HOST || redisConfig.host,
-        port: process.env.REDIS_PORT || redisConfig.port,
-        isGlobal:true,
-        ttl:60,
+      store: redisCacheStore,
+      host: process.env.REDIS_HOST || redisConfig.host,
+      port: process.env.REDIS_PORT || redisConfig.port,
+      isGlobal: true,
+      ttl: 60,
     }),
     AuthModule,
     UsersModule,

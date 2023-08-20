@@ -1,4 +1,4 @@
-import { Body, Controller, Post, Get, Param, Query } from "@nestjs/common";
+import { Body, Controller, Post, Get, Param, Query, UseInterceptors } from "@nestjs/common";
 import { UseGuards } from "@nestjs/common";
 import { AuthGuard } from "@nestjs/passport";
 import { RoomService } from "./room.service";
@@ -12,6 +12,7 @@ import { Participant } from "./participant.entity";
 import { Chatting } from "./chatting.entity";
 import { RoomListResponse } from "./dto/room.roomListResponse.dto";
 import { JwtAuthGuard } from "src/auth/jwt.auth.guard";
+import { ChatCacheInterceptor } from "src/core/interceptors/chatcache.interceptor";
 
 @Controller("chatting")
 @UseGuards(JwtAuthGuard)
@@ -29,6 +30,7 @@ export class ChattingController {
     return await this.chattingService.GetRooms(user);
   }
 
+  @UseInterceptors(ChatCacheInterceptor)
   @Get("chattings/:id")
   @ApiOperation({
     summary: "유저의 채팅방 대화를 가져옵니다. API",

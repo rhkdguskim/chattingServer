@@ -1,5 +1,5 @@
-import { CustomDecorator, SetMetadata } from '@nestjs/common';
-import { CACHE_EVICT_METADATA } from './cache.constants';
+import { CustomDecorator, SetMetadata } from "@nestjs/common";
+import { CACHE_EVICT_METADATA } from "./cache.constants";
 
 export const CacheEvict = (
   ...cacheEvictKeys: string[]

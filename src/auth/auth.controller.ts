@@ -37,7 +37,7 @@ export class AuthController {
   }
 
   @UseInterceptors(HttpCacheInterceptor)
-  @CacheEvict('/users/')
+  @CacheEvict("/users/")
   @Post("signup")
   @ApiOperation({
     summary: "사용자 생성 API",

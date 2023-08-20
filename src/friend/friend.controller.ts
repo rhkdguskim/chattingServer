@@ -19,7 +19,6 @@ import { HttpCacheInterceptor } from "src/core/interceptors/httpcache.intercepto
 import { JwtAuthGuard } from "src/auth/jwt.auth.guard";
 
 @Controller("friend")
-
 @UseGuards(JwtAuthGuard)
 @UseInterceptors(HttpCacheInterceptor)
 @ApiTags("친구")

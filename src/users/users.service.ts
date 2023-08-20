@@ -11,7 +11,7 @@ export class UsersService {
     @InjectRepository(User)
     private userReposity: Repository<User>,
     @Inject(Logger)
-    private readonly logger : LoggerService,
+    private readonly logger: LoggerService
   ) {}
 
   async findAll(): Promise<User[]> {

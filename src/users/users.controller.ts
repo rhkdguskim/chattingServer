@@ -1,4 +1,11 @@
-import { Controller, Get, Put, Body, Param, UseInterceptors } from "@nestjs/common";
+import {
+  Controller,
+  Get,
+  Put,
+  Body,
+  Param,
+  UseInterceptors,
+} from "@nestjs/common";
 import { UsersService } from "./users.service";
 import { User } from "./users.entity";
 import { UseGuards } from "@nestjs/common";
