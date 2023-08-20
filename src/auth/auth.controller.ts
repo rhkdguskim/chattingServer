@@ -7,7 +7,7 @@ import { ApiTags, ApiOperation, ApiCreatedResponse } from "@nestjs/swagger";
 import { GetUser } from "./get-user.decorator";
 import { Response } from "express";
 import { HttpCacheInterceptor } from "src/core/interceptors/httpcache.interceptor";
-import { CacheEvict } from "src/core/interceptors/cache-evict-decorator";
+import { CacheEvict } from "src/core/interceptors/cache-decorator";
 
 @Controller("auth")
 @ApiTags("권한")

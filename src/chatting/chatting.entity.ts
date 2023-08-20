@@ -21,7 +21,7 @@ export class Chatting {
   message!: string;
 
   @Column()
-  not_read!: number;
+  not_read_chat!: number;
 
   @CreateDateColumn()
   createdAt!: Date;
@@ -40,6 +40,9 @@ export class Chatting {
   @JoinColumn({ name: "user_id" })
   user: User;
 
-  @OneToMany((type) => ReadBy, (readBy) => readBy.chatting, { eager: false })
+  @OneToMany((type) => ReadBy, (readBy) => readBy.chatting, {
+    eager: false,
+    cascade: true,
+  })
   readBys: ReadBy[];
 }

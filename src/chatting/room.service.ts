@@ -211,7 +211,7 @@ export class RoomService {
       cursor = 9999999999;
     }
 
-    this.logger.log(`DB에서 채팅 기록을 조회 합니다. RoomID : ${id}`)
+    this.logger.log(`DB에서 채팅 기록을 조회 합니다. RoomID : ${id}`);
     const chatList = await this.chattingRepository
       .createQueryBuilder("chatting")
       .where("chatting.room_id = :id", { id })
@@ -220,7 +220,7 @@ export class RoomService {
       .select([
         "chatting.id",
         "chatting.message",
-        "chatting.not_read",
+        "chatting.not_read_chat",
         "chatting.createdAt",
         "user.id",
         "chatting.room_id",

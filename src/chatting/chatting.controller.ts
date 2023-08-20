@@ -1,6 +1,13 @@
-import { Body, Controller, Post, Get, Param, Query, UseInterceptors } from "@nestjs/common";
+import {
+  Body,
+  Controller,
+  Post,
+  Get,
+  Param,
+  Query,
+  UseInterceptors,
+} from "@nestjs/common";
 import { UseGuards } from "@nestjs/common";
-import { AuthGuard } from "@nestjs/passport";
 import { RoomService } from "./room.service";
 import { ApiOperation, ApiCreatedResponse, ApiTags } from "@nestjs/swagger";
 import { CreateRoom } from "./dto/chatting.createRoom.dto";
@@ -13,6 +20,7 @@ import { Chatting } from "./chatting.entity";
 import { RoomListResponse } from "./dto/room.roomListResponse.dto";
 import { JwtAuthGuard } from "src/auth/jwt.auth.guard";
 import { ChatCacheInterceptor } from "src/core/interceptors/chatcache.interceptor";
+import { CacheAction } from "src/core/interceptors/cache-decorator";
 
 @Controller("chatting")
 @UseGuards(JwtAuthGuard)
@@ -31,12 +39,13 @@ export class ChattingController {
   }
 
   @UseInterceptors(ChatCacheInterceptor)
+  @CacheAction("READ")
   @Get("chattings/:id")
   @ApiOperation({
-    summary: "유저의 채팅방 대화를 가져옵니다. API",
-    description: "유저의 채팅방 리스트를 불러옵니다.",
+    summary: "방 ID로 채팅리스트들을 가져옵니다. API",
+    description: "방 ID로 채팅리스트들을 가져옵니다.",
   })
-  @ApiCreatedResponse({ description: "등록된 친구중 친구정보를 변경합니다." })
+  @ApiCreatedResponse({ description: "방 ID로 채팅리스트들을 가져옵니다." })
   async GetChattingList(
     @Param("id") id: number,
     @Query("cursor") cursor: number

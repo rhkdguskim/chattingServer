@@ -60,6 +60,9 @@ export class User {
   @Column({ nullable: true })
   refreshToken!: string;
 
+  @Column({ nullable: true })
+  accessToken!: string;
+
   @Column({ type: "timestamp", nullable: true })
   refreshTokenExpiry!: Date;
 }
