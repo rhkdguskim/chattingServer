@@ -12,3 +12,17 @@ db:
 jwt:
   expiresIn: 3600
   secret: 'bigkwangs'
+
+redis:
+  host : '127.0.0.1'
+  port: 6379
+
+kakao:
+  restApiKey: '7dd48b864b7c129d14f8f65cf429093b'
+  secret: 'LjgAO0NAMk4XhenvumwOxlPacCJroBBG'
+  loginURL : 'https://kauth.kakao.com/oauth/authorize'
+  tokenURL : 'https://kauth.kakao.com/oauth/token'
+  userURL : 'https://kapi.kakao.com/v2/user/me'
+  redirectURL : 'http://localhost:3000/auth/kakaologinredirect'
+  grant_type : 'authorization_code'
+  response_type : 'code'

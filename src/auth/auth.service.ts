@@ -6,6 +6,7 @@ import {
   Res,
   Req,
   Response,
+  Logger,
 } from "@nestjs/common";
 import { UsersService } from "../users/users.service";
 import { JwtService } from "@nestjs/jwt";
@@ -16,12 +17,17 @@ import { UpdateUserDto } from "../users/dto/users.updateuser.dto";
 import * as bcrypt from "bcrypt";
 import { LoginUserDto } from "../users/dto/users.loginuser.dto";
 import { GetUser } from "./get-user.decorator";
+import { HttpService } from "@nestjs/axios";
+import { Observable, catchError, from } from "rxjs";
+import { KakaoAuthRequest, KakaoLoginRequest } from "./dto/kakao.auth.dto";
+import { URLSearchParams } from "url";
 
 @Injectable()
 export class AuthService {
   constructor(
     private userService: UsersService,
-    private jwtService: JwtService
+    private jwtService: JwtService,
+    private http: HttpService,
   ) {}
 
   async signIn(loginUser: LoginUserDto): Promise<any> {
@@ -118,4 +124,42 @@ export class AuthService {
     }
     return false;
   }
+
+  kakaoLogin(host:string, request : KakaoLoginRequest) : string {
+    const queryParams = new URLSearchParams({
+      client_id: request.client_id,
+      redirect_uri: request.redirect_uri,
+      response_type: 'code',
+  }).toString();
+    const url = `${host}?${queryParams}`;
+    Logger.log(url)
+    return url;
+  }
+
+  async kakaoGetToken(url : string, body: KakaoAuthRequest): Promise<any> {
+    const {grant_type, client_id, redirect_uri, code, client_secret} = body;
+    const headers = {
+      'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
+    };
+    const query = new URLSearchParams({
+      grant_type,
+      client_id,
+      redirect_uri,
+      code,
+      client_secret,
+    }).toString();
+
+    const response = await this.http.post(url, query, { headers }).toPromise();
+    return response.data
+  }
+
+  async kakaogetUserInfo(url: string, access_token : string): Promise<any> {
+    const headers = {
+      Authorization: `Bearer ${access_token}`
+    };
+    
+    const response = await this.http.get(url, {headers}).toPromise();
+    return response;
+  }
+
 }

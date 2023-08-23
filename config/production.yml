@@ -12,3 +12,11 @@ db:
 jwt:
   expiresIn: 3600
   secret: 'bigkwangs'
+
+
+kakao:
+  restApiKey: '7dd48b864b7c129d14f8f65cf429093b'
+  secret: 'LjgAO0NAMk4XhenvumwOxlPacCJroBBG'
+  getLoginURL : 'https://kauth.kakao.com/oauth/authorize'
+  getTokenURL : 'https://kauth.kakao.com/oauth/token'
+  getUserURL : 'https://kapi.kakao.com/v2/user/me'
