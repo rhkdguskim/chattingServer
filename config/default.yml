@@ -23,6 +23,7 @@ kakao:
   loginURL : 'https://kauth.kakao.com/oauth/authorize'
   tokenURL : 'https://kauth.kakao.com/oauth/token'
   userURL : 'https://kapi.kakao.com/v2/user/me'
-  redirectURL : 'http://localhost:3000/auth/kakaologinredirect'
+  redirectURL : 'http://localhost:3000/auth/kakao/redirect'
+  logoutURL : 'https://kapi.kakao.com/v1/user/logout'
   grant_type : 'authorization_code'
   response_type : 'code'

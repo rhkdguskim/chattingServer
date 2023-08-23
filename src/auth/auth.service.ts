@@ -19,7 +19,7 @@ import { LoginUserDto } from "../users/dto/users.loginuser.dto";
 import { GetUser } from "./get-user.decorator";
 import { HttpService } from "@nestjs/axios";
 import { Observable, catchError, from } from "rxjs";
-import { KakaoAuthRequest, KakaoLoginRequest } from "./dto/kakao.auth.dto";
+import { KakaoAuthRequest, KakaoLoginRequest, KakaoLogoutRequest, KakaoLogoutResponse, KakaoUserResponse } from "./dto/kakao.auth.dto";
 import { URLSearchParams } from "url";
 
 @Injectable()
@@ -132,8 +132,24 @@ export class AuthService {
       response_type: 'code',
   }).toString();
     const url = `${host}?${queryParams}`;
-    Logger.log(url)
     return url;
+  }
+
+  async kakaoLogout(url: string, access_token : string, body : KakaoLogoutRequest): Promise<any> {
+    const {client_id, logout_redirect_uri, state} = body;
+    const headers = {
+      Authorization: `Bearer ${access_token}`
+    };
+
+    const queryParams = new URLSearchParams({
+      client_id,
+      logout_redirect_uri,
+      state,
+    }).toString();
+
+    const fullUrl = `${url}?${queryParams}`;
+
+    return await this.http.get(fullUrl, {headers}).toPromise();
   }
 
   async kakaoGetToken(url : string, body: KakaoAuthRequest): Promise<any> {
@@ -153,13 +169,20 @@ export class AuthService {
     return response.data
   }
 
-  async kakaogetUserInfo(url: string, access_token : string): Promise<any> {
+  async kakaoGetUserInfo(url: string, access_token : string): Promise<any> {
     const headers = {
       Authorization: `Bearer ${access_token}`
     };
-    
+
     const response = await this.http.get(url, {headers}).toPromise();
-    return response;
+    const user : KakaoUserResponse = {
+      ...response.data
+    };
+
+    const payload = {id:user.id, user_id:user.kakao_account.email}
+
+    return {access_token: await this.jwtService.signAsync(payload),
+    refresh_token: await this.generateRefreshToken(user.id)}
   }
 
 }
