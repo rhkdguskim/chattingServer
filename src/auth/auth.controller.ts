@@ -89,7 +89,7 @@ export class AuthController {
   @UseGuards(AuthGuard("google"))
   @ApiOperation({
     summary: "OAuth 2.0 구글 로그인 API",
-    description: "구글으로 인증하여 로그인을 구현합니다.",
+    description: "구글으로 인증하여 로그인을 구현입니다.",
   })
   async Google(@GetOAuthData() data : OAuthData) {
     const result = await this.authService.OAuthLogin(data)
