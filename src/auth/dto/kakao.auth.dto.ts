@@ -36,6 +36,7 @@ export interface KakaoAuthResponse {
 }
 
 export interface KakaoUserResponse {
+    provider : string;
     id: number;
     connected_at: string;
     properties: {

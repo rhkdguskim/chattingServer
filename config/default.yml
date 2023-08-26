@@ -20,10 +20,14 @@ redis:
 kakao:
   restApiKey: '7dd48b864b7c129d14f8f65cf429093b'
   secret: 'LjgAO0NAMk4XhenvumwOxlPacCJroBBG'
-  loginURL : 'https://kauth.kakao.com/oauth/authorize'
-  tokenURL : 'https://kauth.kakao.com/oauth/token'
-  userURL : 'https://kapi.kakao.com/v2/user/me'
-  redirectURL : 'http://localhost:3000/auth/kakao/redirect'
-  logoutURL : 'https://kapi.kakao.com/v1/user/logout'
-  grant_type : 'authorization_code'
-  response_type : 'code'
+  redirectURL : 'http://localhost:3000/auth/kakao/login'
+
+google:
+  restApiKey: '846841962221-phpmlehpgrv1lj4ko9fkrmnalt3uo1fk.apps.googleusercontent.com'
+  secret: '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'
+  redirectURL : 'http://localhost:3000/auth/google/login'
+
+naver:
+  restApiKey: 'oTcoSe0Nvv4q6RaZyyAS'
+  secret: 'YA_OXE1Knz'
+  redirectURL : 'http://localhost:3000/auth/naver/login'

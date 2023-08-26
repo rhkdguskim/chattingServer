@@ -8,6 +8,9 @@ import * as config from "config";
 import { JwtStrategy } from "./jwt.strategy";
 import { WsJwtGuard } from "./auth.wsjwtguard";
 import { HttpModule } from "@nestjs/axios";
+import { JwtGoogleStrategy } from "./google.strategy";
+import { JwtKakaoStrategy } from "./kakao.strategy";
+import { JwtNaverStrategy } from "./naver.strategy";
 
 const jwtConstants = config.get("jwt");
 
@@ -23,7 +26,14 @@ const jwtConstants = config.get("jwt");
     }),
   ],
   controllers: [AuthController],
-  providers: [AuthService, JwtStrategy, WsJwtGuard, Logger],
+  providers: [AuthService,
+              JwtStrategy,
+              WsJwtGuard,
+              Logger,
+              JwtGoogleStrategy, //google소셜로그인
+              JwtKakaoStrategy, //naver소셜로그인
+              JwtNaverStrategy, //kakao소셜로그인
+            ],
   exports: [JwtStrategy, WsJwtGuard],
 })
 export class AuthModule {}

@@ -63,6 +63,12 @@ export class User {
   @Column({ nullable: true })
   accessToken!: string;
 
+  @Column({ nullable: true })
+  oauth_refreshToken!: string;
+
+  @Column({ nullable: true })
+  oauth_accessToken!: string;
+
   @Column({ type: "timestamp", nullable: true })
   refreshTokenExpiry!: Date;
 }

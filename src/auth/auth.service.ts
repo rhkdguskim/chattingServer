@@ -3,17 +3,12 @@ import {
   Injectable,
   UnauthorizedException,
   HttpStatus,
-  Res,
-  Req,
-  Response,
   Logger,
 } from "@nestjs/common";
 import { UsersService } from "../users/users.service";
 import { JwtService } from "@nestjs/jwt";
 import { User } from "../users/users.entity";
-import { DeleteResult } from "typeorm";
 import { CreateUserDto } from "../users/dto/users.createuser.dto";
-import { UpdateUserDto } from "../users/dto/users.updateuser.dto";
 import * as bcrypt from "bcrypt";
 import { LoginUserDto } from "../users/dto/users.loginuser.dto";
 import { GetUser } from "./get-user.decorator";
@@ -21,6 +16,7 @@ import { HttpService } from "@nestjs/axios";
 import { Observable, catchError, from } from "rxjs";
 import { KakaoAuthRequest, KakaoLoginRequest, KakaoLogoutRequest, KakaoLogoutResponse, KakaoUserResponse } from "./dto/kakao.auth.dto";
 import { URLSearchParams } from "url";
+import { OAuthData } from "./dto/OAuth.dto";
 
 @Injectable()
 export class AuthService {
@@ -79,7 +75,7 @@ export class AuthService {
     });
   }
 
-  private async generateRefreshToken(userId: number): Promise<string> {
+  async generateRefreshToken(userId: number): Promise<string> {
     const refreshTokenPayload = { id: userId, isRefreshToken: true };
     const refreshToken = await this.jwtService.signAsync(refreshTokenPayload);
 
@@ -125,16 +121,6 @@ export class AuthService {
     return false;
   }
 
-  kakaoLogin(host:string, request : KakaoLoginRequest) : string {
-    const queryParams = new URLSearchParams({
-      client_id: request.client_id,
-      redirect_uri: request.redirect_uri,
-      response_type: 'code',
-  }).toString();
-    const url = `${host}?${queryParams}`;
-    return url;
-  }
-
   async kakaoLogout(url: string, access_token : string, body : KakaoLogoutRequest): Promise<any> {
     const {client_id, logout_redirect_uri, state} = body;
     const headers = {
@@ -152,37 +138,20 @@ export class AuthService {
     return await this.http.get(fullUrl, {headers}).toPromise();
   }
 
-  async kakaoGetToken(url : string, body: KakaoAuthRequest): Promise<any> {
-    const {grant_type, client_id, redirect_uri, code, client_secret} = body;
-    const headers = {
-      'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
+  async OAuthLogin(OAuthData: OAuthData) : Promise<any> {
+    let user = await this.userService.findbyUserId(OAuthData.user.user_id);
+
+    if (user) { // 이미 등록된 사용자
+      Logger.log("이미 등록된 사용자 입니다.")
+    }
+    else { // 가입이 되어있지 않다면 Auto Login
+      user = await this.userService.createOAuthUser(OAuthData);
+    }
+    const payload = { id: user.id, user_id: user.user_id };
+    return {
+      access_token: await this.jwtService.signAsync(payload),
+      refresh_token: await this.generateRefreshToken(user.id),
     };
-    const query = new URLSearchParams({
-      grant_type,
-      client_id,
-      redirect_uri,
-      code,
-      client_secret,
-    }).toString();
-
-    const response = await this.http.post(url, query, { headers }).toPromise();
-    return response.data
-  }
-
-  async kakaoGetUserInfo(url: string, access_token : string): Promise<any> {
-    const headers = {
-      Authorization: `Bearer ${access_token}`
-    };
-
-    const response = await this.http.get(url, {headers}).toPromise();
-    const user : KakaoUserResponse = {
-      ...response.data
-    };
-
-    const payload = {id:user.id, user_id:user.kakao_account.email}
-
-    return {access_token: await this.jwtService.signAsync(payload),
-    refresh_token: await this.generateRefreshToken(user.id)}
   }
 
 }

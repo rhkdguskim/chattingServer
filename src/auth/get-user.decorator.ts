@@ -9,6 +9,13 @@ export const GetUser = createParamDecorator(
   }
 );
 
+export const GetOAuthData  = createParamDecorator(
+  (data, ctx: ExecutionContext): User => {
+    const req = ctx.switchToHttp().getRequest();
+    return req.user;
+  }
+);
+
 export const GetWsUser = createParamDecorator(
   (data, ctx: ExecutionContext): User => {
     const client: Socket = ctx.switchToWs().getClient<Socket>();
