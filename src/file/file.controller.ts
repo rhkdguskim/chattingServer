@@ -1,6 +1,7 @@
 import {
   Controller,
   Get,
+  Logger,
   Param,
   Post,
   Res,
@@ -35,9 +36,10 @@ export class FileController {
     return filepath;
   }
 
-  @Get(":fileName")
+  @Get("/:fileName")
   async serveFile(@Param("fileName") fileName: string, @Res() res: Response) {
     const filePath = path.join(__dirname, "uploads", fileName);
+    Logger.log(filePath)
     res.sendFile(filePath);
   }
 }

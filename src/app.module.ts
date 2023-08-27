@@ -25,9 +25,6 @@ const redisConfig = config.get("redis");
 @Module({
   imports: [
     ServeStaticModule.forRoot({
-      rootPath: path.join(process.cwd(), "public"),
-    }),
-    ServeStaticModule.forRoot({
       rootPath: path.join(process.cwd(), "uploads"),
     }),
     TypeOrmModule.forRoot({
