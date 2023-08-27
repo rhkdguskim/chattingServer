@@ -15,8 +15,9 @@ jwt:
   secret: 'bigkwangs'
 
 redis:
-  host : '127.0.0.1'
-  port: 6379
+  host : 'redis-19046.c245.us-east-1-3.ec2.cloud.redislabs.com'
+  port: 19046
+  password : 'ZmbYRRRGHNb7G4O9ew2VG9gm5P2SNI7u'
 
 kakao:
   restApiKey: '7dd48b864b7c129d14f8f65cf429093b'
