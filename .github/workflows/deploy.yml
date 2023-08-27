@@ -30,7 +30,7 @@ jobs:
               ports: 3000
               install: npm install
               build: npm run build
-              start: npm run start
+              start: npm run start:prod
             context:
               git:
                 url: git@github.com:${{ github.repository }}.git
