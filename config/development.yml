@@ -29,3 +29,6 @@ naver:
   restApiKey: 'oTcoSe0Nvv4q6RaZyyAS'
   secret: 'YA_OXE1Knz'
   redirectURL : 'http://localhost:3000/auth/naver/login'
+
+cors:
+  frontendHost: 'http://localhost:3001'

@@ -22,9 +22,10 @@ async function bootstrap() {
   });
 
   const serverConfig = config.get("server");
+  const cors = config.get('cors')
   app.use(cookieParser());
   app.enableCors({
-    origin: ["http://localhost:3001", process.env.FRONT_END_HOST],
+    origin: [cors.frontendHost || process.env.FRONT_END_HOST],
     credentials: true,
   });
   app.useGlobalInterceptors(new LoggingInterceptor(app.get(Logger)));

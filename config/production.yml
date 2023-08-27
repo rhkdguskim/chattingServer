@@ -33,3 +33,6 @@ naver:
   restApiKey: 'oTcoSe0Nvv4q6RaZyyAS'
   secret: 'YA_OXE1Knz'
   redirectURL : 'https://port-0-kakaotalk-backend-eu1k2lllawv5vy.sel3.cloudtype.app/auth/naver/login'
+
+cors:
+  frontendHost: 'https://web-kakaotalk-frontend-eu1k2lllawv5vy.sel3.cloudtype.app'
