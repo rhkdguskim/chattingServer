@@ -3,11 +3,12 @@ server:
 
 db:
   type: 'mysql'
-  host : '127.0.0.1'
-  port: 13306
+  host : 'svc.sel3.cloudtype.app'
+  port: 30804
   username: 'root'
   password: 'root'
   database: 'kakaotalk'
+  synchronize: true
 
 jwt:
   expiresIn: 3600
