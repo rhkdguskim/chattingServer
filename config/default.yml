@@ -7,7 +7,7 @@ db:
   port: 30804
   username: 'root'
   password: 'root'
-  database: 'kakaotalk'
+  database: 'kwangtalk'
   synchronize: true
 
 jwt:
