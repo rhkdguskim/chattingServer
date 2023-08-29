@@ -34,7 +34,6 @@ const redisConfig = config.get("redis");
       username: process.env.DB_USER || dbConfig.username,
       password: process.env.DB_PASSWORD || dbConfig.password,
       database: process.env.DB_NAME || dbConfig.database,
-      // logging: true,
       entities: [User, Friend, Chatting, Room, Participant, ReadBy],
       synchronize: true || dbConfig.synchronize,
     }),

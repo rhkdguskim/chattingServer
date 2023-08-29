@@ -1,11 +1,11 @@
-import { Body, Controller, Get, Logger, Post, Query, Req, Res, UseGuards, UseInterceptors } from "@nestjs/common";
+import { Body, Controller, Get, Logger, Post, Query, Redirect, Req, Res, UseGuards, UseInterceptors } from "@nestjs/common";
 import { User } from "../users/users.entity";
 import { AuthService } from "./auth.service";
 import { LoginUserDto } from "../users/dto/users.loginuser.dto";
 import { CreateUserDto } from "../users/dto/users.createuser.dto";
 import { ApiTags, ApiOperation, ApiCreatedResponse } from "@nestjs/swagger";
 import { GetOAuthData, GetUser } from "./get-user.decorator";
-import { Response  } from "express";
+import { Request, Response  } from "express";
 import { HttpCacheInterceptor } from "src/core/interceptors/httpcache.interceptor";
 import { CacheEvict } from "src/core/interceptors/cache-decorator";
 import { AuthGuard } from "@nestjs/passport";
@@ -69,9 +69,17 @@ export class AuthController {
     summary: "OAuth 2.0 카카오톡 로그인 API",
     description: "카카오톡으로 인증하여 로그인을 구현합니다.",
   })
-  async Kakao(@GetOAuthData() data : OAuthData) {
-    const result = await this.authService.OAuthLogin(data)
-    return result
+  async Kakao(@GetOAuthData() data : OAuthData, @Res() res: Response, @Req() req : Request) {
+    const { access_token, refresh_token } = await this.authService.OAuthLogin(data)
+
+    res.cookie("jwt", access_token, {
+      httpOnly: true,
+    });
+    Logger.log('OriginalUrl : ',req.originalUrl)
+    res.send({
+      access_token,
+      refresh_token
+    })
   }
 
   @Get("naver/login")
@@ -80,9 +88,16 @@ export class AuthController {
     summary: "OAuth 2.0 네이버 로그인 API",
     description: "네이버으로 인증하여 로그인을 구현합니다.",
   })
-  async Naver(@GetOAuthData() data : OAuthData) {
-    const result = await this.authService.OAuthLogin(data)
-    return result
+  async Naver(@GetOAuthData() data : OAuthData, @Res() res: Response) {
+    const { access_token, refresh_token } = await this.authService.OAuthLogin(data)
+
+    res.cookie("jwt", access_token, {
+      httpOnly: true,
+    });
+    res.send({
+      access_token,
+      refresh_token
+    })
   }
 
   @Get("google/login")
@@ -91,8 +106,15 @@ export class AuthController {
     summary: "OAuth 2.0 구글 로그인 API",
     description: "구글으로 인증하여 로그인을 구현입니다.",
   })
-  async Google(@GetOAuthData() data : OAuthData) {
-    const result = await this.authService.OAuthLogin(data)
-    return result
+  async Google(@GetOAuthData() data : OAuthData, @Res() res: Response) {
+    const { access_token, refresh_token } = await this.authService.OAuthLogin(data)
+
+    res.cookie("jwt", access_token, {
+      httpOnly: true,
+    });
+    res.send({
+      access_token,
+      refresh_token
+    })
   }
 }

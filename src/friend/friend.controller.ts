@@ -20,7 +20,6 @@ import { JwtAuthGuard } from "src/auth/jwt.auth.guard";
 
 @Controller("friend")
 @UseGuards(JwtAuthGuard)
-@UseInterceptors(HttpCacheInterceptor)
 @ApiTags("친구")
 export class FriendController {
   constructor(private friendService: FriendService) {}
