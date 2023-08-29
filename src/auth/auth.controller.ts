@@ -80,10 +80,6 @@ export class AuthController {
       httpOnly: true,
     });
 
-    res.cookie("jwt2", refresh_token, {
-      httpOnly: true,
-    });
-
     res.redirect(`${FRONT_END_HOST}/login?access_token=${access_token}&refresh_token=${refresh_token}`)
   }
 
