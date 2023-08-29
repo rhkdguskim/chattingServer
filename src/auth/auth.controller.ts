@@ -11,6 +11,10 @@ import { CacheEvict } from "src/core/interceptors/cache-decorator";
 import { AuthGuard } from "@nestjs/passport";
 import { OAuthData } from "./dto/OAuth.dto";
 
+import * as config from "config";
+const cors = config.get('cors')
+const FRONT_END_HOST = cors.frontendHost
+
 @Controller("auth")
 @ApiTags("권한")
 export class AuthController {
@@ -75,11 +79,12 @@ export class AuthController {
     res.cookie("jwt", access_token, {
       httpOnly: true,
     });
-    Logger.log('OriginalUrl : ',req.originalUrl)
-    res.send({
-      access_token,
-      refresh_token
-    })
+
+    res.cookie("jwt2", refresh_token, {
+      httpOnly: true,
+    });
+
+    res.redirect(`${FRONT_END_HOST}/login?access_token=${access_token}&refresh_token=${refresh_token}`)
   }
 
   @Get("naver/login")
@@ -94,10 +99,7 @@ export class AuthController {
     res.cookie("jwt", access_token, {
       httpOnly: true,
     });
-    res.send({
-      access_token,
-      refresh_token
-    })
+    res.redirect(`${FRONT_END_HOST}/login?access_token=${access_token}&refresh_token=${refresh_token}`)
   }
 
   @Get("google/login")
@@ -112,9 +114,6 @@ export class AuthController {
     res.cookie("jwt", access_token, {
       httpOnly: true,
     });
-    res.send({
-      access_token,
-      refresh_token
-    })
+    res.redirect(`${FRONT_END_HOST}/login?access_token=${access_token}&refresh_token=${refresh_token}`)
   }
 }
