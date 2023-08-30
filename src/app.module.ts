@@ -15,6 +15,7 @@ import { ReadBy } from "./chatting/readby.entity";
 import { ServeStaticModule } from "@nestjs/serve-static";
 import * as path from "path";
 import { CacheModule } from "@nestjs/cache-manager";
+import { OpenaiModule } from './openai/openai.module';
 import * as redisCacheStore from "cache-manager-ioredis";
 
 const dbConfig = config.get("db");
@@ -48,6 +49,7 @@ const redisConfig = config.get("redis");
     FriendModule,
     ChattingModule,
     FileModule,
+    OpenaiModule,
   ],
   controllers: [],
   providers: [],
