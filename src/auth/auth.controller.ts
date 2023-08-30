@@ -1,15 +1,15 @@
 import { Body, Controller, Get, Logger, Post, Query, Redirect, Req, Res, UseGuards, UseInterceptors } from "@nestjs/common";
-import { User } from "../users/users.entity";
-import { AuthService } from "./auth.service";
-import { LoginUserDto } from "../users/dto/users.loginuser.dto";
-import { CreateUserDto } from "../users/dto/users.createuser.dto";
+import { User } from "@src/users/users.entity";
+import { AuthService } from "@src/auth/auth.service";
+import { LoginUserDto } from "@src/users/dto/users.loginuser.dto";
+import { CreateUserDto } from "@src/users/dto/users.createuser.dto";
 import { ApiTags, ApiOperation, ApiCreatedResponse } from "@nestjs/swagger";
-import { GetOAuthData, GetUser } from "./get-user.decorator";
+import { GetOAuthData, GetUser } from "@src/auth/get-user.decorator";
 import { Request, Response  } from "express";
-import { HttpCacheInterceptor } from "src/core/interceptors/httpcache.interceptor";
-import { CacheEvict } from "src/core/interceptors/cache-decorator";
+import { HttpCacheInterceptor } from "@src/core/interceptors/httpcache.interceptor";
+import { CacheEvict } from "@src/core/interceptors/cache-decorator";
 import { AuthGuard } from "@nestjs/passport";
-import { OAuthData } from "./dto/OAuth.dto";
+import { OAuthData } from "@src/auth/dto/OAuth.dto";
 
 import * as config from "config";
 const cors = config.get('cors')

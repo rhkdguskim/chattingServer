@@ -3,7 +3,7 @@ import { WsException } from "@nestjs/websockets";
 import { Socket } from "socket.io";
 import { JwtService } from "@nestjs/jwt";
 import * as config from "config";
-import { UsersService } from "src/users/users.service";
+import { UsersService } from "@src/users/users.service";
 const jwtConstants = config.get("jwt");
 
 @Injectable()

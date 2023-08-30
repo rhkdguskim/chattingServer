@@ -8,9 +8,9 @@ import * as config from "config";
 import { JwtStrategy } from "./jwt.strategy";
 import { WsJwtGuard } from "./auth.wsjwtguard";
 import { HttpModule } from "@nestjs/axios";
-import { JwtGoogleStrategy } from "./google.strategy";
-import { JwtKakaoStrategy } from "./kakao.strategy";
-import { JwtNaverStrategy } from "./naver.strategy";
+import { JwtGoogleStrategy } from "@src/auth/google.strategy";
+import { JwtKakaoStrategy } from "@src/auth/kakao.strategy";
+import { JwtNaverStrategy } from "@src/auth/naver.strategy";
 
 const jwtConstants = config.get("jwt");
 

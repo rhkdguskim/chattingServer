@@ -8,8 +8,8 @@ import {
 import { PassportStrategy } from "@nestjs/passport";
 import { ExtractJwt, Strategy } from "passport-jwt";
 import * as config from "config";
-import { UsersService } from "src/users/users.service";
-import { User } from "src/users/users.entity";
+import { UsersService } from "@src/users/users.service";
+import { User } from "@src/users/users.entity";
 import { Request } from "express";
 import { CACHE_MANAGER } from "@nestjs/cache-manager";
 import { Cache } from "cache-manager";
