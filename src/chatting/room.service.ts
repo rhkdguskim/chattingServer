@@ -1,8 +1,5 @@
 import {
   Injectable,
-  ForbiddenException,
-  HttpStatus,
-  ConflictException,
   BadRequestException,
   Logger,
   Inject,
@@ -10,15 +7,13 @@ import {
 } from "@nestjs/common";
 import { Room } from "./room.entity";
 import { Participant } from "./participant.entity";
-import { Repository, FindOneOptions } from "typeorm";
+import { Repository } from "typeorm";
 import { InjectRepository } from "@nestjs/typeorm";
-import { CreateRoom } from "./dto/chatting.createRoom.dto";
+import { CreateRoomReqeust } from "./dto/chatting.dto";
 import { User } from "src/users/users.entity";
 import { InviteToRoom } from "./dto/chatting.inviteToRoom.dto";
 import { RoomType } from "./dto/room.type.dto";
-import { Chatting } from "./chatting.entity";
 import { RoomListResponse } from "./dto/room.roomListResponse.dto";
-import { UsersService } from "src/users/users.service";
 import { UserResponse } from "src/users/dto/users.userresponse.dto";
 
 @Injectable()
@@ -28,21 +23,23 @@ export class RoomService {
     private roomRepository: Repository<Room>,
     @InjectRepository(Participant)
     private participantRepository: Repository<Participant>,
-    @InjectRepository(Chatting)
-    private chattingRepository: Repository<Chatting>,
 
     @Inject(Logger)
     private readonly logger: LoggerService
   ) {}
 
-  async createRoom(createRoomDto: CreateRoom, user: User): Promise<Room> {
+  async createRoom(createRoomDto: CreateRoomReqeust, user_id: string): Promise<Room> {
+
     const participantCount = createRoomDto.participant.length;
     let determinedType: RoomType;
     if (participantCount === 1) {
+      this.logger.log("개인방을 생성합니다.")
       determinedType = RoomType.Individual;
     } else if (participantCount === 2) {
+      this.logger.log("1:1 채팅방을 생성합니다.")
       determinedType = RoomType.two;
     } else {
+      this.logger.log("그룹채팅방 생성합니다.")
       determinedType = RoomType.Group;
     }
 
@@ -51,9 +48,10 @@ export class RoomService {
       determinedType
     );
     if (alreadyRoom) {
+      this.logger.log("이미 생성된 채팅방입니다.")
       return alreadyRoom;
     }
-    const room = await this.createBaseRoom(determinedType, user);
+    const room = await this.createBaseRoom(determinedType, user_id);
     await this.addParticipantsToRoom(
       room,
       createRoomDto.participant,
@@ -63,7 +61,7 @@ export class RoomService {
   }
 
   private async validateRoomCreation(
-    createRoomDto: CreateRoom,
+    createRoomDto: CreateRoomReqeust,
     roomType: RoomType
   ): Promise<Room> {
     const { participant } = createRoomDto;
@@ -90,9 +88,9 @@ export class RoomService {
       .getOne();
   }
 
-  private async createBaseRoom(type: RoomType, user: User): Promise<Room> {
+  private async createBaseRoom(type: RoomType, user_id: string): Promise<Room> {
     const newRoom = this.roomRepository.create({
-      owner_id: user.user_id,
+      owner_id: user_id,
       type,
       last_chat: "",
     });
@@ -149,7 +147,7 @@ export class RoomService {
     return rommInfo;
   }
 
-  async GetRooms(user: User): Promise<Array<RoomListResponse>> {
+  async GetUserRooms(user: User): Promise<Array<RoomListResponse>> {
     // 자기자신이 포함된 Room의 정보를 가져옵니다. (자신의 아이디로 Participant를 검색한다.)
     const myRoomList = await this.participantRepository
       .createQueryBuilder("participant")
@@ -198,45 +196,11 @@ export class RoomService {
     return response;
   }
 
-  async getRoom(id: number): Promise<Room | undefined> {
+  async getRoombyID(id: number): Promise<Room | undefined> {
     return this.roomRepository.findOne({ where: { id } });
   }
 
   async updateRoomStatus(room: Room): Promise<Room> {
     return this.roomRepository.save(room);
-  }
-
-  async getChattingList(id: number, cursor: number): Promise<any[]> {
-    if ((cursor as any) == "null") {
-      cursor = 9999999999;
-    }
-
-    this.logger.log(`DB에서 채팅 기록을 조회 합니다. RoomID : ${id}`);
-    const chatList = await this.chattingRepository
-      .createQueryBuilder("chatting")
-      .where("chatting.room_id = :id", { id })
-      .andWhere("chatting.id < :cursor", { cursor: cursor }) // 추가된 부분
-      .leftJoinAndSelect("chatting.user", "user")
-      .select([
-        "chatting.id",
-        "chatting.message",
-        "chatting.not_read_chat",
-        "chatting.createdAt",
-        "user.id",
-        "chatting.room_id",
-      ])
-      .orderBy("chatting.id", "DESC") // 정렬 추가
-      .limit(50) // 추가된 부분
-      .getRawMany();
-    return chatList
-      .map((chat) => ({
-        id: chat.chatting_id,
-        room_id: chat.room_id,
-        user_id: chat.user_id,
-        message: chat.chatting_message,
-        not_read: chat.chatting_not_read,
-        createdAt: chat.chatting_createdAt,
-      }))
-      .reverse();
   }
 }

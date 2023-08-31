@@ -84,7 +84,7 @@ export class ChattingGateway
     @GetWsUser() user: User,
     @MessageBody() message: RequestMessage
   ): Promise<ResponseMessage> {
-    const room: Room = await this.roomService.getRoom(message.room_id);
+    const room: Room = await this.roomService.getRoombyID(message.room_id);
     room.last_chat = message.message;
     await this.roomService.updateRoomStatus(room);
     const not_read_chat: number =

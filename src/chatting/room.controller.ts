@@ -4,23 +4,18 @@ import {
     Post,
     Get,
     Param,
-    Query,
-    UseInterceptors,
   } from "@nestjs/common";
   import { UseGuards } from "@nestjs/common";
   import { RoomService } from "./room.service";
   import { ApiOperation, ApiCreatedResponse, ApiTags, ApiResponse, ApiProperty, ApiParam } from "@nestjs/swagger";
-  import { CreateRoom } from "./dto/chatting.createRoom.dto";
+  import { CreateRoomReqeust } from "./dto/chatting.dto";
   import { GetUser } from "@src/auth/get-user.decorator";
   import { User } from "@src/users/users.entity";
   import { Room } from "./room.entity";
   import { InviteToRoom } from "./dto/chatting.inviteToRoom.dto";
   import { Participant } from "./participant.entity";
-  import { Chatting } from "./chatting.entity";
   import { RoomListResponse } from "./dto/room.roomListResponse.dto";
   import { JwtAuthGuard } from "@src/auth/jwt.auth.guard";
-  import { ChatCacheInterceptor } from "src/core/interceptors/chatcache.interceptor";
-  import { CacheAction } from "src/core/interceptors/cache-decorator";
   
   @Controller("room")
   @UseGuards(JwtAuthGuard)
@@ -39,7 +34,7 @@ import {
         type: Array<RoomListResponse>
     })
     async GetRoomList(@Param('id') id : number, @GetUser() user: User): Promise<Array<RoomListResponse>> {
-      return await this.roomService.GetRooms(user);
+      return await this.roomService.GetUserRooms(user);
     }
     
     @Post(":id")
@@ -52,10 +47,10 @@ import {
         "참가자를 선택하면 자동으로 채팅방 종류가 만들어지고, 채팅방이 생성이 됩니다.",
     })
     async CreateRoom(
-      @Body() createRoom: CreateRoom,
+      @Body() createRoom: CreateRoomReqeust,
       @GetUser() user: User
     ): Promise<Room> {
-      return this.roomService.createRoom(createRoom, user);
+      return this.roomService.createRoom(createRoom, user.user_id);
     }
   
     @Post("invite")
