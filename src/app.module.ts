@@ -18,7 +18,7 @@ import * as path from "path";
 import { OpenaiModule } from '@src/openai/openai.module';
 
 import { DatabaseModule } from "./database.module";
-import { CacheAppModule } from "./cacheapp.module";
+import { CacheRedisModule } from "./cacheRedis.module";
 
 
 @Module({
@@ -27,7 +27,7 @@ import { CacheAppModule } from "./cacheapp.module";
       rootPath: path.join(process.cwd(), "uploads"),
     }),
     DatabaseModule,
-    CacheAppModule,
+    CacheRedisModule,
     AuthModule,
     UsersModule,
     FriendModule,

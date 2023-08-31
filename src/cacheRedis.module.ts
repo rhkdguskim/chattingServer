@@ -11,11 +11,11 @@ const redisConfig = config.get("redis");
       store: redisCacheStore,
       host: process.env.REDIS_HOST || redisConfig.host,
       port: parseInt(process.env.REDIS_PORT) || redisConfig.port,
-      password: process.env.REDIS_PASSWORD || redisConfig.password,
+      password: process.env.REDIS_PASSWORD || redisConfig.password || undefined,
       isGlobal: true,
-      ttl: 60,
+      ttl: process.env.REDIS_TTL || redisConfig.ttl || 60,
     }),
   ],
 })
 
-export class CacheAppModule {}
+export class CacheRedisModule {}

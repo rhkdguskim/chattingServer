@@ -20,7 +20,7 @@ const dbConfig = config.get("db");
       password: process.env.DB_PASSWORD || dbConfig.password,
       database: process.env.DB_NAME || dbConfig.database,
       entities: [User, Friend, Chatting, Room, Participant, ReadBy],
-      synchronize: true || dbConfig.synchronize,
+      synchronize: process.env.DB_SYNCHRONIZE || dbConfig.synchronize,
     }),
   ],
 })

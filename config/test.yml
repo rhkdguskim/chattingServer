@@ -5,7 +5,7 @@ db:
   username: 'root'
   password: 'root'
   database: 'test'
-  synchronize: true
+  synchronize: false
 
 jwt:
   secret: 'bigkwangs'
@@ -14,7 +14,6 @@ jwt:
 redis:
   host : '127.0.0.1'
   port: 6379
-  password : 'root'
 
 kakao:
   restApiKey: '7dd48b864b7c129d14f8f65cf429093b'

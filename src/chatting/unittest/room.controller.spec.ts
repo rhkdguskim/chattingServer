@@ -1,6 +1,6 @@
 import { Test, TestingModule } from "@nestjs/testing";
 import { ChattingController } from "../chatting.controller";
-import { CacheAppModule } from "@src/cacheapp.module";
+import { CacheRedisModule } from "@src/cacheRedis.module";
 import { Logger } from "@nestjs/common";
 import { DatabaseModule } from "@src/database.module";
 import { Chatting } from "../chatting.entity";
@@ -16,7 +16,7 @@ describe("Room Controller", () => {
 
   beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      imports:[CacheAppModule, DatabaseModule, TypeOrmModule.forFeature([Chatting, Room, Participant, ReadBy]),],
+      imports:[CacheRedisModule, DatabaseModule, TypeOrmModule.forFeature([Chatting, Room, Participant, ReadBy]),],
       controllers: [RoomController],
       providers:[Logger,RoomService],
     }).compile();
@@ -30,7 +30,6 @@ describe("Room Controller", () => {
     });
 
     it("GetChattingList", async ()=> {
-
     })
   })
 
