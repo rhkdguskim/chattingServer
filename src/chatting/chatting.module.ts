@@ -8,7 +8,7 @@ import { Chatting } from "./chatting.entity";
 import { Room } from "./room.entity";
 import { ChattingGateway } from "./chatting.gateway";
 import { ChattingService } from "./chatting.service";
-import { UsersModule } from "src/users/users.module";
+import { UsersModule } from "@src/users/users.module";
 import { ReadBy } from "./readby.entity";
 import { RoomController } from "./room.controller";
 

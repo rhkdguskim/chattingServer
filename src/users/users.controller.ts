@@ -7,10 +7,10 @@ import {
   UseInterceptors,
 } from "@nestjs/common";
 import { UsersService } from "./users.service";
-import { User } from "./users.entity";
+import { User } from "@src/users/users.entity";
 import { UseGuards } from "@nestjs/common";
 
-import { UpdateUserDto } from "src/users/dto/users.updateuser.dto";
+import { UpdateUserDto } from "@src/users/dto/users.updateuser.dto";
 import {
   ApiTags,
   ApiOperation,
@@ -19,9 +19,8 @@ import {
   ApiOkResponse,
   ApiNotFoundResponse,
 } from "@nestjs/swagger";
-import { GetUser } from "./../auth/get-user.decorator";
-import { HttpCacheInterceptor } from "src/core/interceptors/httpcache.interceptor";
-import { JwtAuthGuard } from "src/auth/jwt.auth.guard";
+import { HttpCacheInterceptor } from "@src/core/interceptors/httpcache.interceptor";
+import { JwtAuthGuard } from "@src/auth/jwt.auth.guard";
 
 @UseGuards(JwtAuthGuard)
 @UseInterceptors(HttpCacheInterceptor)

@@ -6,6 +6,8 @@ services:
     restart: always
     ports:
       - "6379:6379"
+    environment:
+      - REDIS_PASSWORD=root # 비밀번호 환경 변수 추가
     volumes:
       - ./db/redis/data:/data
     platform: linux/x86_64

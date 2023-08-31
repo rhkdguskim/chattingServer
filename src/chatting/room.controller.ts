@@ -11,14 +11,14 @@ import {
   import { RoomService } from "./room.service";
   import { ApiOperation, ApiCreatedResponse, ApiTags, ApiResponse, ApiProperty, ApiParam } from "@nestjs/swagger";
   import { CreateRoom } from "./dto/chatting.createRoom.dto";
-  import { GetUser } from "src/auth/get-user.decorator";
-  import { User } from "src/users/users.entity";
+  import { GetUser } from "@src/auth/get-user.decorator";
+  import { User } from "@src/users/users.entity";
   import { Room } from "./room.entity";
   import { InviteToRoom } from "./dto/chatting.inviteToRoom.dto";
   import { Participant } from "./participant.entity";
   import { Chatting } from "./chatting.entity";
   import { RoomListResponse } from "./dto/room.roomListResponse.dto";
-  import { JwtAuthGuard } from "src/auth/jwt.auth.guard";
+  import { JwtAuthGuard } from "@src/auth/jwt.auth.guard";
   import { ChatCacheInterceptor } from "src/core/interceptors/chatcache.interceptor";
   import { CacheAction } from "src/core/interceptors/cache-decorator";
   

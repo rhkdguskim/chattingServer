@@ -1,7 +1,6 @@
 import { IsString } from "class-validator";
 import { ApiProperty } from "@nestjs/swagger";
-import { RoomType } from "./room.type.dto";
-import { User } from "src/users/users.entity";
+import { User } from "@src/users/users.entity";
 import { Room } from "../room.entity";
 
 export class JoinRoom {

@@ -9,14 +9,13 @@ import {
   UseInterceptors,
 } from "@nestjs/common";
 import { FriendService } from "./friend.service";
-import { Friend } from "./friend.entity";
-import { User } from "src/users/users.entity";
-import { AuthGuard } from "@nestjs/passport";
-import { GetUser } from "src/auth/get-user.decorator";
+import { Friend } from "@src/friend/friend.entity";
+import { User } from "@src/users/users.entity";
+import { GetUser } from "@src/auth/get-user.decorator";
 import { ApiTags, ApiOperation, ApiCreatedResponse } from "@nestjs/swagger";
-import { CreateFriendDto } from "./dto/friend.createfriend.dto";
-import { HttpCacheInterceptor } from "src/core/interceptors/httpcache.interceptor";
-import { JwtAuthGuard } from "src/auth/jwt.auth.guard";
+import { CreateFriendDto } from "@src/friend/dto/friend.createfriend.dto";
+import { HttpCacheInterceptor } from "@src/core/interceptors/httpcache.interceptor";
+import { JwtAuthGuard } from "@src/auth/jwt.auth.guard";
 
 @Controller("friend")
 @UseGuards(JwtAuthGuard)

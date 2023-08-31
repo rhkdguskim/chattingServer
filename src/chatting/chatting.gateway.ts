@@ -22,17 +22,17 @@ import {
   ResponseSingleRead,
 } from "./dto/chatting.read.dto";
 
-import { User } from "src/users/users.entity";
+import { User } from "@src/users/users.entity";
 import { RoomService } from "./room.service";
 import { Room } from "./room.entity";
 import { Chatting } from "./chatting.entity";
 import { WsJwtGuard } from "../auth/auth.wsjwtguard";
 import { Socket } from "socket.io";
 import { Logger } from "@nestjs/common";
-import { GetWsUser } from "src/auth/get-user.decorator";
+import { GetWsUser } from "@src/auth/get-user.decorator";
 import { RoomType } from "./dto/room.type.dto";
-import { ChatCacheInterceptor } from "src/core/interceptors/chatcache.interceptor";
-import { CacheAction } from "src/core/interceptors/cache-decorator";
+import { ChatCacheInterceptor } from "@src/core/interceptors/chatcache.interceptor";
+import { CacheAction } from "@src/core/interceptors/cache-decorator";
 import { ReadBy } from "./readby.entity";
 
 @WebSocketGateway({ cors: true })

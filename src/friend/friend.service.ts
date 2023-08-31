@@ -1,10 +1,10 @@
 import { ForbiddenException, HttpStatus, Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { Friend } from "./friend.entity";
+import { Friend } from "@src/friend/friend.entity";
 import { DeleteResult, Repository } from "typeorm";
-import { User } from "src/users/users.entity";
-import { CreateFriendDto } from "./dto/friend.createfriend.dto";
-import { UsersService } from "src/users/users.service";
+import { User } from "@src/users/users.entity";
+import { CreateFriendDto } from "@src/friend/dto/friend.createfriend.dto";
+import { UsersService } from "@src/users/users.service";
 
 @Injectable()
 export class FriendService {
