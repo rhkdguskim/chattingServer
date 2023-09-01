@@ -17,7 +17,7 @@ export class Room {
   id!: number;
 
   @Column()
-  owner_id!: string;
+  owner_id!: number;
 
   @Column()
   type!: number;

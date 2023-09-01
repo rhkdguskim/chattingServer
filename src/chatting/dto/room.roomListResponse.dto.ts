@@ -14,7 +14,7 @@ export class RoomListResponse {
   id: number;
 
   @ApiProperty({ description: "소유자 아이디" })
-  owner_id: string;
+  owner_id: number;
 
   @ApiProperty({ description: "방 종류" })
   type: RoomType;

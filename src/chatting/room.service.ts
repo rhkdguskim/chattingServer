@@ -4,6 +4,7 @@ import {
   Logger,
   Inject,
   LoggerService,
+  ForbiddenException,
 } from "@nestjs/common";
 import { Room } from "./room.entity";
 import { Participant } from "./participant.entity";
@@ -28,7 +29,7 @@ export class RoomService {
     private readonly logger: LoggerService
   ) {}
 
-  async createRoom(createRoomDto: CreateRoomReqeust, user_id: string): Promise<Room> {
+  async createRoom(createRoomDto: CreateRoomReqeust, user_id: number): Promise<Room> {
 
     const participantCount = createRoomDto.participant.length;
     let determinedType: RoomType;
@@ -38,9 +39,12 @@ export class RoomService {
     } else if (participantCount === 2) {
       this.logger.log("1:1 채팅방을 생성합니다.")
       determinedType = RoomType.two;
-    } else {
+    } else if (participantCount >= 3) {
       this.logger.log("그룹채팅방 생성합니다.")
       determinedType = RoomType.Group;
+    }
+    else{
+      throw new ForbiddenException("참가자가 없는 채팅방은 생성 할 수 없습니다.");
     }
 
     const alreadyRoom = await this.validateRoomCreation(
@@ -88,7 +92,7 @@ export class RoomService {
       .getOne();
   }
 
-  private async createBaseRoom(type: RoomType, user_id: string): Promise<Room> {
+  private async createBaseRoom(type: RoomType, user_id: number): Promise<Room> {
     const newRoom = this.roomRepository.create({
       owner_id: user_id,
       type,
@@ -147,11 +151,11 @@ export class RoomService {
     return rommInfo;
   }
 
-  async GetUserRooms(user: User): Promise<Array<RoomListResponse>> {
+  async GetUserRooms(user_id: number): Promise<Array<RoomListResponse>> {
     // 자기자신이 포함된 Room의 정보를 가져옵니다. (자신의 아이디로 Participant를 검색한다.)
     const myRoomList = await this.participantRepository
       .createQueryBuilder("participant")
-      .where("participant.user_id = :id", { id: user.id })
+      .where("participant.user_id = :id", { id: user_id })
       .innerJoinAndSelect("participant.room", "room")
       .getMany();
 

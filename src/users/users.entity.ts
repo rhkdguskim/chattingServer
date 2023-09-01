@@ -27,13 +27,13 @@ export class User {
   name!: string;
 
   @Column({ nullable: true })
-  status_msg!: string;
+  status_msg: string;
 
   @Column({ nullable: true })
-  profile_img_url!: string;
+  profile_img_url: string;
 
   @Column({ nullable: true })
-  background_img_url!: string;
+  background_img_url: string;
 
   @BeforeInsert()
   private beforeInsert() {
@@ -58,17 +58,17 @@ export class User {
   participant: Participant[];
 
   @Column({ nullable: true })
-  refreshToken!: string;
+  refreshToken: string;
 
   @Column({ nullable: true })
-  accessToken!: string;
+  accessToken: string;
 
   @Column({ nullable: true })
-  oauth_refreshToken!: string;
+  oauth_refreshToken: string;
 
   @Column({ nullable: true })
-  oauth_accessToken!: string;
+  oauth_accessToken: string;
 
   @Column({ type: "timestamp", nullable: true })
-  refreshTokenExpiry!: Date;
+  refreshTokenExpiry: Date;
 }

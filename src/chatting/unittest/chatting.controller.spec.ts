@@ -32,9 +32,8 @@ describe("ChattingController", () => {
     });
 
     it("GetChattingList", async ()=> {
-      // const result = await controller.GetChattingList(1, null)
-
-      // expect(result).toBeInstanceOf(Array);
+      const result = await controller.GetChattingList(1, null)
+      expect(result).toBeInstanceOf(Array);
     })
   })
 

@@ -33,8 +33,8 @@ import {
         description: '유저의 채팅방 리스트를 성공적으로 불러왔습니다.',
         type: Array<RoomListResponse>
     })
-    async GetRoomList(@Param('id') id : number, @GetUser() user: User): Promise<Array<RoomListResponse>> {
-      return await this.roomService.GetUserRooms(user);
+    async GetRoomList(@Param('id') user_id : number): Promise<Array<RoomListResponse>> {
+      return await this.roomService.GetUserRooms(user_id);
     }
     
     @Post(":id")
@@ -48,9 +48,9 @@ import {
     })
     async CreateRoom(
       @Body() createRoom: CreateRoomReqeust,
-      @GetUser() user: User
+      @Param('id') user_id : number,
     ): Promise<Room> {
-      return this.roomService.createRoom(createRoom, user.user_id);
+      return this.roomService.createRoom(createRoom, user_id);
     }
   
     @Post("invite")
@@ -61,7 +61,6 @@ import {
     @ApiCreatedResponse({ description: "채팅방에 원하는 참가자를 초대합니다." })
     async InviteRoom(
       @Body() inviteToRoom: InviteToRoom,
-      @GetUser() user: User
     ): Promise<Participant[]> {
       return this.roomService.InviteRoom(inviteToRoom);
     }
