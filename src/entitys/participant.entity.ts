@@ -8,8 +8,8 @@ import {
   UpdateDateColumn,
   PrimaryColumn,
 } from "typeorm";
-import { Room } from "@src/chatting/room.entity";
-import { User } from "@src/users/users.entity";
+import { Room } from "@src/entitys/room.entity";
+import { User } from "@src/entitys/users.entity";
 
 // 유저와 방의 Join Table
 @Entity()

@@ -8,9 +8,9 @@ import {
   JoinColumn,
   OneToMany,
 } from "typeorm";
-import { Room } from "@src/chatting/room.entity";
-import { User } from "@src/users/users.entity";
-import { ReadBy } from "@src/chatting/readby.entity";
+import { Room } from "@src/entitys/room.entity";
+import { User } from "@src/entitys/users.entity";
+import { ReadBy } from "@src/entitys/readby.entity";
 
 @Entity()
 export class Chatting {

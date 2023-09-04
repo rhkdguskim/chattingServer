@@ -9,7 +9,7 @@ import {
 import { Request } from "express";
 import { Observable, tap } from "rxjs";
 import { CacheInterceptor } from "@nestjs/cache-manager";
-import { CACHE_EVICT_METADATA } from "./cache.constants";
+import { CACHE_EVICT_METADATA } from "../constatns/cache.constants";
 
 @Injectable()
 export class HttpCacheInterceptor extends CacheInterceptor {

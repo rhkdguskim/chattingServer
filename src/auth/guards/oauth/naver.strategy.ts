@@ -1,7 +1,7 @@
 
 import { PassportStrategy } from "@nestjs/passport";
 import { Strategy } from "passport-naver";
-import { OAuthData } from "@src/auth/dto/OAuth.dto";
+import { OAuthData } from "@src/auth/dto/oauth.dto";
 import * as config from "config";
 
 const naver = config.get("naver");

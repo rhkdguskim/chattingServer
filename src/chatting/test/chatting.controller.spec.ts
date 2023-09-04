@@ -1,17 +1,14 @@
 import { Test, TestingModule } from "@nestjs/testing";
 import { ChattingController } from "../chatting.controller";
-import { CacheRedisModule } from "@src/cacheRedis.module";
+import { CacheRedisModule } from "@src/util/cacheRedis.module";
 import { Logger } from "@nestjs/common";
 import { ChattingService } from "../chatting.service";
 import { DatabaseModule } from "@src/database.module";
-import { Chatting } from "../chatting.entity";
+import { Chatting } from "../../entitys/chatting.entity";
 import { Participant } from "../participant.entity";
-import { RoomService } from "../room.service";
 import { Room } from "../room.entity";
-import { User } from "@src/users/users.entity";
-import { ChattingModule } from "../chatting.module";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { ReadBy } from "../readby.entity";
+import { ReadBy } from "../../entitys/readby.entity";
 
 describe("ChattingController", () => {
   let controller: ChattingController;
@@ -35,6 +32,7 @@ describe("ChattingController", () => {
       const result = await controller.GetChattingList(1, null)
       expect(result).toBeInstanceOf(Array);
     })
+
   })
 
 });

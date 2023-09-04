@@ -1,5 +1,5 @@
 import { createParamDecorator, ExecutionContext } from "@nestjs/common";
-import { User } from "@src/users/users.entity";
+import { User } from "@src/entitys/users.entity";
 import { Socket } from "socket.io";
 
 export const GetUser = createParamDecorator(

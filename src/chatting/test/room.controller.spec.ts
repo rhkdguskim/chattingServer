@@ -1,20 +1,21 @@
 import { Test, TestingModule } from "@nestjs/testing";
 import { ChattingController } from "../chatting.controller";
-import { CacheRedisModule } from "@src/cacheRedis.module";
-import { ForbiddenException, Logger } from "@nestjs/common";
+import { CacheRedisModule } from "@src/util/cacheRedis.module";
+import { ForbiddenException, Logger, ValidationPipe } from "@nestjs/common";
 import { DatabaseModule } from "@src/database.module";
-import { Chatting } from "../chatting.entity";
+import { Chatting } from "../../entitys/chatting.entity";
 import { Participant } from "../participant.entity";
 import { Room } from "../room.entity";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { ReadBy } from "../readby.entity";
+import { ReadBy } from "../../entitys/readby.entity";
 import { RoomController } from "../room.controller";
 import { RoomService } from "../room.service";
 import { CreateRoomReqeust } from "../dto/chatting.dto";
-import { User } from "@src/users/users.entity";
+import { User } from "@src/entitys/users.entity";
 
 describe("Room Controller", () => {
   let controller: RoomController;
+  let validationPipe: ValidationPipe;
 
   beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -22,8 +23,19 @@ describe("Room Controller", () => {
       controllers: [RoomController],
       providers:[Logger,RoomService],
     }).compile();
+
+    validationPipe = new ValidationPipe({ 
+      transform: true, 
+      whitelist: true,
+      exceptionFactory: (errors) => {
+        return new ForbiddenException(errors);
+      }
+    });
     
     controller = module.get<RoomController>(RoomController);
+
+
+
   });
 
   describe("Room Controller",  () => {
@@ -33,19 +45,20 @@ describe("Room Controller", () => {
 
     // 참가자가 아예 없는경우
     it("GetChattingList", async ()=> {
-      
       const request : CreateRoomReqeust = {
         room_name : "TestRoom",
         participant : [],
       }
       try {
-        await controller.CreateRoom(request, 1);
+        const transformedRequest = await validationPipe.transform(request, { type: 'body', metatype: CreateRoomReqeust }); // Validation Test
+        console.log(transformedRequest)
+        await controller.CreateRoom(transformedRequest, 1);
       } catch (error) {
         expect(error).toBeInstanceOf(ForbiddenException)
       }
     })
 
-    
+
   })
 
 });
