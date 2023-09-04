@@ -3,8 +3,9 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Friend } from "@src/entitys/friend.entity";
 import { DeleteResult, Repository } from "typeorm";
 import { User } from "@src/entitys/users.entity";
-import { CreateFriendDto } from "@src/friend/dto/friend.createfriend.dto";
+import { CreateFriendRequest, CreateFriendResponse, DelteFriendRequest } from "@src/friend/dto/friend.createfriend.dto";
 import { UsersService } from "@src/users/users.service";
+import { UserResponse } from "@src/users/dto/users.dto";
 
 @Injectable()
 export class FriendService {
@@ -14,9 +15,9 @@ export class FriendService {
     private userService: UsersService
   ) {}
 
-  async getFriends(user: User): Promise<User[]> {
+  async getFriends(id: number): Promise<UserResponse[]> {
     const friends: Friend[] = await this.friendRepository.find({
-      where: { user: { id: user.id } },
+      where: { user: { id } },
     });
 
     const userPromises = friends.map(async (friend) => {
@@ -27,22 +28,22 @@ export class FriendService {
     return Promise.all(userPromises);
   }
 
-  async getMyFriends(user: User): Promise<Friend[]> {
+  async getMyFriends(id: number): Promise<Friend[]> {
     return await this.friendRepository.find({
-      where: { user: { id: user.id } },
+      where: { user: { id } },
     });
   }
 
-  async addFriend(createFriend: CreateFriendDto, user: User): Promise<Friend> {
+  async addFriend(createFriend: CreateFriendRequest, id: number): Promise<CreateFriendResponse> {
     const { friend_id, friend_name } = createFriend;
     const friend = this.friendRepository.create({
       friend_id,
       friend_name,
-      user,
+      user : {id},
     });
 
     // 이미 등록된 친구라면
-    const friends: Friend[] = await this.getMyFriends(user);
+    const friends: Friend[] = await this.getMyFriends(id);
     friends.map((myfriend: Friend) => {
       if (myfriend.friend_id == friend_id) {
         throw new ForbiddenException({
@@ -52,22 +53,13 @@ export class FriendService {
         });
       }
     });
-
-    // 자기자신은 친구추가 불가
-    // if (user.user_id == friend_id) {
-    //     throw new ForbiddenException({
-    //         statusCode: HttpStatus.FORBIDDEN,
-    //         message: [`자기자신은 친구가 될 수 없습니다.`],
-    //         error: 'Forbidden'
-    //     })
-    // }
     return await this.friendRepository.save(friend);
   }
 
-  async delFriend(delFriend: Friend, user: User): Promise<DeleteResult> {
+  async delFriend(delFriend: DelteFriendRequest, id: number): Promise<DeleteResult> {
     // 해당 Friend가 현재 유저에 속하는지 확인
     const foundFriend = await this.friendRepository.findOne({
-      where: { id: delFriend.id, user: { id: user.id } },
+      where: { id: delFriend.friend_id, user: { id } },
     });
     if (!foundFriend) {
       throw new ForbiddenException({
@@ -81,14 +73,14 @@ export class FriendService {
   }
 
   async changeFriendName(
-    createFriend: CreateFriendDto,
-    user: User
+    createFriend: CreateFriendRequest,
+    id: number
   ): Promise<Friend> {
     const { friend_id, friend_name } = createFriend;
     const friend: Friend = await this.friendRepository.findOne({
       where: {
         friend_id,
-        user: { id: user.id },
+        user: { id },
       },
     });
     if (friend) {

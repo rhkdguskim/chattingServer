@@ -25,7 +25,7 @@ export class AuthService {
     const user = await this.userService.findbyUserId(loginUser.user_id);
 
     if (!user) {
-      throw new UnauthorizedException();
+      throw new UnauthorizedException("아이디가 존재하지 않습니다.");
     }
 
     const isPasswordValid = await bcrypt.compare(
@@ -34,7 +34,7 @@ export class AuthService {
     );
 
     if (!isPasswordValid) {
-      throw new UnauthorizedException();
+      throw new UnauthorizedException("잘못된 패스워드 입니다.");
     }
 
     const payload = { id: user.id, user_id: user.user_id };

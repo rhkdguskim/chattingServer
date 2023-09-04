@@ -45,6 +45,10 @@ export class UsersController {
     summary: "사용자 정보 업데이트 API",
     description: "사용자 정보를 업데이트 합니다.",
   })
+  @ApiCreatedResponse({
+    description: "사용자 정보를 업데이트 합니다.",
+    type: UpdateUserRequest,
+  })
   @ApiCreatedResponse({ description: "사용자 정보를 업데이트 합니다." })
   async updateUser(@Body() user: UpdateUserRequest): Promise<UserResponse> {
     return await this.usersService.saveUser(user);
@@ -63,7 +67,7 @@ export class UsersController {
   @Get("user_id/:id")
   @ApiOperation({
     summary: "유저 찾기기능 API",
-    description: "특정 사용자를 찾는 기능입니다.",
+    description: "아이디를 사용하여 특정 사용자를 찾는 기능입니다.",
   })
   @ApiCreatedResponse({ description: "특정 사용자를 찾는 기능입니다." })
   async SearchUser(@Param("id") user_id: string): Promise<UserResponse> {
