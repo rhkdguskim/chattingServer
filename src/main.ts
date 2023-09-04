@@ -5,8 +5,8 @@ import * as config from "config";
 import * as cookieParser from "cookie-parser";
 import { WinstonModule, utilities, WinstonLogger } from "nest-winston";
 import * as winston from "winston";
-import { LoggingInterceptor } from "./core/interceptors/logging.interceptor";
-import { Logger } from "@nestjs/common";
+import { LoggingInterceptor } from "./common/interceptors/logging.interceptor";
+import { Logger, ValidationPipe } from "@nestjs/common";
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
@@ -29,7 +29,11 @@ async function bootstrap() {
     credentials: true,
   });
   app.useGlobalInterceptors(new LoggingInterceptor(app.get(Logger)));
+  app.useGlobalPipes(new ValidationPipe({
+    enableDebugMessages:true,
+
+  }));
   setupSwagger(app);
-  await app.listen(serverConfig.port);
+  await app.listen(process.env.PORT || serverConfig.port);
 }
 bootstrap();

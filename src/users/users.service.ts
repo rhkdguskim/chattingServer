@@ -1,10 +1,10 @@
 import { Inject, Injectable, Logger, LoggerService } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { User } from "./users.entity";
-import { CreateUserDto } from "./dto/users.createuser.dto";
-import { UpdateUserDto } from "./dto/users.updateuser.dto";
+import { User } from "../entitys/users.entity";
+import { CreateUserRequest } from "./dto/users.dto";
+import { UpdateUserRequest } from "./dto/users.dto";
 import { DeleteResult, Repository } from "typeorm";
-import { OAuthData } from "src/auth/dto/OAuth.dto";
+import { OAuthData } from "@src/auth/dto/oauth.dto";
 
 @Injectable()
 export class UsersService {
@@ -28,11 +28,11 @@ export class UsersService {
     return result;
   }
 
-  async saveUser(user: UpdateUserDto): Promise<User> {
+  async saveUser(user: UpdateUserRequest): Promise<User> {
     return await this.userReposity.save(user);
   }
 
-  async createUser(userDto: CreateUserDto): Promise<User> {
+  async createUser(userDto: CreateUserRequest): Promise<User> {
     const newUser = await this.userReposity.create(userDto);
     return await this.userReposity.save(newUser);
   }

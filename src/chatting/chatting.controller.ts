@@ -7,20 +7,18 @@ import {
 } from "@nestjs/common";
 import { UseGuards } from "@nestjs/common";
 import { ApiOperation, ApiCreatedResponse, ApiTags } from "@nestjs/swagger";
-import { Chatting } from "./chatting.entity";
-import { JwtAuthGuard } from "@src/auth/jwt.auth.guard";
-import { ChatCacheInterceptor } from "@src/core/interceptors/chatcache.interceptor";
-import { CacheAction } from "@src/core/interceptors/cache-decorator";
+import { Chatting } from "../entitys/chatting.entity";
 import { ChattingService } from "./chatting.service";
+import { AuthGuard } from "@nestjs/passport";
+import { ReadChatCacheInterceptor } from "./interceptors/chatting.readchat.cache.interceptor";
 
 @Controller("chatting")
-@UseGuards(JwtAuthGuard)
+@UseGuards(AuthGuard('jwt'))
 @ApiTags("채팅리스트")
 export class ChattingController {
   constructor(private chattingService: ChattingService) {}
 
-  @UseInterceptors(ChatCacheInterceptor)
-  @CacheAction("READ")
+  @UseInterceptors(ReadChatCacheInterceptor)
   @Get(":id")
   @ApiOperation({
     summary: "방 ID로 채팅리스트들을 가져옵니다. API",

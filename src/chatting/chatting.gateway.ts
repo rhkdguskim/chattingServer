@@ -11,29 +11,28 @@ import {
 import { Server } from "socket.io";
 import { ChattingService } from "./chatting.service";
 import {
-  JoinRoom,
   RequestMessage,
   ResponseMessage,
-} from "./dto/chatting.message.dto";
+} from "./dto/chatting.dto";
 import {
   RequestMultiRead,
   RequestSingleMessage,
   ResponseMultiRead,
   ResponseSingleRead,
-} from "./dto/chatting.read.dto";
+} from "./dto/chatting.dto";
 
-import { User } from "@src/users/users.entity";
+import { User } from "@src/entitys/users.entity";
 import { RoomService } from "./room.service";
-import { Room } from "./room.entity";
-import { Chatting } from "./chatting.entity";
-import { WsJwtGuard } from "../auth/auth.wsjwtguard";
+import { Room } from "@src/entitys/room.entity";
+import { Chatting } from "../entitys/chatting.entity";
+import { WsJwtGuard } from "../auth/guards/auth.wsjwtguard";
 import { Socket } from "socket.io";
 import { Logger } from "@nestjs/common";
-import { GetWsUser } from "@src/auth/get-user.decorator";
-import { RoomType } from "./dto/room.type.dto";
-import { ChatCacheInterceptor } from "@src/core/interceptors/chatcache.interceptor";
-import { CacheAction } from "@src/core/interceptors/cache-decorator";
-import { ReadBy } from "./readby.entity";
+import { GetWsUser } from "@src/auth/deco/auth.decorator";
+import { RoomType } from "./dto/room.dto";
+import { CacheAction } from "@src/common/decorator/cache-decorator";
+import { ReadBy } from "../entitys/readby.entity";
+import { SendMessageCacheInterceptor } from "./interceptors/chatting.sendmessage.cache.interceptor";
 
 @WebSocketGateway({ cors: true })
 @UseGuards(WsJwtGuard)
@@ -78,7 +77,7 @@ export class ChattingGateway
   ): void {}
 
   @SubscribeMessage("SendMessage")
-  @UseInterceptors(ChatCacheInterceptor)
+  @UseInterceptors(SendMessageCacheInterceptor)
   @CacheAction("CREATE")
   async handleMessage(
     @GetWsUser() user: User,

@@ -1,13 +1,11 @@
 import { Injectable, ForbiddenException, HttpStatus, Inject, Logger, LoggerService } from "@nestjs/common";
-import { Chatting } from "./chatting.entity";
-import { Room } from "./room.entity";
-import { Participant } from "./participant.entity";
+import { Chatting } from "../entitys/chatting.entity";
+import { Room } from "@src/entitys/room.entity";
+import { Participant } from "@src/entitys/participant.entity";
 import { Equal, Repository } from "typeorm";
 import { InjectRepository } from "@nestjs/typeorm";
-import { InviteToRoom } from "./dto/chatting.inviteToRoom.dto";
-import { RequestMessage } from "./dto/chatting.message.dto";
-import { User } from "src/users/users.entity";
-import { RoomService } from "./room.service";
+import { RequestMessage } from "./dto/chatting.dto";
+import { User } from "@src/entitys/users.entity";
 
 @Injectable()
 export class ChattingService {

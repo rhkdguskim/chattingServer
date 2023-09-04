@@ -8,17 +8,15 @@ import {
   import { UseGuards } from "@nestjs/common";
   import { RoomService } from "./room.service";
   import { ApiOperation, ApiCreatedResponse, ApiTags, ApiResponse, ApiProperty, ApiParam } from "@nestjs/swagger";
-  import { CreateRoomReqeust } from "./dto/chatting.dto";
-  import { GetUser } from "@src/auth/get-user.decorator";
-  import { User } from "@src/users/users.entity";
-  import { Room } from "./room.entity";
-  import { InviteToRoom } from "./dto/chatting.inviteToRoom.dto";
-  import { Participant } from "./participant.entity";
-  import { RoomListResponse } from "./dto/room.roomListResponse.dto";
-  import { JwtAuthGuard } from "@src/auth/jwt.auth.guard";
+  import { CreateRoomReqeust } from "./dto/room.dto";
+  import { Room } from "@src/entitys/room.entity";
+  import { Participant } from "@src/entitys/participant.entity";
+  import { RoomListResponse } from "./dto/room.dto";
+  import { InviteRoomRequest } from "./dto/room.dto";
+  import { JwtStrategy } from "@src/auth/guards/jwt.strategy";
   
   @Controller("room")
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtStrategy)
   @ApiTags("채팅방")
   export class RoomController {
     constructor(private roomService: RoomService) {}
@@ -60,7 +58,7 @@ import {
     })
     @ApiCreatedResponse({ description: "채팅방에 원하는 참가자를 초대합니다." })
     async InviteRoom(
-      @Body() inviteToRoom: InviteToRoom,
+      @Body() inviteToRoom: InviteRoomRequest,
     ): Promise<Participant[]> {
       return this.roomService.InviteRoom(inviteToRoom);
     }

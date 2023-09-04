@@ -14,10 +14,10 @@ import { FileService } from "./file.service";
 import { FileInterceptor } from "@nestjs/platform-express";
 import * as path from "path";
 import { Response } from "express";
-import { JwtAuthGuard } from "@src/auth/jwt.auth.guard";
+import { AuthGuard } from "@nestjs/passport";
 
 @Controller("file")
-@UseGuards(JwtAuthGuard)
+@UseGuards(AuthGuard('jwt'))
 @ApiTags("파일업로드")
 export class FileController {
   constructor(private readonly fileService: FileService) {}

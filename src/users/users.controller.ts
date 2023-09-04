@@ -7,10 +7,10 @@ import {
   UseInterceptors,
 } from "@nestjs/common";
 import { UsersService } from "./users.service";
-import { User } from "@src/users/users.entity";
+import { User } from "@src/entitys/users.entity";
 import { UseGuards } from "@nestjs/common";
 
-import { UpdateUserDto } from "@src/users/dto/users.updateuser.dto";
+import { UpdateUserRequest, UserResponse } from "@src/users/dto/users.dto";
 import {
   ApiTags,
   ApiOperation,
@@ -19,10 +19,11 @@ import {
   ApiOkResponse,
   ApiNotFoundResponse,
 } from "@nestjs/swagger";
-import { HttpCacheInterceptor } from "@src/core/interceptors/httpcache.interceptor";
-import { JwtAuthGuard } from "@src/auth/jwt.auth.guard";
+import { HttpCacheInterceptor } from "@src/common/interceptors/httpcache.interceptor";
+import { AuthGuard } from "@nestjs/passport";
 
-@UseGuards(JwtAuthGuard)
+
+@UseGuards(AuthGuard('jwt'))
 @UseInterceptors(HttpCacheInterceptor)
 @Controller("users")
 @ApiTags("유저")
@@ -35,7 +36,7 @@ export class UsersController {
     description: "모든 사용자의 정보를 가져옵니다.",
   })
   @ApiCreatedResponse({ description: "모든 사용자의 정보를 가져옵니다." })
-  async getAllUser(): Promise<User[]> {
+  async getAllUser(): Promise<UserResponse[]> {
     return await this.usersService.findAll();
   }
 
@@ -45,7 +46,7 @@ export class UsersController {
     description: "사용자 정보를 업데이트 합니다.",
   })
   @ApiCreatedResponse({ description: "사용자 정보를 업데이트 합니다." })
-  async updateUser(@Body() user: UpdateUserDto): Promise<User> {
+  async updateUser(@Body() user: UpdateUserRequest): Promise<UserResponse> {
     return await this.usersService.saveUser(user);
   }
 
@@ -55,7 +56,7 @@ export class UsersController {
     description: "특정 사용자를 찾는 기능입니다.",
   })
   @ApiCreatedResponse({ description: "특정 사용자를 찾는 기능입니다." })
-  async SearchUserByID(@Param("id") id: number): Promise<User> {
+  async SearchUserByID(@Param("id") id: number): Promise<UserResponse> {
     return this.usersService.findOne(id);
   }
 
@@ -65,7 +66,7 @@ export class UsersController {
     description: "특정 사용자를 찾는 기능입니다.",
   })
   @ApiCreatedResponse({ description: "특정 사용자를 찾는 기능입니다." })
-  async SearchUser(@Param("id") user_id: string): Promise<User> {
+  async SearchUser(@Param("id") user_id: string): Promise<UserResponse> {
     return this.usersService.findbyUserId(user_id);
   }
 }

@@ -6,16 +6,15 @@ import {
   LoggerService,
   ForbiddenException,
 } from "@nestjs/common";
-import { Room } from "./room.entity";
-import { Participant } from "./participant.entity";
+import { Room } from "@src/entitys/room.entity";
+import { Participant } from "@src/entitys/participant.entity";
 import { Repository } from "typeorm";
 import { InjectRepository } from "@nestjs/typeorm";
-import { CreateRoomReqeust } from "./dto/chatting.dto";
-import { User } from "src/users/users.entity";
-import { InviteToRoom } from "./dto/chatting.inviteToRoom.dto";
-import { RoomType } from "./dto/room.type.dto";
-import { RoomListResponse } from "./dto/room.roomListResponse.dto";
-import { UserResponse } from "src/users/dto/users.userresponse.dto";
+import { CreateRoomReqeust } from "./dto/room.dto";
+import { User } from "@src/entitys/users.entity";
+import { RoomType } from "./dto/room.dto";
+import { RoomListResponse, InviteRoomRequest } from "./dto/room.dto";
+import { UserResponse } from "@src/users/dto/users.dto";
 
 @Injectable()
 export class RoomService {
@@ -55,6 +54,7 @@ export class RoomService {
       this.logger.log("이미 생성된 채팅방입니다.")
       return alreadyRoom;
     }
+    
     const room = await this.createBaseRoom(determinedType, user_id);
     await this.addParticipantsToRoom(
       room,
@@ -77,7 +77,7 @@ export class RoomService {
   }
 
   private async findExistingRoom(
-    participants: User[],
+    participants: UserResponse[],
     type: RoomType
   ): Promise<Room | undefined> {
     const participantIds = participants.map((p) => p.id);
@@ -103,7 +103,7 @@ export class RoomService {
 
   private async addParticipantsToRoom(
     room: Room,
-    participants: User[],
+    participants: UserResponse[],
     room_name: string
   ): Promise<void> {
     for (const participantUser of participants) {
@@ -116,7 +116,7 @@ export class RoomService {
     }
   }
 
-  async InviteRoom(inviteToRoom: InviteToRoom): Promise<Participant[]> {
+  async InviteRoom(inviteToRoom: InviteRoomRequest): Promise<Participant[]> {
     const results: Participant[] = [];
     const { room, room_name, participants } = inviteToRoom;
 

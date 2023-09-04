@@ -1,15 +1,15 @@
 import { Body, Controller, Get, Logger, Post, Query, Redirect, Req, Res, UseGuards, UseInterceptors } from "@nestjs/common";
-import { User } from "@src/users/users.entity";
+import { User } from "@src/entitys/users.entity";
 import { AuthService } from "@src/auth/auth.service";
-import { LoginUserDto } from "@src/users/dto/users.loginuser.dto";
-import { CreateUserDto } from "@src/users/dto/users.createuser.dto";
+import { LoginUserRequest, LoginUserResponse, UserResponse } from "@src/users/dto/users.dto";
+import { CreateUserRequest } from "@src/users/dto/users.dto";
 import { ApiTags, ApiOperation, ApiCreatedResponse } from "@nestjs/swagger";
-import { GetOAuthData, GetUser } from "@src/auth/get-user.decorator";
+import { GetOAuthData, GetUser } from "@src/auth/deco/auth.decorator";
 import { Request, Response  } from "express";
-import { HttpCacheInterceptor } from "@src/core/interceptors/httpcache.interceptor";
-import { CacheEvict } from "@src/core/interceptors/cache-decorator";
+import { HttpCacheInterceptor } from "@src/common/interceptors/httpcache.interceptor";
+import { CacheEvict } from "@src/common/decorator/cache-decorator";
 import { AuthGuard } from "@nestjs/passport";
-import { OAuthData } from "@src/auth/dto/OAuth.dto";
+import { OAuthData } from "@src/auth/dto/oauth.dto";
 
 import * as config from "config";
 const cors = config.get('cors')
@@ -28,11 +28,11 @@ export class AuthController {
   })
   @ApiCreatedResponse({
     description: "JWT 토큰을 발급합니다",
-    type: LoginUserDto,
+    type: LoginUserResponse,
   })
   async signIn(
     @Res({ passthrough: true }) response: Response,
-    @Body() loginUser: LoginUserDto
+    @Body() loginUser: LoginUserRequest
   ) {
     const { access_token, refresh_token } = await this.authService.signIn(
       loginUser
@@ -40,7 +40,12 @@ export class AuthController {
     response.cookie("jwt", access_token, {
       httpOnly: true,
     });
-    return await { access_token, refresh_token };
+
+    const res : LoginUserResponse = {
+      access_token,
+      refresh_token
+    }
+    return res;
   }
 
   @UseInterceptors(HttpCacheInterceptor)
@@ -50,20 +55,26 @@ export class AuthController {
     summary: "사용자 생성 API",
     description: "사용자를 생성한다.",
   })
+  @ApiCreatedResponse({
+    description: "생성된 사용자 정보를 return 합니다.",
+    type: UserResponse,
+  })
+
   @ApiCreatedResponse({ description: "사용자를 생성한다.", type: User })
-  async createUser(@Body() user: CreateUserDto): Promise<User> {
+  async createUser(@Body() user: CreateUserRequest): Promise<UserResponse> {
     return await this.authService.create(user);
   }
 
   @Post("refreshtoken")
   @ApiOperation({
     summary: "사용자 Token 재발급 API",
-    description: "Refresh Token을 사용한 access Token 재발급",
+    description: "Refresh Token을 사용한 access token, refresh token 재발급",
   })
   @ApiCreatedResponse({
-    description: "Refresh Token을 사용한 access Token 재발급 합니다",
+    description: "JWT 토큰을 재발급합니다",
+    type: LoginUserResponse,
   })
-  getNewToken(@Body() refresh_Token: string, @GetUser() user: User) {
+  getNewToken(@Body() refresh_Token: string, @GetUser() user: User) : Promise<LoginUserResponse> {
     return this.authService.getNewAccessToken(refresh_Token, user);
   }
 

@@ -1,35 +1,65 @@
-import { RoomType } from "./room.type.dto";
-
+import { IsString } from "class-validator";
 import { ApiProperty } from "@nestjs/swagger";
-import { User } from "src/users/users.entity";
 
-export class CreateRoomReqeust {
-  @ApiProperty({ description: "방 이름" })
-  room_name!: string;
+export class RequestMessage {
+  @ApiProperty({ description: "방 ID" })
+  room_id: number;
 
-  @ApiProperty({ description: "참가유저목록" })
-  participant!: User[];
+  @IsString()
+  @ApiProperty({ description: "메세지" })
+  message: string;
 }
 
-export class CreateRoomResponse {
-    @ApiProperty({ description: "방 이름" })
-    id: number;
+export class ResponseMessage {
+  @ApiProperty({ description: "채팅 ID" })
+  id: number;
 
-    @ApiProperty({ description: "방 종류" })
-    type: RoomType;
+  @ApiProperty({ description: "방 ID" })
+  room_id: number;
 
-    @ApiProperty({ description: "방장 아이디" })
-    owner_id: string;
+  @ApiProperty({ description: "보낸사람 ID" })
+  user_id: number;
 
-    @ApiProperty({ description: "방 이름" })
-    room_name: string;
+  @IsString()
+  @ApiProperty({ description: "메세지" })
+  message: string;
 
-    @ApiProperty({ description: "마지막 채팅" })
-    last_chat: string;
+  @ApiProperty({ description: "읽지않은메세지" })
+  not_read_chat: number;
 
-    @ApiProperty({ description: "읽지않은 메세지" })
-    not_read_chat: number;
+  @ApiProperty({ description: "생성 된 시간" })
+  createdAt: Date;
+}
 
-    @ApiProperty({ description: "업데이트시간" })
-    updatedAt: Date;
-  }
+
+export class RequestSingleMessage {
+  @ApiProperty({ description: "단일 채팅 ID" })
+  id: number;
+
+  @ApiProperty({ description: "읽은사람 ID" })
+  user_id: number;
+}
+
+export class RequestMultiRead {
+  @ApiProperty({ description: "방 ID" })
+  id: number;
+
+  @ApiProperty({ description: "읽은사람 ID" })
+  user_id: number;
+}
+
+export class ResponseSingleRead {
+  @ApiProperty({ description: "단일 채팅 ID" })
+  id: number;
+
+  @ApiProperty({ description: "읽은사람 ID" })
+  user_id: number;
+}
+
+export class ResponseMultiRead {
+  @ApiProperty({ description: "여러개 채팅 ID" })
+  id: number[];
+
+  @ApiProperty({ description: "읽은사람 ID" })
+  user_id: number;
+}

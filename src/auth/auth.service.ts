@@ -7,12 +7,12 @@ import {
 } from "@nestjs/common";
 import { UsersService } from "@src/users/users.service";
 import { JwtService } from "@nestjs/jwt";
-import { User } from "@src/users/users.entity";
-import { CreateUserDto } from "@src/users/dto/users.createuser.dto";
+import { User } from "@src/entitys/users.entity";
+import { CreateUserRequest, LoginUserResponse } from "@src/users/dto/users.dto";
 import * as bcrypt from "bcrypt";
-import { LoginUserDto } from "@src/users/dto/users.loginuser.dto";
-import { GetUser } from "@src/auth/get-user.decorator";
-import { OAuthData } from "@src/auth/dto/OAuth.dto";
+import { LoginUserRequest } from "@src/users/dto/users.dto";
+import { GetUser } from "@src/auth/deco/auth.decorator";
+import { OAuthData } from "@src/auth/dto/oauth.dto";
 
 @Injectable()
 export class AuthService {
@@ -21,7 +21,7 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async signIn(loginUser: LoginUserDto): Promise<any> {
+  async signIn(loginUser: LoginUserRequest): Promise<any> {
     const user = await this.userService.findbyUserId(loginUser.user_id);
 
     if (!user) {
@@ -45,7 +45,7 @@ export class AuthService {
     };
   }
 
-  async create(createUserDto: CreateUserDto): Promise<any> {
+  async create(createUserDto: CreateUserRequest): Promise<any> {
     const isExist = await this.userService.findbyUserId(createUserDto.user_id);
     if (isExist) {
       throw new ForbiddenException({
@@ -82,7 +82,7 @@ export class AuthService {
   async getNewAccessToken(
     refreshToken: string,
     @GetUser() user: User
-  ): Promise<string> {
+  ): Promise<LoginUserResponse> {
     const isValidRefreshToken = await this.validateRefreshToken(
       refreshToken,
       user
@@ -94,10 +94,13 @@ export class AuthService {
 
     const payload = this.jwtService.verify(refreshToken);
     if (payload.isRefreshToken) {
-      return this.jwtService.signAsync({
+      const refresh_token = await this.generateRefreshToken(payload.id); // refresh_token을 다시 재발급.
+      const access_token =  await this.jwtService.signAsync({ // access_token 발급.
         id: payload.id,
         user_id: payload.user_id,
       });
+
+      return {access_token, refresh_token}
     } else {
       throw new UnauthorizedException();
     }

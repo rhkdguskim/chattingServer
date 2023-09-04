@@ -9,16 +9,16 @@ import {
   UseInterceptors,
 } from "@nestjs/common";
 import { FriendService } from "./friend.service";
-import { Friend } from "@src/friend/friend.entity";
-import { User } from "@src/users/users.entity";
-import { GetUser } from "@src/auth/get-user.decorator";
+import { Friend } from "@src/entitys/friend.entity";
+import { User } from "@src/entitys/users.entity";
+import { GetUser } from "@src/auth/deco/auth.decorator";
 import { ApiTags, ApiOperation, ApiCreatedResponse } from "@nestjs/swagger";
 import { CreateFriendDto } from "@src/friend/dto/friend.createfriend.dto";
-import { HttpCacheInterceptor } from "@src/core/interceptors/httpcache.interceptor";
-import { JwtAuthGuard } from "@src/auth/jwt.auth.guard";
+import { HttpCacheInterceptor } from "@src/common/interceptors/httpcache.interceptor";
+import { AuthGuard } from "@nestjs/passport";
 
 @Controller("friend")
-@UseGuards(JwtAuthGuard)
+@UseGuards(AuthGuard('jwt'))
 @ApiTags("친구")
 export class FriendController {
   constructor(private friendService: FriendService) {}
