@@ -11,8 +11,8 @@ export class UpdateUserRequest {
   name: string;
 
   @ApiProperty({ description: "비밀번호" })
-  @Matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]).*$/, {
-    message: '비밀번호는 반드시 특수 문자, 대문자, 소문자를 각각 하나씩 포함해야 합니다.',
+  @Matches(/^(?=.*[a-zA-Z])(?=.*[0-9]).*$/, {
+    message: '비밀번호는 반드시 문자와 숫자 조합으로 이루어져야 합니다.',
   })
   password: string;
 
@@ -40,8 +40,8 @@ export class CreateUserRequest {
   name: string;
 
   @ApiProperty({ description: "비밀번호" })
-  @Matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]).*$/, {
-    message: '비밀번호는 반드시 특수 문자, 대문자, 소문자를 각각 하나씩 포함해야 합니다.',
+  @Matches(/^(?=.*[a-zA-Z])(?=.*[0-9]).*$/, {
+    message: '비밀번호는 반드시 문자와 숫자 조합으로 이루어져야 합니다.',
   })
   password: string;
 }
@@ -52,8 +52,8 @@ export class LoginUserRequest {
   user_id: string;
 
   @ApiProperty({ description: "비밀번호" })
-  @Matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]).*$/, {
-    message: '비밀번호는 반드시 특수 문자, 대문자, 소문자를 각각 하나씩 포함해야 합니다.',
+  @Matches(/^(?=.*[a-zA-Z])(?=.*[0-9]).*$/, {
+    message: '비밀번호는 반드시 문자와 숫자 조합으로 이루어져야 합니다.',
   })
   password: string;
 }
