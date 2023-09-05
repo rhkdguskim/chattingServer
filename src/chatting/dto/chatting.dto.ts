@@ -1,4 +1,4 @@
-import { IsString } from "class-validator";
+import { IsNumber, IsString } from "class-validator";
 import { ApiProperty } from "@nestjs/swagger";
 
 export enum ChatType {
@@ -14,6 +14,10 @@ export class RequestMessage {
   @IsString()
   @ApiProperty({ description: "메세지" })
   message: string;
+
+  @IsNumber()
+  @ApiProperty({ description: "메세지 타입" })
+  messageType: ChatType;
 }
 
 export class ResponseMessage {
@@ -35,6 +39,7 @@ export class ResponseMessage {
 
   @ApiProperty({ description: "생성 된 시간" })
   createdAt: Date;
+
 }
 
 export class RequestSingleMessage {

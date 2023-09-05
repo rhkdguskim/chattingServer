@@ -42,6 +42,7 @@ export class ChattingService {
       user,
       room,
       message: requestMessage.message,
+      messageType:requestMessage.messageType,
       not_read_chat,
     });
     return this.chattingRepository.save(chatting);
