@@ -21,6 +21,9 @@ export class Chatting {
   message!: string;
 
   @Column()
+  messageType!: number;
+
+  @Column()
   not_read_chat!: number;
 
   @CreateDateColumn()

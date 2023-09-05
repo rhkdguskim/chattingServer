@@ -15,7 +15,7 @@ import { CACHE_MANAGER } from "@nestjs/cache-manager";
 import { Cache } from "cache-manager";
 
 @Injectable()
-export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
+export class JwtStrategy extends PassportStrategy(Strategy, "jwt") {
   constructor(
     private userService: UsersService,
     @Inject(CACHE_MANAGER)

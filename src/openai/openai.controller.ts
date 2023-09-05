@@ -1,16 +1,11 @@
-import { Controller, Get } from '@nestjs/common';
-import { OpenaiService } from './openai.service';
+import { Controller, Get } from "@nestjs/common";
+import { OpenaiService } from "./openai.service";
 
-@Controller('openai')
+@Controller("openai")
 export class OpenaiController {
-    constructor(
-        private openaiService : OpenaiService
-    ) {
-
-    }
-    @Get('')
-    async test() {
-        return this.openaiService.test();
-    }
+  constructor(private openaiService: OpenaiService) {}
+  @Get("")
+  async test() {
+    return this.openaiService.test();
+  }
 }
-

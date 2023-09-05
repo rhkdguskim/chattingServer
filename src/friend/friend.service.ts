@@ -3,7 +3,11 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Friend } from "@src/entitys/friend.entity";
 import { DeleteResult, Repository } from "typeorm";
 import { User } from "@src/entitys/users.entity";
-import { CreateFriendRequest, CreateFriendResponse, DelteFriendRequest } from "@src/friend/dto/friend.createfriend.dto";
+import {
+  CreateFriendRequest,
+  CreateFriendResponse,
+  DelteFriendRequest,
+} from "@src/friend/dto/friend.createfriend.dto";
 import { UsersService } from "@src/users/users.service";
 import { UserResponse } from "@src/users/dto/users.dto";
 
@@ -34,12 +38,15 @@ export class FriendService {
     });
   }
 
-  async addFriend(createFriend: CreateFriendRequest, id: number): Promise<CreateFriendResponse> {
+  async addFriend(
+    createFriend: CreateFriendRequest,
+    id: number
+  ): Promise<CreateFriendResponse> {
     const { friend_id, friend_name } = createFriend;
     const friend = this.friendRepository.create({
       friend_id,
       friend_name,
-      user : {id},
+      user: { id },
     });
 
     // 이미 등록된 친구라면
@@ -57,7 +64,10 @@ export class FriendService {
     return await this.friendRepository.save(friend);
   }
 
-  async delFriend(delFriend: DelteFriendRequest, id: number): Promise<DeleteResult> {
+  async delFriend(
+    delFriend: DelteFriendRequest,
+    id: number
+  ): Promise<DeleteResult> {
     // 해당 Friend가 현재 유저에 속하는지 확인
     const foundFriend = await this.friendRepository.findOne({
       where: { id: delFriend.friend_id, user: { id } },

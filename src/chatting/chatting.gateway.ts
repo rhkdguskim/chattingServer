@@ -10,10 +10,7 @@ import {
 } from "@nestjs/websockets";
 import { Server } from "socket.io";
 import { ChattingService } from "./chatting.service";
-import {
-  RequestMessage,
-  ResponseMessage,
-} from "./dto/chatting.dto";
+import { RequestMessage, ResponseMessage } from "./dto/chatting.dto";
 import {
   RequestMultiRead,
   RequestSingleMessage,
@@ -78,14 +75,15 @@ export class ChattingGateway
 
   @SubscribeMessage("SendMessage")
   @UseInterceptors(SendMessageCacheInterceptor)
-  @CacheAction("CREATE")
   async handleMessage(
     @GetWsUser() user: User,
     @MessageBody() message: RequestMessage
   ): Promise<ResponseMessage> {
+    // 여기에도 캐싱전략이 들어갔으면 좋겠음. (방 정보를 바로바로 최신화 )
     const room: Room = await this.roomService.getRoombyID(message.room_id);
     room.last_chat = message.message;
     await this.roomService.updateRoomStatus(room);
+
     const not_read_chat: number =
       room.type !== RoomType.Individual ? room.participant.length : 0;
     const ChattingMessage: Chatting = await this.chattingService.createChatting(

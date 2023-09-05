@@ -28,22 +28,25 @@ export class RoomService {
     private readonly logger: LoggerService
   ) {}
 
-  async createRoom(createRoomDto: CreateRoomReqeust, user_id: number): Promise<Room> {
-
+  async createRoom(
+    createRoomDto: CreateRoomReqeust,
+    user_id: number
+  ): Promise<Room> {
     const participantCount = createRoomDto.participant.length;
     let determinedType: RoomType;
     if (participantCount === 1) {
-      this.logger.log("개인방을 생성합니다.")
+      this.logger.log("개인방을 생성합니다.");
       determinedType = RoomType.Individual;
     } else if (participantCount === 2) {
-      this.logger.log("1:1 채팅방을 생성합니다.")
+      this.logger.log("1:1 채팅방을 생성합니다.");
       determinedType = RoomType.two;
     } else if (participantCount >= 3) {
-      this.logger.log("그룹채팅방 생성합니다.")
+      this.logger.log("그룹채팅방 생성합니다.");
       determinedType = RoomType.Group;
-    }
-    else{
-      throw new ForbiddenException("참가자가 없는 채팅방은 생성 할 수 없습니다.");
+    } else {
+      throw new ForbiddenException(
+        "참가자가 없는 채팅방은 생성 할 수 없습니다."
+      );
     }
 
     const alreadyRoom = await this.validateRoomCreation(
@@ -51,10 +54,10 @@ export class RoomService {
       determinedType
     );
     if (alreadyRoom) {
-      this.logger.log("이미 생성된 채팅방입니다.")
+      this.logger.log("이미 생성된 채팅방입니다.");
       return alreadyRoom;
     }
-    
+
     const room = await this.createBaseRoom(determinedType, user_id);
     await this.addParticipantsToRoom(
       room,

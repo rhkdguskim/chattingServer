@@ -9,7 +9,7 @@ export const GetUser = createParamDecorator(
   }
 );
 
-export const GetOAuthData  = createParamDecorator(
+export const GetOAuthData = createParamDecorator(
   (data, ctx: ExecutionContext): User => {
     const req = ctx.switchToHttp().getRequest();
     return req.user;
