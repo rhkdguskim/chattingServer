@@ -30,7 +30,6 @@ async function bootstrap() {
       cors.frontendHost || process.env.FRONT_END_HOST,
       
     ],
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
     credentials: true,
   });
   app.useGlobalInterceptors(new LoggingInterceptor(app.get(Logger)));
