@@ -28,7 +28,9 @@ async function bootstrap() {
     origin: [
       "http://localhost:3001",
       cors.frontendHost || process.env.FRONT_END_HOST,
+      
     ],
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
     credentials: true,
   });
   app.useGlobalInterceptors(new LoggingInterceptor(app.get(Logger)));

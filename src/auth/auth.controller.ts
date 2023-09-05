@@ -88,49 +88,63 @@ export class AuthController {
     return res
   }
 
-  @Get("kakao/login")
+  @Post("kakao/login")
   @UseGuards(AuthGuard("kakao"))
   @ApiOperation({
     summary: "OAuth 2.0 카카오톡 로그인 API",
     description: "카카오톡으로 인증하여 로그인을 구현합니다.",
   })
-  async Kakao(@GetOAuthData() data : OAuthData, @Res() res: Response, @Req() req : Request) {
+  async Kakao(@GetOAuthData() data : OAuthData, @Res({ passthrough: true }) response: Response) {
     const { access_token, refresh_token } = await this.authService.OAuthLogin(data)
 
-    res.cookie("jwt", access_token, {
+    response.cookie("jwt", access_token, {
       httpOnly: true,
     });
 
-    res.redirect(`${FRONT_END_HOST}/login?access_token=${access_token}&refresh_token=${refresh_token}`)
+    const request : LoginUserResponse = {
+      access_token,
+      refresh_token
+    }
+    return request
   }
 
-  @Get("naver/login")
+  @Post("naver/login")
   @UseGuards(AuthGuard("naver"))
   @ApiOperation({
     summary: "OAuth 2.0 네이버 로그인 API",
     description: "네이버으로 인증하여 로그인을 구현합니다.",
   })
-  async Naver(@GetOAuthData() data : OAuthData, @Res() res: Response) {
+  async Naver(@GetOAuthData() data : OAuthData, @Res({ passthrough: true }) response: Response) {
     const { access_token, refresh_token } = await this.authService.OAuthLogin(data)
 
-    res.cookie("jwt", access_token, {
+    response.cookie("jwt", access_token, {
       httpOnly: true,
     });
-    res.redirect(`${FRONT_END_HOST}/login?access_token=${access_token}&refresh_token=${refresh_token}`)
+
+    const request : LoginUserResponse = {
+      access_token,
+      refresh_token
+    }
+    return request
   }
 
-  @Get("google/login")
+  @Post("google/login")
   @UseGuards(AuthGuard("google"))
   @ApiOperation({
     summary: "OAuth 2.0 구글 로그인 API",
     description: "구글으로 인증하여 로그인을 구현입니다.",
   })
-  async Google(@GetOAuthData() data : OAuthData, @Res() res: Response) {
+  async Google(@GetOAuthData() data : OAuthData, @Res({ passthrough: true }) response: Response) {
     const { access_token, refresh_token } = await this.authService.OAuthLogin(data)
 
-    res.cookie("jwt", access_token, {
+    response.cookie("jwt", access_token, {
       httpOnly: true,
     });
-    res.redirect(`${FRONT_END_HOST}/login?access_token=${access_token}&refresh_token=${refresh_token}`)
+
+    const request : LoginUserResponse = {
+      access_token,
+      refresh_token
+    }
+    return request
   }
 }
