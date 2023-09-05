@@ -1,8 +1,8 @@
-import { IsString } from "class-validator";
+import { IsNumber, IsString } from "class-validator";
 import { ApiProperty } from "@nestjs/swagger";
 
 export class CreateFriendRequest {
-  @IsString()
+  @IsNumber()
   @ApiProperty({ description: "친구 아이디" })
   friend_id: number;
 
@@ -12,7 +12,7 @@ export class CreateFriendRequest {
 }
 
 export class CreateFriendResponse {
-  @IsString()
+  @IsNumber()
   @ApiProperty({ description: "친구 아이디" })
   friend_id: number;
 
@@ -22,7 +22,7 @@ export class CreateFriendResponse {
 }
 
 export class DelteFriendRequest {
-  @IsString()
+  @IsNumber()
   @ApiProperty({ description: "친구 아이디" })
   friend_id: number;
 }

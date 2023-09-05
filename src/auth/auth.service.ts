@@ -39,9 +39,13 @@ export class AuthService {
 
     const payload = { id: user.id, user_id: user.user_id };
 
+    const access_token = await this.jwtService.signAsync(payload);
+    const refresh_token = await this.generateRefreshToken(user.id);
+    await this.setRefreshToken(refresh_token, user.id);
+
     return {
-      access_token: await this.jwtService.signAsync(payload),
-      refresh_token: await this.generateRefreshToken(user.id),
+      access_token,
+      refresh_token
     };
   }
 
@@ -81,35 +85,29 @@ export class AuthService {
 
   async getNewAccessToken(
     refreshToken: string,
-    @GetUser() user: User
+    user_id: number
   ): Promise<LoginUserResponse> {
-    const isValidRefreshToken = await this.validateRefreshToken(
-      refreshToken,
-      user
-    );
+    const user = await this.userService.findOne(user_id);
+
+    const isValidRefreshToken = await this.validateRefreshToken(refreshToken, user);
 
     if (!isValidRefreshToken) {
-      throw new UnauthorizedException();
+      throw new UnauthorizedException("Invailed refresh_token");
     }
+    const refresh_token = await this.generateRefreshToken(user.id); // refresh_token을 다시 재발급.
+    const access_token =  await this.jwtService.signAsync({ // access_token 발급.
+      id: user.id,
+      user_id: user.user_id,
+    });
 
-    const payload = this.jwtService.verify(refreshToken);
-    if (payload.isRefreshToken) {
-      const refresh_token = await this.generateRefreshToken(payload.id); // refresh_token을 다시 재발급.
-      const access_token =  await this.jwtService.signAsync({ // access_token 발급.
-        id: payload.id,
-        user_id: payload.user_id,
-      });
-
-      return {access_token, refresh_token}
-    } else {
-      throw new UnauthorizedException();
-    }
+    return {access_token, refresh_token}
   }
 
   private async validateRefreshToken(
     refreshToken: string,
     user: User
   ): Promise<boolean> {
+    
     if (user && user.refreshToken === refreshToken) {
       const currentDateTime = new Date();
       if (user.refreshTokenExpiry > currentDateTime) {

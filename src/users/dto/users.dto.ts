@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsString, Matches } from "class-validator";
+import { IsNumber, IsString, Matches } from "class-validator";
 
 export class UpdateUserRequest {
   @IsString()
@@ -87,4 +87,13 @@ export class UserResponse {
 
   @ApiProperty({ description: "배경 URL" })
   background_img_url: string;
+}
+
+export class refreshtokenRequest {
+  @ApiProperty({ description: "refresh token" })
+  @IsString()
+  refresh_token : string
+
+  @IsNumber()
+  id : number
 }

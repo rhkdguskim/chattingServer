@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Logger, Post, Query, Redirect, Req, Res, UseGuards, UseInterceptors } from "@nestjs/common";
 import { User } from "@src/entitys/users.entity";
 import { AuthService } from "@src/auth/auth.service";
-import { LoginUserRequest, LoginUserResponse, UserResponse } from "@src/users/dto/users.dto";
+import { LoginUserRequest, LoginUserResponse, UserResponse, refreshtokenRequest } from "@src/users/dto/users.dto";
 import { CreateUserRequest } from "@src/users/dto/users.dto";
 import { ApiTags, ApiOperation, ApiCreatedResponse } from "@nestjs/swagger";
 import { GetOAuthData, GetUser } from "@src/auth/deco/auth.decorator";
@@ -74,8 +74,18 @@ export class AuthController {
     description: "JWT 토큰을 재발급합니다",
     type: LoginUserResponse,
   })
-  getNewToken(@Body() refresh_Token: string, @GetUser() user: User) : Promise<LoginUserResponse> {
-    return this.authService.getNewAccessToken(refresh_Token, user);
+  async getNewToken(@Res({ passthrough: true }) response: Response, @Body() refreshtokenRequest: refreshtokenRequest) : Promise<LoginUserResponse> {
+    const {access_token, refresh_token} = await this.authService.getNewAccessToken(refreshtokenRequest.refresh_token, refreshtokenRequest.id);
+
+    response.cookie("jwt", access_token, {
+      httpOnly: true,
+    });
+
+    const res : LoginUserResponse = {
+      access_token,
+      refresh_token
+    }
+    return res
   }
 
   @Get("kakao/login")

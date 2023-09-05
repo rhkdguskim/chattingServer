@@ -19,7 +19,6 @@ import { UserResponse } from "@src/users/dto/users.dto";
 
 @Controller("friend")
 @UseGuards(AuthGuard('jwt'))
-@UseInterceptors(HttpCacheInterceptor)
 @ApiTags("친구")
 export class FriendController {
   constructor(private friendService: FriendService) {}
