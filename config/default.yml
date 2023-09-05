@@ -22,17 +22,17 @@ redis:
 kakao:
   restApiKey: '7dd48b864b7c129d14f8f65cf429093b'
   secret: 'LjgAO0NAMk4XhenvumwOxlPacCJroBBG'
-  redirectURL : 'http://localhost:3000/auth/kakao/login'
+  redirectURL : 'https://web-kakaotalk-frontend-eu1k2lllawv5vy.sel3.cloudtype.app/oauth'
 
 google:
   restApiKey: '846841962221-phpmlehpgrv1lj4ko9fkrmnalt3uo1fk.apps.googleusercontent.com'
   secret: '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'
-  redirectURL : 'http://localhost:3000/auth/google/login'
+  redirectURL : 'https://web-kakaotalk-frontend-eu1k2lllawv5vy.sel3.cloudtype.app/oauth'
 
 naver:
   restApiKey: 'oTcoSe0Nvv4q6RaZyyAS'
   secret: 'YA_OXE1Knz'
-  redirectURL : 'http://localhost:3000/auth/naver/login'
+  redirectURL : 'https://web-kakaotalk-frontend-eu1k2lllawv5vy.sel3.cloudtype.app/oauth'
 
 cors:
   frontendHost: 'https://web-kakaotalk-frontend-eu1k2lllawv5vy.sel3.cloudtype.app'
