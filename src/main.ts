@@ -26,6 +26,7 @@ async function bootstrap() {
   app.use(cookieParser());
   app.enableCors({
     origin: [
+      'https://web-kakaotalk-frontend-eu1k2lllawv5vy.sel3.cloudtype.app',
       "http://localhost:3001",
       cors.frontendHost || process.env.FRONT_END_HOST,
       
