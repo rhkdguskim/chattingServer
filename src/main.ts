@@ -22,17 +22,21 @@ async function bootstrap() {
   });
 
   const serverConfig = config.get("server");
-  const cors = config.get('cors')
+  const cors = config.get("cors");
   app.use(cookieParser());
   app.enableCors({
-    origin: ['http://localhost:3001' ,cors.frontendHost || process.env.FRONT_END_HOST],
+    origin: [
+      "http://localhost:3001",
+      cors.frontendHost || process.env.FRONT_END_HOST,
+    ],
     credentials: true,
   });
   app.useGlobalInterceptors(new LoggingInterceptor(app.get(Logger)));
-  app.useGlobalPipes(new ValidationPipe({
-    enableDebugMessages:true,
-
-  }));
+  app.useGlobalPipes(
+    new ValidationPipe({
+      enableDebugMessages: true,
+    })
+  );
   setupSwagger(app);
   await app.listen(process.env.PORT || serverConfig.port);
 }

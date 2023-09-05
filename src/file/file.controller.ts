@@ -17,7 +17,7 @@ import { Response } from "express";
 import { AuthGuard } from "@nestjs/passport";
 
 @Controller("file")
-@UseGuards(AuthGuard('jwt'))
+@UseGuards(AuthGuard("jwt"))
 @ApiTags("파일업로드")
 export class FileController {
   constructor(private readonly fileService: FileService) {}
@@ -39,7 +39,7 @@ export class FileController {
   @Get("/:fileName")
   async serveFile(@Param("fileName") fileName: string, @Res() res: Response) {
     const filePath = path.join(__dirname, "uploads", fileName);
-    Logger.log(filePath)
+    Logger.log(filePath);
     res.sendFile(filePath);
   }
 }

@@ -38,11 +38,11 @@ export class UsersService {
   }
 
   async createOAuthUser(data: OAuthData): Promise<User> {
-      
-    const newUser = await this.userReposity.create({...data.user,
-       oauth_accessToken:data.access_token, 
-       oauth_refreshToken:data.refresh_token
-      });
+    const newUser = await this.userReposity.create({
+      ...data.user,
+      oauth_accessToken: data.access_token,
+      oauth_refreshToken: data.refresh_token,
+    });
     return await this.userReposity.save(newUser);
   }
 

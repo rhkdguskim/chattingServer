@@ -12,13 +12,17 @@ import {
 import { FriendService } from "./friend.service";
 import { Friend } from "@src/entitys/friend.entity";
 import { ApiTags, ApiOperation, ApiCreatedResponse } from "@nestjs/swagger";
-import { CreateFriendRequest, CreateFriendResponse, DelteFriendRequest } from "@src/friend/dto/friend.createfriend.dto";
+import {
+  CreateFriendRequest,
+  CreateFriendResponse,
+  DelteFriendRequest,
+} from "@src/friend/dto/friend.createfriend.dto";
 import { HttpCacheInterceptor } from "@src/common/interceptors/httpcache.interceptor";
 import { AuthGuard } from "@nestjs/passport";
 import { UserResponse } from "@src/users/dto/users.dto";
 
 @Controller("friend")
-@UseGuards(AuthGuard('jwt'))
+@UseGuards(AuthGuard("jwt"))
 @UseInterceptors(HttpCacheInterceptor)
 @ApiTags("친구")
 export class FriendController {

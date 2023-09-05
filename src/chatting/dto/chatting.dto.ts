@@ -1,7 +1,6 @@
 import { IsString } from "class-validator";
 import { ApiProperty } from "@nestjs/swagger";
 
-
 export enum ChatType {
   text,
   image,
@@ -37,7 +36,6 @@ export class ResponseMessage {
   @ApiProperty({ description: "생성 된 시간" })
   createdAt: Date;
 }
-
 
 export class RequestSingleMessage {
   @ApiProperty({ description: "단일 채팅 ID" })

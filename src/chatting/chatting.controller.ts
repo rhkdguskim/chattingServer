@@ -1,10 +1,4 @@
-import {
-  Controller,
-  Get,
-  Param,
-  Query,
-  UseInterceptors,
-} from "@nestjs/common";
+import { Controller, Get, Param, Query, UseInterceptors } from "@nestjs/common";
 import { UseGuards } from "@nestjs/common";
 import { ApiOperation, ApiCreatedResponse, ApiTags } from "@nestjs/swagger";
 import { Chatting } from "../entitys/chatting.entity";
@@ -13,7 +7,7 @@ import { AuthGuard } from "@nestjs/passport";
 import { ReadChatCacheInterceptor } from "./interceptors/chatting.readchat.cache.interceptor";
 
 @Controller("chatting")
-@UseGuards(AuthGuard('jwt'))
+@UseGuards(AuthGuard("jwt"))
 @ApiTags("채팅리스트")
 export class ChattingController {
   constructor(private chattingService: ChattingService) {}

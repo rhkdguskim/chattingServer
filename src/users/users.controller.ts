@@ -22,8 +22,7 @@ import {
 import { HttpCacheInterceptor } from "@src/common/interceptors/httpcache.interceptor";
 import { AuthGuard } from "@nestjs/passport";
 
-
-@UseGuards(AuthGuard('jwt'))
+@UseGuards(AuthGuard("jwt"))
 @UseInterceptors(HttpCacheInterceptor)
 @Controller("users")
 @ApiTags("유저")

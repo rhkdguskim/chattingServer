@@ -18,7 +18,7 @@ import { OAuthData } from "@src/auth/dto/oauth.dto";
 export class AuthService {
   constructor(
     private userService: UsersService,
-    private jwtService: JwtService,
+    private jwtService: JwtService
   ) {}
 
   async signIn(loginUser: LoginUserRequest): Promise<any> {
@@ -95,12 +95,13 @@ export class AuthService {
     const payload = this.jwtService.verify(refreshToken);
     if (payload.isRefreshToken) {
       const refresh_token = await this.generateRefreshToken(payload.id); // refresh_token을 다시 재발급.
-      const access_token =  await this.jwtService.signAsync({ // access_token 발급.
+      const access_token = await this.jwtService.signAsync({
+        // access_token 발급.
         id: payload.id,
         user_id: payload.user_id,
       });
 
-      return {access_token, refresh_token}
+      return { access_token, refresh_token };
     } else {
       throw new UnauthorizedException();
     }
@@ -119,13 +120,14 @@ export class AuthService {
     return false;
   }
 
-  async OAuthLogin(OAuthData: OAuthData) : Promise<any> {
+  async OAuthLogin(OAuthData: OAuthData): Promise<any> {
     let user = await this.userService.findbyUserId(OAuthData.user.user_id);
 
-    if (user) { // 이미 등록된 사용자
-      Logger.log("이미 등록된 사용자 입니다.")
-    }
-    else { // 가입이 되어있지 않다면 Auto Login
+    if (user) {
+      // 이미 등록된 사용자
+      Logger.log("이미 등록된 사용자 입니다.");
+    } else {
+      // 가입이 되어있지 않다면 Auto Login
       user = await this.userService.createOAuthUser(OAuthData);
     }
     const payload = { id: user.id, user_id: user.user_id };

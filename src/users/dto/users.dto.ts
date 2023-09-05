@@ -12,7 +12,7 @@ export class UpdateUserRequest {
 
   @ApiProperty({ description: "비밀번호" })
   @Matches(/^(?=.*[a-zA-Z])(?=.*[0-9]).*$/, {
-    message: '비밀번호는 반드시 문자와 숫자 조합으로 이루어져야 합니다.',
+    message: "비밀번호는 반드시 문자와 숫자 조합으로 이루어져야 합니다.",
   })
   password: string;
 
@@ -29,7 +29,6 @@ export class UpdateUserRequest {
   background_img_url: string;
 }
 
-
 export class CreateUserRequest {
   @IsString()
   @ApiProperty({ description: "아이디" })
@@ -41,7 +40,7 @@ export class CreateUserRequest {
 
   @ApiProperty({ description: "비밀번호" })
   @Matches(/^(?=.*[a-zA-Z])(?=.*[0-9]).*$/, {
-    message: '비밀번호는 반드시 문자와 숫자 조합으로 이루어져야 합니다.',
+    message: "비밀번호는 반드시 문자와 숫자 조합으로 이루어져야 합니다.",
   })
   password: string;
 }
@@ -53,7 +52,7 @@ export class LoginUserRequest {
 
   @ApiProperty({ description: "비밀번호" })
   @Matches(/^(?=.*[a-zA-Z])(?=.*[0-9]).*$/, {
-    message: '비밀번호는 반드시 문자와 숫자 조합으로 이루어져야 합니다.',
+    message: "비밀번호는 반드시 문자와 숫자 조합으로 이루어져야 합니다.",
   })
   password: string;
 }
@@ -66,8 +65,6 @@ export class LoginUserResponse {
   @ApiProperty({ description: "Refresh 토큰" })
   refresh_token: string;
 }
-
-
 
 export class UserResponse {
   @ApiProperty({ description: "유저 ID" })

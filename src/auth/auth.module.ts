@@ -26,14 +26,15 @@ const jwtConstants = config.get("jwt");
     }),
   ],
   controllers: [AuthController],
-  providers: [AuthService,
-              JwtStrategy,
-              WsJwtGuard,
-              Logger,
-              JwtGoogleStrategy,
-              JwtKakaoStrategy,
-              JwtNaverStrategy,
-            ],
+  providers: [
+    AuthService,
+    JwtStrategy,
+    WsJwtGuard,
+    Logger,
+    JwtGoogleStrategy,
+    JwtKakaoStrategy,
+    JwtNaverStrategy,
+  ],
   exports: [JwtStrategy, WsJwtGuard],
 })
 export class AuthModule {}

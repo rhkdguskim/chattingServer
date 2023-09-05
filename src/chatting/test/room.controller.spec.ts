@@ -19,46 +19,47 @@ describe("Room Controller", () => {
 
   beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      imports:[CacheRedisModule, DatabaseModule, TypeOrmModule.forFeature([Chatting, Room, Participant, ReadBy]),],
+      imports: [
+        CacheRedisModule,
+        DatabaseModule,
+        TypeOrmModule.forFeature([Chatting, Room, Participant, ReadBy]),
+      ],
       controllers: [RoomController],
-      providers:[Logger,RoomService],
+      providers: [Logger, RoomService],
     }).compile();
 
-    validationPipe = new ValidationPipe({ 
-      transform: true, 
+    validationPipe = new ValidationPipe({
+      transform: true,
       whitelist: true,
       exceptionFactory: (errors) => {
         return new ForbiddenException(errors);
-      }
+      },
     });
-    
+
     controller = module.get<RoomController>(RoomController);
-
-
-
   });
 
-  describe("Room Controller",  () => {
+  describe("Room Controller", () => {
     it("should be defined", () => {
       expect(controller).toBeDefined();
     });
 
     // 참가자가 아예 없는경우
-    it("GetChattingList", async ()=> {
-      const request : CreateRoomReqeust = {
-        room_name : "TestRoom",
-        participant : [],
-      }
+    it("GetChattingList", async () => {
+      const request: CreateRoomReqeust = {
+        room_name: "TestRoom",
+        participant: [],
+      };
       try {
-        const transformedRequest = await validationPipe.transform(request, { type: 'body', metatype: CreateRoomReqeust }); // Validation Test
-        console.log(transformedRequest)
+        const transformedRequest = await validationPipe.transform(request, {
+          type: "body",
+          metatype: CreateRoomReqeust,
+        }); // Validation Test
+        console.log(transformedRequest);
         await controller.CreateRoom(transformedRequest, 1);
       } catch (error) {
-        expect(error).toBeInstanceOf(ForbiddenException)
+        expect(error).toBeInstanceOf(ForbiddenException);
       }
-    })
-
-
-  })
-
+    });
+  });
 });

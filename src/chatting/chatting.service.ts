@@ -1,4 +1,11 @@
-import { Injectable, ForbiddenException, HttpStatus, Inject, Logger, LoggerService } from "@nestjs/common";
+import {
+  Injectable,
+  ForbiddenException,
+  HttpStatus,
+  Inject,
+  Logger,
+  LoggerService,
+} from "@nestjs/common";
 import { Chatting } from "../entitys/chatting.entity";
 import { Room } from "@src/entitys/room.entity";
 import { Participant } from "@src/entitys/participant.entity";
@@ -15,9 +22,9 @@ export class ChattingService {
 
     @InjectRepository(Participant)
     private participantRepository: Repository<Participant>,
-    
+
     @Inject(Logger)
-    private readonly logger: LoggerService,
+    private readonly logger: LoggerService
   ) {}
 
   async createChatting(
