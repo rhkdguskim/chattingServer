@@ -1,6 +1,13 @@
 import { IsString } from "class-validator";
 import { ApiProperty } from "@nestjs/swagger";
 
+
+export enum ChatType {
+  text,
+  image,
+  video,
+}
+
 export class RequestMessage {
   @ApiProperty({ description: "방 ID" })
   room_id: number;
