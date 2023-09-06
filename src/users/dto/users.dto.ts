@@ -2,29 +2,18 @@ import { ApiProperty } from "@nestjs/swagger";
 import { IsNumber, IsString, Matches } from "class-validator";
 
 export class UpdateUserRequest {
-  @IsString()
   @ApiProperty({ description: "아이디" })
   user_id!: string;
 
-  @IsString()
   @ApiProperty({ description: "이름" })
   name: string;
 
-  @ApiProperty({ description: "비밀번호" })
-  @Matches(/^(?=.*[a-zA-Z])(?=.*[0-9]).*$/, {
-    message: '비밀번호는 반드시 문자와 숫자 조합으로 이루어져야 합니다.',
-  })
-  password: string;
-
-  @IsString()
   @ApiProperty({ description: "상태메세지" })
   status_msg: string;
 
-  @IsString()
   @ApiProperty({ description: "프로필url" })
   profile_img_url: string;
 
-  @IsString()
   @ApiProperty({ description: "배경화면url" })
   background_img_url: string;
 }
