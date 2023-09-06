@@ -3,12 +3,14 @@ import { ChattingController } from "../chatting.controller";
 import { CacheRedisModule } from "@src/util/cacheRedis.module";
 import { Logger } from "@nestjs/common";
 import { ChattingService } from "../chatting.service";
-import { DatabaseModule } from "@src/database.module";
+import { DatabaseModule } from "@src/util/database.module";
 import { Chatting } from "../../entitys/chatting.entity";
-import { Participant } from "../participant.entity";
-import { Room } from "../room.entity";
+import { Participant } from "@src/entitys/participant.entity";
+import { Room } from "@src/entitys/room.entity";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { ReadBy } from "../../entitys/readby.entity";
+import { JwtStrategy } from "@src/auth/guards/jwt.strategy";
+import { AuthModule } from "@src/auth/auth.module";
 
 describe("ChattingController", () => {
   let controller: ChattingController;
@@ -18,10 +20,11 @@ describe("ChattingController", () => {
       imports: [
         CacheRedisModule,
         DatabaseModule,
+        AuthModule,
         TypeOrmModule.forFeature([Chatting, Room, Participant, ReadBy]),
       ],
       controllers: [ChattingController],
-      providers: [Logger, ChattingService],
+      providers: [JwtStrategy, Logger, ChattingService],
     }).compile();
 
     controller = module.get<ChattingController>(ChattingController);

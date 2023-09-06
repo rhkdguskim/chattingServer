@@ -2,16 +2,18 @@ import { Test, TestingModule } from "@nestjs/testing";
 import { ChattingController } from "../chatting.controller";
 import { CacheRedisModule } from "@src/util/cacheRedis.module";
 import { ForbiddenException, Logger, ValidationPipe } from "@nestjs/common";
-import { DatabaseModule } from "@src/database.module";
+import { DatabaseModule } from "@src/util/database.module";
 import { Chatting } from "../../entitys/chatting.entity";
-import { Participant } from "../participant.entity";
-import { Room } from "../room.entity";
+import { Participant } from "@src/entitys/participant.entity";
+import { Room } from "@src/entitys/room.entity";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { ReadBy } from "../../entitys/readby.entity";
 import { RoomController } from "../room.controller";
 import { RoomService } from "../room.service";
-import { CreateRoomReqeust } from "../dto/chatting.dto";
+import { CreateRoomReqeust } from "../dto/room.dto";
 import { User } from "@src/entitys/users.entity";
+import { JwtStrategy } from "@src/auth/guards/jwt.strategy";
+import { AuthModule } from "@src/auth/auth.module";
 
 describe("Room Controller", () => {
   let controller: RoomController;
@@ -22,10 +24,11 @@ describe("Room Controller", () => {
       imports: [
         CacheRedisModule,
         DatabaseModule,
+        AuthModule,
         TypeOrmModule.forFeature([Chatting, Room, Participant, ReadBy]),
       ],
       controllers: [RoomController],
-      providers: [Logger, RoomService],
+      providers: [JwtStrategy,Logger, RoomService],
     }).compile();
 
     validationPipe = new ValidationPipe({

@@ -44,7 +44,6 @@ export class JwtStrategy extends PassportStrategy(Strategy, "jwt") {
     } else {
       // 캐시가 없다면 DB조회
       user = await this.userService.findOne(id);
-      console.log(user)
       // 패스워드 정보는 보내지 않는다.
       user.password = "";
       await this.cacheManager.set(`login/${id}`, user);
