@@ -43,6 +43,9 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
+## Swagger API
+- https://port-0-kakaotalk-backend-eu1k2lllawv5vy.sel3.cloudtype.app/api
+
 ## Open Server
 - 아래의 링크에서 서비스를 확인 할 수 있습니다.
 - https://web-kakaotalk-frontend-eu1k2lllawv5vy.sel3.cloudtype.app/
