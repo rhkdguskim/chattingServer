@@ -27,6 +27,8 @@ jobs:
               env:
                 - name: NODE_ENV
                   value: production
+                - name: TZ
+                  value: Asia/Seoul
               ports: 3000
               install: npm install
               build: npm run build
