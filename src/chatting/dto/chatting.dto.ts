@@ -43,8 +43,24 @@ export class ResponseMessage {
 }
 
 export class RequestSingleMessage {
-  @ApiProperty({ description: "단일 채팅 ID" })
+
+  @ApiProperty({ description: "Chatting ID" })
   id: number;
+
+  @ApiProperty({ description: "방 ID" })
+  room_id: number;
+
+  @ApiProperty({ description: "읽은사람 ID" })
+  user_id: number;
+}
+
+export class ResponseSingleRead {
+
+  @ApiProperty({ description: "Chatting ID" })
+  id: number;
+
+  @ApiProperty({ description: "방 ID" })
+  room_id: number;
 
   @ApiProperty({ description: "읽은사람 ID" })
   user_id: number;
@@ -52,14 +68,6 @@ export class RequestSingleMessage {
 
 export class RequestMultiRead {
   @ApiProperty({ description: "방 ID" })
-  id: number;
-
-  @ApiProperty({ description: "읽은사람 ID" })
-  user_id: number;
-}
-
-export class ResponseSingleRead {
-  @ApiProperty({ description: "단일 채팅 ID" })
   id: number;
 
   @ApiProperty({ description: "읽은사람 ID" })

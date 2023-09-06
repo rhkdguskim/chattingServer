@@ -116,6 +116,8 @@ export class ChattingGateway
       message.id
     );
 
+    console.log(message)
+
     if (!chattingMessage) {
       return;
     }
@@ -141,6 +143,7 @@ export class ChattingGateway
 
     const response: ResponseSingleRead = {
       id: chattingMessage.id,
+      room_id : chattingMessage.room.id,
       user_id: user.id,
     };
 
