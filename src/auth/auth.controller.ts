@@ -94,6 +94,10 @@ export class AuthController {
     summary: "OAuth 2.0 카카오톡 로그인 API",
     description: "카카오톡으로 인증하여 로그인을 구현합니다.",
   })
+  @ApiCreatedResponse({
+    description: "JWT 토큰을 재발급합니다",
+    type: LoginUserResponse,
+  })
   async Kakao(@GetOAuthData() data : OAuthData, @Res({ passthrough: true }) response: Response) {
     const { access_token, refresh_token } = await this.authService.OAuthLogin(data)
 
@@ -114,6 +118,10 @@ export class AuthController {
     summary: "OAuth 2.0 네이버 로그인 API",
     description: "네이버으로 인증하여 로그인을 구현합니다.",
   })
+  @ApiCreatedResponse({
+    description: "JWT 토큰을 재발급합니다",
+    type: LoginUserResponse,
+  })
   async Naver(@GetOAuthData() data : OAuthData, @Res({ passthrough: true }) response: Response) {
     const { access_token, refresh_token } = await this.authService.OAuthLogin(data)
 
@@ -133,6 +141,10 @@ export class AuthController {
   @ApiOperation({
     summary: "OAuth 2.0 구글 로그인 API",
     description: "구글으로 인증하여 로그인을 구현입니다.",
+  })
+  @ApiCreatedResponse({
+    description: "JWT 토큰을 재발급합니다",
+    type: LoginUserResponse,
   })
   async Google(@GetOAuthData() data : OAuthData, @Res({ passthrough: true }) response: Response) {
     const { access_token, refresh_token } = await this.authService.OAuthLogin(data)

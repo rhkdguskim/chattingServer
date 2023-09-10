@@ -7,6 +7,26 @@ export enum ChatType {
   video,
 }
 
+export class ChattingResponse {
+  @ApiProperty({ description: "ID" })
+  id: number;
+
+  @ApiProperty({ description: "방 ID" })
+  room_id: number;
+
+  @ApiProperty({ description: "유저 ID" })
+  user_id: number;
+
+  @ApiProperty({ description: "메세지" })
+  message: string;
+
+  @ApiProperty({ description: "읽지않는 채팅 수" })
+  not_read_chat: number;
+
+  @ApiProperty({ description: "수정된 날짜" })
+  createdAt: Date;
+}
+
 export class RequestMessage {
   @ApiProperty({ description: "방 ID" })
   room_id: number;

@@ -8,17 +8,20 @@ import {
 } from "@nestjs/common";
 import { Room } from "@src/entitys/room.entity";
 import { Participant } from "@src/entitys/participant.entity";
-import { Repository } from "typeorm";
+import { EntityManager, Repository } from "typeorm";
 import { InjectRepository } from "@nestjs/typeorm";
-import { CreateRoomReqeust } from "./dto/room.dto";
+import { CreateRoomReqeust, CreateRoomResponse } from "./dto/room.dto";
 import { User } from "@src/entitys/users.entity";
 import { RoomType } from "./dto/room.dto";
 import { RoomListResponse, InviteRoomRequest } from "./dto/room.dto";
 import { UserResponse } from "@src/users/dto/users.dto";
+import { ValidateCreateRoom } from "./deco/room.deco";
 
 @Injectable()
 export class RoomService {
   constructor(
+    @Inject(EntityManager) private readonly manager: EntityManager,
+
     @InjectRepository(Room)
     private roomRepository: Repository<Room>,
     @InjectRepository(Participant)
@@ -28,10 +31,12 @@ export class RoomService {
     private readonly logger: LoggerService
   ) {}
 
+  @ValidateCreateRoom()
   async createRoom(
     createRoomDto: CreateRoomReqeust,
     user_id: number
-  ): Promise<Room> {
+  ): Promise<CreateRoomResponse> {
+
     const participantCount = createRoomDto.participant.length;
     let determinedType: RoomType;
     if (participantCount === 1) {
@@ -49,74 +54,32 @@ export class RoomService {
       );
     }
 
-    const alreadyRoom = await this.validateRoomCreation(
-      createRoomDto,
-      determinedType
-    );
-    if (alreadyRoom) {
-      this.logger.log("이미 생성된 채팅방입니다.");
-      return alreadyRoom;
-    }
+    // 채팅방 + 참가자 트랜잭션 구현
+    return await this.manager.transaction(async transactionalEntityManager => {
+      const newRoom : Room = transactionalEntityManager.create(Room, {
+        owner_id: user_id,
+        type : determinedType,
+        last_chat: "",
+      })
+      const createdRoom : Room = await transactionalEntityManager.save(Room, newRoom)
 
-    const room = await this.createBaseRoom(determinedType, user_id);
-    await this.addParticipantsToRoom(
-      room,
-      createRoomDto.participant,
-      createRoomDto.room_name
-    );
-    return room;
-  }
+      for (const participantUser of createRoomDto.participant) {
+        const newParticipant = transactionalEntityManager.create(Participant, {
+          user: participantUser,
+          room : createdRoom,
+          room_name : createRoomDto.room_name,
+        });
 
-  private async validateRoomCreation(
-    createRoomDto: CreateRoomReqeust,
-    roomType: RoomType
-  ): Promise<Room> {
-    const { participant } = createRoomDto;
+        await transactionalEntityManager.save(Participant, newParticipant);
+      }
 
-    // 개인 및 1:1 채팅방의 경우 중복 체크
-    if (roomType === RoomType.Individual || roomType === RoomType.two) {
-      return await this.findExistingRoom(participant, roomType);
-    }
-  }
-
-  private async findExistingRoom(
-    participants: UserResponse[],
-    type: RoomType
-  ): Promise<Room | undefined> {
-    const participantIds = participants.map((p) => p.id);
-    return await this.roomRepository
-      .createQueryBuilder("room")
-      .innerJoin("room.participant", "participant")
-      .innerJoin("participant.user", "user")
-      .where("room.type = :type", { type })
-      .andWhere("user.id IN (:...participantIds)", { participantIds }) // AND 조건으로 추가
-      .groupBy("room.id") // 그룹화 추가
-      .having(`COUNT(participant.id) = ${participants.length}`) // 참가자 수와 비교하여 필터링
-      .getOne();
-  }
-
-  private async createBaseRoom(type: RoomType, user_id: number): Promise<Room> {
-    const newRoom = this.roomRepository.create({
-      owner_id: user_id,
-      type,
-      last_chat: "",
+      const roomResponse : CreateRoomResponse = {
+        ...createdRoom,
+        room_name : createRoomDto.room_name,
+      }
+      
+      return roomResponse;
     });
-    return await this.roomRepository.save(newRoom);
-  }
-
-  private async addParticipantsToRoom(
-    room: Room,
-    participants: UserResponse[],
-    room_name: string
-  ): Promise<void> {
-    for (const participantUser of participants) {
-      const newParticipant = this.participantRepository.create({
-        user: participantUser,
-        room,
-        room_name,
-      });
-      await this.participantRepository.save(newParticipant);
-    }
   }
 
   async InviteRoom(inviteToRoom: InviteRoomRequest): Promise<Participant[]> {

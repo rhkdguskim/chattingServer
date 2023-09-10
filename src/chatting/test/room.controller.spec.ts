@@ -58,7 +58,6 @@ describe("Room Controller", () => {
           type: "body",
           metatype: CreateRoomReqeust,
         }); // Validation Test
-        console.log(transformedRequest);
         await controller.CreateRoom(transformedRequest, 1);
       } catch (error) {
         expect(error).toBeInstanceOf(ForbiddenException);

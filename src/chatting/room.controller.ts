@@ -9,7 +9,7 @@ import {
   ApiProperty,
   ApiParam,
 } from "@nestjs/swagger";
-import { CreateRoomReqeust } from "./dto/room.dto";
+import { CreateRoomReqeust, CreateRoomResponse } from "./dto/room.dto";
 import { Room } from "@src/entitys/room.entity";
 import { Participant } from "@src/entitys/participant.entity";
 import { RoomListResponse } from "./dto/room.dto";
@@ -46,11 +46,12 @@ export class RoomController {
   @ApiCreatedResponse({
     description:
       "참가자를 선택하면 자동으로 채팅방 종류가 만들어지고, 채팅방이 생성이 됩니다.",
+      type: CreateRoomReqeust,
   })
   async CreateRoom(
     @Body() createRoom: CreateRoomReqeust,
     @Param("id") user_id: number
-  ): Promise<Room> {
+  ): Promise<CreateRoomResponse> {
     return this.roomService.createRoom(createRoom, user_id);
   }
 
@@ -59,7 +60,8 @@ export class RoomController {
     summary: "채팅방에 초대하기 API",
     description: "채팅방에 원하는 참가자를 초대합니다.",
   })
-  @ApiCreatedResponse({ description: "채팅방에 원하는 참가자를 초대합니다." })
+  @ApiCreatedResponse({ description: "채팅방에 원하는 참가자를 초대합니다.",
+  type: Array<Participant>})
   async InviteRoom(
     @Body() inviteToRoom: InviteRoomRequest
   ): Promise<Participant[]> {
