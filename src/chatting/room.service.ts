@@ -16,6 +16,7 @@ import { RoomType } from "./dto/room.dto";
 import { RoomListResponse, InviteRoomRequest } from "./dto/room.dto";
 import { UserResponse } from "@src/users/dto/users.dto";
 import { ValidateCreateRoom } from "./deco/room.deco";
+import { create } from "domain";
 
 @Injectable()
 export class RoomService {
@@ -72,12 +73,10 @@ export class RoomService {
 
         await transactionalEntityManager.save(Participant, newParticipant);
       }
-
       const roomResponse : CreateRoomResponse = {
         ...createdRoom,
         room_name : createRoomDto.room_name,
       }
-      
       return roomResponse;
     });
   }

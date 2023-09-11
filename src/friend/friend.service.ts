@@ -26,7 +26,15 @@ export class FriendService {
 
     const userPromises = friends.map(async (friend) => {
       const user: User = await this.userService.findOne(friend.friend_id);
-      return user;
+      const userResponse : UserResponse = {
+        id:user.id,
+        user_id:user.user_id,
+        name:user.name,
+        status_msg:user.status_msg,
+        profile_img_url:user.profile_img_url,
+        background_img_url:user.background_img_url,
+      }
+      return userResponse;
     });
 
     return Promise.all(userPromises);

@@ -116,8 +116,6 @@ export class ChattingGateway
       message.id
     );
 
-    console.log(message)
-
     if (!chattingMessage) {
       return;
     }
