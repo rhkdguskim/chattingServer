@@ -1,6 +1,6 @@
 import { NestFactory } from "@nestjs/core";
 import { AppModule } from "./app.module";
-import { setupSwagger } from "src/util/swagger";
+import { setupSwagger } from "@src/util/swagger";
 import * as config from "config";
 import * as cookieParser from "cookie-parser";
 import { WinstonModule, utilities, WinstonLogger } from "nest-winston";

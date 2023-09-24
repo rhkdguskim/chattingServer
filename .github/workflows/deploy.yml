@@ -18,10 +18,10 @@ jobs:
         uses: cloudtype-github-actions/deploy@v1
         with:
           token: ${{ secrets.CLOUDTYPE_TOKEN }}
-          project: rhkdguskim/kakaotalk-backend
+          project: rhkdguskim/kakaotalk-apigateway
           stage: main
           yaml: |
-            name: kakaotalk-backend
+            name: kakaotalk-apigateway
             app: node@18
             options:
               env:
