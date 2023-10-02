@@ -46,7 +46,7 @@ export class RoomController {
   @ApiCreatedResponse({
     description:
       "참가자를 선택하면 자동으로 채팅방 종류가 만들어지고, 채팅방이 생성이 됩니다.",
-      type: CreateRoomReqeust,
+    type: CreateRoomReqeust,
   })
   async CreateRoom(
     @Body() createRoom: CreateRoomReqeust,
@@ -60,8 +60,10 @@ export class RoomController {
     summary: "채팅방에 초대하기 API",
     description: "채팅방에 원하는 참가자를 초대합니다.",
   })
-  @ApiCreatedResponse({ description: "채팅방에 원하는 참가자를 초대합니다.",
-  type: Array<Participant>})
+  @ApiCreatedResponse({
+    description: "채팅방에 원하는 참가자를 초대합니다.",
+    type: Array<Participant>,
+  })
   async InviteRoom(
     @Body() inviteToRoom: InviteRoomRequest
   ): Promise<Participant[]> {

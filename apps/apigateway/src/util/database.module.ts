@@ -9,7 +9,6 @@ import { ReadBy } from "@src/entitys/readby.entity";
 import * as config from "config";
 
 const dbConfig = config.get("db");
-
 @Module({
   imports: [
     TypeOrmModule.forRoot({

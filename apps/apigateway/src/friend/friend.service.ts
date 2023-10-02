@@ -1,4 +1,9 @@
-import { ForbiddenException, HttpStatus, Injectable, Logger } from "@nestjs/common";
+import {
+  ForbiddenException,
+  HttpStatus,
+  Injectable,
+  Logger,
+} from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Friend } from "@src/entitys/friend.entity";
 import { DeleteResult, Repository } from "typeorm";
@@ -26,14 +31,14 @@ export class FriendService {
 
     const userPromises = friends.map(async (friend) => {
       const user: User = await this.userService.findOne(friend.friend_id);
-      const userResponse : UserResponse = {
-        id:user.id,
-        user_id:user.user_id,
-        name:user.name,
-        status_msg:user.status_msg,
-        profile_img_url:user.profile_img_url,
-        background_img_url:user.background_img_url,
-      }
+      const userResponse: UserResponse = {
+        id: user.id,
+        user_id: user.user_id,
+        name: user.name,
+        status_msg: user.status_msg,
+        profile_img_url: user.profile_img_url,
+        background_img_url: user.background_img_url,
+      };
       return userResponse;
     });
 
@@ -61,7 +66,7 @@ export class FriendService {
     const friends: Friend[] = await this.getMyFriends(id);
     friends.map((myfriend: Friend) => {
       if (myfriend.friend_id == friend_id) {
-        Logger.log("이미 등록된 친구입니다.")
+        Logger.log("이미 등록된 친구입니다.");
         throw new ForbiddenException({
           statusCode: HttpStatus.FORBIDDEN,
           message: [`이미 등록된 친구입니다.`],

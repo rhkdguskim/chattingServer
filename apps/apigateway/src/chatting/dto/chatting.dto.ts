@@ -59,11 +59,9 @@ export class ResponseMessage {
 
   @ApiProperty({ description: "생성 된 시간" })
   createdAt: Date;
-
 }
 
 export class RequestSingleMessage {
-
   @ApiProperty({ description: "Chatting ID" })
   id: number;
 
@@ -75,7 +73,6 @@ export class RequestSingleMessage {
 }
 
 export class ResponseSingleRead {
-
   @ApiProperty({ description: "Chatting ID" })
   id: number;
 

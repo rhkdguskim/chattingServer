@@ -1,3 +1,4 @@
-import { join } from 'path';
-
-export const AUTHENTICATION_PROTO_PATH = join(__dirname, '..', 'authentication.proto');
+export * from './dto'
+export * from './entity'
+export * from './module'
+//export * from './interface'

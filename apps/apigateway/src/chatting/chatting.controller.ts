@@ -19,7 +19,10 @@ export class ChattingController {
     summary: "방 ID로 채팅리스트들을 가져옵니다. API",
     description: "방 ID로 채팅리스트들을 가져옵니다.",
   })
-  @ApiCreatedResponse({ description: "방 ID로 채팅리스트들을 가져옵니다.",type: Array<ChattingResponse[]>, })
+  @ApiCreatedResponse({
+    description: "방 ID로 채팅리스트들을 가져옵니다.",
+    type: Array<ChattingResponse[]>,
+  })
   async GetChattingList(
     @Param("id") id: number,
     @Query("cursor") cursor: number

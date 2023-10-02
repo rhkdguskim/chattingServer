@@ -1,27 +1,20 @@
-import {
-  ForbiddenException,
-  Injectable,
-  UnauthorizedException,
-  HttpStatus,
-  Logger,
-} from "@nestjs/common";
-import { UsersService } from "@src/users/users.service";
-import { JwtService } from "@nestjs/jwt";
-import { User } from "@src/entitys/users.entity";
-import { CreateUserRequest, LoginUserResponse } from "@src/users/dto/users.dto";
+import {ForbiddenException, HttpStatus, Injectable, Logger, UnauthorizedException} from '@nestjs/common';
+import { LoginUserRequest, LoginUserResponse} from "@app/common";
 import * as bcrypt from "bcrypt";
-import { LoginUserRequest } from "@src/users/dto/users.dto";
-import { GetUser } from "@src/auth/deco/auth.decorator";
-import { OAuthData } from "@src/auth/dto/oauth.dto";
+import {JwtService} from "@nestjs/jwt";
+import {CreateUserRequest} from "@src/users/dto/users.dto";
+import { User} from "@app/common";
+import {UsersService} from "./users.service";
 
 @Injectable()
-export class AuthService {
+export class AuthenticationService {
+
   constructor(
-    private userService: UsersService,
-    private jwtService: JwtService
+      private userService: UsersService,
+      private jwtService: JwtService
   ) {}
 
-  async signIn(loginUser: LoginUserRequest): Promise<any> {
+  async signIn(loginUser: LoginUserRequest): Promise<LoginUserResponse> {
     const user = await this.userService.findbyUserId(loginUser.user_id);
 
     if (!user) {
@@ -29,8 +22,8 @@ export class AuthService {
     }
 
     const isPasswordValid = await bcrypt.compare(
-      loginUser.password,
-      user.password
+        loginUser.password,
+        user.password
     );
 
     if (!isPasswordValid) {
@@ -65,7 +58,7 @@ export class AuthService {
   private async setRefreshToken(refreshToken: string, userId: number) {
     const currentDateTime = new Date();
     const refreshTokenExpiry = new Date(
-      currentDateTime.setMonth(currentDateTime.getMonth() + 1)
+        currentDateTime.setMonth(currentDateTime.getMonth() + 1)
     ); // 1달 후 만료로 설정
 
     await this.userService.updateUser(userId, {
@@ -84,14 +77,14 @@ export class AuthService {
   }
 
   async getNewAccessToken(
-    refreshToken: string,
-    user_id: number
+      refreshToken: string,
+      user_id: number
   ): Promise<LoginUserResponse> {
     const user = await this.userService.findOne(user_id);
 
     const isValidRefreshToken = await this.validateRefreshToken(
-      refreshToken,
-      user
+        refreshToken,
+        user
     );
 
     if (!isValidRefreshToken) {
@@ -108,8 +101,8 @@ export class AuthService {
   }
 
   private async validateRefreshToken(
-    refreshToken: string,
-    user: User
+      refreshToken: string,
+      user: User
   ): Promise<boolean> {
     if (user && user.refreshToken === refreshToken) {
       const currentDateTime = new Date();
@@ -118,22 +111,5 @@ export class AuthService {
       }
     }
     return false;
-  }
-
-  async OAuthLogin(OAuthData: OAuthData): Promise<any> {
-    let user = await this.userService.findbyUserId(OAuthData.user.user_id);
-
-    if (user) {
-      // 이미 등록된 사용자
-      Logger.log("이미 등록된 사용자 입니다.");
-    } else {
-      // 가입이 되어있지 않다면 Auto Login
-      user = await this.userService.createOAuthUser(OAuthData);
-    }
-    const payload = { id: user.id, user_id: user.user_id };
-    return {
-      access_token: await this.jwtService.signAsync(payload),
-      refresh_token: await this.generateRefreshToken(user.id),
-    };
   }
 }

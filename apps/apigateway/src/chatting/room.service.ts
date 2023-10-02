@@ -37,7 +37,6 @@ export class RoomService {
     createRoomDto: CreateRoomReqeust,
     user_id: number
   ): Promise<CreateRoomResponse> {
-
     const participantCount = createRoomDto.participant.length;
     let determinedType: RoomType;
     if (participantCount === 1) {
@@ -56,29 +55,37 @@ export class RoomService {
     }
 
     // 채팅방 + 참가자 트랜잭션 구현
-    return await this.manager.transaction(async transactionalEntityManager => {
-      const newRoom : Room = transactionalEntityManager.create(Room, {
-        owner_id: user_id,
-        type : determinedType,
-        last_chat: "",
-      })
-      const createdRoom : Room = await transactionalEntityManager.save(Room, newRoom)
-
-      for (const participantUser of createRoomDto.participant) {
-        const newParticipant = transactionalEntityManager.create(Participant, {
-          user: participantUser,
-          room : createdRoom,
-          room_name : createRoomDto.room_name,
+    return await this.manager.transaction(
+      async (transactionalEntityManager) => {
+        const newRoom: Room = transactionalEntityManager.create(Room, {
+          owner_id: user_id,
+          type: determinedType,
+          last_chat: "",
         });
+        const createdRoom: Room = await transactionalEntityManager.save(
+          Room,
+          newRoom
+        );
 
-        await transactionalEntityManager.save(Participant, newParticipant);
+        for (const participantUser of createRoomDto.participant) {
+          const newParticipant = transactionalEntityManager.create(
+            Participant,
+            {
+              user: participantUser,
+              room: createdRoom,
+              room_name: createRoomDto.room_name,
+            }
+          );
+
+          await transactionalEntityManager.save(Participant, newParticipant);
+        }
+        const roomResponse: CreateRoomResponse = {
+          ...createdRoom,
+          room_name: createRoomDto.room_name,
+        };
+        return roomResponse;
       }
-      const roomResponse : CreateRoomResponse = {
-        ...createdRoom,
-        room_name : createRoomDto.room_name,
-      }
-      return roomResponse;
-    });
+    );
   }
 
   async InviteRoom(inviteToRoom: InviteRoomRequest): Promise<Participant[]> {

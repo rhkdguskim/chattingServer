@@ -28,7 +28,7 @@ describe("Room Controller", () => {
         TypeOrmModule.forFeature([Chatting, Room, Participant, ReadBy]),
       ],
       controllers: [RoomController],
-      providers: [JwtStrategy,Logger, RoomService],
+      providers: [JwtStrategy, Logger, RoomService],
     }).compile();
 
     validationPipe = new ValidationPipe({

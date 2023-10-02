@@ -50,16 +50,16 @@ export class UsersController {
   })
   @ApiCreatedResponse({ description: "사용자 정보를 업데이트 합니다." })
   async updateUser(@Body() user: UpdateUserRequest): Promise<UserResponse> {
-    const userResult : User = await this.usersService.saveUser(user);
-    const response : UserResponse = {
-      id:userResult.id,
-      user_id:userResult.user_id,
-      name:userResult.name,
-      status_msg:userResult.status_msg,
-      profile_img_url:userResult.profile_img_url,
-      background_img_url:userResult.background_img_url,
-    }
-    return response
+    const userResult: User = await this.usersService.saveUser(user);
+    const response: UserResponse = {
+      id: userResult.id,
+      user_id: userResult.user_id,
+      name: userResult.name,
+      status_msg: userResult.status_msg,
+      profile_img_url: userResult.profile_img_url,
+      background_img_url: userResult.background_img_url,
+    };
+    return response;
   }
 
   @Get(":id")

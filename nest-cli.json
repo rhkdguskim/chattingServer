@@ -17,31 +17,8 @@
       "entryFile": "src/main",
       "sourceRoot": "./",
       "compilerOptions": {
-        "assets": ["proto/*.proto"],
         "watchAssets": true,
         "tsConfigPath": "apps/apigateway/tsconfig.app.json"
-      }
-    },
-    "authentication-service": {
-      "type": "application",
-      "root": "apps/authentication-service",
-      "entryFile": "src/main",
-      "sourceRoot": "./",
-      "compilerOptions": {
-        "assets": ["proto/*.proto"],
-        "watchAssets": true,
-        "tsConfigPath": "apps/authentication-service/tsconfig.app.json"
-      }
-    },
-    "authorization-service": {
-      "type": "application",
-      "root": "apps/authorization-service",
-      "entryFile": "src/main",
-      "sourceRoot": "./",
-      "compilerOptions": {
-        "assets": ["proto/*.proto"],
-        "watchAssets": true,
-        "tsConfigPath": "apps/authorization-service/tsconfig.app.json"
       }
     },
     "common": {
@@ -51,6 +28,24 @@
       "sourceRoot": "libs/common/src",
       "compilerOptions": {
         "tsConfigPath": "libs/common/tsconfig.lib.json"
+      }
+    },
+    "authentication": {
+      "type": "application",
+      "root": "apps/authentication",
+      "entryFile": "main",
+      "sourceRoot": "apps/authentication/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/authentication/tsconfig.app.json"
+      }
+    },
+    "authorization": {
+      "type": "application",
+      "root": "apps/authorization",
+      "entryFile": "main",
+      "sourceRoot": "apps/authorization/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/authorization/tsconfig.app.json"
       }
     }
   }
