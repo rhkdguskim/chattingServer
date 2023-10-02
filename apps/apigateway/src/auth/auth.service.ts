@@ -3,7 +3,7 @@ import {
   Injectable,
   UnauthorizedException,
   HttpStatus,
-  Logger,
+  Logger, Inject, OnModuleInit,
 } from "@nestjs/common";
 import { UsersService } from "@src/users/users.service";
 import { JwtService } from "@nestjs/jwt";
@@ -13,40 +13,28 @@ import * as bcrypt from "bcrypt";
 import { LoginUserRequest } from "@src/users/dto/users.dto";
 import { GetUser } from "@src/auth/deco/auth.decorator";
 import { OAuthData } from "@src/auth/dto/oauth.dto";
+import {AUTHENTICATION_SERVICE, SIGN_IN} from "@app/common";
+import {ClientProxy} from "@nestjs/microservices";
+import {lastValueFrom} from "rxjs";
+import e from "express";
 
 @Injectable()
-export class AuthService {
-  constructor(
+export class AuthService{
+  constructor (
+      @Inject(AUTHENTICATION_SERVICE) private client : ClientProxy,
     private userService: UsersService,
     private jwtService: JwtService
-  ) {}
+  ) {
+
+  }
 
   async signIn(loginUser: LoginUserRequest): Promise<any> {
-    const user = await this.userService.findbyUserId(loginUser.user_id);
-
-    if (!user) {
-      throw new UnauthorizedException("아이디가 존재하지 않습니다.");
+    const pattern = {cmd : SIGN_IN}
+    try {
+      return await lastValueFrom(this.client.send<LoginUserResponse>(pattern, loginUser));
+    } catch (e) {
+      throw  new UnauthorizedException(e.message);
     }
-
-    const isPasswordValid = await bcrypt.compare(
-      loginUser.password,
-      user.password
-    );
-
-    if (!isPasswordValid) {
-      throw new UnauthorizedException("잘못된 패스워드 입니다.");
-    }
-
-    const payload = { id: user.id, user_id: user.user_id };
-
-    const access_token = await this.jwtService.signAsync(payload);
-    const refresh_token = await this.generateRefreshToken(user.id);
-    await this.setRefreshToken(refresh_token, user.id);
-
-    return {
-      access_token,
-      refresh_token,
-    };
   }
 
   async create(createUserDto: CreateUserRequest): Promise<any> {

@@ -5,6 +5,7 @@ import {JwtService} from "@nestjs/jwt";
 import {CreateUserRequest} from "@src/users/dto/users.dto";
 import { User} from "@app/common";
 import {UsersService} from "./users.service";
+import {RpcException} from "@nestjs/microservices";
 
 @Injectable()
 export class AuthenticationService {
@@ -18,7 +19,7 @@ export class AuthenticationService {
     const user = await this.userService.findbyUserId(loginUser.user_id);
 
     if (!user) {
-      throw new UnauthorizedException("아이디가 존재하지 않습니다.");
+      throw new RpcException("아이디가 존재하지 않습니다.");
     }
 
     const isPasswordValid = await bcrypt.compare(
@@ -27,8 +28,9 @@ export class AuthenticationService {
     );
 
     if (!isPasswordValid) {
-      throw new UnauthorizedException("잘못된 패스워드 입니다.");
+      throw new RpcException("잘못된 패스워드 입니다.");
     }
+
 
     const payload = { id: user.id, user_id: user.user_id };
 
@@ -45,11 +47,7 @@ export class AuthenticationService {
   async create(createUserDto: CreateUserRequest): Promise<any> {
     const isExist = await this.userService.findbyUserId(createUserDto.user_id);
     if (isExist) {
-      throw new ForbiddenException({
-        statusCode: HttpStatus.FORBIDDEN,
-        message: [`이미 등록된 사용자입니다.`],
-        error: "Forbidden",
-      });
+      throw new RpcException("이미 등록된 사용자입니다.");
     }
 
     return this.userService.createUser(createUserDto);
