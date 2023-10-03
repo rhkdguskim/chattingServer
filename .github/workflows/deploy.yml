@@ -30,9 +30,9 @@ jobs:
                 - name: TZ
                   value: Asia/Seoul
               ports: 3000
-              install: npm install && npm install pm2 -g
+              install: npm install
               build: npm run build
-              start: npm run start:pm2
+              start: npm run start:prod
             context:
               git:
                 url: git@github.com:${{ github.repository }}.git
