@@ -12,7 +12,7 @@ import { JwtGoogleStrategy } from "@src/auth/guards/oauth/google.strategy";
 import { JwtKakaoStrategy } from "@src/auth/guards/oauth/kakao.strategy";
 import { JwtNaverStrategy } from "@src/auth/guards/oauth/naver.strategy";
 import {ClientsModule, Transport} from "@nestjs/microservices";
-import {AUTHENTICATION_SERVICE, AUTHORIZATION_SERVICE} from "@app/common";
+import {AUTHENTICATION_SERVICE, AUTHORIZATION_SERVICE} from "@app/common/constant";
 
 const jwtConstants = config.get("jwt");
 

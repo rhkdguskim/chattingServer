@@ -55,6 +55,17 @@ export class LoginUserResponse {
   refresh_token: string;
 }
 
+export interface OAuthRequest {
+  access_token: string;
+  refresh_token: string;
+  user: CreateUserRequest;
+}
+
+export interface NewTokenRequest {
+  refresh_token : string;
+  user_id : number,
+}
+
 export class UserResponse {
   @ApiProperty({ description: "유저 ID" })
   id!: number;

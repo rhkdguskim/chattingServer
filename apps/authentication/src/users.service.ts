@@ -1,9 +1,9 @@
 import { Inject, Injectable, Logger, LoggerService } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { User, CreateUserRequest, UpdateUserRequest} from "@app/common";
+import { CreateUserRequest, UpdateUserRequest} from "@app/common/dto";
+import { User} from "@app/common/entity";
 import { DeleteResult, Repository } from "typeorm";
-
-import { OAuthData } from "@src/auth/dto/oauth.dto";
+import { OAuthRequest} from "@app/common/dto";
 
 @Injectable()
 export class UsersService {
@@ -34,7 +34,7 @@ export class UsersService {
     return await this.userReposity.save(newUser);
   }
 
-  async createOAuthUser(data: OAuthData): Promise<User> {
+  async createOAuthUser(data: OAuthRequest): Promise<User> {
     const newUser = await this.userReposity.create({
       ...data.user,
       oauth_accessToken: data.access_token,

@@ -41,22 +41,8 @@ export class AuthController {
     description: "JWT 토큰을 발급합니다",
     type: LoginUserResponse,
   })
-  async signIn(
-    @Res({ passthrough: true }) response: Response,
-    @Body() loginUser: LoginUserRequest
-  ) {
-    const { access_token, refresh_token } = await this.authService.signIn(
-      loginUser
-    );
-    response.cookie("jwt", access_token, {
-      httpOnly: true,
-    });
-
-    const res: LoginUserResponse = {
-      access_token,
-      refresh_token,
-    };
-    return res;
+  async signIn(@Body() loginUser: LoginUserRequest):Promise<LoginUserResponse> {
+    return await this.authService.signIn(loginUser);
   }
 
   @UseInterceptors(HttpCacheInterceptor)
@@ -85,24 +71,9 @@ export class AuthController {
     type: LoginUserResponse,
   })
   async getNewToken(
-    @Res({ passthrough: true }) response: Response,
     @Body() refreshtokenRequest: refreshtokenRequest
   ): Promise<LoginUserResponse> {
-    const { access_token, refresh_token } =
-      await this.authService.getNewAccessToken(
-        refreshtokenRequest.refresh_token,
-        refreshtokenRequest.id
-      );
-
-    response.cookie("jwt", access_token, {
-      httpOnly: true,
-    });
-
-    const res: LoginUserResponse = {
-      access_token,
-      refresh_token,
-    };
-    return res;
+      return await this.authService.getNewAccessToken({refresh_token : refreshtokenRequest.refresh_token, user_id:refreshtokenRequest.id});
   }
 
   @Post("kakao/login")
@@ -116,22 +87,11 @@ export class AuthController {
     type: LoginUserResponse,
   })
   async Kakao(
-    @GetOAuthData() data: OAuthData,
-    @Res({ passthrough: true }) response: Response
+    @GetOAuthData() data: OAuthData
   ) {
-    const { access_token, refresh_token } = await this.authService.OAuthLogin(
+     return await this.authService.OAuthLogin(
       data
     );
-
-    response.cookie("jwt", access_token, {
-      httpOnly: true,
-    });
-
-    const request: LoginUserResponse = {
-      access_token,
-      refresh_token,
-    };
-    return request;
   }
 
   @Post("naver/login")
@@ -145,22 +105,11 @@ export class AuthController {
     type: LoginUserResponse,
   })
   async Naver(
-    @GetOAuthData() data: OAuthData,
-    @Res({ passthrough: true }) response: Response
+    @GetOAuthData() data: OAuthData
   ) {
-    const { access_token, refresh_token } = await this.authService.OAuthLogin(
+    return await this.authService.OAuthLogin(
       data
     );
-
-    response.cookie("jwt", access_token, {
-      httpOnly: true,
-    });
-
-    const request: LoginUserResponse = {
-      access_token,
-      refresh_token,
-    };
-    return request;
   }
 
   @Post("google/login")
@@ -175,20 +124,9 @@ export class AuthController {
   })
   async Google(
     @GetOAuthData() data: OAuthData,
-    @Res({ passthrough: true }) response: Response
   ) {
-    const { access_token, refresh_token } = await this.authService.OAuthLogin(
+    return await this.authService.OAuthLogin(
       data
     );
-
-    response.cookie("jwt", access_token, {
-      httpOnly: true,
-    });
-
-    const request: LoginUserResponse = {
-      access_token,
-      refresh_token,
-    };
-    return request;
   }
 }

@@ -1,18 +1,20 @@
-import {ForbiddenException, HttpStatus, Injectable, Logger, UnauthorizedException} from '@nestjs/common';
-import { LoginUserRequest, LoginUserResponse} from "@app/common";
+import {ForbiddenException, HttpStatus, Inject, Injectable, Logger, UnauthorizedException} from '@nestjs/common';
+import {LoginUserRequest, LoginUserResponse, NewTokenRequest, OAuthRequest, UpdateUserRequest} from "@app/common/dto";
 import * as bcrypt from "bcrypt";
 import {JwtService} from "@nestjs/jwt";
 import {CreateUserRequest} from "@src/users/dto/users.dto";
-import { User} from "@app/common";
+import { User} from "@app/common/entity";
 import {UsersService} from "./users.service";
-import {RpcException} from "@nestjs/microservices";
+import {ClientProxy, RpcException} from "@nestjs/microservices";
+import {AUTHORIZATION_SERVICE, JWT_SIGN} from "@app/common/constant";
+import {lastValueFrom} from "rxjs";
 
 @Injectable()
 export class AuthenticationService {
-
   constructor(
+      @Inject(AUTHORIZATION_SERVICE)
+      private authorizationClient : ClientProxy,
       private userService: UsersService,
-      private jwtService: JwtService
   ) {}
 
   async signIn(loginUser: LoginUserRequest): Promise<LoginUserResponse> {
@@ -31,20 +33,11 @@ export class AuthenticationService {
       throw new RpcException("잘못된 패스워드 입니다.");
     }
 
-
     const payload = { id: user.id, user_id: user.user_id };
-
-    const access_token = await this.jwtService.signAsync(payload);
-    const refresh_token = await this.generateRefreshToken(user.id);
-    await this.setRefreshToken(refresh_token, user.id);
-
-    return {
-      access_token,
-      refresh_token,
-    };
+    return await lastValueFrom(this.authorizationClient.send({cmd:JWT_SIGN}, payload))
   }
 
-  async create(createUserDto: CreateUserRequest): Promise<any> {
+  async create(createUserDto: CreateUserRequest): Promise<User> {
     const isExist = await this.userService.findbyUserId(createUserDto.user_id);
     if (isExist) {
       throw new RpcException("이미 등록된 사용자입니다.");
@@ -53,61 +46,31 @@ export class AuthenticationService {
     return this.userService.createUser(createUserDto);
   }
 
-  private async setRefreshToken(refreshToken: string, userId: number) {
-    const currentDateTime = new Date();
-    const refreshTokenExpiry = new Date(
-        currentDateTime.setMonth(currentDateTime.getMonth() + 1)
-    ); // 1달 후 만료로 설정
-
-    await this.userService.updateUser(userId, {
-      refreshToken,
-      refreshTokenExpiry,
-    });
+  async findOne(id : number): Promise<User> {
+    return await this.userService.findOne(id)
   }
 
-  async generateRefreshToken(userId: number): Promise<string> {
-    const refreshTokenPayload = { id: userId, isRefreshToken: true };
-    const refreshToken = await this.jwtService.signAsync(refreshTokenPayload);
-
-    this.setRefreshToken(refreshToken, userId);
-
-    return refreshToken;
+  async update(payload : UpdateUserRequest) : Promise<User> {
+    return await this.userService.saveUser(payload);
   }
 
   async getNewAccessToken(
-      refreshToken: string,
-      user_id: number
+      payload : NewTokenRequest,
   ): Promise<LoginUserResponse> {
-    const user = await this.userService.findOne(user_id);
-
-    const isValidRefreshToken = await this.validateRefreshToken(
-        refreshToken,
-        user
-    );
-
-    if (!isValidRefreshToken) {
-      throw new UnauthorizedException("Invailed refresh_token");
-    }
-    const refresh_token = await this.generateRefreshToken(user.id); // refresh_token을 다시 재발급.
-    const access_token = await this.jwtService.signAsync({
-      // access_token 발급.
-      id: user.id,
-      user_id: user.user_id,
-    });
-
-    return { access_token, refresh_token };
+    const user = await this.userService.findOne(payload.user_id);
+    return lastValueFrom(this.authorizationClient.send({cmd:JWT_SIGN}, user));
   }
+  async OAuthLogin(OAuthData: OAuthRequest): Promise<LoginUserResponse> {
+    let user = await this.userService.findbyUserId(OAuthData.user.user_id);
 
-  private async validateRefreshToken(
-      refreshToken: string,
-      user: User
-  ): Promise<boolean> {
-    if (user && user.refreshToken === refreshToken) {
-      const currentDateTime = new Date();
-      if (user.refreshTokenExpiry > currentDateTime) {
-        return true;
-      }
+    if (user) {
+      // 이미 등록된 사용자
+      Logger.log("이미 등록된 사용자 입니다.");
+    } else {
+      // 가입이 되어있지 않다면 Auto Login
+      user = await this.userService.createOAuthUser(OAuthData);
     }
-    return false;
+    const payload = { id: user.id, user_id: user.user_id };
+    return await lastValueFrom(this.authorizationClient.send({cmd:JWT_SIGN}, payload))
   }
 }
