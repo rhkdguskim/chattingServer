@@ -7,7 +7,7 @@ import { WinstonModule, utilities, WinstonLogger } from "nest-winston";
 import * as winston from "winston";
 import { LoggingInterceptor } from "./common/interceptors/logging.interceptor";
 import { Logger, ValidationPipe } from "@nestjs/common";
-import {LOGLEVEL, MAIN_HOST} from "@app/common/config";
+import {LOGLEVEL, MAIN_HOST, MAIN_PORT} from "@app/common/config";
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
@@ -16,14 +16,13 @@ async function bootstrap() {
       transports: [
         new winston.transports.Console({
           format: winston.format.combine(
-            utilities.format.nestLike("KwangTalk")
+            utilities.format.nestLike("API Gateway")
           ),
         }),
       ],
     }),
   });
 
-  const serverConfig = config.get("server");
   const cors = config.get("cors");
   app.use(cookieParser());
   app.enableCors({
@@ -41,6 +40,6 @@ async function bootstrap() {
     })
   );
   setupSwagger(app);
-  await app.listen(MAIN_HOST);
+  await app.listen(MAIN_PORT);
 }
 bootstrap();

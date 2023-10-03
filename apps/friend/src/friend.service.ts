@@ -1,51 +1,29 @@
 import {
   ForbiddenException,
-  HttpStatus, Inject,
+  HttpStatus,
   Injectable,
   Logger,
 } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { Friend } from "@src/entitys/friend.entity";
+import {Friend} from "@app/common/entity";
 import { DeleteResult, Repository } from "typeorm";
-import { User } from "@src/entitys/users.entity";
 import {
   CreateFriendRequest,
   CreateFriendResponse,
   DelteFriendRequest,
 } from "@src/friend/dto/friend.createfriend.dto";
-import { UsersService } from "@src/users/users.service";
-import { UserResponse } from "@src/users/dto/users.dto";
-import {FRIEND_SERVICE} from "@app/common/message/friend";
-import {ClientProxy} from "@nestjs/microservices";
 
 @Injectable()
 export class FriendService {
   constructor(
-      @Inject(FRIEND_SERVICE) private friendClient : ClientProxy,
     @InjectRepository(Friend)
     private friendRepository: Repository<Friend>,
-    private userService: UsersService
   ) {}
 
-  async getFriends(id: number): Promise<UserResponse[]> {
-    const friends: Friend[] = await this.friendRepository.find({
+  async getFriends(id: number): Promise<Friend[]> {
+    return await this.friendRepository.find({
       where: { user: { id } },
     });
-
-    const userPromises = friends.map(async (friend) => {
-      const user: User = await this.userService.findOne(friend.friend_id);
-      const userResponse: UserResponse = {
-        id: user.id,
-        user_id: user.user_id,
-        name: user.name,
-        status_msg: user.status_msg,
-        profile_img_url: user.profile_img_url,
-        background_img_url: user.background_img_url,
-      };
-      return userResponse;
-    });
-
-    return Promise.all(userPromises);
   }
 
   async getMyFriends(id: number): Promise<Friend[]> {

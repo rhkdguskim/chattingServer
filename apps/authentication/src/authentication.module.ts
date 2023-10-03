@@ -6,7 +6,7 @@ import { User} from "@app/common/entity";
 import {TypeOrmModule} from "@nestjs/typeorm";
 import {UsersService} from "./users.service";
 import {ClientsModule, Transport} from "@nestjs/microservices";
-import {AUTHORIZATION_SERVICE} from "@app/common/constant";
+import {AUTHORIZATION_SERVICE} from "@app/common/message/authorization";
 
 @Module({
   imports: [

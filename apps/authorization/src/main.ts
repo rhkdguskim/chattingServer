@@ -5,7 +5,7 @@ import {LoggingInterceptor} from "@app/common/interceptor";
 import {Logger} from "@nestjs/common";
 import {utilities, WinstonModule} from "nest-winston";
 import * as winston from "winston";
-import { AUTHORIZATION_SERVICE} from "@app/common/constant";
+import { AUTHORIZATION_SERVICE} from "@app/common/message/authorization";
 import {AUTHORIZAION_HOST, AUTHORIZAION_PORT, LOGLEVEL} from "@app/common/config";
 
 async function bootstrap() {

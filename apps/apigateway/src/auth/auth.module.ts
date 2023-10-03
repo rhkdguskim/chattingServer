@@ -11,17 +11,14 @@ import { HttpModule } from "@nestjs/axios";
 import { JwtGoogleStrategy } from "@src/auth/guards/oauth/google.strategy";
 import { JwtKakaoStrategy } from "@src/auth/guards/oauth/kakao.strategy";
 import { JwtNaverStrategy } from "@src/auth/guards/oauth/naver.strategy";
-import {ClientsModule, Transport} from "@nestjs/microservices";
-import {AUTHENTICATION_SERVICE, AUTHORIZATION_SERVICE} from "@app/common/constant";
+import {JwtGuard} from "@src/auth/guards/auth.jwt.guard";
+import {AuthClientsModule} from "@app/common/module/authclients.module";
 
 const jwtConstants = config.get("jwt");
 
 @Module({
   imports: [
-    ClientsModule.register([
-      {name : AUTHENTICATION_SERVICE, transport : Transport.TCP , options : {host : "localhost", port : 3001}},
-      {name : AUTHORIZATION_SERVICE, transport : Transport.TCP, options : {host : "localhost", port : 3002}}
-    ]),
+    AuthClientsModule,
     HttpModule,
     PassportModule,
     UsersModule,
@@ -36,11 +33,12 @@ const jwtConstants = config.get("jwt");
     AuthService,
     JwtStrategy,
     WsJwtGuard,
+      JwtGuard,
     Logger,
     JwtGoogleStrategy,
     JwtKakaoStrategy,
     JwtNaverStrategy,
   ],
-  exports: [JwtStrategy, WsJwtGuard],
+  exports: [JwtStrategy, WsJwtGuard, JwtGuard],
 })
 export class AuthModule {}

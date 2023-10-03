@@ -17,12 +17,11 @@ import {
   CreateFriendResponse,
   DelteFriendRequest,
 } from "@src/friend/dto/friend.createfriend.dto";
-import { HttpCacheInterceptor } from "@src/common/interceptors/httpcache.interceptor";
-import { AuthGuard } from "@nestjs/passport";
 import { UserResponse } from "@src/users/dto/users.dto";
+import {JwtGuard} from "@src/auth/guards/auth.jwt.guard";
 
 @Controller("friend")
-@UseGuards(AuthGuard("jwt"))
+@UseGuards(JwtGuard)
 @ApiTags("친구")
 export class FriendController {
   constructor(private friendService: FriendService) {}

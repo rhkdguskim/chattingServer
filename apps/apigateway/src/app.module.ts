@@ -11,9 +11,6 @@ import { OpenaiModule } from "@src/openai/openai.module";
 
 import { DatabaseModule } from "@src/util/database.module";
 import { CacheRedisModule } from "@src/util/cacheRedis.module";
-import {ClientsModule, Transport} from "@nestjs/microservices";
-import {AUTHENTICATION_SERVICE, AUTHORIZATION_SERVICE} from "@app/common/constant";
-import {JwtGuard} from "@src/auth/guards/auth.jwt.guard";
 
 @Module({
   imports: [
