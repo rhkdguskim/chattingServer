@@ -30,7 +30,7 @@ jobs:
                 - name: TZ
                   value: Asia/Seoul
               ports: 3000
-              install: npm install
+              install: npm install && npm install pm2 -g
               build: npm run build
               start: npm run start:pm2
             context:
