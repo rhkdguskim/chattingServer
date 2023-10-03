@@ -1,6 +1,9 @@
 server:
   port: 3000
 
+log:
+  loglevel : 'info'
+
 db:
   type: 'mysql'
   host : 'svc.sel3.cloudtype.app'

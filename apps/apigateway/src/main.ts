@@ -7,10 +7,12 @@ import { WinstonModule, utilities, WinstonLogger } from "nest-winston";
 import * as winston from "winston";
 import { LoggingInterceptor } from "./common/interceptors/logging.interceptor";
 import { Logger, ValidationPipe } from "@nestjs/common";
+import {LOGLEVEL, MAIN_HOST} from "@app/common/config";
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
     logger: WinstonModule.createLogger({
+      level : LOGLEVEL,
       transports: [
         new winston.transports.Console({
           format: winston.format.combine(
@@ -39,6 +41,6 @@ async function bootstrap() {
     })
   );
   setupSwagger(app);
-  await app.listen(process.env.PORT || serverConfig.port);
+  await app.listen(MAIN_HOST);
 }
 bootstrap();

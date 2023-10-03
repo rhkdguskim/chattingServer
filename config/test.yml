@@ -7,6 +7,9 @@ db:
   database: 'test'
   synchronize: false
 
+log:
+  loglevel : 'debug'
+
 jwt:
   secret: 'bigkwangs'
 
