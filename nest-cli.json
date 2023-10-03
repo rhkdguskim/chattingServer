@@ -14,8 +14,8 @@
     "apigateway": {
       "type": "application",
       "root": "apps/apigateway",
-      "entryFile": "src/main",
-      "sourceRoot": "./",
+      "entryFile": "main",
+      "sourceRoot": "apps/apigateway/src",
       "compilerOptions": {
         "watchAssets": true,
         "tsConfigPath": "apps/apigateway/tsconfig.app.json"
