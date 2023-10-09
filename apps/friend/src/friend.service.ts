@@ -5,7 +5,7 @@ import {
   Logger,
 } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import {Friend} from "@app/common/entity";
+import { Friend } from "@app/common/entity";
 import { DeleteResult, Repository } from "typeorm";
 import {
   CreateFriendRequest,
@@ -17,7 +17,7 @@ import {
 export class FriendService {
   constructor(
     @InjectRepository(Friend)
-    private friendRepository: Repository<Friend>,
+    private friendRepository: Repository<Friend>
   ) {}
 
   async getFriends(id: number): Promise<Friend[]> {

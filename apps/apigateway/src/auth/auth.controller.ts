@@ -1,6 +1,7 @@
 import {
   Body,
-  Controller, Get,
+  Controller,
+  Get,
   Post,
   Res,
   UseGuards,
@@ -41,7 +42,9 @@ export class AuthController {
     description: "JWT 토큰을 발급합니다",
     type: LoginUserResponse,
   })
-  async signIn(@Body() loginUser: LoginUserRequest):Promise<LoginUserResponse> {
+  async signIn(
+    @Body() loginUser: LoginUserRequest
+  ): Promise<LoginUserResponse> {
     return await this.authService.signIn(loginUser);
   }
 
@@ -73,7 +76,10 @@ export class AuthController {
   async getNewToken(
     @Body() refreshtokenRequest: refreshtokenRequest
   ): Promise<LoginUserResponse> {
-      return await this.authService.getNewAccessToken({refresh_token : refreshtokenRequest.refresh_token, user_id:refreshtokenRequest.id});
+    return await this.authService.getNewAccessToken({
+      refresh_token: refreshtokenRequest.refresh_token,
+      user_id: refreshtokenRequest.id,
+    });
   }
 
   @Post("kakao/login")
@@ -86,12 +92,8 @@ export class AuthController {
     description: "JWT 토큰을 재발급합니다",
     type: LoginUserResponse,
   })
-  async Kakao(
-    @GetOAuthData() data: OAuthData
-  ) {
-     return await this.authService.OAuthLogin(
-      data
-    );
+  async Kakao(@GetOAuthData() data: OAuthData) {
+    return await this.authService.OAuthLogin(data);
   }
 
   @Post("naver/login")
@@ -104,12 +106,8 @@ export class AuthController {
     description: "JWT 토큰을 재발급합니다",
     type: LoginUserResponse,
   })
-  async Naver(
-    @GetOAuthData() data: OAuthData
-  ) {
-    return await this.authService.OAuthLogin(
-      data
-    );
+  async Naver(@GetOAuthData() data: OAuthData) {
+    return await this.authService.OAuthLogin(data);
   }
 
   @Post("google/login")
@@ -122,11 +120,7 @@ export class AuthController {
     description: "JWT 토큰을 재발급합니다",
     type: LoginUserResponse,
   })
-  async Google(
-    @GetOAuthData() data: OAuthData,
-  ) {
-    return await this.authService.OAuthLogin(
-      data
-    );
+  async Google(@GetOAuthData() data: OAuthData) {
+    return await this.authService.OAuthLogin(data);
   }
 }

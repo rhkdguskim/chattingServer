@@ -1,27 +1,28 @@
-import {NestFactory} from "@nestjs/core";
-import {ChatModule} from "./chat.module";
+import {NestFactory} from '@nestjs/core';
+import {RoomModule} from './room.module';
 import {MicroserviceOptions, Transport} from "@nestjs/microservices";
 import {utilities, WinstonModule} from "nest-winston";
-import {CHAT_HOST, CHAT_PORT, LOGLEVEL} from "@app/common/config";
+import {LOGLEVEL, ROOM_HOST, ROOM_PORT} from "@app/common/config";
 import * as winston from "winston";
-import {CHAT_SERVICE} from "@app/common/message/chat";
+import {FRIEND_SERVICE} from "@app/common/message/friend";
+import {ROOM_SERVICE} from "@app/common/message/room";
 
 async function bootstrap() {
-  const app = await NestFactory.createMicroservice<MicroserviceOptions>(ChatModule, {
+  const app = await NestFactory.createMicroservice<MicroserviceOptions>(RoomModule, {
     logger: WinstonModule.createLogger({
       level: LOGLEVEL,
       transports: [
         new winston.transports.Console({
           format: winston.format.combine(
-              utilities.format.nestLike(CHAT_SERVICE)
+              utilities.format.nestLike(ROOM_SERVICE)
           ),
         }),
       ],
     }),
     transport : Transport.TCP,
     options : {
-      host:CHAT_HOST,
-      port:CHAT_PORT
+      host:ROOM_HOST,
+      port:ROOM_PORT,
     }
   });
   await app.listen();

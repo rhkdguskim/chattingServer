@@ -8,7 +8,7 @@ import {
   Unique,
   Generated,
 } from "typeorm";
-import { Participant} from "@app/common/entity/participant.entity";
+import { Participant } from "@app/common/entity/participant.entity";
 import { Chatting } from "@app/common/entity/chatting.entity";
 
 @Entity()

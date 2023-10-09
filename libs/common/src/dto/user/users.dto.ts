@@ -62,8 +62,8 @@ export interface OAuthRequest {
 }
 
 export interface NewTokenRequest {
-  refresh_token : string;
-  user_id : number,
+  refresh_token: string;
+  user_id: number;
 }
 
 export class UserResponse {

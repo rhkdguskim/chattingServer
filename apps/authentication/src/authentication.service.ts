@@ -1,34 +1,38 @@
-import {Inject, Injectable, Logger} from '@nestjs/common';
-import {LoginUserRequest, OAuthRequest, UpdateUserRequest} from "@app/common/dto";
+import { Inject, Injectable, Logger } from "@nestjs/common";
+import {
+  LoginUserRequest,
+  OAuthRequest,
+  UpdateUserRequest,
+} from "@app/common/dto";
 import * as bcrypt from "bcrypt";
-import {CreateUserRequest} from "@src/users/dto/users.dto";
-import { User} from "@app/common/entity";
-import {UsersService} from "./users.service";
-import { RpcException} from "@nestjs/microservices";
+import { CreateUserRequest } from "@src/users/dto/users.dto";
+import { User } from "@app/common/entity";
+import { UsersService } from "./users.service";
+import { RpcException } from "@nestjs/microservices";
 
 @Injectable()
 export class AuthenticationService {
   constructor(
-      @Inject(Logger) private logger : Logger,
-      private userService: UsersService,
+    @Inject(Logger) private logger: Logger,
+    private userService: UsersService
   ) {}
 
   async signIn(loginUser: LoginUserRequest): Promise<User> {
-    this.logger.debug(loginUser)
+    this.logger.debug(loginUser);
     const user = await this.userService.findbyUserId(loginUser.user_id);
 
     if (!user) {
-      this.logger.error('아이디가 존재 하지 않습니다.')
+      this.logger.error("아이디가 존재 하지 않습니다.");
       throw new RpcException("아이디가 존재하지 않습니다.");
     }
 
     const isPasswordValid = await bcrypt.compare(
-        loginUser.password,
-        user.password
+      loginUser.password,
+      user.password
     );
 
     if (!isPasswordValid) {
-      this.logger.error('잘못된 패스워드 입니다.')
+      this.logger.error("잘못된 패스워드 입니다.");
       throw new RpcException("잘못된 패스워드 입니다.");
     }
 
@@ -38,18 +42,18 @@ export class AuthenticationService {
   async create(createUserDto: CreateUserRequest): Promise<User> {
     const isExist = await this.userService.findbyUserId(createUserDto.user_id);
     if (isExist) {
-      this.logger.error('이미 등록된 사용자입니다.')
+      this.logger.error("이미 등록된 사용자입니다.");
       throw new RpcException("이미 등록된 사용자입니다.");
     }
 
     return this.userService.createUser(createUserDto);
   }
 
-  async findOne(id : number): Promise<User> {
-    return await this.userService.findOne(id)
+  async findOne(id: number): Promise<User> {
+    return await this.userService.findOne(id);
   }
 
-  async update(payload : UpdateUserRequest) : Promise<User> {
+  async update(payload: UpdateUserRequest): Promise<User> {
     return await this.userService.saveUser(payload);
   }
 
@@ -64,5 +68,4 @@ export class AuthenticationService {
   async OAuthLogin(OAuthData: OAuthRequest): Promise<User> {
     return this.userService.createUser(OAuthData.user);
   }
-
 }

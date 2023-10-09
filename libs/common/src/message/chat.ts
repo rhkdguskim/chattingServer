@@ -1,0 +1,2 @@
+export const FIND_CHATTLING_ALL = "FIND_CHATTLING_ALL";
+export const CHAT_SERVICE = "CHAT_SERVICE"

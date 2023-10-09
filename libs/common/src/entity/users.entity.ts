@@ -8,9 +8,9 @@ import {
   OneToMany,
 } from "typeorm";
 import * as bsrypt from "bcrypt";
-import { Friend} from "@app/common/entity/friend.entity";
-import { Chatting} from "@app/common/entity/chatting.entity";
-import { Participant} from "@app/common/entity/participant.entity";
+import { Friend } from "@app/common/entity/friend.entity";
+import { Chatting } from "@app/common/entity/chatting.entity";
+import { Participant } from "@app/common/entity/participant.entity";
 
 @Entity()
 export class User {

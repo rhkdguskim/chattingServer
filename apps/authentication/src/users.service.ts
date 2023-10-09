@@ -1,15 +1,15 @@
 import { Inject, Injectable, Logger, LoggerService } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { CreateUserRequest, UpdateUserRequest} from "@app/common/dto";
-import { User} from "@app/common/entity";
+import { CreateUserRequest, UpdateUserRequest } from "@app/common/dto";
+import { User } from "@app/common/entity";
 import { DeleteResult, Repository } from "typeorm";
-import { OAuthRequest} from "@app/common/dto";
+import { OAuthRequest } from "@app/common/dto";
 
 @Injectable()
 export class UsersService {
   constructor(
     @InjectRepository(User)
-    private userReposity: Repository<User>,
+    private userReposity: Repository<User>
   ) {}
 
   async findAll(): Promise<User[]> {

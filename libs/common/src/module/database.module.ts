@@ -1,6 +1,13 @@
 import { Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import {User, Friend, Chatting, Room, Participant, ReadBy} from "@app/common/entity";
+import {
+  User,
+  Friend,
+  Chatting,
+  Room,
+  Participant,
+  ReadBy,
+} from "@app/common/entity";
 import * as config from "config";
 const dbConfig = config.get("db");
 export function DatabaseModule() {

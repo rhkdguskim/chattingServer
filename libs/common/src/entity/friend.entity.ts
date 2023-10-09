@@ -7,7 +7,7 @@ import {
   UpdateDateColumn,
   JoinColumn,
 } from "typeorm";
-import {User} from "@app/common/entity/users.entity";
+import { User } from "@app/common/entity/users.entity";
 
 @Entity()
 export class Friend {

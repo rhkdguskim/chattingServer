@@ -11,8 +11,8 @@ import { HttpModule } from "@nestjs/axios";
 import { JwtGoogleStrategy } from "@src/auth/guards/oauth/google.strategy";
 import { JwtKakaoStrategy } from "@src/auth/guards/oauth/kakao.strategy";
 import { JwtNaverStrategy } from "@src/auth/guards/oauth/naver.strategy";
-import {JwtGuard} from "@src/auth/guards/auth.jwt.guard";
-import {AuthClientsModule} from "@app/common/module/authclients.module";
+import { JwtGuard } from "@src/auth/guards/auth.jwt.guard";
+import { AuthClientsModule } from "@app/common/module/authclients.module";
 
 const jwtConstants = config.get("jwt");
 
@@ -33,7 +33,7 @@ const jwtConstants = config.get("jwt");
     AuthService,
     JwtStrategy,
     WsJwtGuard,
-      JwtGuard,
+    JwtGuard,
     Logger,
     JwtGoogleStrategy,
     JwtKakaoStrategy,

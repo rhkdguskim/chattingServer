@@ -1,8 +1,8 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { FriendController } from './friend.controller';
-import { FriendService } from './friend.service';
+import { Test, TestingModule } from "@nestjs/testing";
+import { FriendController } from "./friend.controller";
+import { FriendService } from "./friend.service";
 
-describe('FriendController', () => {
+describe("FriendController", () => {
   let friendController: FriendController;
 
   beforeEach(async () => {
@@ -14,9 +14,9 @@ describe('FriendController', () => {
     friendController = app.get<FriendController>(FriendController);
   });
 
-  describe('root', () => {
+  describe("root", () => {
     it('should return "Hello World!"', () => {
-      expect(friendController.getHello()).toBe('Hello World!');
+      expect(friendController.getHello()).toBe("Hello World!");
     });
   });
 });

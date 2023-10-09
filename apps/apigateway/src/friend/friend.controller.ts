@@ -18,7 +18,7 @@ import {
   DelteFriendRequest,
 } from "@src/friend/dto/friend.createfriend.dto";
 import { UserResponse } from "@src/users/dto/users.dto";
-import {JwtGuard} from "@src/auth/guards/auth.jwt.guard";
+import { JwtGuard } from "@src/auth/guards/auth.jwt.guard";
 
 @Controller("friend")
 @UseGuards(JwtGuard)

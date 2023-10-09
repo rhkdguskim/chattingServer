@@ -1,12 +1,13 @@
 import {
   CallHandler,
-  ExecutionContext, Inject,
+  ExecutionContext,
+  Inject,
   Injectable,
   LoggerService,
   NestInterceptor,
 } from "@nestjs/common";
 import { Observable, tap } from "rxjs";
-import {JsonSocket} from "@nestjs/microservices";
+import { JsonSocket } from "@nestjs/microservices";
 
 @Injectable()
 export class LoggingInterceptor implements NestInterceptor {
@@ -17,7 +18,6 @@ export class LoggingInterceptor implements NestInterceptor {
     context: ExecutionContext,
     next: CallHandler<any>
   ): Observable<any> | Promise<Observable<any>> {
-
     const request = context.switchToRpc().getContext();
     const [jsonSocket, requestData] = request.args as [JsonSocket, any];
 
@@ -26,14 +26,18 @@ export class LoggingInterceptor implements NestInterceptor {
 
     this.logger.debug(
       `Start`,
-      `${context.getClass().name}.${context.getHandler().name} [${remoteAddress}:${remotePort}]`
+      `${context.getClass().name}.${
+        context.getHandler().name
+      } [${remoteAddress}:${remotePort}]`
     );
     const now = Date.now();
     return next.handle().pipe(
       tap(() => {
         this.logger.debug(
           `End: Time : {${Date.now() - now} ms}`,
-          `${context.getClass().name}.${context.getHandler().name} [${remoteAddress}:${remotePort}]`
+          `${context.getClass().name}.${
+            context.getHandler().name
+          } [${remoteAddress}:${remotePort}]`
         );
       })
     );

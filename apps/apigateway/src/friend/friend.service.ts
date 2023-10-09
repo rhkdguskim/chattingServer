@@ -1,6 +1,7 @@
 import {
   ForbiddenException,
-  HttpStatus, Inject,
+  HttpStatus,
+  Inject,
   Injectable,
   Logger,
 } from "@nestjs/common";
@@ -15,13 +16,13 @@ import {
 } from "@src/friend/dto/friend.createfriend.dto";
 import { UsersService } from "@src/users/users.service";
 import { UserResponse } from "@src/users/dto/users.dto";
-import {FRIEND_SERVICE} from "@app/common/message/friend";
-import {ClientProxy} from "@nestjs/microservices";
+import { FRIEND_SERVICE } from "@app/common/message/friend";
+import { ClientProxy } from "@nestjs/microservices";
 
 @Injectable()
 export class FriendService {
   constructor(
-      @Inject(FRIEND_SERVICE) private friendClient : ClientProxy,
+    @Inject(FRIEND_SERVICE) private friendClient: ClientProxy,
     @InjectRepository(Friend)
     private friendRepository: Repository<Friend>,
     private userService: UsersService
