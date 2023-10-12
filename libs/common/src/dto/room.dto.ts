@@ -1,21 +1,12 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { UserResponse } from "@src/users/dto/users.dto";
 import { ArrayMinSize, IsString } from "class-validator";
-import { User } from "@src/entitys/users.entity";
-import { Room } from "@src/entitys/room.entity";
+import {Room, User} from "@app/common/entity";
+import {UserResponse} from "@app/common/dto/index";
 
 export enum RoomType {
   Individual,
   two,
   Group,
-}
-
-export class RoomListRequest {
-  id:number;
-}
-
-export class RoomRequest {
-  id:number;
 }
 
 export class RoomListResponse {
@@ -48,8 +39,6 @@ export class RoomListResponse {
 }
 
 export class CreateRoomReqeust {
-  id : number;
-
   @ApiProperty({ description: "방 이름" })
   @IsString()
   room_name!: string;

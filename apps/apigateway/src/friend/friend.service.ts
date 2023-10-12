@@ -5,121 +5,46 @@ import {
   Injectable,
   Logger,
 } from "@nestjs/common";
-import { InjectRepository } from "@nestjs/typeorm";
-import { Friend } from "@src/entitys/friend.entity";
+import { Friend} from "@app/common/entity";
 import { DeleteResult, Repository } from "typeorm";
-import { User } from "@src/entitys/users.entity";
 import {
   CreateFriendRequest,
   CreateFriendResponse,
-  DelteFriendRequest,
-} from "@src/friend/dto/friend.createfriend.dto";
-import { UsersService } from "@src/users/users.service";
-import { UserResponse } from "@src/users/dto/users.dto";
-import { FRIEND_SERVICE } from "@app/common/message/friend";
+  DelteFriendRequest, FindFriendAllRequest,
+} from "@app/common/dto/friend.createfriend.dto";
+import {ADD_FRIEND, DELETE_FRIEND, FIND_ALL_FRIEND, FRIEND_SERVICE, UPDATE_FRIEND} from "@app/common/message/friend";
 import { ClientProxy } from "@nestjs/microservices";
+import {lastValueFrom} from "rxjs";
+import {UserResponse} from "@app/common/dto";
 
 @Injectable()
 export class FriendService {
   constructor(
-    @Inject(FRIEND_SERVICE) private friendClient: ClientProxy,
-    @InjectRepository(Friend)
-    private friendRepository: Repository<Friend>,
-    private userService: UsersService
-  ) {}
-
-  async getFriends(id: number): Promise<UserResponse[]> {
-    const friends: Friend[] = await this.friendRepository.find({
-      where: { user: { id } },
-    });
-
-    const userPromises = friends.map(async (friend) => {
-      const user: User = await this.userService.findOne(friend.friend_id);
-      const userResponse: UserResponse = {
-        id: user.id,
-        user_id: user.user_id,
-        name: user.name,
-        status_msg: user.status_msg,
-        profile_img_url: user.profile_img_url,
-        background_img_url: user.background_img_url,
-      };
-      return userResponse;
-    });
-
-    return Promise.all(userPromises);
+      @Inject(FRIEND_SERVICE) private friendClient: ClientProxy,
+  ) {
   }
 
-  async getMyFriends(id: number): Promise<Friend[]> {
-    return await this.friendRepository.find({
-      where: { user: { id } },
-    });
+  async getFriends(id: number): Promise<UserResponse[]> {
+    const request: FindFriendAllRequest = {
+      id
+    }
+    return await lastValueFrom(this.friendClient.send({cmd: FIND_ALL_FRIEND}, request))
   }
 
   async addFriend(
-    createFriend: CreateFriendRequest,
-    id: number
-  ): Promise<CreateFriendResponse> {
-    const { friend_id, friend_name } = createFriend;
-    const friend = this.friendRepository.create({
-      friend_id,
-      friend_name,
-      user: { id },
-    });
-
-    // 이미 등록된 친구라면
-    const friends: Friend[] = await this.getMyFriends(id);
-    friends.map((myfriend: Friend) => {
-      if (myfriend.friend_id == friend_id) {
-        Logger.log("이미 등록된 친구입니다.");
-        throw new ForbiddenException({
-          statusCode: HttpStatus.FORBIDDEN,
-          message: [`이미 등록된 친구입니다.`],
-          error: "Forbidden",
-        });
-      }
-    });
-    return await this.friendRepository.save(friend);
+      createFriend: CreateFriendRequest): Promise<CreateFriendResponse> {
+    return await lastValueFrom(this.friendClient.send({cmd: ADD_FRIEND}, createFriend))
   }
 
   async delFriend(
-    delFriend: DelteFriendRequest,
-    id: number
+      delFriend: DelteFriendRequest
   ): Promise<DeleteResult> {
-    // 해당 Friend가 현재 유저에 속하는지 확인
-    const foundFriend = await this.friendRepository.findOne({
-      where: { id: delFriend.friend_id, user: { id } },
-    });
-    if (!foundFriend) {
-      throw new ForbiddenException({
-        statusCode: HttpStatus.FORBIDDEN,
-        message: [`이 친구는 삭제할 수 없습니다.`],
-        error: "Forbidden",
-      });
-    }
-
-    return this.friendRepository.delete(foundFriend.id);
+    return await lastValueFrom(this.friendClient.send({cmd: DELETE_FRIEND}, delFriend))
   }
 
   async changeFriendName(
-    createFriend: CreateFriendRequest,
-    id: number
+      createFriend: CreateFriendRequest,
   ): Promise<Friend> {
-    const { friend_id, friend_name } = createFriend;
-    const friend: Friend = await this.friendRepository.findOne({
-      where: {
-        friend_id,
-        user: { id },
-      },
-    });
-    if (friend) {
-      friend.friend_name = friend_name;
-      return await this.friendRepository.save(friend);
-    } else {
-      throw new ForbiddenException({
-        statusCode: HttpStatus.FORBIDDEN,
-        message: [`해당하는 친구가 없습니다.`],
-        error: "Forbidden",
-      });
-    }
+    return await lastValueFrom(this.friendClient.send({cmd: UPDATE_FRIEND}, createFriend))
   }
 }

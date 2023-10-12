@@ -57,6 +57,10 @@ export class AuthenticationService {
     return await this.userService.saveUser(payload);
   }
 
+  async delete(payload: number): Promise<any> {
+    return await this.userService.remove(payload);
+  }
+
   async findAll(): Promise<User[]> {
     return await this.userService.findAll();
   }

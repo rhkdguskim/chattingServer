@@ -2,7 +2,6 @@ import { Logger, Module } from "@nestjs/common";
 import { AuthController } from "./auth.controller";
 import { PassportModule } from "@nestjs/passport";
 import { AuthService } from "./auth.service";
-import { UsersModule } from "../users/users.module";
 import { JwtModule } from "@nestjs/jwt";
 import * as config from "config";
 import { JwtStrategy } from "./guards/jwt.strategy";
@@ -21,7 +20,6 @@ const jwtConstants = config.get("jwt");
     AuthClientsModule,
     HttpModule,
     PassportModule,
-    UsersModule,
     JwtModule.register({
       global: true,
       secret: jwtConstants.secret,
@@ -31,14 +29,12 @@ const jwtConstants = config.get("jwt");
   controllers: [AuthController],
   providers: [
     AuthService,
-    JwtStrategy,
-    WsJwtGuard,
     JwtGuard,
     Logger,
     JwtGoogleStrategy,
     JwtKakaoStrategy,
     JwtNaverStrategy,
   ],
-  exports: [JwtStrategy, WsJwtGuard, JwtGuard],
+  exports: [JwtGuard],
 })
 export class AuthModule {}

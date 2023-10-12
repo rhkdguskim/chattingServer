@@ -1,6 +1,6 @@
 import {Controller} from "@nestjs/common";
 import { ChatService } from "./chat.service";
-import {ChattingResponse} from "@src/chatting/dto/chatting.dto";
+import {ChattingResponse} from "@app/common/dto/chatting.dto";
 import {MessagePattern} from "@nestjs/microservices";
 import {FIND_CHATTLING_ALL} from "@app/common/message/chat";
 import {ChattingListRequest} from "@app/common/dto/chat";

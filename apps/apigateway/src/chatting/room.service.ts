@@ -6,17 +6,15 @@ import {
   LoggerService,
   ForbiddenException,
 } from "@nestjs/common";
-import { Room } from "@src/entitys/room.entity";
-import { Participant } from "@src/entitys/participant.entity";
 import { EntityManager, Repository } from "typeorm";
 import { InjectRepository } from "@nestjs/typeorm";
-import { CreateRoomReqeust, CreateRoomResponse } from "./dto/room.dto";
-import { User } from "@src/entitys/users.entity";
-import { RoomType } from "./dto/room.dto";
-import { RoomListResponse, InviteRoomRequest } from "./dto/room.dto";
-import { UserResponse } from "@src/users/dto/users.dto";
+import { CreateRoomReqeust, CreateRoomResponse } from "@app/common/dto/room.dto";
+import { RoomType } from "@app/common/dto/room.dto";
+import { RoomListResponse, InviteRoomRequest } from "@app/common/dto/room.dto";
 import { ValidateCreateRoom } from "./deco/room.deco";
 import { create } from "domain";
+import {Participant, Room, User} from "@app/common/entity";
+import {UserResponse} from "@app/common/dto";
 
 @Injectable()
 export class RoomService {

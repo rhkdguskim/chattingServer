@@ -6,12 +6,7 @@ import {
   Logger,
   Inject,
 } from "@nestjs/common";
-import { UsersService } from "@src/users/users.service";
-import { JwtService } from "@nestjs/jwt";
-import { User } from "@src/entitys/users.entity";
-import { CreateUserRequest, LoginUserResponse } from "@src/users/dto/users.dto";
-import { LoginUserRequest } from "@src/users/dto/users.dto";
-import { OAuthRequest, NewTokenRequest } from "@app/common/dto";
+import {OAuthRequest, NewTokenRequest, LoginUserResponse, CreateUserRequest, LoginUserRequest} from "@app/common/dto";
 import {
   AUTHORIZATION_SERVICE,
   JWT_SIGN,
@@ -25,6 +20,7 @@ import {
 } from "@app/common/message/authentication";
 import { ClientProxy } from "@nestjs/microservices";
 import { lastValueFrom } from "rxjs";
+import {User} from "@app/common/entity";
 
 @Injectable()
 export class AuthService {

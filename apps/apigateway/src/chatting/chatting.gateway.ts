@@ -10,26 +10,23 @@ import {
 } from "@nestjs/websockets";
 import { Server } from "socket.io";
 import { ChattingService } from "./chatting.service";
-import { RequestMessage, ResponseMessage } from "./dto/chatting.dto";
+import { RequestMessage, ResponseMessage } from "@app/common/dto/chatting.dto";
 import {
   RequestMultiRead,
   RequestSingleMessage,
   ResponseMultiRead,
   ResponseSingleRead,
-} from "./dto/chatting.dto";
-
-import { User } from "@src/entitys/users.entity";
+} from "@app/common/dto/chatting.dto";
 import { RoomService } from "./room.service";
-import { Room } from "@src/entitys/room.entity";
-import { Chatting } from "../entitys/chatting.entity";
+
 import { WsJwtGuard } from "../auth/guards/auth.wsjwtguard";
 import { Socket } from "socket.io";
 import { Logger } from "@nestjs/common";
 import { GetWsUser } from "@src/auth/deco/auth.decorator";
-import { RoomType } from "./dto/room.dto";
+import { RoomType } from "@app/common/dto/room.dto";
 import { CacheAction } from "@src/common/decorator/cache-decorator";
-import { ReadBy } from "../entitys/readby.entity";
 import { SendMessageCacheInterceptor } from "./interceptors/chatting.sendmessage.cache.interceptor";
+import {Chatting, ReadBy, Room, User} from "@app/common/entity";
 
 @WebSocketGateway({ cors: true })
 @UseGuards(WsJwtGuard)

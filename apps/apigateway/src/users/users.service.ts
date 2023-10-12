@@ -1,56 +1,39 @@
 import { Inject, Injectable, Logger, LoggerService } from "@nestjs/common";
-import { InjectRepository } from "@nestjs/typeorm";
-import { User } from "../entitys/users.entity";
-import { CreateUserRequest } from "./dto/users.dto";
-import { UpdateUserRequest } from "./dto/users.dto";
-import { DeleteResult, Repository } from "typeorm";
-import { OAuthData } from "@src/auth/dto/oauth.dto";
+import { User} from "@app/common/entity";
+import { DeleteResult } from "typeorm";
+import {
+  AUTHENTICATION_SERVICE, DELETE_USER,
+  FIND_ALL_USER,
+  FIND_ONE_BY_ID_USER,
+  FIND_ONE_USER, UPDATE_USER
+} from "@app/common/message/authentication";
+import {ClientProxy} from "@nestjs/microservices";
+import {lastValueFrom} from "rxjs";
 
 @Injectable()
 export class UsersService {
   constructor(
-    @InjectRepository(User)
-    private userReposity: Repository<User>,
-    @Inject(Logger)
-    private readonly logger: LoggerService
+    @Inject(AUTHENTICATION_SERVICE)
+    private readonly userClient : ClientProxy,
   ) {}
 
   async findAll(): Promise<User[]> {
-    return await this.userReposity.find();
+    return await lastValueFrom(this.userClient.send({cmd:FIND_ALL_USER}, {}))
   }
 
-  findOne(id: number): Promise<User | null> {
-    return this.userReposity.findOneBy({ id });
+  async findOne(id: number): Promise<User | null> {
+    return await lastValueFrom(this.userClient.send({cmd:FIND_ONE_USER}, id))
   }
 
   async findbyUserId(user_id: string): Promise<User | null> {
-    const result = await this.userReposity.findOneBy({ user_id });
-    return result;
-  }
-
-  async saveUser(user: UpdateUserRequest): Promise<User> {
-    return await this.userReposity.save(user);
-  }
-
-  async createUser(userDto: CreateUserRequest): Promise<User> {
-    const newUser = await this.userReposity.create(userDto);
-    return await this.userReposity.save(newUser);
-  }
-
-  async createOAuthUser(data: OAuthData): Promise<User> {
-    const newUser = await this.userReposity.create({
-      ...data.user,
-      oauth_accessToken: data.access_token,
-      oauth_refreshToken: data.refresh_token,
-    });
-    return await this.userReposity.save(newUser);
+    return await lastValueFrom(this.userClient.send({cmd:FIND_ONE_BY_ID_USER}, user_id))
   }
 
   async remove(id: number): Promise<DeleteResult> {
-    return await this.userReposity.delete(id);
+    return await lastValueFrom(this.userClient.send({cmd:DELETE_USER}, id));
   }
 
-  async updateUser(id: number, updateData: Partial<User>) {
-    return await this.userReposity.update(id, updateData);
+  async updateUser(updateData: Partial<User>) {
+    return await lastValueFrom(this.userClient.send({cmd:UPDATE_USER}, updateData));
   }
 }

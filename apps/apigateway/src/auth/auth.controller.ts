@@ -7,24 +7,16 @@ import {
   UseGuards,
   UseInterceptors,
 } from "@nestjs/common";
-import { User } from "@src/entitys/users.entity";
 import { AuthService } from "@src/auth/auth.service";
-import {
-  LoginUserRequest,
-  LoginUserResponse,
-  UserResponse,
-  refreshtokenRequest,
-} from "@src/users/dto/users.dto";
-import { CreateUserRequest } from "@src/users/dto/users.dto";
 import { ApiTags, ApiOperation, ApiCreatedResponse } from "@nestjs/swagger";
 import { GetOAuthData, GetUser } from "@src/auth/deco/auth.decorator";
-import { Request, Response } from "express";
 import { HttpCacheInterceptor } from "@src/common/interceptors/httpcache.interceptor";
 import { CacheEvict } from "@src/common/decorator/cache-decorator";
 import { AuthGuard } from "@nestjs/passport";
-import { OAuthData } from "@src/auth/dto/oauth.dto";
-
+import { OAuthData } from "@app/common/dto/oauth.dto";
 import * as config from "config";
+import {User} from "@app/common/entity";
+import {CreateUserRequest, LoginUserRequest, LoginUserResponse, UserResponse} from "@app/common/dto";
 const cors = config.get("cors");
 const FRONT_END_HOST = cors.frontendHost;
 
@@ -74,7 +66,7 @@ export class AuthController {
     type: LoginUserResponse,
   })
   async getNewToken(
-    @Body() refreshtokenRequest: refreshtokenRequest
+    @Body() refreshtokenRequest: any
   ): Promise<LoginUserResponse> {
     return await this.authService.getNewAccessToken({
       refresh_token: refreshtokenRequest.refresh_token,

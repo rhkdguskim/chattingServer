@@ -10,7 +10,7 @@ import { User} from "@app/common/entity";
 
 import { Equal, Repository } from "typeorm";
 import { InjectRepository } from "@nestjs/typeorm";
-import { RequestMessage} from "@src/chatting/dto/chatting.dto";
+import { RequestMessage} from "@app/common/dto/chatting.dto";
 import {ChattingListRequest} from "@app/common/dto/chat";
 
 

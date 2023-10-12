@@ -12,7 +12,7 @@ import { Server } from "socket.io";
 import { RequestMessage, ResponseMessage, RequestMultiRead, RequestSingleMessage,
   ResponseMultiRead,
   ResponseSingleRead, } from "@app/common/dto/chat";
-import { RoomType } from "@src/chatting/dto/room.dto";
+import { RoomType } from "@app/common/dto/room.dto";
 import { User} from "@app/common/entity";
 import { Room} from "@app/common/entity";
 import {Chatting, Participant} from "@app/common/entity";

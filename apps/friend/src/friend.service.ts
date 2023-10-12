@@ -11,7 +11,7 @@ import {
   CreateFriendRequest,
   CreateFriendResponse,
   DelteFriendRequest,
-} from "@src/friend/dto/friend.createfriend.dto";
+} from "@app/common/dto/friend.createfriend.dto";
 
 @Injectable()
 export class FriendService {

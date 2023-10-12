@@ -1,11 +1,10 @@
 import { Controller, Get, Param, Query, UseInterceptors } from "@nestjs/common";
 import { UseGuards } from "@nestjs/common";
 import { ApiOperation, ApiCreatedResponse, ApiTags } from "@nestjs/swagger";
-import { Chatting } from "../entitys/chatting.entity";
 import { ChattingService } from "./chatting.service";
 import { AuthGuard } from "@nestjs/passport";
 import { ReadChatCacheInterceptor } from "./interceptors/chatting.readchat.cache.interceptor";
-import { ChattingResponse } from "./dto/chatting.dto";
+import { ChattingResponse } from "@app/common/dto/chatting.dto";
 
 @Controller("chatting")
 @UseGuards(AuthGuard("jwt"))

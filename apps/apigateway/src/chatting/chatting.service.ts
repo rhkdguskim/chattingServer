@@ -6,13 +6,10 @@ import {
   Logger,
   LoggerService,
 } from "@nestjs/common";
-import { Chatting } from "../entitys/chatting.entity";
-import { Room } from "@src/entitys/room.entity";
-import { Participant } from "@src/entitys/participant.entity";
 import { Equal, Repository } from "typeorm";
 import { InjectRepository } from "@nestjs/typeorm";
-import { RequestMessage } from "./dto/chatting.dto";
-import { User } from "@src/entitys/users.entity";
+import { RequestMessage } from "@app/common/dto/chatting.dto";
+import {Chatting, Participant, Room, User} from "@app/common/entity";
 
 @Injectable()
 export class ChattingService {

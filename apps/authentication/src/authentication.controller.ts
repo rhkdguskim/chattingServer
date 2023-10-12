@@ -14,7 +14,7 @@ import {
   UPDATE_USER,
   FIND_ONE_USER,
   FIND_ONE_BY_ID_USER,
-  FIND_ALL_USER,
+  FIND_ALL_USER, DELETE_USER,
 } from "@app/common/message/authentication";
 
 import { User } from "@app/common/entity";
@@ -35,6 +35,11 @@ export class AuthenticationController {
   @MessagePattern({ cmd: UPDATE_USER }) // Update
   async update(payload: UpdateUserRequest): Promise<User> {
     return await this.authenticationService.update(payload);
+  }
+
+  @MessagePattern({ cmd: DELETE_USER }) // Update
+  async delete(payload: number): Promise<User> {
+    return await this.authenticationService.delete(payload);
   }
 
   @MessagePattern({ cmd: FIND_ONE_USER }) // Find

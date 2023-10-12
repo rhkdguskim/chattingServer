@@ -10,7 +10,7 @@ import {
 import { Observable, tap, of } from "rxjs";
 import { CACHE_MANAGER } from "@nestjs/cache-manager";
 import { Cluster } from "ioredis";
-import { ResponseMessage } from "@src/chatting/dto/chatting.dto";
+import { ResponseMessage } from "@app/common/dto/chatting.dto";
 import { Reflector } from "@nestjs/core";
 
 @Injectable()

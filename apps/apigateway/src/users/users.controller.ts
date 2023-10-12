@@ -7,10 +7,8 @@ import {
   UseInterceptors,
 } from "@nestjs/common";
 import { UsersService } from "./users.service";
-import { User } from "@src/entitys/users.entity";
 import { UseGuards } from "@nestjs/common";
 
-import { UpdateUserRequest, UserResponse } from "@src/users/dto/users.dto";
 import {
   ApiTags,
   ApiOperation,
@@ -21,9 +19,10 @@ import {
 } from "@nestjs/swagger";
 import { HttpCacheInterceptor } from "@src/common/interceptors/httpcache.interceptor";
 import { AuthGuard } from "@nestjs/passport";
+import {JwtGuard} from "@src/auth/guards/auth.jwt.guard";
+import {UpdateUserRequest, UserResponse} from "@app/common/dto";
 
-@UseGuards(AuthGuard("jwt"))
-@UseInterceptors(HttpCacheInterceptor)
+@UseGuards(JwtGuard)
 @Controller("users")
 @ApiTags("유저")
 export class UsersController {
@@ -50,16 +49,7 @@ export class UsersController {
   })
   @ApiCreatedResponse({ description: "사용자 정보를 업데이트 합니다." })
   async updateUser(@Body() user: UpdateUserRequest): Promise<UserResponse> {
-    const userResult: User = await this.usersService.saveUser(user);
-    const response: UserResponse = {
-      id: userResult.id,
-      user_id: userResult.user_id,
-      name: userResult.name,
-      status_msg: userResult.status_msg,
-      profile_img_url: userResult.profile_img_url,
-      background_img_url: userResult.background_img_url,
-    };
-    return response;
+    return await this.usersService.updateUser(user);
   }
 
   @Get(":id")

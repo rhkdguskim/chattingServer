@@ -6,17 +6,19 @@ import {
   AUTHORIZAION_HOST,
   AUTHORIZAION_PORT,
 } from "@app/common/config";
+import {AUTHENTICATION_SERVICE} from "@app/common/message/authentication";
+import {AUTHORIZATION_SERVICE} from "@app/common/message/authorization";
 
 @Module({
   imports: [
     ClientsModule.register([
       {
-        name: "AUTHENTICATION_SERVICE",
+        name: AUTHENTICATION_SERVICE,
         transport: Transport.TCP,
         options: { host: AUTHENTICATION_HOST, port: AUTHENTICATION_PORT },
       },
       {
-        name: "AUTHORIZATION_SERVICE",
+        name: AUTHORIZATION_SERVICE,
         transport: Transport.TCP,
         options: { host: AUTHORIZAION_HOST, port: AUTHORIZAION_PORT },
       },

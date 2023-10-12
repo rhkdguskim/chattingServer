@@ -10,7 +10,7 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 import { ReadBy } from "../../entitys/readby.entity";
 import { RoomController } from "../room.controller";
 import { RoomService } from "../room.service";
-import { CreateRoomReqeust } from "../dto/room.dto";
+import { CreateRoomReqeust } from "@app/common/dto/room.dto";
 import { User } from "@src/entitys/users.entity";
 import { JwtStrategy } from "@src/auth/guards/jwt.strategy";
 import { AuthModule } from "@src/auth/auth.module";

@@ -7,8 +7,6 @@ import { FileModule } from "@src/file/file.module";
 import { ServeStaticModule } from "@nestjs/serve-static";
 import * as path from "path";
 
-import { OpenaiModule } from "@src/openai/openai.module";
-
 import { DatabaseModule } from "@src/util/database.module";
 import { CacheRedisModule } from "@src/util/cacheRedis.module";
 
@@ -24,7 +22,6 @@ import { CacheRedisModule } from "@src/util/cacheRedis.module";
     FriendModule,
     ChattingModule,
     FileModule,
-    OpenaiModule,
   ],
   controllers: [],
   providers: [],
