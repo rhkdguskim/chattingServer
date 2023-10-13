@@ -9,7 +9,7 @@ import {
 } from "@nestjs/common";
 import { AuthService } from "@src/auth/auth.service";
 import { ApiTags, ApiOperation, ApiCreatedResponse } from "@nestjs/swagger";
-import { GetOAuthData, GetUser } from "@src/auth/deco/auth.decorator";
+import { GetOAuthData, GetUser } from "@app/common/decoration/auth.decorator";
 import { HttpCacheInterceptor } from "@src/common/interceptors/httpcache.interceptor";
 import { CacheEvict } from "@src/common/decorator/cache-decorator";
 import { AuthGuard } from "@nestjs/passport";

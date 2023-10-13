@@ -12,11 +12,11 @@ import {
 import { CreateRoomReqeust, CreateRoomResponse } from "@app/common/dto/room.dto";
 import { RoomListResponse } from "@app/common/dto/room.dto";
 import { InviteRoomRequest } from "@app/common/dto/room.dto";
-import { JwtStrategy } from "@src/auth/guards/jwt.strategy";
 import {Participant} from "@app/common/entity";
+import {JwtGuard} from "@src/auth/guards/auth.jwt.guard";
 
 @Controller("room")
-@UseGuards(JwtStrategy)
+@UseGuards(JwtGuard)
 @ApiTags("채팅방")
 export class RoomController {
   constructor(private roomService: RoomService) {}
@@ -48,10 +48,9 @@ export class RoomController {
     type: CreateRoomReqeust,
   })
   async CreateRoom(
-    @Body() createRoom: CreateRoomReqeust,
-    @Param("id") user_id: number
+    @Body() createRoom: CreateRoomReqeust
   ): Promise<CreateRoomResponse> {
-    return this.roomService.createRoom(createRoom, user_id);
+    return this.roomService.createRoom(createRoom);
   }
 
   @Post("invite")

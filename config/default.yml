@@ -9,6 +9,8 @@ server:
   chatport : 3004
   roomhost: "127.0.0.1"
   roomport : 3005
+  filehost: "127.0.0.1"
+  fileport: 3006
   host : "127.0.0.1"
   port: 3000
 

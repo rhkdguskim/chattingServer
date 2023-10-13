@@ -8,9 +8,10 @@ import { SwaggerModule, DocumentBuilder } from "@nestjs/swagger";
  */
 export function setupSwagger(app: INestApplication): void {
   const options = new DocumentBuilder()
-    .setTitle("KwangsTalk API Docs")
-    .setDescription("KwangsTalk API description")
+    .setTitle("Kwangs Chatting API Docs")
+    .setDescription("Kwangs Chatting API description")
     .setVersion("1.0.0")
+      .addApiKey({ type: 'apiKey', name: 'authentication', in: 'header' }, 'Authentication')
     .addOAuth2()
     .build();
 

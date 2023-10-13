@@ -12,9 +12,6 @@ import { CacheRedisModule } from "@src/util/cacheRedis.module";
 
 @Module({
   imports: [
-    ServeStaticModule.forRoot({
-      rootPath: path.join(process.cwd(), "uploads"),
-    }),
     DatabaseModule,
     CacheRedisModule,
     AuthModule,

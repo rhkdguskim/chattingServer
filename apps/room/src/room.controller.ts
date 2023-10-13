@@ -9,11 +9,9 @@ import {
   CreateRoomResponse,
   RoomListResponse,
   InviteRoomRequest,
-  RoomListRequest, RoomRequest
 } from "@app/common/dto/room.dto";
-import { Room } from "@src/entitys/room.entity";
-import { Participant } from "@src/entitys/participant.entity";
-import { JwtStrategy } from "@src/auth/guards/jwt.strategy";
+import { Room} from "@app/common/entity";
+import { Participant} from "@app/common/entity";
 import {MessagePattern} from "@nestjs/microservices";
 import {
   CREATE_ROOM,
@@ -31,13 +29,13 @@ export class RoomController {
   constructor(private roomService: RoomService) {}
 
   @MessagePattern({cmd:FIND_ALL_ROOM})
-  async GetRoomList(payload : RoomListRequest): Promise<Array<RoomListResponse>> {
-    return await this.roomService.GetUserRooms(payload.id);
+  async GetRoomList(payload : number): Promise<Array<RoomListResponse>> {
+    return await this.roomService.GetUserRooms(payload);
   }
 
   @MessagePattern({cmd:FIND_ROOM})
-  async findRoom(payload : RoomRequest): Promise<Room> {
-    return await this.roomService.getRoombyID(payload.id);
+  async findRoom(payload : number): Promise<Room> {
+    return await this.roomService.getRoombyID(payload);
   }
 
   @MessagePattern({cmd:UPDATE_ROOM})

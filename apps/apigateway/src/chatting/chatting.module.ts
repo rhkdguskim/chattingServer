@@ -1,21 +1,17 @@
 import { Logger, Module } from "@nestjs/common";
 import { ChattingController } from "./chatting.controller";
-import { RoomService } from "./room.service";
-import { TypeOrmModule } from "@nestjs/typeorm";
-import { ChattingGateway } from "./chatting.gateway";
-import { ChattingService } from "./chatting.service";
-import { UsersModule } from "@src/users/users.module";
 import { RoomController } from "./room.controller";
 import {ClientsModule, Transport} from "@nestjs/microservices";
 import {CHAT_HOST, CHAT_PORT, FRIEND_HOST, FRIEND_PORT, ROOM_HOST, ROOM_PORT} from "@app/common/config";
 import {ROOM_SERVICE} from "@app/common/message/room";
 import {CHAT_SERVICE} from "@app/common/message/chat";
-import {Chatting, Participant, ReadBy, Room} from "@app/common/entity";
+import {AuthClientsModule} from "@app/common/module/authclients.module";
+import {ChattingService} from "@src/chatting/chatting.service";
+import {RoomService} from "@src/chatting/room.service";
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([Chatting, Room, Participant, ReadBy]),
-    UsersModule,
+      AuthClientsModule,
     ClientsModule.register([
       {
         name: ROOM_SERVICE,
@@ -30,6 +26,6 @@ import {Chatting, Participant, ReadBy, Room} from "@app/common/entity";
     ]),
   ],
   controllers: [ChattingController, RoomController],
-  providers: [RoomService, ChattingService, ChattingGateway, Logger],
+  providers: [Logger, ChattingService, RoomService],
 })
 export class ChattingModule {}

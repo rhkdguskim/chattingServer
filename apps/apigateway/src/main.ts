@@ -24,6 +24,7 @@ async function bootstrap() {
   });
 
   const cors = config.get("cors");
+  app.setGlobalPrefix('api');
   app.use(cookieParser());
   app.enableCors({
     origin: [

@@ -18,13 +18,12 @@ import { Room} from "@app/common/entity";
 import {Chatting, Participant} from "@app/common/entity";
 
 import { Socket } from "socket.io";
-import { GetWsUser } from "@src/auth/deco/auth.decorator";
+import { GetWsUser } from "@app/common/decoration/auth.decorator";
 import { ReadBy} from "@app/common/entity";
-import {FIND_ALL_PARTICIPANT, ROOM_SERVICE, UPDATE_ROOM} from "@app/common/message/room";
+import {FIND_ALL_PARTICIPANT, FIND_ROOM, ROOM_SERVICE, UPDATE_ROOM} from "@app/common/message/room";
 import {ClientProxy} from "@nestjs/microservices";
 import {ChatService} from "./chat.service";
 import {lastValueFrom} from "rxjs";
-import {RoomRequest} from "@app/common/dto/room.dto";
 
 @WebSocketGateway({ cors: true })
 //@UseGuards(WsJwtGuard)
@@ -75,7 +74,7 @@ export class ChatGateway
     @MessageBody() message: RequestMessage
   ): Promise<ResponseMessage> {
     // 여기에도 캐싱전략이 들어갔으면 좋겠음. (방 정보를 바로바로 최신화 )
-    const room: Room = await lastValueFrom(this.roomService.send({cmd:RoomRequest},{id : message.room_id}));
+    const room: Room = await lastValueFrom(this.roomService.send({cmd:FIND_ROOM},{id : message.room_id}));
     room.last_chat = message.message;
     await lastValueFrom(this.roomService.send({cmd:UPDATE_ROOM},room));
 

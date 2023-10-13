@@ -4,6 +4,9 @@ const server = config.get("server");
 export const MAIN_HOST = server.host;
 export const MAIN_PORT = server.port;
 
+export const FILE_HOST = server.filehost;
+export const FILE_PORT = server.fileport;
+
 export const AUTHENTICATION_HOST = server.authenticationhost;
 export const AUTHENTICATION_PORT = server.authenticationport;
 

@@ -20,11 +20,6 @@ const jwtConstants = config.get("jwt");
     AuthClientsModule,
     HttpModule,
     PassportModule,
-    JwtModule.register({
-      global: true,
-      secret: jwtConstants.secret,
-      signOptions: { expiresIn: jwtConstants.expiresIn },
-    }),
   ],
   controllers: [AuthController],
   providers: [

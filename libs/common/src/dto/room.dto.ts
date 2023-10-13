@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { ArrayMinSize, IsString } from "class-validator";
+import {ArrayMinSize, IsNumber, IsString} from "class-validator";
 import {Room, User} from "@app/common/entity";
 import {UserResponse} from "@app/common/dto/index";
 
@@ -39,6 +39,9 @@ export class RoomListResponse {
 }
 
 export class CreateRoomReqeust {
+  @IsNumber()
+  id : number;
+
   @ApiProperty({ description: "방 이름" })
   @IsString()
   room_name!: string;
