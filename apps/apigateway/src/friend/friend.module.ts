@@ -4,7 +4,7 @@ import { FriendController } from "@src/friend/friend.controller";
 import { AuthClientsModule } from "@app/common/module/authclients.module";
 import { ClientsModule, Transport } from "@nestjs/microservices";
 import { FRIEND_HOST, FRIEND_PORT } from "@app/common/config";
-import {FRIEND_SERVICE} from "@app/common/message/friend";
+import { FRIEND_SERVICE } from "@app/common/message/friend";
 
 @Module({
   imports: [

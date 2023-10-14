@@ -6,14 +6,20 @@ import {
   LoggerService,
   ForbiddenException,
 } from "@nestjs/common";
-import { Room} from "@app/common/entity";
-import { Participant} from "@app/common/entity";
+import { Room } from "@app/common/entity";
+import { Participant } from "@app/common/entity";
 import { EntityManager, Repository } from "typeorm";
 import { InjectRepository } from "@nestjs/typeorm";
-import { CreateRoomReqeust, CreateRoomResponse, RoomType, RoomListResponse, InviteRoomRequest} from "@app/common/dto/room.dto";
-import { User} from "@app/common/entity";
-import { UserResponse} from "@app/common/dto";
-import { ValidateCreateRoom} from "@app/common/decoration/room.deco";
+import {
+  CreateRoomReqeust,
+  CreateRoomResponse,
+  RoomType,
+  RoomListResponse,
+  InviteRoomRequest,
+} from "@app/common/dto/room.dto";
+import { User } from "@app/common/entity";
+import { UserResponse } from "@app/common/dto";
+import { ValidateCreateRoom } from "@app/common/decoration/room.deco";
 
 @Injectable()
 export class RoomService {
@@ -31,7 +37,7 @@ export class RoomService {
 
   @ValidateCreateRoom()
   async createRoom(
-    createRoomDto: CreateRoomReqeust,
+    createRoomDto: CreateRoomReqeust
   ): Promise<CreateRoomResponse> {
     const participantCount = createRoomDto.participant.length;
     let determinedType: RoomType;

@@ -6,7 +6,13 @@ import {
   Logger,
   Inject,
 } from "@nestjs/common";
-import {OAuthRequest, NewTokenRequest, LoginUserResponse, CreateUserRequest, LoginUserRequest} from "@app/common/dto";
+import {
+  OAuthRequest,
+  NewTokenRequest,
+  LoginUserResponse,
+  CreateUserRequest,
+  LoginUserRequest,
+} from "@app/common/dto";
 import {
   AUTHORIZATION_SERVICE,
   JWT_SIGN,
@@ -20,7 +26,7 @@ import {
 } from "@app/common/message/authentication";
 import { ClientProxy } from "@nestjs/microservices";
 import { lastValueFrom } from "rxjs";
-import {User} from "@app/common/entity";
+import { User } from "@app/common/entity";
 
 @Injectable()
 export class AuthService {

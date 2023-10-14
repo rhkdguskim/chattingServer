@@ -3,7 +3,7 @@ import { MulterModule } from "@nestjs/platform-express";
 import { FileService } from "./file.service";
 import { multerOptionsFactory } from "@src/util/multer.options.factory";
 import { FileController } from "./file.controller";
-import {ServeStaticModule} from "@nestjs/serve-static";
+import { ServeStaticModule } from "@nestjs/serve-static";
 import * as path from "path";
 
 @Module({

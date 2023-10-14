@@ -16,11 +16,7 @@ import { AuthClientsModule } from "@app/common/module/authclients.module";
 const jwtConstants = config.get("jwt");
 
 @Module({
-  imports: [
-    AuthClientsModule,
-    HttpModule,
-    PassportModule,
-  ],
+  imports: [AuthClientsModule, HttpModule, PassportModule],
   controllers: [AuthController],
   providers: [
     AuthService,

@@ -6,8 +6,8 @@ import {
   AUTHORIZAION_HOST,
   AUTHORIZAION_PORT,
 } from "@app/common/config";
-import {AUTHENTICATION_SERVICE} from "@app/common/message/authentication";
-import {AUTHORIZATION_SERVICE} from "@app/common/message/authorization";
+import { AUTHENTICATION_SERVICE } from "@app/common/message/authentication";
+import { AUTHORIZATION_SERVICE } from "@app/common/message/authorization";
 
 @Module({
   imports: [

@@ -14,7 +14,8 @@ import {
   UPDATE_USER,
   FIND_ONE_USER,
   FIND_ONE_BY_ID_USER,
-  FIND_ALL_USER, DELETE_USER,
+  FIND_ALL_USER,
+  DELETE_USER,
 } from "@app/common/message/authentication";
 
 import { User } from "@app/common/entity";

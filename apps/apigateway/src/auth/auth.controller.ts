@@ -15,8 +15,13 @@ import { CacheEvict } from "@src/common/decorator/cache-decorator";
 import { AuthGuard } from "@nestjs/passport";
 import { OAuthData } from "@app/common/dto/oauth.dto";
 import * as config from "config";
-import {User} from "@app/common/entity";
-import {CreateUserRequest, LoginUserRequest, LoginUserResponse, UserResponse} from "@app/common/dto";
+import { User } from "@app/common/entity";
+import {
+  CreateUserRequest,
+  LoginUserRequest,
+  LoginUserResponse,
+  UserResponse,
+} from "@app/common/dto";
 const cors = config.get("cors");
 const FRONT_END_HOST = cors.frontendHost;
 

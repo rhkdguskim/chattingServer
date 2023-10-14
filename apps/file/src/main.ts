@@ -1,6 +1,6 @@
-import { NestFactory } from '@nestjs/core';
-import { FileModule } from './file.module';
-import {FILE_PORT} from "@app/common/config";
+import { NestFactory } from "@nestjs/core";
+import { FileModule } from "./file.module";
+import { FILE_PORT } from "@app/common/config";
 
 async function bootstrap() {
   const app = await NestFactory.create(FileModule);

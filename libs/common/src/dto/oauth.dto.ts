@@ -1,4 +1,4 @@
-import {CreateUserRequest} from "@app/common/dto/index";
+import { CreateUserRequest } from "@app/common/dto/index";
 
 export interface OAuthData {
   access_token: string;

@@ -9,11 +9,14 @@ import {
   ApiProperty,
   ApiParam,
 } from "@nestjs/swagger";
-import { CreateRoomReqeust, CreateRoomResponse } from "@app/common/dto/room.dto";
+import {
+  CreateRoomReqeust,
+  CreateRoomResponse,
+} from "@app/common/dto/room.dto";
 import { RoomListResponse } from "@app/common/dto/room.dto";
 import { InviteRoomRequest } from "@app/common/dto/room.dto";
-import {Participant} from "@app/common/entity";
-import {JwtGuard} from "@src/auth/guards/auth.jwt.guard";
+import { Participant } from "@app/common/entity";
+import { JwtGuard } from "@src/auth/guards/auth.jwt.guard";
 
 @Controller("room")
 @UseGuards(JwtGuard)

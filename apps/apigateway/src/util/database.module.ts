@@ -1,6 +1,6 @@
 import { Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { User} from "@app/common/entity";
+import { User } from "@app/common/entity";
 import { Friend } from "@app/common/entity";
 import { Chatting } from "@app/common/entity";
 import { Room } from "@app/common/entity";

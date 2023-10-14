@@ -5,7 +5,7 @@ import { ChattingService } from "./chatting.service";
 import { AuthGuard } from "@nestjs/passport";
 import { ReadChatCacheInterceptor } from "../../../chat/src/interceptors/chatting.readchat.cache.interceptor";
 import { ChattingResponse } from "@app/common/dto/chatting.dto";
-import {JwtGuard} from "@src/auth/guards/auth.jwt.guard";
+import { JwtGuard } from "@src/auth/guards/auth.jwt.guard";
 
 @Controller("chatting")
 @UseGuards(JwtGuard)

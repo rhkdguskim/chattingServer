@@ -5,7 +5,7 @@ import {
   UpdateUserRequest,
 } from "@app/common/dto";
 import * as bcrypt from "bcrypt";
-import { CreateUserRequest} from "@app/common/dto";
+import { CreateUserRequest } from "@app/common/dto";
 import { User } from "@app/common/entity";
 import { UsersService } from "./users.service";
 import { RpcException } from "@nestjs/microservices";

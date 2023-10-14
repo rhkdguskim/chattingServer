@@ -1,4 +1,4 @@
-import {Inject, UseGuards, UseInterceptors} from "@nestjs/common";
+import { Inject, UseGuards, UseInterceptors } from "@nestjs/common";
 import {
   SubscribeMessage,
   WebSocketGateway,
@@ -9,27 +9,35 @@ import {
   OnGatewayDisconnect,
 } from "@nestjs/websockets";
 import { Server } from "socket.io";
-import { RequestMessage, ResponseMessage, RequestMultiRead, RequestSingleMessage,
+import {
+  RequestMessage,
+  ResponseMessage,
+  RequestMultiRead,
+  RequestSingleMessage,
   ResponseMultiRead,
-  ResponseSingleRead, } from "@app/common/dto/chat";
+  ResponseSingleRead,
+} from "@app/common/dto/chat";
 import { RoomType } from "@app/common/dto/room.dto";
-import { User} from "@app/common/entity";
-import { Room} from "@app/common/entity";
-import {Chatting, Participant} from "@app/common/entity";
+import { User } from "@app/common/entity";
+import { Room } from "@app/common/entity";
+import { Chatting, Participant } from "@app/common/entity";
 
 import { Socket } from "socket.io";
 import { GetWsUser } from "@app/common/decoration/auth.decorator";
-import { ReadBy} from "@app/common/entity";
-import {FIND_ALL_PARTICIPANT, FIND_ROOM, ROOM_SERVICE, UPDATE_ROOM} from "@app/common/message/room";
-import {ClientProxy} from "@nestjs/microservices";
-import {ChatService} from "./chat.service";
-import {lastValueFrom} from "rxjs";
+import { ReadBy } from "@app/common/entity";
+import {
+  FIND_ALL_PARTICIPANT,
+  FIND_ROOM,
+  ROOM_SERVICE,
+  UPDATE_ROOM,
+} from "@app/common/message/room";
+import { ClientProxy } from "@nestjs/microservices";
+import { ChatService } from "./chat.service";
+import { lastValueFrom } from "rxjs";
 
 @WebSocketGateway({ cors: true })
 //@UseGuards(WsJwtGuard)
-export class ChatGateway
-  implements OnGatewayConnection, OnGatewayDisconnect
-{
+export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
   constructor(
     private readonly chattingService: ChatService,
     @Inject(ROOM_SERVICE)
@@ -56,7 +64,9 @@ export class ChatGateway
     @ConnectedSocket() client: Socket,
     @GetWsUser() user: User
   ): Promise<void> {
-    const participants : Participant[] = await lastValueFrom(this.roomService.send({cmd:FIND_ALL_PARTICIPANT},user))
+    const participants: Participant[] = await lastValueFrom(
+      this.roomService.send({ cmd: FIND_ALL_PARTICIPANT }, user)
+    );
     participants.forEach((participant) => {
       client.join(String(participant.room.id));
     });
@@ -74,9 +84,11 @@ export class ChatGateway
     @MessageBody() message: RequestMessage
   ): Promise<ResponseMessage> {
     // 여기에도 캐싱전략이 들어갔으면 좋겠음. (방 정보를 바로바로 최신화 )
-    const room: Room = await lastValueFrom(this.roomService.send({cmd:FIND_ROOM},{id : message.room_id}));
+    const room: Room = await lastValueFrom(
+      this.roomService.send({ cmd: FIND_ROOM }, { id: message.room_id })
+    );
     room.last_chat = message.message;
-    await lastValueFrom(this.roomService.send({cmd:UPDATE_ROOM},room));
+    await lastValueFrom(this.roomService.send({ cmd: UPDATE_ROOM }, room));
 
     const not_read_chat: number =
       room.type !== RoomType.Individual ? room.participant.length : 0;
@@ -156,7 +168,7 @@ export class ChatGateway
     );
     const readChattingIds: number[] = [];
 
-    for (let chattingMessage of chattings) {
+    for (const chattingMessage of chattings) {
       // 사용자가 이미 이 메시지를 읽었는지 확인합니다.
       const alreadyRead = chattingMessage.readBys.some(
         (readBy) => readBy.user.id === user.id

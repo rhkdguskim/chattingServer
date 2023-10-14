@@ -1,18 +1,12 @@
-import {
-  Injectable,
-  Inject,
-  Logger,
-  LoggerService,
-} from "@nestjs/common";
-import {Chatting, Room} from "@app/common/entity";
-import { Participant} from "@app/common/entity";
-import { User} from "@app/common/entity";
+import { Injectable, Inject, Logger, LoggerService } from "@nestjs/common";
+import { Chatting, Room } from "@app/common/entity";
+import { Participant } from "@app/common/entity";
+import { User } from "@app/common/entity";
 
 import { Equal, Repository } from "typeorm";
 import { InjectRepository } from "@nestjs/typeorm";
-import { RequestMessage} from "@app/common/dto/chatting.dto";
-import {ChattingListRequest} from "@app/common/dto/chat";
-
+import { RequestMessage } from "@app/common/dto/chatting.dto";
+import { ChattingListRequest } from "@app/common/dto/chat";
 
 @Injectable()
 export class ChatService {
@@ -72,7 +66,7 @@ export class ChatService {
     });
   }
 
-  async getChattingList(payload : ChattingListRequest): Promise<any[]> {
+  async getChattingList(payload: ChattingListRequest): Promise<any[]> {
     if ((payload.cursor as any) == "null") {
       payload.cursor = 9999999999;
     }

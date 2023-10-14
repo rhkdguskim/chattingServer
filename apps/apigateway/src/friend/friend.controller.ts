@@ -10,7 +10,7 @@ import {
   Param,
 } from "@nestjs/common";
 import { FriendService } from "./friend.service";
-import { Friend} from "@app/common/entity";
+import { Friend } from "@app/common/entity";
 import { ApiTags, ApiOperation, ApiCreatedResponse } from "@nestjs/swagger";
 import {
   CreateFriendRequest,
@@ -18,7 +18,7 @@ import {
   DelteFriendRequest,
 } from "@app/common/dto/friend.createfriend.dto";
 import { JwtGuard } from "@src/auth/guards/auth.jwt.guard";
-import {UserResponse} from "@app/common/dto";
+import { UserResponse } from "@app/common/dto";
 
 @Controller("friend")
 @UseGuards(JwtGuard)
@@ -49,7 +49,7 @@ export class FriendController {
   })
   @ApiCreatedResponse({ description: "새로운 친구를 추가합니다." })
   async AddFriend(
-    @Body() createFriend: CreateFriendRequest,
+    @Body() createFriend: CreateFriendRequest
   ): Promise<CreateFriendResponse> {
     return this.friendService.addFriend(createFriend);
   }
@@ -64,9 +64,7 @@ export class FriendController {
     type: CreateFriendResponse,
   })
   @ApiCreatedResponse({ description: "등록된 친구중 친구정보를 변경합니다." })
-  async ModFriend(
-    @Body() createFriend: CreateFriendRequest
-  ): Promise<Friend> {
+  async ModFriend(@Body() createFriend: CreateFriendRequest): Promise<Friend> {
     return this.friendService.changeFriendName(createFriend);
   }
 
@@ -76,9 +74,7 @@ export class FriendController {
     description: "등록된 친구중 친구를 삭제합니다.",
   })
   @ApiCreatedResponse({ description: "등록된 친구중 친구를 삭제합니다." })
-  async DelFriend(
-    @Body() delFriend: DelteFriendRequest
-  ): Promise<any> {
+  async DelFriend(@Body() delFriend: DelteFriendRequest): Promise<any> {
     return this.friendService.delFriend(delFriend);
   }
 }

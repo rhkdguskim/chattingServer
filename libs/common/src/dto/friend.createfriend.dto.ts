@@ -3,12 +3,12 @@ import { ApiProperty } from "@nestjs/swagger";
 
 export class FindFriendAllRequest {
   @IsNumber()
-  id : number;
+  id: number;
 }
 
 export class CreateFriendRequest {
   @IsNumber()
-  id : number;
+  id: number;
 
   @IsNumber()
   @ApiProperty({ description: "친구 아이디" })
@@ -31,7 +31,7 @@ export class CreateFriendResponse {
 
 export class DelteFriendRequest {
   @IsNumber()
-  id : number;
+  id: number;
 
   @IsNumber()
   @ApiProperty({ description: "친구 아이디" })
