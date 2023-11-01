@@ -27,21 +27,20 @@ import {
 import { ClientProxy } from "@nestjs/microservices";
 import { lastValueFrom } from "rxjs";
 import { User } from "@app/common/entity";
+import { AuthenticationTCPClient } from "apps/authentication/src/authentication.tcp.client";
 
 @Injectable()
 export class AuthService {
   constructor(
     @Inject(Logger) private logger: Logger,
-    @Inject(AUTHENTICATION_SERVICE) private authenticationClient: ClientProxy,
+    @Inject(AUTHENTICATION_SERVICE) private authenticationClient: AuthenticationTCPClient,
     @Inject(AUTHORIZATION_SERVICE) private authorizationClient: ClientProxy
   ) {}
 
   async signIn(loginUser: LoginUserRequest): Promise<LoginUserResponse> {
     try {
       // 1. 유저 아이디와 패스워드로 인증을 요청한다.
-      const user: User = await lastValueFrom(
-        this.authenticationClient.send<User>({ cmd: SIGN_IN }, loginUser)
-      );
+      const user: User = await this.authenticationClient.SignIn(loginUser);
       // 2. JWT Payload의 범위를 지정한다.
       const { id, user_id } = user;
 
@@ -61,9 +60,7 @@ export class AuthService {
   async create(createUserDto: CreateUserRequest): Promise<User> {
     try {
       // 1. 인증 서버에 회원가입을 요청한다.
-      return await lastValueFrom(
-        this.authenticationClient.send<User>({ cmd: SIGN_UP }, createUserDto)
-      );
+      return await this.authenticationClient.SignUp(createUserDto);
     } catch (e) {
       this.logger.error(e);
       throw new UnauthorizedException(e.message);

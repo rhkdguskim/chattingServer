@@ -2,7 +2,7 @@
   "name": "apigateway",
   "version": "0.0.1",
   "description": "",
-  "author": "",
+  "author": "rhkdguskim <rhkdguskim@naver.com>",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
@@ -122,6 +122,12 @@
     "roots": [
       "<rootDir>/apps/",
       "<rootDir>/libs/"
+    ]
+  },
+  "repository": "rhkdguskim/chattingserver",
+  "auto": {
+    "plugins": [
+      "npm"
     ]
   }
 }
