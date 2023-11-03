@@ -1,49 +1,35 @@
 import { Inject, Injectable, Logger, LoggerService } from "@nestjs/common";
 import { User } from "@app/common/entity";
-import { DeleteResult } from "typeorm";
 import {
   AUTHENTICATION_SERVICE,
-  DELETE_USER,
-  FIND_ALL_USER,
-  FIND_ONE_BY_ID_USER,
-  FIND_ONE_USER,
-  UPDATE_USER,
 } from "@app/common/message/authentication";
-import { ClientProxy } from "@nestjs/microservices";
-import { lastValueFrom } from "rxjs";
+import { IAuthenticationClient } from "@app/common/clients/authenication.interface.client";
+import { UpdateUserRequest } from "@app/common/dto";
 
 @Injectable()
 export class UsersService {
   constructor(
     @Inject(AUTHENTICATION_SERVICE)
-    private readonly userClient: ClientProxy
+    private readonly userClient: IAuthenticationClient
   ) {}
 
   async findAll(): Promise<User[]> {
-    return await lastValueFrom(
-      this.userClient.send({ cmd: FIND_ALL_USER }, {})
-    );
+    return await this.userClient.findAll();
   }
 
   async findOne(id: number): Promise<User | null> {
-    return await lastValueFrom(
-      this.userClient.send({ cmd: FIND_ONE_USER }, id)
-    );
+    return await this.userClient.findOne(id);
   }
 
   async findbyUserId(user_id: string): Promise<User | null> {
-    return await lastValueFrom(
-      this.userClient.send({ cmd: FIND_ONE_BY_ID_USER }, user_id)
-    );
+    return await this.userClient.findOneByID(user_id);
   }
 
-  async remove(id: number): Promise<DeleteResult> {
-    return await lastValueFrom(this.userClient.send({ cmd: DELETE_USER }, id));
+  async remove(id: number): Promise<any> {
+    return await this.userClient.delete(id);
   }
 
-  async updateUser(updateData: Partial<User>) {
-    return await lastValueFrom(
-      this.userClient.send({ cmd: UPDATE_USER }, updateData)
-    );
+  async updateUser(updateData: UpdateUserRequest) {
+    return await this.userClient.update(updateData);
   }
 }

@@ -27,13 +27,13 @@ import {
 import { ClientProxy } from "@nestjs/microservices";
 import { lastValueFrom } from "rxjs";
 import { User } from "@app/common/entity";
-import { AuthenticationTCPClient } from "apps/authentication/src/authentication.tcp.client";
+import { IAuthenticationClient } from "@app/common/clients/authenication.interface.client";
 
 @Injectable()
 export class AuthService {
   constructor(
     @Inject(Logger) private logger: Logger,
-    @Inject(AUTHENTICATION_SERVICE) private authenticationClient: AuthenticationTCPClient,
+    @Inject(AUTHENTICATION_SERVICE) private authenticationClient: IAuthenticationClient,
     @Inject(AUTHORIZATION_SERVICE) private authorizationClient: ClientProxy
   ) {}
 
@@ -84,12 +84,9 @@ export class AuthService {
   }
 
   async OAuthLogin(OAuthData: OAuthRequest): Promise<any> {
-    const pattern = { cmd: OAUTH_SIGN_IN };
     try {
       // 1. 인증서버에게 OAuth 데이터를 통해 회원가입이 되어있지 않다면 회원가입을 요청한다.
-      return await lastValueFrom(
-        this.authenticationClient.send<LoginUserResponse>(pattern, OAuthData)
-      );
+      return await this.authenticationClient.OAuthLogin(OAuthData);
     } catch (e) {
       this.logger.error(e);
       throw new UnauthorizedException(e.message);

@@ -18,7 +18,6 @@ export class AuthenticationService {
   ) {}
 
   async signIn(loginUser: LoginUserRequest): Promise<User> {
-    this.logger.debug(loginUser);
     const user = await this.userService.findbyUserId(loginUser.user_id);
 
     if (!user) {

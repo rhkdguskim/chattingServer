@@ -9,12 +9,11 @@ import {
 } from "@nestjs/common";
 import { AuthService } from "@src/auth/auth.service";
 import { ApiTags, ApiOperation, ApiCreatedResponse } from "@nestjs/swagger";
-import { GetOAuthData, GetUser } from "@app/common/decoration/auth.decorator";
+import { GetOAuthData } from "@app/common/decoration/auth.decorator";
 import { HttpCacheInterceptor } from "@src/common/interceptors/httpcache.interceptor";
 import { CacheEvict } from "@src/common/decorator/cache-decorator";
 import { AuthGuard } from "@nestjs/passport";
 import { OAuthData } from "@app/common/dto/oauth.dto";
-import * as config from "config";
 import { User } from "@app/common/entity";
 import {
   CreateUserRequest,
@@ -22,8 +21,6 @@ import {
   LoginUserResponse,
   UserResponse,
 } from "@app/common/dto";
-const cors = config.get("cors");
-const FRONT_END_HOST = cors.frontendHost;
 
 @Controller("auth")
 @ApiTags("권한")
