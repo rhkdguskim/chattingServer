@@ -13,5 +13,14 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '17'  # Node.js 버전을 지정합니다.
+    
+    - name: Install Dependencies
+      run: npm install  # 의존성을 설치합니다.
+    
+    - name: Run Script
+      run: npm run start  # package.json에 정의된 스크립트를 실행합니다.
