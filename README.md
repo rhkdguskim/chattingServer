@@ -1,3 +1,14 @@
+### Archtechture
+```mermaid
+flowchart TD
+    A[API GateWay] --> B(Authenication MicroService)
+    A --> C(Authorizaion MicroService)
+    A --> D(Chat MicroService)
+    A --> E(Friend MicroService)
+    A --> F(Room MicroService)
+    A --> G(File MicroService)
+``` 
+
 ## Description
 - 프로필, 친구 기능을 제공합니다.
 - 실시간 채팅 기능을 제공합니다.
