@@ -27,31 +27,31 @@ export class RoomController {
   constructor(private roomService: RoomService) {}
 
   @MessagePattern({ cmd: FIND_ALL_ROOM })
-  async GetRoomList(payload: number): Promise<Array<RoomListResponse>> {
-    return await this.roomService.GetUserRooms(payload);
+  GetRoomList(payload: number): Promise<Array<RoomListResponse>> {
+    return this.roomService.GetUserRooms(payload);
   }
 
   @MessagePattern({ cmd: FIND_ROOM })
-  async findRoom(payload: number): Promise<Room> {
-    return await this.roomService.getRoombyID(payload);
+  findRoom(payload: number): Promise<Room> {
+    return this.roomService.getRoombyID(payload);
   }
 
   @MessagePattern({ cmd: UPDATE_ROOM })
-  async updateRoom(payload: Room) {
+  updateRoom(payload: Room) {
     return this.roomService.updateRoomStatus(payload);
   }
 
   @MessagePattern({ cmd: CREATE_ROOM })
-  async CreateRoom(payload: CreateRoomReqeust): Promise<CreateRoomResponse> {
-    return await this.roomService.createRoom(payload);
+  CreateRoom(payload: CreateRoomReqeust): Promise<CreateRoomResponse> {
+    return this.roomService.createRoom(payload);
   }
   @MessagePattern({ cmd: INVITE_ROOM })
-  async InviteRoom(payload: InviteRoomRequest): Promise<Participant[]> {
-    return await this.roomService.InviteRoom(payload);
+  InviteRoom(payload: InviteRoomRequest): Promise<Participant[]> {
+    return this.roomService.InviteRoom(payload);
   }
 
   @MessagePattern({ cmd: FIND_ALL_PARTICIPANT })
-  async findParticipant(payload: User) {
-    return await this.roomService.GetParticipants(payload);
+  findParticipant(payload: User) {
+    return this.roomService.GetParticipants(payload);
   }
 }

@@ -7,7 +7,14 @@ import {
   InviteRoomRequest,
 } from "@app/common/dto/room.dto";
 import { Room, Participant, User } from "@app/common/entity";
-import { CREATE_ROOM, FIND_ALL_PARTICIPANT, FIND_ALL_ROOM, FIND_ROOM, INVITE_ROOM, UPDATE_ROOM } from "@app/common/message/room";
+import {
+  CREATE_ROOM,
+  FIND_ALL_PARTICIPANT,
+  FIND_ALL_ROOM,
+  FIND_ROOM,
+  INVITE_ROOM,
+  UPDATE_ROOM,
+} from "@app/common/message/room";
 import { lastValueFrom } from "rxjs";
 
 export class RoomTCPClient extends ClientTCP implements IRoomClient {
@@ -25,9 +32,7 @@ export class RoomTCPClient extends ClientTCP implements IRoomClient {
     );
   }
   updateRoom(payload: Room): Promise<Room> {
-    return lastValueFrom<Room>(
-      this.send<Room>({ cmd: UPDATE_ROOM }, payload)
-    );
+    return lastValueFrom<Room>(this.send<Room>({ cmd: UPDATE_ROOM }, payload));
   }
   CreateRoom(payload: CreateRoomReqeust): Promise<CreateRoomResponse> {
     return lastValueFrom<CreateRoomResponse>(
@@ -44,5 +49,4 @@ export class RoomTCPClient extends ClientTCP implements IRoomClient {
       this.send<Participant[]>({ cmd: FIND_ALL_PARTICIPANT }, payload)
     );
   }
-
 }

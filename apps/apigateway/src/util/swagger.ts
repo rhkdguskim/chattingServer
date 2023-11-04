@@ -15,10 +15,10 @@ export function setupSwagger(app: INestApplication): void {
     //   { type: "apiKey", name: "authentication", in: "header" },
     //   "authentication"
     // )
-    .addSecurity('apiKey', {
-      type: 'apiKey',
-      in: 'header',
-      name: 'authentication',
+    .addSecurity("apiKey", {
+      type: "apiKey",
+      in: "header",
+      name: "authentication",
     })
     .addOAuth2()
     .build();

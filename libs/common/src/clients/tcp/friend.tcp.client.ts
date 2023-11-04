@@ -9,7 +9,12 @@ import {
 import { Friend } from "@app/common/entity";
 import { UserResponse } from "@app/common/dto";
 import { lastValueFrom } from "rxjs";
-import { ADD_FRIEND, DELETE_FRIEND, FIND_ALL_FRIEND, UPDATE_FRIEND } from "@app/common/message/friend";
+import {
+  ADD_FRIEND,
+  DELETE_FRIEND,
+  FIND_ALL_FRIEND,
+  UPDATE_FRIEND,
+} from "@app/common/message/friend";
 
 export class FriendTCPClient extends ClientTCP implements IFriendClient {
   constructor(options: TcpClientOptions["options"]) {

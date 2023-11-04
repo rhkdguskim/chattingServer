@@ -29,14 +29,10 @@ export class AuthenticationTCPClient
     super(options);
   }
   update(payload: UpdateUserRequest): Promise<User> {
-    return lastValueFrom<User>(
-      this.send<User>({ cmd: UPDATE_USER }, payload)
-    );
+    return lastValueFrom<User>(this.send<User>({ cmd: UPDATE_USER }, payload));
   }
   delete(payload: number): Promise<User> {
-    return lastValueFrom<User>(
-      this.send<User>({ cmd: DELETE_USER }, payload)
-    );
+    return lastValueFrom<User>(this.send<User>({ cmd: DELETE_USER }, payload));
   }
   findOne(payload: number): Promise<User> {
     return lastValueFrom<User>(
@@ -49,26 +45,18 @@ export class AuthenticationTCPClient
     );
   }
   findAll(): Promise<User[]> {
-    return lastValueFrom<User[]>(
-      this.send<User[]>({ cmd: FIND_ALL_USER }, {})
-    );
+    return lastValueFrom<User[]>(this.send<User[]>({ cmd: FIND_ALL_USER }, {}));
   }
   oAuthSignIn(payload: OAuthRequest): Promise<User> {
-    return lastValueFrom<User>(
-      this.send<User>({ cmd: SIGN_IN }, payload)
-    );
+    return lastValueFrom<User>(this.send<User>({ cmd: SIGN_IN }, payload));
   }
 
   SignIn(payload: LoginUserRequest): Promise<User> {
-    return lastValueFrom<User>(
-      this.send<User>({ cmd: SIGN_IN }, payload)
-    );
+    return lastValueFrom<User>(this.send<User>({ cmd: SIGN_IN }, payload));
   }
 
   SignUp(payload: CreateUserRequest): Promise<User> {
-    return lastValueFrom<User>(
-      this.send<User>({ cmd: SIGN_UP }, payload)
-    );
+    return lastValueFrom<User>(this.send<User>({ cmd: SIGN_UP }, payload));
   }
 
   OAuthLogin(payload: OAuthRequest): Promise<LoginUserResponse> {

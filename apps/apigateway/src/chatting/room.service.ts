@@ -16,9 +16,7 @@ import { ValidateCreateRoom } from "@app/common/decoration/room.deco";
 import { create } from "domain";
 import { Participant, Room, User } from "@app/common/entity";
 import { UserResponse } from "@app/common/dto";
-import {
-  ROOM_SERVICE,
-} from "@app/common/message/room";
+import { ROOM_SERVICE } from "@app/common/message/room";
 import { IRoomClient } from "@app/common/clients/room.interface.client";
 
 @Injectable()

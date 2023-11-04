@@ -1,7 +1,4 @@
-import {
-  Inject,
-  Injectable,
-} from "@nestjs/common";
+import { Inject, Injectable } from "@nestjs/common";
 import { Friend } from "@app/common/entity";
 import { DeleteResult } from "typeorm";
 import {
@@ -10,9 +7,7 @@ import {
   DelteFriendRequest,
   FindFriendAllRequest,
 } from "@app/common/dto/friend.createfriend.dto";
-import {
-  FRIEND_SERVICE,
-} from "@app/common/message/friend";
+import { FRIEND_SERVICE } from "@app/common/message/friend";
 import { UserResponse } from "@app/common/dto";
 import { IFriendClient } from "@app/common/clients/friend.interface.client";
 

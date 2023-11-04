@@ -8,16 +8,10 @@ import {
 } from "@nestjs/common";
 import {
   AUTHENTICATION_SERVICE,
-  FIND_ONE_BY_ID_USER,
 } from "@app/common/message/authentication";
 import {
   AUTHORIZATION_SERVICE,
-  JWT_SIGN,
-  JWT_VERIFY,
 } from "@app/common/message/authorization";
-import { ClientProxy } from "@nestjs/microservices";
-import { lastValueFrom } from "rxjs";
-import { User } from "@app/common/entity";
 import { Request } from "express";
 import { IAuthorizaionClient } from "@app/common/clients/authorization.interface.client";
 import { IAuthenticationClient } from "@app/common/clients/authenication.interface.client";
@@ -37,7 +31,7 @@ export class JwtGuard implements CanActivate {
       const request: Request = context.switchToHttp().getRequest();
 
       const authToken: string = request.headers["authentication"] as string;
-      
+
       if (!authToken && typeof authToken !== "string") {
         this.logger.error("토큰이 존재하지 않거나 올바르지 않는 토큰입니다.");
         return false;
