@@ -1,39 +1,21 @@
-name: Deploy to cloudtype
+name: CD Pipeline
+
 on:
-  push:
-    branches:
-      - main
+  workflow_run:
+    workflows: ["CI Pipeline"]
+    types:
+        - completed
+
 jobs:
-  deploy:
-    runs-on: ubuntu-latest
+
+  build:
+
+    runs-on: self-hosted
+
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Connect deploy key
-        uses: cloudtype-github-actions/connect@v1
-        with:
-          token: ${{ secrets.CLOUDTYPE_TOKEN }}
-          ghtoken: ${{ secrets.GHP_TOKEN }}
-      - name: Deploy
-        uses: cloudtype-github-actions/deploy@v1
-        with:
-          token: ${{ secrets.CLOUDTYPE_TOKEN }}
-          project: rhkdguskim/kakaotalk-backend
-          stage: main
-          yaml: |
-            name: kakaotalk-backend
-            app: node@18
-            options:
-              env:
-                - name: NODE_ENV
-                  value: production
-                - name: TZ
-                  value: Asia/Seoul
-              ports: 3000
-              install: npm install
-              build: npm run build
-              start: npm run start:prod
-            context:
-              git:
-                url: git@github.com:${{ github.repository }}.git
-                ref: ${{ github.ref }}
+    - name: Pull Docker image
+      run: sudo docker pull mag123c/manaweb-api:latest
+    - name: Delete Old docker container
+      run: sudo docker rm -f manaweb-api-container || true
+    - name: Run Docker Container
+      run: sudo docker run -d -p 8080:8080 --name manaweb-api-container mag123c/manaweb-api
