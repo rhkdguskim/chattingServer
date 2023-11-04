@@ -28,13 +28,16 @@ import { ClientProxy } from "@nestjs/microservices";
 import { lastValueFrom } from "rxjs";
 import { User } from "@app/common/entity";
 import { IAuthenticationClient } from "@app/common/clients/authenication.interface.client";
+import { IAuthorizaionClient } from "@app/common/clients/authorization.interface.client";
 
 @Injectable()
 export class AuthService {
   constructor(
     @Inject(Logger) private logger: Logger,
-    @Inject(AUTHENTICATION_SERVICE) private authenticationClient: IAuthenticationClient,
-    @Inject(AUTHORIZATION_SERVICE) private authorizationClient: ClientProxy
+    @Inject(AUTHENTICATION_SERVICE)
+    private authenticationClient: IAuthenticationClient,
+    @Inject(AUTHORIZATION_SERVICE)
+    private authorizationClient: IAuthorizaionClient
   ) {}
 
   async signIn(loginUser: LoginUserRequest): Promise<LoginUserResponse> {
@@ -45,12 +48,7 @@ export class AuthService {
       const { id, user_id } = user;
 
       // 3. 인가 서버를 통해 JWT 토큰을 발급한다.
-      return await lastValueFrom(
-        this.authorizationClient.send<LoginUserResponse>(
-          { cmd: JWT_SIGN },
-          { id, user_id }
-        )
-      );
+      return await this.authorizationClient.Sign({ id, user_id });
     } catch (e) {
       this.logger.error(e);
       throw new UnauthorizedException(e.message);
@@ -71,12 +69,7 @@ export class AuthService {
   ): Promise<LoginUserResponse> {
     try {
       // 1. 인가서버에 JWT 토큰 재발급을 요청한다.
-      return await lastValueFrom(
-        this.authorizationClient.send<LoginUserResponse>(
-          { cmd: GET_NEW_TOKEN },
-          newtokenRequest
-        )
-      );
+      return;
     } catch (e) {
       this.logger.error(e);
       throw new UnauthorizedException(e.message);

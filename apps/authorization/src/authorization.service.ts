@@ -1,14 +1,14 @@
 import { Injectable } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import { JWT_SECRET } from "@app/common/config";
-import { LoginUserResponse } from "@app/common/dto";
+import { JWTResponse, LoginUserResponse } from "@app/common/dto";
 
 @Injectable()
 export class AuthorizationService {
   constructor(private jwtService: JwtService) {}
 
-  async verify(authToken: string) {
-    return await this.jwtService.verifyAsync(authToken, {
+  async verify(authToken: string): Promise<JWTResponse> {
+    return await this.jwtService.verifyAsync<JWTResponse>(authToken, {
       secret: JWT_SECRET,
     });
   }

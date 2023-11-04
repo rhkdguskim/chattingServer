@@ -7,10 +7,7 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 import { UsersService } from "./users.service";
 
 @Module({
-  imports: [
-    DatabaseModule(),
-    TypeOrmModule.forFeature([User]),
-  ],
+  imports: [DatabaseModule(), TypeOrmModule.forFeature([User])],
   controllers: [AuthenticationController],
   providers: [AuthenticationService, UsersService, Logger],
 })

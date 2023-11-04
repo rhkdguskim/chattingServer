@@ -55,6 +55,15 @@ export class LoginUserResponse {
   refresh_token: string;
 }
 
+export interface JWTRequest {
+  id: number;
+  user_id: string;
+}
+
+export interface JWTResponse extends JWTRequest {
+  iat: string;
+}
+
 export interface OAuthRequest {
   access_token: string;
   refresh_token: string;

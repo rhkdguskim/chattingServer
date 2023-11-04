@@ -6,8 +6,6 @@ import {
   LoggerService,
   ForbiddenException,
 } from "@nestjs/common";
-import { EntityManager, Repository } from "typeorm";
-import { InjectRepository } from "@nestjs/typeorm";
 import {
   CreateRoomReqeust,
   CreateRoomResponse,
@@ -19,19 +17,15 @@ import { create } from "domain";
 import { Participant, Room, User } from "@app/common/entity";
 import { UserResponse } from "@app/common/dto";
 import {
-  CREATE_ROOM,
-  FIND_ROOM,
-  INVITE_ROOM,
   ROOM_SERVICE,
 } from "@app/common/message/room";
-import { ClientProxy } from "@nestjs/microservices";
-import { lastValueFrom } from "rxjs";
+import { IRoomClient } from "@app/common/clients/room.interface.client";
 
 @Injectable()
 export class RoomService {
   constructor(
     @Inject(ROOM_SERVICE)
-    private readonly roomClient: ClientProxy,
+    private readonly roomClient: IRoomClient,
 
     @Inject(Logger)
     private readonly logger: LoggerService
@@ -40,20 +34,14 @@ export class RoomService {
   async createRoom(
     createRoomDto: CreateRoomReqeust
   ): Promise<CreateRoomResponse> {
-    return await lastValueFrom(
-      this.roomClient.send({ cmd: CREATE_ROOM }, createRoomDto)
-    );
+    return await this.roomClient.CreateRoom(createRoomDto);
   }
 
   async InviteRoom(inviteToRoom: InviteRoomRequest): Promise<Participant[]> {
-    return await lastValueFrom(
-      this.roomClient.send({ cmd: INVITE_ROOM }, inviteToRoom)
-    );
+    return await this.roomClient.InviteRoom(inviteToRoom);
   }
 
   async GetUserRooms(user_id: number): Promise<Array<RoomListResponse>> {
-    return await lastValueFrom(
-      this.roomClient.send({ cmd: FIND_ROOM }, user_id)
-    );
+    return await this.roomClient.findRoom(user_id);
   }
 }

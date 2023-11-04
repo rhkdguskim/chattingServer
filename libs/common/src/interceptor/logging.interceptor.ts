@@ -20,25 +20,22 @@ export class LoggingInterceptor implements NestInterceptor {
   ): Observable<any> | Promise<Observable<any>> {
     const request = context.switchToRpc().getContext();
     const [jsonSocket, requestData] = request.args as [JsonSocket, any];
-
+    console.log(requestData)
     const remoteAddress = jsonSocket.socket.remoteAddress;
     const remotePort = jsonSocket.socket.remotePort;
-
     this.logger.debug(
-      `Start`,
+      `Start - ${JSON.stringify(requestData)}`,
       `${context.getClass().name}.${
         context.getHandler().name
-      } [${remoteAddress}:${remotePort}]`
-    );
+      } [${remoteAddress}:${remotePort}] ${requestData}`);
     const now = Date.now();
     return next.handle().pipe(
-      tap(() => {
+      tap((responseData) => {
         this.logger.debug(
-          `End: Time : {${Date.now() - now} ms}`,
+          `End: Time : {${Date.now() - now} ms} ${JSON.stringify(responseData)}`,
           `${context.getClass().name}.${
             context.getHandler().name
-          } [${remoteAddress}:${remotePort}]`
-        );
+          } [${remoteAddress}:${remotePort}]`);
       })
     );
   }
