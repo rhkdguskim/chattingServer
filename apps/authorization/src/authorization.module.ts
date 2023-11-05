@@ -3,9 +3,11 @@ import { AuthorizationController } from "./authorization.controller";
 import { AuthorizationService } from "./authorization.service";
 import { JwtModule } from "@nestjs/jwt";
 import { JWT_EXPIREIN, JWT_SECRET } from "@app/common/config";
+import { HttpService } from "@nestjs/axios";
 
 @Module({
   imports: [
+    HttpService,
     JwtModule.register({
       global: true,
       secret: JWT_SECRET,

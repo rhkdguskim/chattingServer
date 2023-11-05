@@ -1,7 +1,7 @@
 import { Controller, Get } from "@nestjs/common";
 import { AuthorizationService } from "./authorization.service";
 import { MessagePattern } from "@nestjs/microservices";
-import { JWTResponse, LoginUserResponse } from "@app/common/dto";
+import { JWTRequest, JWTResponse, LoginUserResponse } from "@app/common/dto";
 import { JWT_VERIFY, JWT_SIGN } from "@app/common/message/authorization";
 
 @Controller()
@@ -13,7 +13,7 @@ export class AuthorizationController {
     return this.authorizationService.verify(payload);
   }
   @MessagePattern({ cmd: JWT_SIGN })
-  async sign(payload): Promise<LoginUserResponse> {
+  async sign(payload : JWTRequest): Promise<LoginUserResponse> {
     return this.authorizationService.sign(payload);
   }
 }

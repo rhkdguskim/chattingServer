@@ -58,6 +58,7 @@ export class LoginUserResponse {
 export interface JWTRequest {
   id: number;
   user_id: string;
+  refresh_token?:boolean,
 }
 
 export interface JWTResponse extends JWTRequest {
