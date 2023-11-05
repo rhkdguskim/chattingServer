@@ -50,7 +50,10 @@ export class ClientProxyFactoryCustomModule {
         }
         return {
           provide: client.name,
-          useFactory: () => new ClientClass(client.config.options as TcpClientOptions["options"]),
+          useFactory: () =>
+            new ClientClass(
+              client.config.options as TcpClientOptions["options"]
+            ),
         };
       } else {
         throw new Error("Not implemented !!");

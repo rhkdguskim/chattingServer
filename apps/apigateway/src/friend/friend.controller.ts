@@ -11,7 +11,7 @@ import {
 } from "@nestjs/common";
 import { FriendService } from "./friend.service";
 import { Friend } from "@app/common/entity";
-import { ApiTags, ApiOperation, ApiCreatedResponse } from "@nestjs/swagger";
+import { ApiTags, ApiOperation, ApiCreatedResponse, ApiBasicAuth, ApiSecurity } from "@nestjs/swagger";
 import {
   CreateFriendRequest,
   CreateFriendResponse,
@@ -22,6 +22,7 @@ import { UserResponse } from "@app/common/dto";
 
 @Controller("friend")
 @UseGuards(JwtGuard)
+@ApiSecurity('authentication')
 @ApiTags("친구")
 export class FriendController {
   constructor(private friendService: FriendService) {}

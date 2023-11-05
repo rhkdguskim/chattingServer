@@ -6,12 +6,8 @@ import {
   Logger,
   UnauthorizedException,
 } from "@nestjs/common";
-import {
-  AUTHENTICATION_SERVICE,
-} from "@app/common/message/authentication";
-import {
-  AUTHORIZATION_SERVICE,
-} from "@app/common/message/authorization";
+import { AUTHENTICATION_SERVICE } from "@app/common/message/authentication";
+import { AUTHORIZATION_SERVICE } from "@app/common/message/authorization";
 import { Request } from "express";
 import { IAuthorizaionClient } from "@app/common/clients/authorization.interface.client";
 import { IAuthenticationClient } from "@app/common/clients/authenication.interface.client";
