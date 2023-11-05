@@ -7,7 +7,29 @@ flowchart TD
     A --> E(Friend MicroService)
     A --> F(Room MicroService)
     A --> G(File MicroService)
-``` 
+```
+
+### NormalAuthGuard Sequence Diagram ( JWT Token )
+``` mermaid
+sequenceDiagram;
+    FrontEnd ->> APIGateWay : Plz Check Verify
+    APIGateWay ->> AuthorizaionMicroService : Send to Authorizaion
+    AuthorizaionMicroService ->> APIGateWay : Verifyed
+    APIGateWay ->> FrontEnd : Verifyed
+```
+
+### OAUTH Sequence Diagram
+``` mermaid
+sequenceDiagram;
+    FrontEnd ->> OauthProiver: Get Code from Redirect
+    OauthProiver ->> FrontEnd : Okay Here is Code by Redirect
+    FrontEnd ->> APIGateWay : Plz Check Verify ( Code )
+    APIGateWay ->> AuthorizaionMicroService : Send to Authorizaion ( Code )
+    AuthorizaionMicroService ->> OauthProiver : Checking Verify...
+    OauthProiver ->> AuthorizaionMicroService : Vertifyed
+    AuthorizaionMicroService ->> APIGateWay : Verifyed
+    APIGateWay ->> FrontEnd : Verifyed
+```
 
 ## Description
 - 프로필, 친구 기능을 제공합니다.
