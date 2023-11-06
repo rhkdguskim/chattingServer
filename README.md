@@ -1,12 +1,19 @@
 ### Archtechture
 ```mermaid
 flowchart TD
-    A[API GateWay] --> B(Authenication MicroService)
-    A --> C(Authorizaion MicroService)
-    A --> D(Chat MicroService)
-    A --> E(Friend MicroService)
-    A --> F(Room MicroService)
-    A --> G(File MicroService)
+    A2[Frontend] --> A
+    A --> A2
+    A[API GateWay] --> B(Authenication Service)
+    A --> C(Authorizaion Service)
+    C --> A
+    A --> D(Chat Service)
+    D --> A
+    A --> E(Friend Service)
+    E --> A
+    A --> F(Room Service)
+    F --> A
+    A --> G(File Service)
+    G --> A
 ```
 
 ### NormalAuthGuard Sequence Diagram ( JWT Token )
