@@ -16,7 +16,7 @@ flowchart TD
     G --> A
 ```
 
-### NormalAuthGuard Sequence Diagram ( JWT Token )
+### AuthGuard Sequence Diagram ( JWT Token )
 ``` mermaid
 sequenceDiagram;
     FrontEnd ->> APIGateWay : Plz Check Verify
@@ -25,7 +25,7 @@ sequenceDiagram;
     APIGateWay ->> FrontEnd : Verifyed
 ```
 
-### OAUTH Sequence Diagram
+### Oauth 2.0 Sequence Diagram
 ``` mermaid
 sequenceDiagram;
     FrontEnd ->> OauthProiver: Get Code from Redirect
@@ -39,17 +39,18 @@ sequenceDiagram;
 ```
 
 ## Description
-- 프로필, 친구 기능을 제공합니다.
 - 실시간 채팅 기능을 제공합니다.
+- 프로필, 친구 기능을 제공합니다.
+
 
 ## TechSpec
-- OAuth (카카오,네이버,구글) 로그인 적용하였습니다.
-- JWT Token으로 Guard Strategy를 적용하였습니다.
-- WebSocket을 사용한 실시간 채팅을 보장합니다.
-- 캐싱 시스템을 적용하여 DB 조회를 최소화 하였습니다. ( Redis 저장소 사용 )
-- TypeORM을 도입하여 Object to Entity를 구현하였습니다.
-- Swagger를 사용하여 API 명세서를 작성하였습니다.
-- CI/CD 구축으로 테스트/배포 자동화 하였습니다.
+- [x] OAuth 2.0
+- [x] AuthGuard by JWT Token
+- [x] Websocket Realtime Chatting
+- [x] Redis Caching System
+- [x] TypeORM ( MySQL )
+- [x] Swagger API
+- [x] CI/CD PipeLine ( Deploy, Test )
 
 ## Installation
 
