@@ -6,7 +6,7 @@ import { DeleteResult, Repository } from "typeorm";
 import { OAuthRequest } from "@app/common/dto";
 
 @Injectable()
-export class UsersService {
+export class UserRepository {
   constructor(
     @InjectRepository(User)
     private userReposity: Repository<User>

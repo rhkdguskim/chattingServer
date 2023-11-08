@@ -11,6 +11,7 @@ import {
   AUTHENTICATION_PORT,
   LOGLEVEL,
 } from "@app/common/config";
+import { RcpExceptionsFilter } from "@app/common/exception/exception.filter";
 
 async function bootstrap() {
   const app = await NestFactory.createMicroservice<MicroserviceOptions>(
@@ -34,6 +35,7 @@ async function bootstrap() {
     }
   );
   app.useGlobalInterceptors(new LoggingInterceptor(app.get(Logger)));
+  app.useGlobalFilters(new RcpExceptionsFilter(app.get(Logger)))
   await app.listen();
 }
 bootstrap();

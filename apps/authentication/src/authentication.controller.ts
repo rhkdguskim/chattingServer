@@ -1,4 +1,4 @@
-import { Controller, Get } from "@nestjs/common";
+import { Controller, Get, UseFilters } from "@nestjs/common";
 import { AuthenticationService } from "./authentication.service";
 import { MessagePattern } from "@nestjs/microservices";
 import {
@@ -19,6 +19,7 @@ import {
 } from "@app/common/message/authentication";
 
 import { User } from "@app/common/entity";
+import { RcpExceptionsFilter } from "@app/common/exception/exception.filter";
 
 @Controller()
 export class AuthenticationController {
