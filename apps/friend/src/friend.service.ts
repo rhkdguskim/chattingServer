@@ -5,7 +5,7 @@ import {
   Logger,
 } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { Friend } from "@app/common/entity";
+import { FriendTypeORM } from "@app/common/entity/typeorm";
 import { DeleteResult, Repository } from "typeorm";
 import {
   CreateFriendRequest,
@@ -16,17 +16,17 @@ import {
 @Injectable()
 export class FriendService {
   constructor(
-    @InjectRepository(Friend)
-    private friendRepository: Repository<Friend>
+    @InjectRepository(FriendTypeORM)
+    private friendRepository: Repository<FriendTypeORM>
   ) {}
 
-  async getFriends(id: number): Promise<Friend[]> {
+  async getFriends(id: number): Promise<FriendTypeORM[]> {
     return await this.friendRepository.find({
       where: { user: { id } },
     });
   }
 
-  async getMyFriends(id: number): Promise<Friend[]> {
+  async getMyFriends(id: number): Promise<FriendTypeORM[]> {
     return await this.friendRepository.find({
       where: { user: { id } },
     });
@@ -44,8 +44,8 @@ export class FriendService {
     });
 
     // 이미 등록된 친구라면
-    const friends: Friend[] = await this.getMyFriends(id);
-    friends.map((myfriend: Friend) => {
+    const friends: FriendTypeORM[] = await this.getMyFriends(id);
+    friends.map((myfriend: FriendTypeORM) => {
       if (myfriend.friend_id == friend_id) {
         Logger.log("이미 등록된 친구입니다.");
         throw new ForbiddenException({
@@ -80,9 +80,9 @@ export class FriendService {
   async changeFriendName(
     createFriend: CreateFriendRequest,
     id: number
-  ): Promise<Friend> {
+  ): Promise<FriendTypeORM> {
     const { friend_id, friend_name } = createFriend;
-    const friend: Friend = await this.friendRepository.findOne({
+    const friend: FriendTypeORM = await this.friendRepository.findOne({
       where: {
         friend_id,
         user: { id },

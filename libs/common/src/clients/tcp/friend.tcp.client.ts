@@ -6,7 +6,7 @@ import {
   CreateFriendResponse,
   DelteFriendRequest,
 } from "@app/common/dto/friend.createfriend.dto";
-import { Friend } from "@app/common/entity";
+import { FriendTypeORM } from "@app/common/entity/typeorm";
 import { UserResponse } from "@app/common/dto";
 import { lastValueFrom } from "rxjs";
 import {
@@ -30,14 +30,14 @@ export class FriendTCPClient extends ClientTCP implements IFriendClient {
       this.send<CreateFriendResponse>({ cmd: ADD_FRIEND }, payload)
     );
   }
-  updateFriend(payload: CreateFriendRequest): Promise<Friend> {
-    return lastValueFrom<Friend>(
-      this.send<Friend>({ cmd: UPDATE_FRIEND }, payload)
+  updateFriend(payload: CreateFriendRequest): Promise<FriendTypeORM> {
+    return lastValueFrom<FriendTypeORM>(
+      this.send<FriendTypeORM>({ cmd: UPDATE_FRIEND }, payload)
     );
   }
   deleteFriend(payload: DelteFriendRequest): Promise<any> {
-    return lastValueFrom<Friend>(
-      this.send<Friend>({ cmd: DELETE_FRIEND }, payload)
+    return lastValueFrom<FriendTypeORM>(
+      this.send<FriendTypeORM>({ cmd: DELETE_FRIEND }, payload)
     );
   }
 }

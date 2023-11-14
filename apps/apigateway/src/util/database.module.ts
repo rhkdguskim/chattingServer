@@ -1,11 +1,11 @@
 import { Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { User } from "@app/common/entity";
-import { Friend } from "@app/common/entity";
-import { Chatting } from "@app/common/entity";
-import { Room } from "@app/common/entity";
-import { Participant } from "@app/common/entity";
-import { ReadBy } from "@app/common/entity";
+import { UserTypeORM } from "@app/common/entity/typeorm";
+import { FriendTypeORM } from "@app/common/entity/typeorm";
+import { ChattingTypeORM } from "@app/common/entity/typeorm";
+import { RoomTypeORM } from "@app/common/entity/typeorm";
+import { ParticipantTypeORM } from "@app/common/entity/typeorm";
+import { ReadByTypeORM } from "@app/common/entity/typeorm";
 import * as config from "config";
 
 const dbConfig = config.get("db");
@@ -18,7 +18,7 @@ const dbConfig = config.get("db");
       username: process.env.DB_USER || dbConfig.username,
       password: process.env.DB_PASSWORD || dbConfig.password,
       database: process.env.DB_NAME || dbConfig.database,
-      entities: [User, Friend, Chatting, Room, Participant, ReadBy],
+      entities: [UserTypeORM, FriendTypeORM, ChattingTypeORM, RoomTypeORM, ParticipantTypeORM, ReadByTypeORM],
       synchronize: process.env.DB_SYNCHRONIZE || dbConfig.synchronize,
     }),
   ],

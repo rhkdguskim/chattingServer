@@ -7,10 +7,11 @@ import {
   UpdateDateColumn,
   JoinColumn,
 } from "typeorm";
-import { User } from "@app/common/entity/users.entity";
+import { UserTypeORM } from "@app/common/entity/typeorm/users.typeorm.entity";
+import { Friend } from "../interface/friend.entity";
 
 @Entity()
-export class Friend {
+export class FriendTypeORM implements Friend {
   @PrimaryGeneratedColumn()
   id!: number;
 
@@ -20,9 +21,9 @@ export class Friend {
   @Column()
   friend_name!: string;
 
-  @ManyToOne(() => User)
+  @ManyToOne(() => UserTypeORM)
   @JoinColumn({ name: "user_id" })
-  user!: User;
+  user!: UserTypeORM;
 
   @CreateDateColumn()
   createdAt!: Date;

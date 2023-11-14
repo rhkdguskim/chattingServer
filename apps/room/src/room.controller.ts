@@ -8,8 +8,8 @@ import {
   RoomListResponse,
   InviteRoomRequest,
 } from "@app/common/dto/room.dto";
-import { Room } from "@app/common/entity";
-import { Participant } from "@app/common/entity";
+import { RoomTypeORM } from "@app/common/entity/typeorm";
+import { ParticipantTypeORM } from "@app/common/entity/typeorm";
 import { MessagePattern } from "@nestjs/microservices";
 import {
   CREATE_ROOM,
@@ -19,7 +19,7 @@ import {
   INVITE_ROOM,
   UPDATE_ROOM,
 } from "@app/common/message/room";
-import { User } from "@app/common/entity";
+import { UserTypeORM } from "@app/common/entity/typeorm";
 
 @Controller("room")
 @ApiTags("채팅방")
@@ -32,12 +32,12 @@ export class RoomController {
   }
 
   @MessagePattern({ cmd: FIND_ROOM })
-  findRoom(payload: number): Promise<Room> {
+  findRoom(payload: number): Promise<RoomTypeORM> {
     return this.roomService.getRoombyID(payload);
   }
 
   @MessagePattern({ cmd: UPDATE_ROOM })
-  updateRoom(payload: Room) {
+  updateRoom(payload: RoomTypeORM) {
     return this.roomService.updateRoomStatus(payload);
   }
 
@@ -46,12 +46,12 @@ export class RoomController {
     return this.roomService.createRoom(payload);
   }
   @MessagePattern({ cmd: INVITE_ROOM })
-  InviteRoom(payload: InviteRoomRequest): Promise<Participant[]> {
+  InviteRoom(payload: InviteRoomRequest): Promise<ParticipantTypeORM[]> {
     return this.roomService.InviteRoom(payload);
   }
 
   @MessagePattern({ cmd: FIND_ALL_PARTICIPANT })
-  findParticipant(payload: User) {
+  findParticipant(payload: UserTypeORM) {
     return this.roomService.GetParticipants(payload);
   }
 }

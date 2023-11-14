@@ -13,7 +13,7 @@ import {
   DelteFriendRequest,
   FindFriendAllRequest,
 } from "@app/common/dto/friend.createfriend.dto";
-import { Friend } from "@app/common/entity";
+import { FriendTypeORM } from "@app/common/entity/typeorm";
 
 @Controller()
 export class FriendController {
@@ -30,7 +30,7 @@ export class FriendController {
   }
 
   @MessagePattern({ cmd: UPDATE_FRIEND })
-  async updateFriend(payload: CreateFriendRequest): Promise<Friend> {
+  async updateFriend(payload: CreateFriendRequest): Promise<FriendTypeORM> {
     return await this.friendService.changeFriendName(payload, payload.id);
   }
 

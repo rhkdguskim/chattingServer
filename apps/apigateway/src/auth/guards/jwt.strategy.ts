@@ -12,7 +12,7 @@ import { UsersService } from "@src/users/users.service";
 import { Request } from "express";
 import { CACHE_MANAGER } from "@nestjs/cache-manager";
 import { Cache } from "cache-manager";
-import { User } from "@app/common/entity";
+import { UserTypeORM } from "@app/common/entity/typeorm";
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy, "jwt") {
@@ -34,9 +34,9 @@ export class JwtStrategy extends PassportStrategy(Strategy, "jwt") {
     });
   }
 
-  async validate(payload): Promise<User> {
+  async validate(payload): Promise<UserTypeORM> {
     const { id } = payload;
-    let user: User;
+    let user: UserTypeORM;
     const cachedData = await this.cacheManager.get<any>(`login/${id}`);
     if (cachedData) {
       // 캐시가 있다면 메모리 조회

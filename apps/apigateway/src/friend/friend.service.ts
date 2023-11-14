@@ -1,5 +1,5 @@
 import { Inject, Injectable } from "@nestjs/common";
-import { Friend } from "@app/common/entity";
+import { FriendTypeORM } from "@app/common/entity/typeorm";
 import { DeleteResult } from "typeorm";
 import {
   CreateFriendRequest,
@@ -32,7 +32,7 @@ export class FriendService {
     return await this.friendClient.deleteFriend(delFriend);
   }
 
-  async changeFriendName(updateFriend: CreateFriendRequest): Promise<Friend> {
+  async changeFriendName(updateFriend: CreateFriendRequest): Promise<FriendTypeORM> {
     return await this.friendClient.updateFriend(updateFriend);
   }
 }

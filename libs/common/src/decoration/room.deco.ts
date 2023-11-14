@@ -5,7 +5,7 @@ import {
   RoomType,
 } from "@app/common/dto/room.dto";
 import { ForbiddenException } from "@nestjs/common";
-import { Room } from "@app/common/entity";
+import { RoomTypeORM } from "@app/common/entity/typeorm";
 
 export function ValidateCreateRoom() {
   return function (
@@ -36,7 +36,7 @@ export function ValidateCreateRoom() {
       }
 
       if (roomType == RoomType.two || roomType == RoomType.Individual) {
-        const roomRepository: Repository<Room> = this.roomRepository;
+        const roomRepository: Repository<RoomTypeORM> = this.roomRepository;
 
         const { participant } = createRoomDto;
 

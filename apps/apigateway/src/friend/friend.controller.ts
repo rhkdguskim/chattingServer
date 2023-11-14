@@ -10,7 +10,7 @@ import {
   Param,
 } from "@nestjs/common";
 import { FriendService } from "./friend.service";
-import { Friend } from "@app/common/entity";
+import { FriendTypeORM } from "@app/common/entity/typeorm";
 import { ApiTags, ApiOperation, ApiCreatedResponse, ApiBasicAuth, ApiSecurity } from "@nestjs/swagger";
 import {
   CreateFriendRequest,
@@ -65,7 +65,7 @@ export class FriendController {
     type: CreateFriendResponse,
   })
   @ApiCreatedResponse({ description: "등록된 친구중 친구정보를 변경합니다." })
-  async ModFriend(@Body() createFriend: CreateFriendRequest): Promise<Friend> {
+  async ModFriend(@Body() createFriend: CreateFriendRequest): Promise<FriendTypeORM> {
     return this.friendService.changeFriendName(createFriend);
   }
 

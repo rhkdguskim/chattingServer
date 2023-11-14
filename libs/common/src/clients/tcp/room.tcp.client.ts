@@ -6,7 +6,7 @@ import {
   CreateRoomResponse,
   InviteRoomRequest,
 } from "@app/common/dto/room.dto";
-import { Room, Participant, User } from "@app/common/entity";
+import { RoomTypeORM, ParticipantTypeORM, UserTypeORM } from "@app/common/entity/typeorm";
 import {
   CREATE_ROOM,
   FIND_ALL_PARTICIPANT,
@@ -31,22 +31,22 @@ export class RoomTCPClient extends ClientTCP implements IRoomClient {
       this.send<RoomListResponse[]>({ cmd: FIND_ROOM }, payload)
     );
   }
-  updateRoom(payload: Room): Promise<Room> {
-    return lastValueFrom<Room>(this.send<Room>({ cmd: UPDATE_ROOM }, payload));
+  updateRoom(payload: RoomTypeORM): Promise<RoomTypeORM> {
+    return lastValueFrom<RoomTypeORM>(this.send<RoomTypeORM>({ cmd: UPDATE_ROOM }, payload));
   }
   CreateRoom(payload: CreateRoomReqeust): Promise<CreateRoomResponse> {
     return lastValueFrom<CreateRoomResponse>(
       this.send<CreateRoomResponse>({ cmd: CREATE_ROOM }, payload)
     );
   }
-  InviteRoom(payload: InviteRoomRequest): Promise<Participant[]> {
-    return lastValueFrom<Participant[]>(
-      this.send<Participant[]>({ cmd: INVITE_ROOM }, payload)
+  InviteRoom(payload: InviteRoomRequest): Promise<ParticipantTypeORM[]> {
+    return lastValueFrom<ParticipantTypeORM[]>(
+      this.send<ParticipantTypeORM[]>({ cmd: INVITE_ROOM }, payload)
     );
   }
-  findParticipant(payload: User): Promise<Participant[]> {
-    return lastValueFrom<Participant[]>(
-      this.send<Participant[]>({ cmd: FIND_ALL_PARTICIPANT }, payload)
+  findParticipant(payload: UserTypeORM): Promise<ParticipantTypeORM[]> {
+    return lastValueFrom<ParticipantTypeORM[]>(
+      this.send<ParticipantTypeORM[]>({ cmd: FIND_ALL_PARTICIPANT }, payload)
     );
   }
 }

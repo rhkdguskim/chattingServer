@@ -1,5 +1,5 @@
 import { Inject, Injectable, Logger, LoggerService } from "@nestjs/common";
-import { User } from "@app/common/entity";
+import { UserTypeORM } from "@app/common/entity/typeorm";
 import { AUTHENTICATION_SERVICE } from "@app/common/message/authentication";
 import { IAuthenticationClient } from "@app/common/clients/authenication.interface.client";
 import { UpdateUserRequest } from "@app/common/dto";
@@ -11,15 +11,15 @@ export class UsersService {
     private readonly userClient: IAuthenticationClient
   ) {}
 
-  async findAll(): Promise<User[]> {
+  async findAll(): Promise<UserTypeORM[]> {
     return await this.userClient.findAll();
   }
 
-  async findOne(id: number): Promise<User | null> {
+  async findOne(id: number): Promise<UserTypeORM | null> {
     return await this.userClient.findOne(id);
   }
 
-  async findbyUserId(user_id: string): Promise<User | null> {
+  async findbyUserId(user_id: string): Promise<UserTypeORM | null> {
     return await this.userClient.findOneByID(user_id);
   }
 

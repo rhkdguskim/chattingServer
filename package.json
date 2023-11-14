@@ -44,6 +44,7 @@
     "@nestjs/typeorm": "^10.0.0",
     "@nestjs/websockets": "^9.0.0",
     "@nestjsplus/cookies": "^1.1.1",
+    "@nestjsx/crud-typeorm": "^5.0.0-alpha.3",
     "@types/cache-manager": "^4.0.2",
     "@types/cache-manager-redis-store": "^2.0.1",
     "@types/passport-google-oauth20": "^2.0.11",

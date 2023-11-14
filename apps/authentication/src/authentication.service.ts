@@ -5,22 +5,22 @@ import {
   UpdateUserRequest,
 } from "@app/common/dto";
 import { CreateUserRequest } from "@app/common/dto";
-import { User } from "@app/common/entity";
+import { UserTypeORM } from "@app/common/entity/typeorm";
 import { UserRepository } from "./users.repository";
 import { AuthenticationDomain } from "./authentication.domain";
 import { CustomRpcExceptionException, RpcExceptionType } from "@app/common/exception/customrpcexception.exception";
-
+import { NullCheck } from "@app/common/util/util";
 @Injectable()
 export class AuthenticationService {
   constructor(
-    @Inject(AuthenticationDomain) private authenticationDomain : AuthenticationDomain,
+    private authenticationDomain : AuthenticationDomain,
     private userRepository: UserRepository
   ) {}
 
-  async signIn(loginUser: LoginUserRequest): Promise<User> {
+  async signIn(loginUser: LoginUserRequest): Promise<UserTypeORM> {
     const user = await this.userRepository.findbyUserId(loginUser.user_id);
 
-    if (isNull(user)) {
+    if (NullCheck(user)) {
       throw new CustomRpcExceptionException({
         message : "아이디가 존재하지 않습니다.",
         code : RpcExceptionType.AUTHENTICATION_ERROR,
@@ -37,10 +37,10 @@ export class AuthenticationService {
     return user;
   }
 
-  async create(createUserDto: CreateUserRequest): Promise<User> {
+  async create(createUserDto: CreateUserRequest): Promise<UserTypeORM> {
     const user = await this.userRepository.findbyUserId(createUserDto.user_id);
 
-    if (!isNull(user)) {
+    if (!NullCheck(user)) {
       throw new CustomRpcExceptionException({
         message : "이미 등록된 사용자입니다.",
         code : RpcExceptionType.AUTHENTICATION_ERROR,
@@ -50,11 +50,11 @@ export class AuthenticationService {
     return this.userRepository.createUser(createUserDto);
   }
 
-  async findOne(id: number): Promise<User> {
+  async findOne(id: number): Promise<UserTypeORM> {
     return await this.userRepository.findOne(id);
   }
 
-  async update(payload: UpdateUserRequest): Promise<User> {
+  async update(payload: UpdateUserRequest): Promise<UserTypeORM> {
     return await this.userRepository.saveUser(payload);
   }
 
@@ -62,15 +62,11 @@ export class AuthenticationService {
     return await this.userRepository.remove(payload);
   }
 
-  async findAll(): Promise<User[]> {
+  async findAll(): Promise<UserTypeORM[]> {
     return await this.userRepository.findAll();
   }
 
-  async findbyUserId(user_id: string): Promise<User | null> {
+  async findbyUserId(user_id: string): Promise<UserTypeORM | null> {
     return await this.userRepository.findbyUserId(user_id);
-  }
-
-  async OAuthLogin(OAuthData: OAuthRequest): Promise<User> {
-    return this.userRepository.createUser(OAuthData.user);
   }
 }

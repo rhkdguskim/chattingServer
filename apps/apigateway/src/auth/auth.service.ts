@@ -19,14 +19,13 @@ import {
 } from "@app/common/message/authorization";
 import {
   AUTHENTICATION_SERVICE,
-  OAUTH_SIGN_IN,
   SIGN_UP,
   SIGN_IN,
   GET_NEW_TOKEN,
 } from "@app/common/message/authentication";
 import { ClientProxy } from "@nestjs/microservices";
 import { lastValueFrom } from "rxjs";
-import { User } from "@app/common/entity";
+import { UserTypeORM } from "@app/common/entity/typeorm";
 import { IAuthenticationClient } from "@app/common/clients/authenication.interface.client";
 import { IAuthorizaionClient } from "@app/common/clients/authorization.interface.client";
 
@@ -43,7 +42,7 @@ export class AuthService {
   async signIn(loginUser: LoginUserRequest): Promise<LoginUserResponse> {
     try {
       // 1. 유저 아이디와 패스워드로 인증을 요청한다.
-      const user: User = await this.authenticationClient.SignIn(loginUser);
+      const user: UserTypeORM = await this.authenticationClient.SignIn(loginUser);
       // 2. JWT Payload의 범위를 지정한다.
       const { id, user_id } = user;
 
@@ -55,7 +54,7 @@ export class AuthService {
     }
   }
 
-  async create(createUserDto: CreateUserRequest): Promise<User> {
+  async create(createUserDto: CreateUserRequest): Promise<UserTypeORM> {
     try {
       // 1. 인증 서버에 회원가입을 요청한다.
       return await this.authenticationClient.SignUp(createUserDto);
@@ -70,16 +69,6 @@ export class AuthService {
     try {
       // 1. 인가서버에 JWT 토큰 재발급을 요청한다.
       return;
-    } catch (e) {
-      this.logger.error(e);
-      throw new UnauthorizedException(e.message);
-    }
-  }
-
-  async OAuthLogin(OAuthData: OAuthRequest): Promise<any> {
-    try {
-      // 1. 인증서버에게 OAuth 데이터를 통해 회원가입이 되어있지 않다면 회원가입을 요청한다.
-      return await this.authenticationClient.OAuthLogin(OAuthData);
     } catch (e) {
       this.logger.error(e);
       throw new UnauthorizedException(e.message);

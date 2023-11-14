@@ -1,3 +1,7 @@
-function isNull(payload : any) : boolean {
-    return payload === undefined;
+/*
+NullCheck
+paylod === null is True
+*/
+export function NullCheck(payload) {
+    return payload === null;
 }

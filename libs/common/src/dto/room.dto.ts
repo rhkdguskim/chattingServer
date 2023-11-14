@@ -1,6 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { ArrayMinSize, IsNumber, IsString } from "class-validator";
-import { Room, User } from "@app/common/entity";
+import { RoomTypeORM, UserTypeORM } from "@app/common/entity/typeorm";
 import { UserResponse } from "@app/common/dto/index";
 
 export enum RoomType {
@@ -73,10 +73,10 @@ export class CreateRoomResponse {
 
 export class InviteRoomRequest {
   @ApiProperty({ description: "방ID" })
-  room!: Room;
+  room!: RoomTypeORM;
 
   @ApiProperty({ description: "참가유저목록" })
-  participants!: User[];
+  participants!: UserTypeORM[];
 
   @ApiProperty({ description: "방이름" })
   room_name!: string;

@@ -4,13 +4,13 @@ import {
   CreateRoomResponse,
   InviteRoomRequest,
 } from "../dto/room.dto";
-import { Participant, Room, User } from "../entity";
+import { ParticipantTypeORM, RoomTypeORM, UserTypeORM } from "../entity/typeorm";
 
 export interface IRoomClient {
   GetRoomList(payload: number): Promise<Array<RoomListResponse>>;
   findRoom(payload: number): Promise<Array<RoomListResponse>>;
-  updateRoom(payload: Room): Promise<Room>;
+  updateRoom(payload: RoomTypeORM): Promise<RoomTypeORM>;
   CreateRoom(payload: CreateRoomReqeust): Promise<CreateRoomResponse>;
-  InviteRoom(payload: InviteRoomRequest): Promise<Participant[]>;
-  findParticipant(payload: User): Promise<Participant[]>;
+  InviteRoom(payload: InviteRoomRequest): Promise<ParticipantTypeORM[]>;
+  findParticipant(payload: UserTypeORM): Promise<ParticipantTypeORM[]>;
 }

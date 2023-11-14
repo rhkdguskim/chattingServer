@@ -1,13 +1,13 @@
 import { Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import {
-  User,
-  Friend,
-  Chatting,
-  Room,
-  Participant,
-  ReadBy,
-} from "@app/common/entity";
+  UserTypeORM,
+  FriendTypeORM,
+  ChattingTypeORM,
+  RoomTypeORM,
+  ParticipantTypeORM,
+  ReadByTypeORM,
+} from "@app/common/entity/typeorm";
 import * as config from "config";
 const dbConfig = config.get("db");
 export function DatabaseModule() {
@@ -18,7 +18,7 @@ export function DatabaseModule() {
     username: process.env.DB_USER || dbConfig.username,
     password: process.env.DB_PASSWORD || dbConfig.password,
     database: process.env.DB_NAME || dbConfig.database,
-    entities: [User, Friend, Chatting, Room, Participant, ReadBy],
+    entities: [UserTypeORM, FriendTypeORM, ChattingTypeORM, RoomTypeORM, ParticipantTypeORM, ReadByTypeORM],
     synchronize: process.env.DB_SYNCHRONIZE || dbConfig.synchronize,
     autoLoadEntities: true,
   });

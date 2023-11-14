@@ -12,7 +12,7 @@ import { HttpCacheInterceptor } from "@src/common/interceptors/httpcache.interce
 import { CacheEvict } from "@src/common/decorator/cache-decorator";
 import { AuthGuard } from "@nestjs/passport";
 import { OAuthData } from "@app/common/dto/oauth.dto";
-import { User } from "@app/common/entity";
+import { UserTypeORM } from "@app/common/entity/typeorm";
 import {
   CreateUserRequest,
   LoginUserRequest,
@@ -51,7 +51,7 @@ export class AuthController {
     description: "생성된 사용자 정보를 return 합니다.",
     type: UserResponse,
   })
-  @ApiCreatedResponse({ description: "사용자를 생성한다.", type: User })
+  @ApiCreatedResponse({ description: "사용자를 생성한다.", type: UserTypeORM })
   async createUser(@Body() user: CreateUserRequest): Promise<UserResponse> {
     return await this.authService.create(user);
   }
@@ -74,45 +74,46 @@ export class AuthController {
     });
   }
 
-  @Post("kakao/login")
-  @UseGuards(AuthGuard("kakao"))
-  @ApiOperation({
-    summary: "OAuth 2.0 카카오톡 로그인 API",
-    description: "카카오톡으로 인증하여 로그인을 구현합니다.",
-  })
-  @ApiCreatedResponse({
-    description: "JWT 토큰을 재발급합니다",
-    type: LoginUserResponse,
-  })
-  async Kakao(@GetOAuthData() data: OAuthData) {
-    return await this.authService.OAuthLogin(data);
-  }
+  // @Post("kakao/login")
+  // @UseGuards(AuthGuard("kakao"))
+  // @ApiOperation({
+  //   summary: "OAuth 2.0 카카오톡 로그인 API",
+  //   description: "카카오톡으로 인증하여 로그인을 구현합니다.",
+  // })
+  // @ApiCreatedResponse({
+  //   description: "JWT 토큰을 재발급합니다",
+  //   type: LoginUserResponse,
+  // })
+  // async Kakao(@GetOAuthData() data: OAuthData) {
 
-  @Post("naver/login")
-  @UseGuards(AuthGuard("naver"))
-  @ApiOperation({
-    summary: "OAuth 2.0 네이버 로그인 API",
-    description: "네이버으로 인증하여 로그인을 구현합니다.",
-  })
-  @ApiCreatedResponse({
-    description: "JWT 토큰을 재발급합니다",
-    type: LoginUserResponse,
-  })
-  async Naver(@GetOAuthData() data: OAuthData) {
-    return await this.authService.OAuthLogin(data);
-  }
+  //   return await this.authService.signIn(data);
+  // }
 
-  @Post("google/login")
-  @UseGuards(AuthGuard("google"))
-  @ApiOperation({
-    summary: "OAuth 2.0 구글 로그인 API",
-    description: "구글으로 인증하여 로그인을 구현입니다.",
-  })
-  @ApiCreatedResponse({
-    description: "JWT 토큰을 재발급합니다",
-    type: LoginUserResponse,
-  })
-  async Google(@GetOAuthData() data: OAuthData) {
-    return await this.authService.OAuthLogin(data);
-  }
+  // @Post("naver/login")
+  // @UseGuards(AuthGuard("naver"))
+  // @ApiOperation({
+  //   summary: "OAuth 2.0 네이버 로그인 API",
+  //   description: "네이버으로 인증하여 로그인을 구현합니다.",
+  // })
+  // @ApiCreatedResponse({
+  //   description: "JWT 토큰을 재발급합니다",
+  //   type: LoginUserResponse,
+  // })
+  // async Naver(@GetOAuthData() data: OAuthData) {
+  //   return await this.authService.OAuthLogin(data);
+  // }
+
+  // @Post("google/login")
+  // @UseGuards(AuthGuard("google"))
+  // @ApiOperation({
+  //   summary: "OAuth 2.0 구글 로그인 API",
+  //   description: "구글으로 인증하여 로그인을 구현입니다.",
+  // })
+  // @ApiCreatedResponse({
+  //   description: "JWT 토큰을 재발급합니다",
+  //   type: LoginUserResponse,
+  // })
+  // async Google(@GetOAuthData() data: OAuthData) {
+  //   return await this.authService.OAuthLogin(data);
+  // }
 }

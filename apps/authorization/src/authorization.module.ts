@@ -4,6 +4,7 @@ import { AuthorizationService } from "./authorization.service";
 import { JwtModule } from "@nestjs/jwt";
 import { JWT_EXPIREIN, JWT_SECRET } from "@app/common/config";
 import { HttpService } from "@nestjs/axios";
+import { OauthServiceFactory } from "./oauth.factory.service";
 
 @Module({
   imports: [
@@ -15,6 +16,6 @@ import { HttpService } from "@nestjs/axios";
     }),
   ],
   controllers: [AuthorizationController],
-  providers: [AuthorizationService, Logger],
+  providers: [AuthorizationService, OauthServiceFactory, Logger],
 })
 export class AuthorizationModule {}

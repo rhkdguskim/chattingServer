@@ -32,6 +32,9 @@ export class CreateUserRequest {
     message: "비밀번호는 반드시 문자와 숫자 조합으로 이루어져야 합니다.",
   })
   password: string;
+
+  access_token?: string;
+  refresh_token?: string;
 }
 
 export class LoginUserRequest {

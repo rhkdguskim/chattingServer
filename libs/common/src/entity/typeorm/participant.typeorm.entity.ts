@@ -8,28 +8,29 @@ import {
   UpdateDateColumn,
   PrimaryColumn,
 } from "typeorm";
-import { Room } from "@app/common/entity/room.entity";
-import { User } from "@app/common/entity/users.entity";
+import { RoomTypeORM } from "@app/common/entity/typeorm/room.typeorm.entity";
+import { UserTypeORM } from "@app/common/entity/typeorm/users.typeorm.entity";
+import { Participant } from "../interface/participant.entity";
 
 // 유저와 방의 Join Table
 @Entity()
-export class Participant {
+export class ParticipantTypeORM implements Participant {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @ManyToOne(() => Room, (room) => room.participant, {
+  @ManyToOne(() => RoomTypeORM, (room) => room.participant, {
     eager: false,
     nullable: false,
   })
   @JoinColumn({ name: "room_id" })
-  room!: Room;
+  room!: RoomTypeORM;
 
-  @ManyToOne(() => User, (user) => user.participant, {
+  @ManyToOne(() => UserTypeORM, (user) => user.participant, {
     eager: false,
     nullable: false,
   })
   @JoinColumn({ name: "user_id" })
-  user!: User;
+  user!: UserTypeORM;
 
   @Column()
   room_name!: string;

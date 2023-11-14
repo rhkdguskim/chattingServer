@@ -5,16 +5,14 @@ import {
   OAuthRequest,
   UpdateUserRequest,
 } from "../dto";
-import { User } from "../entity";
+import { UserTypeORM } from "../entity/typeorm";
 
 export interface IAuthenticationClient {
-  SignIn(payload: LoginUserRequest): Promise<User>;
-  SignUp(payload: CreateUserRequest): Promise<User>;
-  OAuthLogin(payload: OAuthRequest): Promise<LoginUserResponse>;
-  update(payload: UpdateUserRequest): Promise<User>;
-  delete(payload: number): Promise<User>;
-  findOne(payload: number): Promise<User>;
-  findOneByID(payload: string): Promise<User>;
-  findAll(): Promise<User[]>;
-  oAuthSignIn(payload: OAuthRequest): Promise<User>;
+  SignIn(payload: LoginUserRequest): Promise<UserTypeORM>;
+  SignUp(payload: CreateUserRequest): Promise<UserTypeORM>;
+  update(payload: UpdateUserRequest): Promise<UserTypeORM>;
+  delete(payload: number): Promise<UserTypeORM>;
+  findOne(payload: number): Promise<UserTypeORM>;
+  findOneByID(payload: string): Promise<UserTypeORM>;
+  findAll(): Promise<UserTypeORM[]>;
 }

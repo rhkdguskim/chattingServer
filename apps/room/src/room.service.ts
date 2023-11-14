@@ -6,8 +6,8 @@ import {
   LoggerService,
   ForbiddenException,
 } from "@nestjs/common";
-import { Room } from "@app/common/entity";
-import { Participant } from "@app/common/entity";
+import { RoomTypeORM } from "@app/common/entity/typeorm";
+import { ParticipantTypeORM } from "@app/common/entity/typeorm";
 import { EntityManager, Repository } from "typeorm";
 import { InjectRepository } from "@nestjs/typeorm";
 import {
@@ -17,7 +17,7 @@ import {
   RoomListResponse,
   InviteRoomRequest,
 } from "@app/common/dto/room.dto";
-import { User } from "@app/common/entity";
+import { UserTypeORM } from "@app/common/entity/typeorm";
 import { UserResponse } from "@app/common/dto";
 import { ValidateCreateRoom } from "@app/common/decoration/room.deco";
 
@@ -26,10 +26,10 @@ export class RoomService {
   constructor(
     @Inject(EntityManager) private readonly manager: EntityManager,
 
-    @InjectRepository(Room)
-    private roomRepository: Repository<Room>,
-    @InjectRepository(Participant)
-    private participantRepository: Repository<Participant>,
+    @InjectRepository(RoomTypeORM)
+    private roomRepository: Repository<RoomTypeORM>,
+    @InjectRepository(ParticipantTypeORM)
+    private participantRepository: Repository<ParticipantTypeORM>,
 
     @Inject(Logger)
     private readonly logger: LoggerService
@@ -59,19 +59,19 @@ export class RoomService {
     // 채팅방 + 참가자 트랜잭션 구현
     return await this.manager.transaction(
       async (transactionalEntityManager) => {
-        const newRoom: Room = transactionalEntityManager.create(Room, {
+        const newRoom: RoomTypeORM = transactionalEntityManager.create(RoomTypeORM, {
           owner_id: createRoomDto.id,
           type: determinedType,
           last_chat: "",
         });
-        const createdRoom: Room = await transactionalEntityManager.save(
-          Room,
+        const createdRoom: RoomTypeORM = await transactionalEntityManager.save(
+          RoomTypeORM,
           newRoom
         );
 
         for (const participantUser of createRoomDto.participant) {
           const newParticipant = transactionalEntityManager.create(
-            Participant,
+            ParticipantTypeORM,
             {
               user: participantUser,
               room: createdRoom,
@@ -79,7 +79,7 @@ export class RoomService {
             }
           );
 
-          await transactionalEntityManager.save(Participant, newParticipant);
+          await transactionalEntityManager.save(ParticipantTypeORM, newParticipant);
         }
         const roomResponse: CreateRoomResponse = {
           ...createdRoom,
@@ -90,8 +90,8 @@ export class RoomService {
     );
   }
 
-  async InviteRoom(inviteToRoom: InviteRoomRequest): Promise<Participant[]> {
-    const results: Participant[] = [];
+  async InviteRoom(inviteToRoom: InviteRoomRequest): Promise<ParticipantTypeORM[]> {
+    const results: ParticipantTypeORM[] = [];
     const { room, room_name, participants } = inviteToRoom;
 
     // 해당 방이 그룹 채팅방인지 확인
@@ -116,7 +116,7 @@ export class RoomService {
   }
 
   // 자기자신이 참가한 채팅방 Participant와 Room와 Join 하여 결과 출력
-  async GetParticipants(user: User): Promise<Participant[]> {
+  async GetParticipants(user: UserTypeORM): Promise<ParticipantTypeORM[]> {
     const rommInfo = await this.participantRepository
       .createQueryBuilder("participant")
       .where({ user: { id: user.id } })
@@ -174,11 +174,11 @@ export class RoomService {
     return response;
   }
 
-  async getRoombyID(id: number): Promise<Room | undefined> {
+  async getRoombyID(id: number): Promise<RoomTypeORM | undefined> {
     return this.roomRepository.findOne({ where: { id } });
   }
 
-  async updateRoomStatus(room: Room): Promise<Room> {
+  async updateRoomStatus(room: RoomTypeORM): Promise<RoomTypeORM> {
     return this.roomRepository.save(room);
   }
 }

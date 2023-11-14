@@ -15,7 +15,7 @@ import {
 } from "@app/common/dto/room.dto";
 import { RoomListResponse } from "@app/common/dto/room.dto";
 import { InviteRoomRequest } from "@app/common/dto/room.dto";
-import { Participant } from "@app/common/entity";
+import { ParticipantTypeORM } from "@app/common/entity/typeorm";
 import { JwtGuard } from "@src/auth/guards/auth.jwt.guard";
 
 @Controller("room")
@@ -63,11 +63,11 @@ export class RoomController {
   })
   @ApiCreatedResponse({
     description: "채팅방에 원하는 참가자를 초대합니다.",
-    type: Array<Participant>,
+    type: Array<ParticipantTypeORM>,
   })
   async InviteRoom(
     @Body() inviteToRoom: InviteRoomRequest
-  ): Promise<Participant[]> {
+  ): Promise<ParticipantTypeORM[]> {
     return this.roomService.InviteRoom(inviteToRoom);
   }
 }

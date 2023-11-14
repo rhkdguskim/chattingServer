@@ -1,45 +1,36 @@
 import { Inject, Injectable, Logger, LoggerService } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { CreateUserRequest, UpdateUserRequest } from "@app/common/dto";
-import { User } from "@app/common/entity";
+import { UserTypeORM } from "@app/common/entity/typeorm";
 import { DeleteResult, Repository } from "typeorm";
 import { OAuthRequest } from "@app/common/dto";
 
 @Injectable()
 export class UserRepository {
   constructor(
-    @InjectRepository(User)
-    private userReposity: Repository<User>
+    @InjectRepository(UserTypeORM)
+    private userReposity: Repository<UserTypeORM>
   ) {}
 
-  async findAll(): Promise<User[]> {
+  async findAll(): Promise<UserTypeORM[]> {
     return await this.userReposity.find();
   }
 
-  findOne(id: number): Promise<User | null> {
+  findOne(id: number): Promise<UserTypeORM | null> {
     return this.userReposity.findOneBy({ id });
   }
 
-  async findbyUserId(user_id: string): Promise<User | null> {
+  async findbyUserId(user_id: string): Promise<UserTypeORM | null> {
     const result = await this.userReposity.findOneBy({ user_id });
     return result;
   }
 
-  async saveUser(user: UpdateUserRequest): Promise<User> {
+  async saveUser(user: UpdateUserRequest): Promise<UserTypeORM> {
     return await this.userReposity.save(user);
   }
 
-  async createUser(userDto: CreateUserRequest): Promise<User> {
+  async createUser(userDto: CreateUserRequest): Promise<UserTypeORM> {
     const newUser = await this.userReposity.create(userDto);
-    return await this.userReposity.save(newUser);
-  }
-
-  async createOAuthUser(data: OAuthRequest): Promise<User> {
-    const newUser = await this.userReposity.create({
-      ...data.user,
-      oauth_accessToken: data.access_token,
-      oauth_refreshToken: data.refresh_token,
-    });
     return await this.userReposity.save(newUser);
   }
 
@@ -47,7 +38,7 @@ export class UserRepository {
     return await this.userReposity.delete(id);
   }
 
-  async updateUser(id: number, updateData: Partial<User>) {
+  async updateUser(id: number, updateData: Partial<UserTypeORM>) {
     return await this.userReposity.update(id, updateData);
   }
 }

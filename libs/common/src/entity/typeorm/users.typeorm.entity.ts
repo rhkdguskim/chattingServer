@@ -8,12 +8,13 @@ import {
   OneToMany,
 } from "typeorm";
 import * as bsrypt from "bcrypt";
-import { Friend } from "@app/common/entity/friend.entity";
-import { Chatting } from "@app/common/entity/chatting.entity";
-import { Participant } from "@app/common/entity/participant.entity";
+import { FriendTypeORM } from "@app/common/entity/typeorm/friend.typeorm.entity";
+import { ChattingTypeORM } from "@app/common/entity/typeorm/chatting.typeorm.entity";
+import { ParticipantTypeORM } from "@app/common/entity/typeorm/participant.typeorm.entity";
+import { User } from "../interface/users.entity";
 
 @Entity()
-export class User {
+export class UserTypeORM implements User {
   @PrimaryGeneratedColumn()
   id!: number;
 
@@ -46,16 +47,16 @@ export class User {
   @UpdateDateColumn()
   updateAt!: Date;
 
-  @OneToMany((type) => Friend, (friend) => friend.user, { eager: false })
-  friends: Friend[];
+  @OneToMany((type) => FriendTypeORM, (friend) => friend.user, { eager: false })
+  friends: FriendTypeORM[];
 
-  @OneToMany((type) => Chatting, (chatting) => chatting.user, { eager: false })
-  chatting: Chatting[];
+  @OneToMany((type) => ChattingTypeORM, (chatting) => chatting.user, { eager: false })
+  chatting: ChattingTypeORM[];
 
-  @OneToMany((type) => Participant, (participant) => participant.user, {
+  @OneToMany((type) => ParticipantTypeORM, (participant) => participant.user, {
     eager: false,
   })
-  participant: Participant[];
+  participant: ParticipantTypeORM[];
 
   @Column({ nullable: true })
   refreshToken: string;

@@ -1,7 +1,7 @@
 import { Injectable, Inject, Logger, LoggerService } from "@nestjs/common";
-import { Chatting, Room } from "@app/common/entity";
-import { Participant } from "@app/common/entity";
-import { User } from "@app/common/entity";
+import { ChattingTypeORM, RoomTypeORM } from "@app/common/entity/typeorm";
+import { ParticipantTypeORM } from "@app/common/entity/typeorm";
+import { UserTypeORM } from "@app/common/entity/typeorm";
 
 import { Equal, Repository } from "typeorm";
 import { InjectRepository } from "@nestjs/typeorm";
@@ -11,11 +11,11 @@ import { ChattingListRequest } from "@app/common/dto/chat";
 @Injectable()
 export class ChatService {
   constructor(
-    @InjectRepository(Chatting)
-    private chattingRepository: Repository<Chatting>,
+    @InjectRepository(ChattingTypeORM)
+    private chattingRepository: Repository<ChattingTypeORM>,
 
-    @InjectRepository(Participant)
-    private participantRepository: Repository<Participant>,
+    @InjectRepository(ParticipantTypeORM)
+    private participantRepository: Repository<ParticipantTypeORM>,
 
     @Inject(Logger)
     private readonly logger: LoggerService
@@ -23,9 +23,9 @@ export class ChatService {
 
   async createChatting(
     requestMessage: RequestMessage,
-    user: User,
-    room: Room
-  ): Promise<Chatting> {
+    user: UserTypeORM,
+    room: RoomTypeORM
+  ): Promise<ChattingTypeORM> {
     const participantsCount = await this.participantRepository.count({
       where: {
         room: { id: room.id },
@@ -42,25 +42,25 @@ export class ChatService {
     return this.chattingRepository.save(chatting);
   }
 
-  async findChattingById(id: number): Promise<Chatting> {
+  async findChattingById(id: number): Promise<ChattingTypeORM> {
     return await this.chattingRepository.findOne({
       where: { id },
       relations: ["readBys"],
     });
   }
 
-  async findChattingsByRoomId(id: number): Promise<Chatting[]> {
+  async findChattingsByRoomId(id: number): Promise<ChattingTypeORM[]> {
     return await this.chattingRepository.find({
       where: { room: { id } },
       relations: ["readBys"],
     });
   }
 
-  async updateChatting(chat: Chatting): Promise<Chatting> {
+  async updateChatting(chat: ChattingTypeORM): Promise<ChattingTypeORM> {
     return await this.chattingRepository.save(chat);
   }
 
-  async readChatting(user: User, room: Room): Promise<Chatting[]> {
+  async readChatting(user: UserTypeORM, room: RoomTypeORM): Promise<ChattingTypeORM[]> {
     return await this.chattingRepository.find({
       where: { user: { id: user.id }, room: { id: room.id } },
     });
