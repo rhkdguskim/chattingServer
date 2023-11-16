@@ -6,8 +6,8 @@ import {
   LoggerService,
   ForbiddenException,
 } from "@nestjs/common";
-import { RoomTypeORM } from "@app/common/entity/typeorm";
-import { ParticipantTypeORM } from "@app/common/entity/typeorm";
+import { RoomTypeORM } from "@app/common/typeorm/entity";
+import { ParticipantTypeORM } from "@app/common/typeorm/entity";
 import { EntityManager, Repository } from "typeorm";
 import { InjectRepository } from "@nestjs/typeorm";
 import {
@@ -17,7 +17,7 @@ import {
   RoomListResponse,
   InviteRoomRequest,
 } from "@app/common/dto/room.dto";
-import { UserTypeORM } from "@app/common/entity/typeorm";
+import { UserTypeORM } from "@app/common/typeorm/entity";
 import { UserResponse } from "@app/common/dto";
 import { ValidateCreateRoom } from "@app/common/decoration/room.deco";
 

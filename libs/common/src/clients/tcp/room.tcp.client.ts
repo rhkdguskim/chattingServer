@@ -6,7 +6,7 @@ import {
   CreateRoomResponse,
   InviteRoomRequest,
 } from "@app/common/dto/room.dto";
-import { RoomTypeORM, ParticipantTypeORM, UserTypeORM } from "@app/common/entity/typeorm";
+import { RoomTypeORM, ParticipantTypeORM, UserTypeORM } from "@app/common/typeorm/entity";
 import {
   CREATE_ROOM,
   FIND_ALL_PARTICIPANT,

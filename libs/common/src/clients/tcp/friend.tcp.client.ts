@@ -6,7 +6,7 @@ import {
   CreateFriendResponse,
   DelteFriendRequest,
 } from "@app/common/dto/friend.createfriend.dto";
-import { FriendTypeORM } from "@app/common/entity/typeorm";
+import { FriendTypeORM } from "@app/common/typeorm/entity";
 import { UserResponse } from "@app/common/dto";
 import { lastValueFrom } from "rxjs";
 import {

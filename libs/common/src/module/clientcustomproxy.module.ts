@@ -1,7 +1,7 @@
 import { Module, DynamicModule, Global } from "@nestjs/common";
-import { AUTHENTICATION_SERVICE } from "../message/authentication";
+import { AUTHENTICATION_SERVICE } from "../../../../apps/authentication/src/authentication.message";
 import { AUTHORIZATION_SERVICE } from "../message/authorization";
-import { AuthenticationTCPClient } from "../clients/tcp/authentication.tcp.client";
+import { AuthenticationTCPClient } from "../../../../apps/authentication/src/authentication.tcpproxy.service";
 import { AuthorizaionTCPClient } from "../clients/tcp/authorization.tcp.client";
 import {
   ClientOptions,
@@ -16,7 +16,7 @@ import { CHAT_SERVICE } from "../message/chat";
 import { ChatTCPClient } from "../clients/tcp/chat.tcp.client";
 import { AuthorizationService } from "apps/authorization/src/authorization.service";
 import { FriendService } from "apps/friend/src/friend.service";
-import { AuthenticationService } from "apps/authentication/src/authentication.service";
+import { AuthenticationServiceImpl } from "apps/authentication/src/authentication.service";
 import { RoomService } from "apps/room/src/room.service";
 import { ChatService } from "apps/chat/src/chat.service";
 interface ClientCustomProxy {
@@ -38,7 +38,7 @@ const tcpClientFactoryMap = {
 };
 
 const localClientFactoryMap = {
-  [AUTHENTICATION_SERVICE]: AuthenticationService,
+  [AUTHENTICATION_SERVICE]: AuthenticationServiceImpl,
   [AUTHORIZATION_SERVICE]: AuthorizationService,
   [FRIEND_SERVICE]: FriendService,
   [ROOM_SERVICE]: RoomService,

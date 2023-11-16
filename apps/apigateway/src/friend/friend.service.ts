@@ -1,5 +1,5 @@
 import { Inject, Injectable } from "@nestjs/common";
-import { FriendTypeORM } from "@app/common/entity/typeorm";
+import { FriendTypeORM } from "@app/common/typeorm/entity";
 import { DeleteResult } from "typeorm";
 import {
   CreateFriendRequest,

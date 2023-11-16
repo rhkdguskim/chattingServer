@@ -5,7 +5,7 @@ import { LoggingInterceptor } from "@app/common/interceptor";
 import { Logger } from "@nestjs/common";
 import { utilities, WinstonModule } from "nest-winston";
 import * as winston from "winston";
-import { AUTHENTICATION_SERVICE } from "@app/common/message/authentication";
+import { AUTHENTICATION_SERVICE } from "apps/authentication/src/authentication.message";
 import {
   AUTHENTICATION_HOST,
   AUTHENTICATION_PORT,
@@ -15,7 +15,7 @@ import { RcpExceptionsFilter } from "@app/common/exception/exception.filter";
 
 async function bootstrap() {
   const app = await NestFactory.createMicroservice<MicroserviceOptions>(
-    AuthenticationModule,
+    AuthenticationModule.forRoot({isDev : false, isMicroService:true}),
     {
       logger: WinstonModule.createLogger({
         level: LOGLEVEL,

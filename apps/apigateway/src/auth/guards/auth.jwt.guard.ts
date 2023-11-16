@@ -6,11 +6,11 @@ import {
   Logger,
   UnauthorizedException,
 } from "@nestjs/common";
-import { AUTHENTICATION_SERVICE } from "@app/common/message/authentication";
+import { AUTHENTICATION_SERVICE } from "apps/authentication/src/authentication.message";
 import { AUTHORIZATION_SERVICE } from "@app/common/message/authorization";
 import { Request } from "express";
 import { IAuthorizaionClient } from "@app/common/clients/authorization.interface.client";
-import { IAuthenticationClient } from "@app/common/clients/authenication.interface.client";
+import { AuthenticationClient } from "apps/authentication/src/authentication.interface";
 
 @Injectable()
 export class JwtGuard implements CanActivate {
@@ -19,7 +19,7 @@ export class JwtGuard implements CanActivate {
     @Inject(AUTHORIZATION_SERVICE)
     private authorizationClient: IAuthorizaionClient,
     @Inject(AUTHENTICATION_SERVICE)
-    private authenticationClient: IAuthenticationClient
+    private authenticationClient: AuthenticationClient
   ) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {

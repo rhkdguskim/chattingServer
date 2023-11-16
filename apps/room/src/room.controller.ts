@@ -8,8 +8,8 @@ import {
   RoomListResponse,
   InviteRoomRequest,
 } from "@app/common/dto/room.dto";
-import { RoomTypeORM } from "@app/common/entity/typeorm";
-import { ParticipantTypeORM } from "@app/common/entity/typeorm";
+import { RoomTypeORM } from "@app/common/typeorm/entity";
+import { ParticipantTypeORM } from "@app/common/typeorm/entity";
 import { MessagePattern } from "@nestjs/microservices";
 import {
   CREATE_ROOM,
@@ -19,7 +19,7 @@ import {
   INVITE_ROOM,
   UPDATE_ROOM,
 } from "@app/common/message/room";
-import { UserTypeORM } from "@app/common/entity/typeorm";
+import { UserTypeORM } from "@app/common/typeorm/entity";
 
 @Controller("room")
 @ApiTags("채팅방")

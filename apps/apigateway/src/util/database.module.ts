@@ -1,11 +1,11 @@
 import { Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { UserTypeORM } from "@app/common/entity/typeorm";
-import { FriendTypeORM } from "@app/common/entity/typeorm";
-import { ChattingTypeORM } from "@app/common/entity/typeorm";
-import { RoomTypeORM } from "@app/common/entity/typeorm";
-import { ParticipantTypeORM } from "@app/common/entity/typeorm";
-import { ReadByTypeORM } from "@app/common/entity/typeorm";
+import { UserTypeORM } from "@app/common/typeorm/entity";
+import { FriendTypeORM } from "@app/common/typeorm/entity";
+import { ChattingTypeORM } from "@app/common/typeorm/entity";
+import { RoomTypeORM } from "@app/common/typeorm/entity";
+import { ParticipantTypeORM } from "@app/common/typeorm/entity";
+import { ReadByTypeORM } from "@app/common/typeorm/entity";
 import * as config from "config";
 
 const dbConfig = config.get("db");

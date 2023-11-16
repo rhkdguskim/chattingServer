@@ -5,7 +5,7 @@ import {
   Logger,
 } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { FriendTypeORM } from "@app/common/entity/typeorm";
+import { FriendTypeORM } from "@app/common/typeorm/entity";
 import { DeleteResult, Repository } from "typeorm";
 import {
   CreateFriendRequest,

@@ -23,7 +23,7 @@ db:
   username: 'root'
   password: 'root'
   database: 'kwangtalk'
-  synchronize: true
+  synchronize: false
 
 jwt:
   expiresIn: 3600

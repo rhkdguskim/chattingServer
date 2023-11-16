@@ -1,5 +1,5 @@
 import { RoomListResponse, CreateRoomReqeust, CreateRoomResponse, InviteRoomRequest } from "@app/common/dto/room.dto";
-import { RoomTypeORM, ParticipantTypeORM, UserTypeORM } from "@app/common/entity/typeorm";
+import { RoomTypeORM, ParticipantTypeORM, UserTypeORM } from "@app/common/typeorm/entity";
 import { IRoomClient } from "../room.interface.client";
 
 export class RoomLocalClient implements IRoomClient {

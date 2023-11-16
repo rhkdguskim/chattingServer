@@ -1,9 +1,9 @@
 import { Entity, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from "typeorm";
-import { ChattingTypeORM } from "@app/common/entity/typeorm/chatting.typeorm.entity";
-import { UserTypeORM } from "@app/common/entity/typeorm/users.typeorm.entity";
-import { ReadBy } from "../interface/readby.entity";
+import { ChattingTypeORM } from "@app/common/typeorm/entity/chatting.typeorm.entity";
+import { UserTypeORM } from "@app/common/typeorm/entity/users.typeorm.entity";
+import { ReadBy } from "../../entity/readby.entity";
 
-@Entity()
+@Entity({ name: "Readby" })
 export class ReadByTypeORM implements ReadBy {
   @PrimaryGeneratedColumn()
   id!: number;

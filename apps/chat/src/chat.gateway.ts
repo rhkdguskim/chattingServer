@@ -18,13 +18,13 @@ import {
   ResponseSingleRead,
 } from "@app/common/dto/chat";
 import { RoomType } from "@app/common/dto/room.dto";
-import { UserTypeORM } from "@app/common/entity/typeorm";
-import { RoomTypeORM } from "@app/common/entity/typeorm";
-import { ChattingTypeORM, ParticipantTypeORM } from "@app/common/entity/typeorm";
+import { UserTypeORM } from "@app/common/typeorm/entity";
+import { RoomTypeORM } from "@app/common/typeorm/entity";
+import { ChattingTypeORM, ParticipantTypeORM } from "@app/common/typeorm/entity";
 
 import { Socket } from "socket.io";
 import { GetWsUser } from "@app/common/decoration/auth.decorator";
-import { ReadByTypeORM } from "@app/common/entity/typeorm";
+import { ReadByTypeORM } from "@app/common/typeorm/entity";
 import {
   FIND_ALL_PARTICIPANT,
   FIND_ROOM,

@@ -8,11 +8,11 @@ import {
   Unique,
   Generated,
 } from "typeorm";
-import { ParticipantTypeORM } from "@app/common/entity/typeorm/participant.typeorm.entity";
-import { ChattingTypeORM } from "@app/common/entity/typeorm/chatting.typeorm.entity";
-import { Room } from "../interface/room.entity";
+import { ParticipantTypeORM } from "@app/common/typeorm/entity/participant.typeorm.entity";
+import { ChattingTypeORM } from "@app/common/typeorm/entity/chatting.typeorm.entity";
+import { Room } from "../../entity/room.entity";
 
-@Entity()
+@Entity({ name: "Room" })
 export class RoomTypeORM implements Room {
   @PrimaryGeneratedColumn()
   id!: number;

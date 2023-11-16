@@ -8,12 +8,12 @@ import {
   OneToMany,
 } from "typeorm";
 import * as bsrypt from "bcrypt";
-import { FriendTypeORM } from "@app/common/entity/typeorm/friend.typeorm.entity";
-import { ChattingTypeORM } from "@app/common/entity/typeorm/chatting.typeorm.entity";
-import { ParticipantTypeORM } from "@app/common/entity/typeorm/participant.typeorm.entity";
-import { User } from "../interface/users.entity";
+import { FriendTypeORM } from "@app/common/typeorm/entity/friend.typeorm.entity";
+import { ChattingTypeORM } from "@app/common/typeorm/entity/chatting.typeorm.entity";
+import { ParticipantTypeORM } from "@app/common/typeorm/entity/participant.typeorm.entity";
+import { User } from "../../entity/users.entity";
 
-@Entity()
+@Entity({ name: "User" })
 export class UserTypeORM implements User {
   @PrimaryGeneratedColumn()
   id!: number;

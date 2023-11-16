@@ -22,11 +22,11 @@ import {
   SIGN_UP,
   SIGN_IN,
   GET_NEW_TOKEN,
-} from "@app/common/message/authentication";
+} from "apps/authentication/src/authentication.message";
 import { ClientProxy } from "@nestjs/microservices";
 import { lastValueFrom } from "rxjs";
-import { UserTypeORM } from "@app/common/entity/typeorm";
-import { IAuthenticationClient } from "@app/common/clients/authenication.interface.client";
+import { UserTypeORM } from "@app/common/typeorm/entity";
+import { AuthenticationClient } from "apps/authentication/src/authentication.interface";
 import { IAuthorizaionClient } from "@app/common/clients/authorization.interface.client";
 
 @Injectable()
@@ -34,7 +34,7 @@ export class AuthService {
   constructor(
     @Inject(Logger) private logger: Logger,
     @Inject(AUTHENTICATION_SERVICE)
-    private authenticationClient: IAuthenticationClient,
+    private authenticationClient: AuthenticationClient,
     @Inject(AUTHORIZATION_SERVICE)
     private authorizationClient: IAuthorizaionClient
   ) {}

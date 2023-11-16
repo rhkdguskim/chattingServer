@@ -10,7 +10,7 @@ import {
   Param,
 } from "@nestjs/common";
 import { FriendService } from "./friend.service";
-import { FriendTypeORM } from "@app/common/entity/typeorm";
+import { FriendTypeORM } from "@app/common/typeorm/entity";
 import { ApiTags, ApiOperation, ApiCreatedResponse, ApiBasicAuth, ApiSecurity } from "@nestjs/swagger";
 import {
   CreateFriendRequest,

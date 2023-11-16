@@ -13,7 +13,7 @@ import {
   DelteFriendRequest,
   FindFriendAllRequest,
 } from "@app/common/dto/friend.createfriend.dto";
-import { FriendTypeORM } from "@app/common/entity/typeorm";
+import { FriendTypeORM } from "@app/common/typeorm/entity";
 
 @Controller()
 export class FriendController {

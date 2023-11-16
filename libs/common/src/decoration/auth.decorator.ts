@@ -1,6 +1,6 @@
 import { createParamDecorator, ExecutionContext } from "@nestjs/common";
 import { Socket } from "socket.io";
-import { UserTypeORM } from "@app/common/entity/typeorm";
+import { UserTypeORM } from "@app/common/typeorm/entity";
 
 export const GetUser = createParamDecorator(
   (data, ctx: ExecutionContext): UserTypeORM => {

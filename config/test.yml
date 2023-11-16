@@ -4,7 +4,7 @@ db:
   port: 30804
   username: 'root'
   password: 'root'
-  database: 'test'
+  database: 'kwangtalk'
   synchronize: false
 
 log:

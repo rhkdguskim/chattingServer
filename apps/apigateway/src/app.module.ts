@@ -7,7 +7,7 @@ import { UsersModule } from "@src/users/users.module";
 import { FileModule } from "@src/file/file.module";
 import { DatabaseModule } from "@src/util/database.module";
 import { CacheRedisModule } from "@src/util/cacheRedis.module";
-import { AUTHENTICATION_SERVICE } from "@app/common/message/authentication";
+import { AUTHENTICATION_SERVICE } from "apps/authentication/src/authentication.message";
 import {
   AUTHENTICATION_HOST,
   AUTHENTICATION_PORT,

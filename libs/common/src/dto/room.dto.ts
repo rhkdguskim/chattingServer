@@ -1,6 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { ArrayMinSize, IsNumber, IsString } from "class-validator";
-import { RoomTypeORM, UserTypeORM } from "@app/common/entity/typeorm";
+import { RoomTypeORM, UserTypeORM } from "@app/common/typeorm/entity";
 import { UserResponse } from "@app/common/dto/index";
 
 export enum RoomType {

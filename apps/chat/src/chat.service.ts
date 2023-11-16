@@ -1,7 +1,7 @@
 import { Injectable, Inject, Logger, LoggerService } from "@nestjs/common";
-import { ChattingTypeORM, RoomTypeORM } from "@app/common/entity/typeorm";
-import { ParticipantTypeORM } from "@app/common/entity/typeorm";
-import { UserTypeORM } from "@app/common/entity/typeorm";
+import { ChattingTypeORM, RoomTypeORM } from "@app/common/typeorm/entity";
+import { ParticipantTypeORM } from "@app/common/typeorm/entity";
+import { UserTypeORM } from "@app/common/typeorm/entity";
 
 import { Equal, Repository } from "typeorm";
 import { InjectRepository } from "@nestjs/typeorm";

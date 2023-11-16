@@ -5,7 +5,7 @@ import {
   RoomType,
 } from "@app/common/dto/room.dto";
 import { ForbiddenException } from "@nestjs/common";
-import { RoomTypeORM } from "@app/common/entity/typeorm";
+import { RoomTypeORM } from "@app/common/typeorm/entity";
 
 export function ValidateCreateRoom() {
   return function (

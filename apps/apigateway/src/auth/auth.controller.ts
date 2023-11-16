@@ -12,7 +12,7 @@ import { HttpCacheInterceptor } from "@src/common/interceptors/httpcache.interce
 import { CacheEvict } from "@src/common/decorator/cache-decorator";
 import { AuthGuard } from "@nestjs/passport";
 import { OAuthData } from "@app/common/dto/oauth.dto";
-import { UserTypeORM } from "@app/common/entity/typeorm";
+import { UserTypeORM } from "@app/common/typeorm/entity";
 import {
   CreateUserRequest,
   LoginUserRequest,

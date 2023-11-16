@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { IOauthService, OauthService } from "./oauth.service";
-import { CustomRpcExceptionException, RpcExceptionType } from "@app/common/exception/customrpcexception.exception";
+import { CustomException, ExceptionType } from "@app/common/exception/custom.exception";
 
 interface OauthServiceConfig {
     name : string,
@@ -24,8 +24,8 @@ export class OauthServiceFactory {
             return this.OauthServices.get(key)
         }
         else {
-            throw new CustomRpcExceptionException({
-                code : RpcExceptionType.AUTHENTICATION_ERROR,
+            throw new CustomException({
+                code : ExceptionType.AUTHENTICATION_ERROR,
                 message : `There is no Instance name of ${key}`
             })
         }   

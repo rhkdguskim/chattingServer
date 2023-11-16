@@ -10,13 +10,13 @@ import {
   Logger,
   LoggerService,
 } from '@nestjs/common';
-import { CustomRpcExceptionException } from './customrpcexception.exception';
+import { CustomException } from './custom.exception';
 import { Observable, throwError } from 'rxjs';
 
-@Catch(CustomRpcExceptionException)
-export class RcpExceptionsFilter implements RpcExceptionFilter<CustomRpcExceptionException> {
+@Catch(CustomException)
+export class RcpExceptionsFilter implements RpcExceptionFilter<CustomException> {
   constructor(private readonly logger: LoggerService) {}
-  catch(exception: CustomRpcExceptionException, host: ArgumentsHost): Observable<any> {
+  catch(exception: CustomException, host: ArgumentsHost): Observable<any> {
     this.logger.error(exception.getMessage())
     return throwError(() => exception.getError());
   }

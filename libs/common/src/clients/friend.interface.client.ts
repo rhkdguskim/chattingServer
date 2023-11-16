@@ -5,7 +5,7 @@ import {
   CreateFriendResponse,
   DelteFriendRequest,
 } from "../dto/friend.createfriend.dto";
-import { FriendTypeORM } from "../entity/typeorm";
+import { FriendTypeORM } from "../typeorm/entity";
 
 export interface IFriendClient {
   findAllFriend(payload: FindFriendAllRequest): Promise<UserResponse[]>;

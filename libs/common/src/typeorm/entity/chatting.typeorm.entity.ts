@@ -8,12 +8,12 @@ import {
   JoinColumn,
   OneToMany,
 } from "typeorm";
-import { RoomTypeORM } from "@app/common/entity/typeorm/room.typeorm.entity";
-import { UserTypeORM } from "@app/common/entity/typeorm/users.typeorm.entity";
-import { ReadByTypeORM } from "@app/common/entity/typeorm/readby.typeorm.entity";
-import { Chatting } from "../interface/chatting.entity";
+import { RoomTypeORM } from "@app/common/typeorm/entity/room.typeorm.entity";
+import { UserTypeORM } from "@app/common/typeorm/entity/users.typeorm.entity";
+import { ReadByTypeORM } from "@app/common/typeorm/entity/readby.typeorm.entity";
+import { Chatting } from "../../entity/chatting.entity";
 
-@Entity()
+@Entity({name: "Chatting"})
 export class ChattingTypeORM implements Chatting {
   @PrimaryGeneratedColumn()
   id!: number;

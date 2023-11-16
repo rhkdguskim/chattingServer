@@ -3,24 +3,28 @@ https://docs.nestjs.com/exception-filters#custom-exceptions
 */
 import { RpcException } from '@nestjs/microservices';
 
-export enum RpcExceptionType {
+export enum ExceptionType {
   AUTHENTICATION_ERROR = '인증에러',
   AUTHORIZAION_ERROR = '인가에러',
 }
 
-export interface CustomRpcExceptionMessage {
+export interface CustomExceptionMessage {
   message : string;
-  code : RpcExceptionType;
+  code : ExceptionType;
 }
 
-export class CustomRpcExceptionException extends RpcException {
-  private msg : CustomRpcExceptionMessage;
-  constructor(msg :CustomRpcExceptionMessage) {
-    super(msg);
+export class CustomException extends Error {
+  private msg : CustomExceptionMessage;
+  constructor(msg :CustomExceptionMessage) {
+    super();
     this.msg  = msg
   }
   
   getMessage() : string {
     return this.msg.message
+  }
+
+  getError() : CustomExceptionMessage {
+    return this.msg;
   }
 }

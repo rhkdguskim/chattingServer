@@ -1,15 +1,48 @@
-import { Logger, Module } from "@nestjs/common";
-import { AuthenticationController } from "./authentication.controller";
-import { AuthenticationService } from "./authentication.service";
-import { DatabaseModule } from "@app/common/module";
-import { UserTypeORM } from "@app/common/entity/typeorm";
+import { DynamicModule, Logger, Module } from "@nestjs/common";
+import { AuthenticationMicroServiceTCPController } from "./authentication.microservice.tcp.controller";
+import { AuthenticationServiceImpl } from "./authentication.service";
+import { typeOrmConfig } from "@app/common/module";
+import { UserTypeORM } from "@app/common/typeorm/entity";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { UserRepository } from "./users.repository";
+import { UserTypeORMRepository } from "../../../libs/common/src/typeorm/repository/users.typeorm.repository";
 import { AuthenticationDomain } from "./authentication.domain";
+import { AUTHENTICATION_SERVICE, USER_REPOSITORY } from "apps/authentication/src/authentication.interface";
+import { AuthenticationMockService } from "./test/authentication.mock.service";
+import { UserMockRepository } from "./test/users.mock.repository";
+import { AuthenticationControllerImpl } from "./authentication.controller";
 
-@Module({
-  imports: [DatabaseModule(), TypeOrmModule.forFeature([UserTypeORM])],
-  controllers: [AuthenticationController],
-  providers: [AuthenticationService, AuthenticationDomain, UserRepository, Logger],
-})
-export class AuthenticationModule {}
+export interface AuthenticationModuleConfig {
+  isDev : boolean
+  isMicroService : boolean
+}
+@Module({})
+export class AuthenticationModule {
+  static forRoot(config :AuthenticationModuleConfig): DynamicModule {
+    const authenticationServiceProvider = {
+      provide: AUTHENTICATION_SERVICE,
+      useClass: config.isDev ? AuthenticationMockService : AuthenticationServiceImpl,
+    };
+
+    const userRepositoryProvider = {
+      provide: USER_REPOSITORY,
+      useClass: config.isDev ? UserMockRepository : UserTypeORMRepository,
+    };
+
+    const AuthenticationController = config.isMicroService ? AuthenticationMicroServiceTCPController : AuthenticationControllerImpl
+
+    return {
+      module: AuthenticationModule,
+      imports: [
+        TypeOrmModule.forRoot(typeOrmConfig),
+        TypeOrmModule.forFeature([UserTypeORM]),
+      ],
+      controllers: [AuthenticationController],
+      providers: [
+        authenticationServiceProvider,
+        userRepositoryProvider,
+        AuthenticationDomain,
+        Logger,
+      ],
+    };
+  }
+}

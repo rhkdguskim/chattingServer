@@ -7,10 +7,10 @@ import {
   UpdateDateColumn,
   JoinColumn,
 } from "typeorm";
-import { UserTypeORM } from "@app/common/entity/typeorm/users.typeorm.entity";
-import { Friend } from "../interface/friend.entity";
+import { UserTypeORM } from "@app/common/typeorm/entity/users.typeorm.entity";
+import { Friend } from "../../entity/friend.entity";
 
-@Entity()
+@Entity({name: "Friend"})
 export class FriendTypeORM implements Friend {
   @PrimaryGeneratedColumn()
   id!: number;

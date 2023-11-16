@@ -15,7 +15,7 @@ import {
 } from "@app/common/dto/room.dto";
 import { RoomListResponse } from "@app/common/dto/room.dto";
 import { InviteRoomRequest } from "@app/common/dto/room.dto";
-import { ParticipantTypeORM } from "@app/common/entity/typeorm";
+import { ParticipantTypeORM } from "@app/common/typeorm/entity";
 import { JwtGuard } from "@src/auth/guards/auth.jwt.guard";
 
 @Controller("room")

@@ -1,14 +1,14 @@
 import { Inject, Injectable, Logger, LoggerService } from "@nestjs/common";
-import { UserTypeORM } from "@app/common/entity/typeorm";
-import { AUTHENTICATION_SERVICE } from "@app/common/message/authentication";
-import { IAuthenticationClient } from "@app/common/clients/authenication.interface.client";
+import { UserTypeORM } from "@app/common/typeorm/entity";
+import { AUTHENTICATION_SERVICE } from "apps/authentication/src/authentication.message";
+import { AuthenticationClient } from "apps/authentication/src/authentication.interface";
 import { UpdateUserRequest } from "@app/common/dto";
 
 @Injectable()
 export class UsersService {
   constructor(
     @Inject(AUTHENTICATION_SERVICE)
-    private readonly userClient: IAuthenticationClient
+    private readonly userClient: AuthenticationClient
   ) {}
 
   async findAll(): Promise<UserTypeORM[]> {

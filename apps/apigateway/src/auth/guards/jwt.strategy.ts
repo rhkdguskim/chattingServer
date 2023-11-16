@@ -12,14 +12,14 @@ import { UsersService } from "@src/users/users.service";
 import { Request } from "express";
 import { CACHE_MANAGER } from "@nestjs/cache-manager";
 import { Cache } from "cache-manager";
-import { UserTypeORM } from "@app/common/entity/typeorm";
+import { UserTypeORM } from "@app/common/typeorm/entity";
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy, "jwt") {
   constructor(
     private userService: UsersService,
     @Inject(CACHE_MANAGER)
-    private cacheManager: Cache, // CacheManager 추가
+    private cacheManager: Cache,
     @Inject(Logger)
     private readonly logger: LoggerService
   ) {

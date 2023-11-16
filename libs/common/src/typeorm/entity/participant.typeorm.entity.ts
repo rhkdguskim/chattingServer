@@ -8,12 +8,12 @@ import {
   UpdateDateColumn,
   PrimaryColumn,
 } from "typeorm";
-import { RoomTypeORM } from "@app/common/entity/typeorm/room.typeorm.entity";
-import { UserTypeORM } from "@app/common/entity/typeorm/users.typeorm.entity";
-import { Participant } from "../interface/participant.entity";
+import { RoomTypeORM } from "@app/common/typeorm/entity/room.typeorm.entity";
+import { UserTypeORM } from "@app/common/typeorm/entity/users.typeorm.entity";
+import { Participant } from "../../entity/participant.entity";
 
 // 유저와 방의 Join Table
-@Entity()
+@Entity({ name: "Participant" })
 export class ParticipantTypeORM implements Participant {
   @PrimaryGeneratedColumn()
   id!: number;
