@@ -1,4 +1,4 @@
-import { APP_FILTER } from '@nestjs/core';
+import { APP_FILTER } from "@nestjs/core";
 import { Module } from "@nestjs/common";
 import { AuthModule } from "@src/auth/auth.module";
 import { FriendModule } from "@src/friend/friend.module";
@@ -79,4 +79,4 @@ import { CHAT_SERVICE } from "@app/common/message/chat";
   ],
   controllers: [],
 })
-export class AppModule { }
+export class AppModule {}

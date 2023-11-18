@@ -11,7 +11,13 @@ import {
 } from "@nestjs/common";
 import { FriendService } from "./friend.service";
 import { FriendTypeORM } from "@app/common/typeorm/entity";
-import { ApiTags, ApiOperation, ApiCreatedResponse, ApiBasicAuth, ApiSecurity } from "@nestjs/swagger";
+import {
+  ApiTags,
+  ApiOperation,
+  ApiCreatedResponse,
+  ApiBasicAuth,
+  ApiSecurity,
+} from "@nestjs/swagger";
 import {
   CreateFriendRequest,
   CreateFriendResponse,
@@ -22,7 +28,7 @@ import { UserResponse } from "@app/common/dto";
 
 @Controller("friend")
 @UseGuards(JwtGuard)
-@ApiSecurity('authentication')
+@ApiSecurity("authentication")
 @ApiTags("친구")
 export class FriendController {
   constructor(private friendService: FriendService) {}
@@ -65,7 +71,9 @@ export class FriendController {
     type: CreateFriendResponse,
   })
   @ApiCreatedResponse({ description: "등록된 친구중 친구정보를 변경합니다." })
-  async ModFriend(@Body() createFriend: CreateFriendRequest): Promise<FriendTypeORM> {
+  async ModFriend(
+    @Body() createFriend: CreateFriendRequest
+  ): Promise<FriendTypeORM> {
     return this.friendService.changeFriendName(createFriend);
   }
 

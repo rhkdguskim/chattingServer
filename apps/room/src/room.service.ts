@@ -59,11 +59,14 @@ export class RoomService {
     // 채팅방 + 참가자 트랜잭션 구현
     return await this.manager.transaction(
       async (transactionalEntityManager) => {
-        const newRoom: RoomTypeORM = transactionalEntityManager.create(RoomTypeORM, {
-          owner_id: createRoomDto.id,
-          type: determinedType,
-          last_chat: "",
-        });
+        const newRoom: RoomTypeORM = transactionalEntityManager.create(
+          RoomTypeORM,
+          {
+            owner_id: createRoomDto.id,
+            type: determinedType,
+            last_chat: "",
+          }
+        );
         const createdRoom: RoomTypeORM = await transactionalEntityManager.save(
           RoomTypeORM,
           newRoom
@@ -79,7 +82,10 @@ export class RoomService {
             }
           );
 
-          await transactionalEntityManager.save(ParticipantTypeORM, newParticipant);
+          await transactionalEntityManager.save(
+            ParticipantTypeORM,
+            newParticipant
+          );
         }
         const roomResponse: CreateRoomResponse = {
           ...createdRoom,
@@ -90,7 +96,9 @@ export class RoomService {
     );
   }
 
-  async InviteRoom(inviteToRoom: InviteRoomRequest): Promise<ParticipantTypeORM[]> {
+  async InviteRoom(
+    inviteToRoom: InviteRoomRequest
+  ): Promise<ParticipantTypeORM[]> {
     const results: ParticipantTypeORM[] = [];
     const { room, room_name, participants } = inviteToRoom;
 

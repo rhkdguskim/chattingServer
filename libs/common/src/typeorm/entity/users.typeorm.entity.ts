@@ -50,7 +50,9 @@ export class UserTypeORM implements User {
   @OneToMany((type) => FriendTypeORM, (friend) => friend.user, { eager: false })
   friends: FriendTypeORM[];
 
-  @OneToMany((type) => ChattingTypeORM, (chatting) => chatting.user, { eager: false })
+  @OneToMany((type) => ChattingTypeORM, (chatting) => chatting.user, {
+    eager: false,
+  })
   chatting: ChattingTypeORM[];
 
   @OneToMany((type) => ParticipantTypeORM, (participant) => participant.user, {

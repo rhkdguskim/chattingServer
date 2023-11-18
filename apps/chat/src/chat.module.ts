@@ -1,14 +1,17 @@
 import { Logger, Module } from "@nestjs/common";
 import { ChatController } from "./chat.controller";
 import { ChatService } from "./chat.service";
-import { DatabaseModule } from "@app/common/module";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { ChattingTypeORM, ParticipantTypeORM } from "@app/common/typeorm/entity";
+import {
+  ChattingTypeORM,
+  ParticipantTypeORM,
+} from "@app/common/typeorm/entity";
 import { ChatGateway } from "./chat.gateway";
+import { typeOrmConfig } from "@app/common/module";
 
 @Module({
   imports: [
-    DatabaseModule(),
+    TypeOrmModule.forRoot(typeOrmConfig),
     TypeOrmModule.forFeature([ChattingTypeORM, ParticipantTypeORM]),
   ],
   controllers: [ChatController],

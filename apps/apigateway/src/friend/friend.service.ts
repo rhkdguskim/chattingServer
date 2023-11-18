@@ -32,7 +32,9 @@ export class FriendService {
     return await this.friendClient.deleteFriend(delFriend);
   }
 
-  async changeFriendName(updateFriend: CreateFriendRequest): Promise<FriendTypeORM> {
+  async changeFriendName(
+    updateFriend: CreateFriendRequest
+  ): Promise<FriendTypeORM> {
     return await this.friendClient.updateFriend(updateFriend);
   }
 }

@@ -6,7 +6,11 @@ import {
   CreateRoomResponse,
   InviteRoomRequest,
 } from "@app/common/dto/room.dto";
-import { RoomTypeORM, ParticipantTypeORM, UserTypeORM } from "@app/common/typeorm/entity";
+import {
+  RoomTypeORM,
+  ParticipantTypeORM,
+  UserTypeORM,
+} from "@app/common/typeorm/entity";
 import {
   CREATE_ROOM,
   FIND_ALL_PARTICIPANT,
@@ -32,7 +36,9 @@ export class RoomTCPClient extends ClientTCP implements IRoomClient {
     );
   }
   updateRoom(payload: RoomTypeORM): Promise<RoomTypeORM> {
-    return lastValueFrom<RoomTypeORM>(this.send<RoomTypeORM>({ cmd: UPDATE_ROOM }, payload));
+    return lastValueFrom<RoomTypeORM>(
+      this.send<RoomTypeORM>({ cmd: UPDATE_ROOM }, payload)
+    );
   }
   CreateRoom(payload: CreateRoomReqeust): Promise<CreateRoomResponse> {
     return lastValueFrom<CreateRoomResponse>(

@@ -42,7 +42,9 @@ export class AuthService {
   async signIn(loginUser: LoginUserRequest): Promise<LoginUserResponse> {
     try {
       // 1. 유저 아이디와 패스워드로 인증을 요청한다.
-      const user: UserTypeORM = await this.authenticationClient.SignIn(loginUser);
+      const user: UserTypeORM = await this.authenticationClient.SignIn(
+        loginUser
+      );
       // 2. JWT Payload의 범위를 지정한다.
       const { id, user_id } = user;
 

@@ -21,7 +21,7 @@ export class UserTypeORMRepository implements UserRepository {
   findAll(): Promise<User[]> {
     return this.userReposity.find();
   }
-  findOne(id : number): Promise<User> {
+  findOne(id: number): Promise<User> {
     return this.userReposity.findOneBy({ id });
   }
 
@@ -30,7 +30,7 @@ export class UserTypeORMRepository implements UserRepository {
     return result.affected >= 1;
   }
   async delete(id: string | number): Promise<boolean> {
-    const result : DeleteResult = await this.userReposity.delete(id);
-    return result.affected >= 1
+    const result: DeleteResult = await this.userReposity.delete(id);
+    return result.affected >= 1;
   }
 }

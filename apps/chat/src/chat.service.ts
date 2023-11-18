@@ -60,7 +60,10 @@ export class ChatService {
     return await this.chattingRepository.save(chat);
   }
 
-  async readChatting(user: UserTypeORM, room: RoomTypeORM): Promise<ChattingTypeORM[]> {
+  async readChatting(
+    user: UserTypeORM,
+    room: RoomTypeORM
+  ): Promise<ChattingTypeORM[]> {
     return await this.chattingRepository.find({
       where: { user: { id: user.id }, room: { id: room.id } },
     });

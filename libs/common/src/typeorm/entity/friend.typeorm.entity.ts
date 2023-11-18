@@ -10,7 +10,7 @@ import {
 import { UserTypeORM } from "@app/common/typeorm/entity/users.typeorm.entity";
 import { Friend } from "../../entity/friend.entity";
 
-@Entity({name: "Friend"})
+@Entity({ name: "Friend" })
 export class FriendTypeORM implements Friend {
   @PrimaryGeneratedColumn()
   id!: number;

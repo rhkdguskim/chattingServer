@@ -13,7 +13,7 @@ import { UserTypeORM } from "@app/common/typeorm/entity/users.typeorm.entity";
 import { ReadByTypeORM } from "@app/common/typeorm/entity/readby.typeorm.entity";
 import { Chatting } from "../../entity/chatting.entity";
 
-@Entity({name: "Chatting"})
+@Entity({ name: "Chatting" })
 export class ChattingTypeORM implements Chatting {
   @PrimaryGeneratedColumn()
   id!: number;

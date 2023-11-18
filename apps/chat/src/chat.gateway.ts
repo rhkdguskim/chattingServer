@@ -20,7 +20,10 @@ import {
 import { RoomType } from "@app/common/dto/room.dto";
 import { UserTypeORM } from "@app/common/typeorm/entity";
 import { RoomTypeORM } from "@app/common/typeorm/entity";
-import { ChattingTypeORM, ParticipantTypeORM } from "@app/common/typeorm/entity";
+import {
+  ChattingTypeORM,
+  ParticipantTypeORM,
+} from "@app/common/typeorm/entity";
 
 import { Socket } from "socket.io";
 import { GetWsUser } from "@app/common/decoration/auth.decorator";
@@ -92,11 +95,8 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
 
     const not_read_chat: number =
       room.type !== RoomType.Individual ? room.participant.length : 0;
-    const ChattingMessage: ChattingTypeORM = await this.chattingService.createChatting(
-      message,
-      user,
-      room
-    );
+    const ChattingMessage: ChattingTypeORM =
+      await this.chattingService.createChatting(message, user, room);
     const responseMessage: ResponseMessage = {
       id: ChattingMessage.id,
       room_id: room.id,

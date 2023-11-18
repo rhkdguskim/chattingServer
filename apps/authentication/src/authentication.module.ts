@@ -5,22 +5,27 @@ import { typeOrmConfig } from "@app/common/module";
 import { UserTypeORM } from "@app/common/typeorm/entity";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { UserTypeORMRepository } from "../../../libs/common/src/typeorm/repository/users.typeorm.repository";
-import { AuthenticationDomain } from "./authentication.domain";
-import { AUTHENTICATION_SERVICE, USER_REPOSITORY } from "apps/authentication/src/authentication.interface";
+import { AuthenticationBcrypt } from "./authentication.bcrpy";
+import {
+  AUTHENTICATION_BCRPY,
+  AUTHENTICATION_SERVICE,
+  USER_REPOSITORY,
+} from "apps/authentication/src/authentication.interface";
 import { AuthenticationMockService } from "./test/authentication.mock.service";
 import { UserMockRepository } from "./test/users.mock.repository";
-import { AuthenticationControllerImpl } from "./authentication.controller";
 
 export interface AuthenticationModuleConfig {
-  isDev : boolean
-  isMicroService : boolean
+  isDev: boolean;
+  isMicroService: boolean;
 }
 @Module({})
 export class AuthenticationModule {
-  static forRoot(config :AuthenticationModuleConfig): DynamicModule {
+  static forRoot(config: AuthenticationModuleConfig): DynamicModule {
     const authenticationServiceProvider = {
       provide: AUTHENTICATION_SERVICE,
-      useClass: config.isDev ? AuthenticationMockService : AuthenticationServiceImpl,
+      useClass: config.isDev
+        ? AuthenticationMockService
+        : AuthenticationServiceImpl,
     };
 
     const userRepositoryProvider = {
@@ -28,7 +33,7 @@ export class AuthenticationModule {
       useClass: config.isDev ? UserMockRepository : UserTypeORMRepository,
     };
 
-    const AuthenticationController = config.isMicroService ? AuthenticationMicroServiceTCPController : AuthenticationControllerImpl
+    const AuthenticationController = AuthenticationMicroServiceTCPController;
 
     return {
       module: AuthenticationModule,
@@ -40,7 +45,10 @@ export class AuthenticationModule {
       providers: [
         authenticationServiceProvider,
         userRepositoryProvider,
-        AuthenticationDomain,
+        {
+          provide : AUTHENTICATION_BCRPY,
+          useClass : AuthenticationBcrypt
+        },
         Logger,
       ],
     };

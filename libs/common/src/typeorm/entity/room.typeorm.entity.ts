@@ -38,6 +38,8 @@ export class RoomTypeORM implements Room {
   })
   participant: ParticipantTypeORM[]; // 관련된 참가자들을 eager 로딩하고, 채팅방이 저장될 때 함께 저장(cascade)
 
-  @OneToMany((type) => ChattingTypeORM, (chatting) => chatting.room, { eager: false })
+  @OneToMany((type) => ChattingTypeORM, (chatting) => chatting.room, {
+    eager: false,
+  })
   chatting: ChattingTypeORM[];
 }

@@ -4,7 +4,11 @@ import {
   CreateRoomResponse,
   InviteRoomRequest,
 } from "../dto/room.dto";
-import { ParticipantTypeORM, RoomTypeORM, UserTypeORM } from "../typeorm/entity";
+import {
+  ParticipantTypeORM,
+  RoomTypeORM,
+  UserTypeORM,
+} from "../typeorm/entity";
 
 export interface IRoomClient {
   GetRoomList(payload: number): Promise<Array<RoomListResponse>>;

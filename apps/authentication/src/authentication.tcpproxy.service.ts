@@ -3,7 +3,7 @@ import {
   CreateUserRequest,
   UpdateUserRequest,
 } from "@app/common/dto/users.dto";
-import { UserTypeORM } from "@app/common/typeorm/entity";
+
 import {
   DELETE_USER,
   FIND_ALL_USER,
@@ -15,7 +15,9 @@ import {
 } from "apps/authentication/src/authentication.message";
 import { ClientTCP, TcpClientOptions } from "@nestjs/microservices";
 import { lastValueFrom } from "rxjs";
-import { AuthenticationClient, AuthenticationService } from "apps/authentication/src/authentication.interface";
+import {
+  AuthenticationService,
+} from "apps/authentication/src/authentication.interface";
 import { User } from "@app/common/entity/users.entity";
 
 export class AuthenticationTCPClient

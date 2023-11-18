@@ -6,7 +6,10 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 import { ParticipantTypeORM, RoomTypeORM } from "@app/common/typeorm/entity";
 
 @Module({
-  imports: [DatabaseModule(), TypeOrmModule.forFeature([RoomTypeORM, ParticipantTypeORM])],
+  imports: [
+    DatabaseModule(),
+    TypeOrmModule.forFeature([RoomTypeORM, ParticipantTypeORM]),
+  ],
   controllers: [RoomController],
   providers: [RoomService, Logger],
 })

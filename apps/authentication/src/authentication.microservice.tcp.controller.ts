@@ -15,14 +15,21 @@ import {
   FIND_ALL_USER,
   DELETE_USER,
 } from "apps/authentication/src/authentication.message";
-import { AuthenticationController, AuthenticationService, AUTHENTICATION_SERVICE } from "apps/authentication/src/authentication.interface";
+import {
+  AuthenticationController,
+  AuthenticationService,
+  AUTHENTICATION_SERVICE,
+} from "apps/authentication/src/authentication.interface";
 import { User } from "@app/common/entity/users.entity";
 
 @Controller()
-export class AuthenticationMicroServiceTCPController implements AuthenticationController {
+export class AuthenticationMicroServiceTCPController
+  implements AuthenticationController
+{
   constructor(
     @Inject(AUTHENTICATION_SERVICE)
-    private readonly authenticationService: AuthenticationService) {}
+    private readonly authenticationService: AuthenticationService
+  ) {}
   @MessagePattern({ cmd: SIGN_IN })
   async signIn(payload: LoginUserRequest): Promise<User> {
     return await this.authenticationService.signIn(payload);

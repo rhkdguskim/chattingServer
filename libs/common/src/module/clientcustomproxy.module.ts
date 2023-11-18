@@ -14,7 +14,7 @@ import { ROOM_SERVICE } from "../message/room";
 import { RoomTCPClient } from "../clients/tcp/room.tcp.client";
 import { CHAT_SERVICE } from "../message/chat";
 import { ChatTCPClient } from "../clients/tcp/chat.tcp.client";
-import { AuthorizationService } from "apps/authorization/src/authorization.service";
+import { AuthorizationServiceImpl } from "apps/authorization/src/authorization.service";
 import { FriendService } from "apps/friend/src/friend.service";
 import { AuthenticationServiceImpl } from "apps/authentication/src/authentication.service";
 import { RoomService } from "apps/room/src/room.service";
@@ -39,11 +39,11 @@ const tcpClientFactoryMap = {
 
 const localClientFactoryMap = {
   [AUTHENTICATION_SERVICE]: AuthenticationServiceImpl,
-  [AUTHORIZATION_SERVICE]: AuthorizationService,
+  [AUTHORIZATION_SERVICE]: AuthorizationServiceImpl,
   [FRIEND_SERVICE]: FriendService,
   [ROOM_SERVICE]: RoomService,
   [CHAT_SERVICE]: ChatService,
-}
+};
 
 @Module({})
 export class ClientProxyFactoryCustomModule {
@@ -72,8 +72,7 @@ export class ClientProxyFactoryCustomModule {
         const ClientClass = localClientFactoryMap[client.name];
         return {
           provide: client.name,
-          useFactory: () =>
-            new ClientClass(),
+          useFactory: () => new ClientClass(),
         };
       }
     });
