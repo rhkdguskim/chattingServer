@@ -53,6 +53,8 @@ export class AuthenticationServiceImpl implements AuthenticationService {
       });
     }
 
+    createUserDto.password = await this.authenticationDomain.hash(createUserDto.password);
+
     return this.userRepository.create(createUserDto);
   }
 
@@ -77,15 +79,15 @@ export class AuthenticationServiceImpl implements AuthenticationService {
 
   async update(payload: UpdateUserRequest): Promise<User | boolean> {
     try {
-      return await this.userRepository.update(payload.user_id, payload)
-    } catch(e) {
+      return await this.userRepository.update(payload.user_id, payload);
+    } catch (e) {
       throw new CustomException({
         message: e,
         code: ExceptionType.AUTHENTICATION_ERROR,
       });
     }
   }
-  
+
   async delete(payload: number): Promise<boolean> {
     return await this.userRepository.delete(payload);
   }

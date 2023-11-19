@@ -61,17 +61,17 @@ export class UserTypeORM implements User {
   participant: ParticipantTypeORM[];
 
   @Column({ nullable: true })
-  refreshToken: string;
+  refresh_token: string;
 
   @Column({ nullable: true })
-  accessToken: string;
+  access_token: string;
 
   @Column({ nullable: true })
-  oauth_refreshToken: string;
+  oauth_refresh_token: string;
 
   @Column({ nullable: true })
-  oauth_accessToken: string;
+  oauth_access_token: string;
 
   @Column({ type: "timestamp", nullable: true })
-  refreshTokenExpiry: Date;
+  refresh_token_expire: Date;
 }

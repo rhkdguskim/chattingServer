@@ -1,13 +1,10 @@
 import {
-  ForbiddenException,
   Injectable,
   UnauthorizedException,
-  HttpStatus,
   Logger,
   Inject,
 } from "@nestjs/common";
 import {
-  OAuthRequest,
   NewTokenRequest,
   LoginUserResponse,
   CreateUserRequest,
@@ -15,51 +12,45 @@ import {
 } from "@app/common/dto";
 import {
   AUTHORIZATION_SERVICE,
-  JWT_SIGN,
 } from "@app/common/message/authorization";
 import {
   AUTHENTICATION_SERVICE,
-  SIGN_UP,
-  SIGN_IN,
-  GET_NEW_TOKEN,
 } from "apps/authentication/src/authentication.message";
-import { ClientProxy } from "@nestjs/microservices";
-import { lastValueFrom } from "rxjs";
-import { UserTypeORM } from "@app/common/typeorm/entity";
-import { AuthenticationClient } from "apps/authentication/src/authentication.interface";
-import { IAuthorizaionClient } from "@app/common/clients/authorization.interface.client";
+import { AuthenticationService } from "apps/authentication/src/authentication.interface";
+import { User } from "@app/common/entity/users.entity";
+import { AuthorizationService } from "apps/authorization/src/authorization.interface";
 
 @Injectable()
 export class AuthService {
   constructor(
     @Inject(Logger) private logger: Logger,
     @Inject(AUTHENTICATION_SERVICE)
-    private authenticationClient: AuthenticationClient,
+    private authenticationService: AuthenticationService,
     @Inject(AUTHORIZATION_SERVICE)
-    private authorizationClient: IAuthorizaionClient
+    private authorizationService: AuthorizationService
   ) {}
 
   async signIn(loginUser: LoginUserRequest): Promise<LoginUserResponse> {
     try {
       // 1. 유저 아이디와 패스워드로 인증을 요청한다.
-      const user: UserTypeORM = await this.authenticationClient.SignIn(
+      const user: User = await this.authenticationService.signIn(
         loginUser
       );
       // 2. JWT Payload의 범위를 지정한다.
       const { id, user_id } = user;
 
       // 3. 인가 서버를 통해 JWT 토큰을 발급한다.
-      return await this.authorizationClient.Sign({ id, user_id });
+      return await this.authorizationService.sign({ id, user_id });
     } catch (e) {
       this.logger.error(e);
       throw new UnauthorizedException(e.message);
     }
   }
 
-  async create(createUserDto: CreateUserRequest): Promise<UserTypeORM> {
+  async create(createUserDto: CreateUserRequest): Promise<User> {
     try {
       // 1. 인증 서버에 회원가입을 요청한다.
-      return await this.authenticationClient.SignUp(createUserDto);
+      return await this.authenticationService.signUp(createUserDto);
     } catch (e) {
       this.logger.error(e);
       throw new UnauthorizedException(e.message);

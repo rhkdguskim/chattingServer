@@ -1,7 +1,3 @@
-import { Friend } from "./friend.entity";
-import { Chatting } from "./chatting.entity";
-import { Participant } from "./participant.entity";
-
 export interface User {
   id: number;
   user_id: string;
@@ -12,12 +8,9 @@ export interface User {
   background_img_url: string;
   createdAt: Date;
   updateAt: Date;
-  friends: Friend[];
-  chatting: Chatting[];
-  participant: Participant[];
-  refreshToken: string;
-  accessToken: string;
-  oauth_refreshToken: string;
-  oauth_accessToken: string;
-  refreshTokenExpiry: Date;
+  refresh_token: string;
+  access_token: string;
+  oauth_refresh_token: string;
+  oauth_access_token: string;
+  refresh_token_expire: Date;
 }

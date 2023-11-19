@@ -9,15 +9,15 @@ import {
 import { AUTHENTICATION_SERVICE } from "apps/authentication/src/authentication.message";
 import { AUTHORIZATION_SERVICE } from "@app/common/message/authorization";
 import { Request } from "express";
-import { IAuthorizaionClient } from "@app/common/clients/authorization.interface.client";
 import { AuthenticationClient } from "apps/authentication/src/authentication.interface";
+import { AuthorizationService } from "apps/authorization/src/authorization.interface";
 
 @Injectable()
 export class JwtGuard implements CanActivate {
   constructor(
     @Inject(Logger) private logger: Logger,
     @Inject(AUTHORIZATION_SERVICE)
-    private authorizationClient: IAuthorizaionClient,
+    private authorizationClient: AuthorizationService,
     @Inject(AUTHENTICATION_SERVICE)
     private authenticationClient: AuthenticationClient
   ) {}
@@ -33,7 +33,7 @@ export class JwtGuard implements CanActivate {
         return false;
       }
 
-      const payload = await this.authorizationClient.Verify(authToken);
+      const payload = await this.authorizationClient.verify(authToken);
 
       request.user = await this.authenticationClient.findOneByID(
         payload.user_id

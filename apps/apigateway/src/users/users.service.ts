@@ -3,6 +3,7 @@ import { UserTypeORM } from "@app/common/typeorm/entity";
 import { AUTHENTICATION_SERVICE } from "apps/authentication/src/authentication.message";
 import { AuthenticationClient } from "apps/authentication/src/authentication.interface";
 import { UpdateUserRequest } from "@app/common/dto";
+import { User } from "@app/common/entity/users.entity";
 
 @Injectable()
 export class UsersService {
@@ -11,15 +12,15 @@ export class UsersService {
     private readonly userClient: AuthenticationClient
   ) {}
 
-  async findAll(): Promise<UserTypeORM[]> {
+  async findAll(): Promise<User[]> {
     return await this.userClient.findAll();
   }
 
-  async findOne(id: number): Promise<UserTypeORM | null> {
+  async findOne(id: number): Promise<User | null> {
     return await this.userClient.findOne(id);
   }
 
-  async findbyUserId(user_id: string): Promise<UserTypeORM | null> {
+  async findbyUserId(user_id: string): Promise<User | null> {
     return await this.userClient.findOneByID(user_id);
   }
 

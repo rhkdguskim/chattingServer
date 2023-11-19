@@ -7,7 +7,7 @@ import { User } from "@app/common/entity/users.entity";
 import { Repository } from "../../../libs/common/src/interface";
 
 export const AUTHENTICATION_SERVICE = "AUTHENTICATION_SERVICE";
-export const AUTHENTICATION_BCRPY = "AUTHENTICATION_BCRPY"
+export const AUTHENTICATION_BCRPY = "AUTHENTICATION_BCRPY";
 export const AUTHENTICATION_CONTROLLER = "AUTHENTICATION_CONTROLLER";
 export const USER_REPOSITORY = "USER_REPOSITORY";
 

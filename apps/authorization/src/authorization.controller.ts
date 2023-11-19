@@ -1,13 +1,14 @@
-import { Controller, Get } from "@nestjs/common";
-import { AuthorizationServiceImpl } from "./authorization.service";
+import { Controller, Get, Inject } from "@nestjs/common";
 import { MessagePattern } from "@nestjs/microservices";
 import { JWTRequest, JWTResponse, LoginUserResponse } from "@app/common/dto";
 import { JWT_VERIFY, JWT_SIGN } from "@app/common/message/authorization";
+import { AUTHORIZATION_SERVICE, AuthorizationService } from "./authorization.interface";
 
 @Controller()
 export class AuthorizationController {
   constructor(
-    private readonly authorizationService: AuthorizationServiceImpl
+    @Inject(AUTHORIZATION_SERVICE)
+    private readonly authorizationService: AuthorizationService
   ) {}
 
   @MessagePattern({ cmd: JWT_VERIFY })

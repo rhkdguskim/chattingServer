@@ -16,6 +16,7 @@ import {
   ApiParam,
   ApiOkResponse,
   ApiNotFoundResponse,
+  ApiSecurity,
 } from "@nestjs/swagger";
 import { HttpCacheInterceptor } from "@src/common/interceptors/httpcache.interceptor";
 import { AuthGuard } from "@nestjs/passport";
@@ -25,6 +26,7 @@ import { UpdateUserRequest, UserResponse } from "@app/common/dto";
 @UseGuards(JwtGuard)
 @Controller("users")
 @ApiTags("유저")
+@ApiSecurity("authentication")
 export class UsersController {
   constructor(private usersService: UsersService) {}
 

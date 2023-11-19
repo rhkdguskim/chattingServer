@@ -13,14 +13,11 @@ export class UserMockRepository implements UserRepository {
       background_img_url: "",
       createdAt: undefined,
       updateAt: undefined,
-      friends: [],
-      chatting: [],
-      participant: [],
-      refreshToken: "",
-      accessToken: "",
-      oauth_refreshToken: "",
-      oauth_accessToken: "",
-      refreshTokenExpiry: undefined,
+      refresh_token: "",
+      access_token: "",
+      oauth_refresh_token: "",
+      oauth_access_token: "",
+      refresh_token_expire: undefined,
     };
 
     return Promise.resolve(mockUser);
@@ -36,14 +33,11 @@ export class UserMockRepository implements UserRepository {
       background_img_url: "",
       createdAt: undefined,
       updateAt: undefined,
-      friends: [],
-      chatting: [],
-      participant: [],
-      refreshToken: "",
-      accessToken: "",
-      oauth_refreshToken: "",
-      oauth_accessToken: "",
-      refreshTokenExpiry: undefined,
+      refresh_token: "",
+      access_token: "",
+      oauth_refresh_token: "",
+      oauth_access_token: "",
+      refresh_token_expire: undefined,
     };
 
     return Promise.resolve(mockData);
@@ -63,14 +57,11 @@ export class UserMockRepository implements UserRepository {
       background_img_url: "",
       createdAt: undefined,
       updateAt: undefined,
-      friends: [],
-      chatting: [],
-      participant: [],
-      refreshToken: "",
-      accessToken: "",
-      oauth_refreshToken: "",
-      oauth_accessToken: "",
-      refreshTokenExpiry: undefined,
+      refresh_token: "",
+      access_token: "",
+      oauth_refresh_token: "",
+      oauth_access_token: "",
+      refresh_token_expire: undefined,
     };
 
     return Promise.resolve(mockUser);
