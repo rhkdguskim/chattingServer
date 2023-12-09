@@ -5,8 +5,8 @@ import {
 } from "@app/common/dto/users.dto";
 import { ClientTCP, TcpClientOptions } from "@nestjs/microservices";
 import { lastValueFrom } from "rxjs";
-import { IAuthorizaionClient } from "../authorization.interface.client";
-import { JWT_SIGN, JWT_VERIFY } from "../../message/authorization";
+import { IAuthorizaionClient } from "../../../libs/common/src/clients/authorization.interface.client";
+import { JWT_SIGN, JWT_VERIFY } from "../../../libs/common/src/message/authorization";
 
 export class AuthorizaionTCPClient
   extends ClientTCP

@@ -1,9 +1,9 @@
 import { DynamicModule, Module } from "@nestjs/common";
-import { AUTHENTICATION_SERVICE } from "./authentication.message";
 import { AuthenticationMockService } from "./test/authentication.mock.service";
 import { AuthenticationServiceImpl } from "./authentication.service";
 import {
   AUTHENTICATION_BCRPY,
+  AUTHENTICATION_SERVICE,
   USER_REPOSITORY,
 } from "./authentication.interface";
 import { UserMockRepository } from "./test/users.mock.repository";

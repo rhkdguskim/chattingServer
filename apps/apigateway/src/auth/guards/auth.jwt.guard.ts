@@ -6,10 +6,10 @@ import {
   Logger,
   UnauthorizedException,
 } from "@nestjs/common";
-import { AUTHENTICATION_SERVICE } from "apps/authentication/src/authentication.message";
+
 import { AUTHORIZATION_SERVICE } from "@app/common/message/authorization";
 import { Request } from "express";
-import { AuthenticationClient } from "apps/authentication/src/authentication.interface";
+import { AUTHENTICATION_SERVICE, AuthenticationService } from "apps/authentication/src/authentication.interface";
 import { AuthorizationService } from "apps/authorization/src/authorization.interface";
 
 @Injectable()
@@ -19,7 +19,7 @@ export class JwtGuard implements CanActivate {
     @Inject(AUTHORIZATION_SERVICE)
     private authorizationClient: AuthorizationService,
     @Inject(AUTHENTICATION_SERVICE)
-    private authenticationClient: AuthenticationClient
+    private authenticationClient: AuthenticationService
   ) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
@@ -30,6 +30,7 @@ export class JwtGuard implements CanActivate {
 
       if (!authToken && typeof authToken !== "string") {
         this.logger.error("토큰이 존재하지 않거나 올바르지 않는 토큰입니다.");
+        throw new UnauthorizedException("토큰이 만료되었습니다.");
         return false;
       }
 

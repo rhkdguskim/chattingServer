@@ -1,10 +1,10 @@
-import { Controller, Get } from "@nestjs/common";
-import { FriendService } from "./friend.service";
+import { Controller, Get, Inject } from "@nestjs/common";
 import { MessagePattern } from "@nestjs/microservices";
 import {
   ADD_FRIEND,
   DELETE_FRIEND,
   FIND_ALL_FRIEND,
+  FRIEND_SERVICE,
   UPDATE_FRIEND,
 } from "@app/common/message/friend";
 import {
@@ -13,11 +13,15 @@ import {
   DelteFriendRequest,
   FindFriendAllRequest,
 } from "@app/common/dto/friend.createfriend.dto";
-import { FriendTypeORM } from "@app/common/typeorm/entity";
+import { FriendService } from "./friend.interface";
+import { Friend } from "@app/common/entity/friend.entity";
 
 @Controller()
 export class FriendController {
-  constructor(private readonly friendService: FriendService) {}
+  
+  constructor(
+    @Inject(FRIEND_SERVICE)
+    private readonly friendService: FriendService) {}
 
   @MessagePattern({ cmd: FIND_ALL_FRIEND })
   async findAllFriend(payload: FindFriendAllRequest) {
@@ -26,16 +30,16 @@ export class FriendController {
 
   @MessagePattern({ cmd: ADD_FRIEND })
   async addFriend(payload: CreateFriendRequest): Promise<CreateFriendResponse> {
-    return await this.friendService.addFriend(payload, payload.id);
+    return await this.friendService.addFriend(payload);
   }
 
   @MessagePattern({ cmd: UPDATE_FRIEND })
-  async updateFriend(payload: CreateFriendRequest): Promise<FriendTypeORM> {
-    return await this.friendService.changeFriendName(payload, payload.id);
+  async updateFriend(payload: CreateFriendRequest): Promise<Friend> {
+    return await this.friendService.changeFriendName(payload);
   }
 
   @MessagePattern({ cmd: DELETE_FRIEND })
   async deleteFriend(payload: DelteFriendRequest) {
-    return await this.friendService.delFriend(payload, payload.id);
+    return await this.friendService.delFriend(payload);
   }
 }

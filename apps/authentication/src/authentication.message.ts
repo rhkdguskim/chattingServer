@@ -1,4 +1,3 @@
-export const AUTHENTICATION_SERVICE = "AUTHENTICATION_SERVICE";
 export const SIGN_IN = "SIGN_IN";
 export const SIGN_UP = "SIGN_UP";
 export const GET_NEW_TOKEN = "GET_NEW_TOKEN";

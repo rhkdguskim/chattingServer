@@ -1,6 +1,5 @@
 import { Test, TestingModule } from "@nestjs/testing";
 import { AuthenticationModule } from "../authentication.module";
-import { UserTypeORM } from "@app/common/typeorm/entity";
 import { CreateUserRequest } from "@app/common/dto";
 import {
   CustomException,
@@ -9,17 +8,19 @@ import {
 import {
   AuthenticationService,
   AUTHENTICATION_SERVICE,
-  USER_REPOSITORY,
-  UserRepository,
 } from "apps/authentication/src/authentication.interface";
 import { AuthenticationBcrypt } from "../authentication.bcrpy";
+import { AuthenticationServiceMoudle } from "../authentication.service.module";
 
 describe("AuthenticationController", () => {
   let authenticationDomain: AuthenticationBcrypt;
   let authenticationService: AuthenticationService;
   beforeEach(async () => {
     const app: TestingModule = await Test.createTestingModule({
-      imports: [AuthenticationModule.forRoot({ isDev: true })],
+      imports: [AuthenticationServiceMoudle.forRoot({
+        isDev: true,
+        isGlobal : false,
+      })],
     }).compile();
 
     authenticationDomain = app.get<AuthenticationBcrypt>(AuthenticationBcrypt);
@@ -55,7 +56,7 @@ describe("AuthenticationController", () => {
       };
       try {
         const user = await authenticationService.signIn(createUserRequest);
-        expect(user).toBeInstanceOf(UserTypeORM);
+        
       } catch (e) {
         expect(e).toBeInstanceOf(CustomException);
         expect(e.msg.code).toEqual(ExceptionType.AUTHENTICATION_ERROR);

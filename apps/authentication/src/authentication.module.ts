@@ -17,7 +17,7 @@ export class AuthenticationModule {
       module: AuthenticationModule,
       imports: [
         TypeOrmModule.forRoot(typeOrmConfig),
-        AuthenticationServiceMoudle.forRoot({ isDev: false }),
+        AuthenticationServiceMoudle.forRoot({ isDev: false, isGlobal : false }),
       ],
       controllers: [AuthenticationController],
       providers: [Logger],

@@ -1,6 +1,4 @@
 import { Inject, Injectable } from "@nestjs/common";
-import { FriendTypeORM } from "@app/common/typeorm/entity";
-import { DeleteResult } from "typeorm";
 import {
   CreateFriendRequest,
   CreateFriendResponse,
@@ -10,31 +8,32 @@ import {
 import { FRIEND_SERVICE } from "@app/common/message/friend";
 import { UserResponse } from "@app/common/dto";
 import { IFriendClient } from "@app/common/clients/friend.interface.client";
+import { Friend } from "@app/common/entity/friend.entity";
 
 @Injectable()
 export class FriendService {
-  constructor(@Inject(FRIEND_SERVICE) private friendClient: IFriendClient) {}
+  constructor(@Inject(FRIEND_SERVICE) private friendService: IFriendClient) {}
 
   async getFriends(id: number): Promise<UserResponse[]> {
     const request: FindFriendAllRequest = {
       id,
     };
-    return await this.friendClient.findAllFriend(request);
+    return await this.friendService.findAllFriend(request);
   }
 
   async addFriend(
     createFriend: CreateFriendRequest
   ): Promise<CreateFriendResponse> {
-    return await this.friendClient.addFriend(createFriend);
+    return await this.friendService.addFriend(createFriend);
   }
 
-  async delFriend(delFriend: DelteFriendRequest): Promise<DeleteResult> {
-    return await this.friendClient.deleteFriend(delFriend);
+  async delFriend(delFriend: DelteFriendRequest): Promise<boolean> {
+    return await this.friendService.deleteFriend(delFriend);
   }
 
   async changeFriendName(
     updateFriend: CreateFriendRequest
-  ): Promise<FriendTypeORM> {
-    return await this.friendClient.updateFriend(updateFriend);
+  ): Promise<Friend> {
+    return await this.friendService.updateFriend(updateFriend);
   }
 }

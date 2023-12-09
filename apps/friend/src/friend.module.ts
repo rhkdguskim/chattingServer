@@ -1,13 +1,12 @@
 import { Logger, Module } from "@nestjs/common";
 import { FriendController } from "./friend.controller";
-import { FriendService } from "./friend.service";
-import { DatabaseModule } from "@app/common/module";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { FriendTypeORM } from "@app/common/typeorm/entity";
+import { typeOrmConfig } from "@app/common/module";
+import { FriendServiceMoudle } from "./friend.service.module";
 
 @Module({
-  imports: [DatabaseModule(), TypeOrmModule.forFeature([FriendTypeORM])],
+  imports: [TypeOrmModule.forRoot(typeOrmConfig), FriendServiceMoudle.forRoot({isDev : false, isGlobal : false})],
   controllers: [FriendController],
-  providers: [FriendService, Logger],
+  providers: [Logger],
 })
 export class FriendModule {}

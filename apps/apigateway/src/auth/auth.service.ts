@@ -13,10 +13,8 @@ import {
 import {
   AUTHORIZATION_SERVICE,
 } from "@app/common/message/authorization";
-import {
-  AUTHENTICATION_SERVICE,
-} from "apps/authentication/src/authentication.message";
-import { AuthenticationService } from "apps/authentication/src/authentication.interface";
+
+import { AUTHENTICATION_SERVICE, AuthenticationService } from "apps/authentication/src/authentication.interface";
 import { User } from "@app/common/entity/users.entity";
 import { AuthorizationService } from "apps/authorization/src/authorization.interface";
 

@@ -6,11 +6,10 @@ import {
   UseGuards,
   Body,
   Delete,
-  UseInterceptors,
   Param,
+  Inject,
 } from "@nestjs/common";
-import { FriendService } from "./friend.service";
-import { FriendTypeORM } from "@app/common/typeorm/entity";
+
 import {
   ApiTags,
   ApiOperation,
@@ -25,13 +24,20 @@ import {
 } from "@app/common/dto/friend.createfriend.dto";
 import { JwtGuard } from "@src/auth/guards/auth.jwt.guard";
 import { UserResponse } from "@app/common/dto";
+import { FRIEND_SERVICE } from "@app/common/message/friend";
+import { Friend } from "@app/common/entity/friend.entity";
+import { FriendService } from "apps/friend/src/friend.interface";
 
 @Controller("friend")
 @UseGuards(JwtGuard)
 @ApiSecurity("authentication")
 @ApiTags("친구")
 export class FriendController {
-  constructor(private friendService: FriendService) {}
+  constructor(
+    @Inject(FRIEND_SERVICE)
+    private friendService: FriendService) {
+      console.log(friendService)
+    }
 
   @Get(":id")
   @ApiOperation({
@@ -41,8 +47,8 @@ export class FriendController {
   @ApiCreatedResponse({
     description: "사용자가 등록한 등록된 친구 목록을 가져옵니다.",
   })
-  async FindAll(@Param("id") id: number): Promise<UserResponse[]> {
-    return this.friendService.getFriends(id);
+  async FindAll(@Param("id") id: number): Promise<Friend[]> {
+    return this.friendService.getMyFriends(id);
   }
 
   @Post(":id")
@@ -73,7 +79,7 @@ export class FriendController {
   @ApiCreatedResponse({ description: "등록된 친구중 친구정보를 변경합니다." })
   async ModFriend(
     @Body() createFriend: CreateFriendRequest
-  ): Promise<FriendTypeORM> {
+  ): Promise<Friend> {
     return this.friendService.changeFriendName(createFriend);
   }
 

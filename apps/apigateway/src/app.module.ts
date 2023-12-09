@@ -32,13 +32,6 @@ import { typeOrmConfig } from "@app/common/module";
       isGlobal: true,
       clients: [
         {
-          name: FRIEND_SERVICE,
-          config: {
-            transport: Transport.TCP,
-            options: { host: FRIEND_HOST, port: FRIEND_PORT },
-          },
-        },
-        {
           name: ROOM_SERVICE,
           config: {
             transport: Transport.TCP,

@@ -5,7 +5,7 @@ import { JWT_VERIFY, JWT_SIGN } from "@app/common/message/authorization";
 import { AUTHORIZATION_SERVICE, AuthorizationService } from "./authorization.interface";
 
 @Controller()
-export class AuthorizationController {
+export class AuthorizationHttpController {
   constructor(
     @Inject(AUTHORIZATION_SERVICE)
     private readonly authorizationService: AuthorizationService
