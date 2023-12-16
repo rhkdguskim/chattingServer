@@ -1,7 +1,8 @@
 import * as bcrypt from "bcrypt";
-export class AuthenticationBcrypt {
-  constructor() {}
+import {BcryptService} from "./bcrpy.interface";
 
+export class NodeBcryptService implements BcryptService {
+  constructor() {}
   compare(cmp1: string, cmp2: string) {
     return bcrypt.compareSync(cmp1, cmp2);
   }

@@ -3,24 +3,15 @@ import { AppModule } from "./app.module";
 import { setupSwagger } from "@src/util/swagger";
 import * as config from "config";
 import * as cookieParser from "cookie-parser";
-import { WinstonModule, utilities, WinstonLogger } from "nest-winston";
-import * as winston from "winston";
 import { LoggingInterceptor } from "./common/interceptors/logging.interceptor";
 import { Logger, ValidationPipe } from "@nestjs/common";
-import { LOGLEVEL, MAIN_HOST, MAIN_PORT } from "@app/common/config";
+import { MAIN_PORT } from "@app/common/config";
+import {getWinstonLogger} from "@app/common/util/util";
 
 async function bootstrap() {
+  const logger = getWinstonLogger('APIGateWay', 'ApiGateWay');
   const app = await NestFactory.create(AppModule, {
-    logger: WinstonModule.createLogger({
-      level: LOGLEVEL,
-      transports: [
-        new winston.transports.Console({
-          format: winston.format.combine(
-            utilities.format.nestLike("API Gateway")
-          ),
-        }),
-      ],
-    }),
+    logger,
   });
 
   const cors = config.get("cors");

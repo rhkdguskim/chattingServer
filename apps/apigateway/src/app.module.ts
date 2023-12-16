@@ -20,14 +20,14 @@ import { ClientProxyFactoryCustomModule } from "@app/common/module/clientcustomp
 import { Transport } from "@nestjs/microservices";
 import { ROOM_SERVICE } from "@app/common/message/room";
 import { CHAT_SERVICE } from "@app/common/message/chat";
-import { AuthenticationServiceMoudle } from "apps/authentication/src/authentication.service.module";
+import { AuthenticationServiceModule } from "../../authentication/src/module/authentication.service.module";
 import { AuthorizationServiceModule } from "apps/authorization/src/authorization.service.module";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { typeOrmConfig } from "@app/common/module";
 
 @Module({
   imports: [
-    AuthenticationServiceMoudle.forRoot({isDev : false, isGlobal :true}), AuthorizationServiceModule.forRoot({isDev: false, isGlobal:true}),
+    AuthenticationServiceModule.forRoot({isDev : false, isGlobal :true}), AuthorizationServiceModule.forRoot({isDev: false, isGlobal:true}),
     ClientProxyFactoryCustomModule.register({
       isGlobal: true,
       clients: [

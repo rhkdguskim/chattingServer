@@ -9,8 +9,9 @@ import {
 
 import { AUTHORIZATION_SERVICE } from "@app/common/message/authorization";
 import { Request } from "express";
-import { AUTHENTICATION_SERVICE, AuthenticationService } from "apps/authentication/src/authentication.interface";
 import { AuthorizationService } from "apps/authorization/src/authorization.interface";
+import {AuthenticationService} from "../../../../authentication/src/providers/authenticationservice.interface";
+import {AUTHENTICATION_SERVICE} from "../../../../authentication/src/authentication.metadata";
 
 @Injectable()
 export class JwtGuard implements CanActivate {
@@ -31,7 +32,6 @@ export class JwtGuard implements CanActivate {
       if (!authToken && typeof authToken !== "string") {
         this.logger.error("토큰이 존재하지 않거나 올바르지 않는 토큰입니다.");
         throw new UnauthorizedException("토큰이 만료되었습니다.");
-        return false;
       }
 
       const payload = await this.authorizationClient.verify(authToken);

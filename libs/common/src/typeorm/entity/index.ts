@@ -1,4 +1,4 @@
-export * from "./users.typeorm.entity";
+export * from "../../../../../apps/authentication/src/entity/users.typeorm.entity";
 export * from "./friend.typeorm.entity";
 export * from "./chatting.typeorm.entity";
 export * from "./room.typeorm.entity";

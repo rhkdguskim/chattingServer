@@ -1,6 +1,5 @@
 import { Module, DynamicModule, Global } from "@nestjs/common";
 import { AUTHORIZATION_SERVICE } from "../message/authorization";
-import { AuthenticationTCPClient } from "../../../../apps/authentication/src/authentication.tcpproxy.service";
 import { AuthorizaionTCPClient } from "../../../../apps/authorization/src/authorization.microservice.tcp.controller";
 import {
   ClientOptions,
@@ -15,10 +14,11 @@ import { CHAT_SERVICE } from "../message/chat";
 import { ChatTCPClient } from "../clients/tcp/chat.tcp.client";
 import { AuthorizationServiceImpl } from "apps/authorization/src/authorization.service";
 import { FriendServiceImpl } from "apps/friend/src/friend.service";
-import { AuthenticationServiceImpl } from "apps/authentication/src/authentication.service";
+import { AuthenticationServiceLocal } from "../../../../apps/authentication/src/providers/authentication-service-local.service";
 import { RoomService } from "apps/room/src/room.service";
 import { ChatService } from "apps/chat/src/chat.service";
-import { AUTHENTICATION_SERVICE } from "apps/authentication/src/authentication.interface";
+import {AuthenticationServiceTcpclient} from "../../../../apps/authentication/src/providers/authenticationServiceTcpclient";
+import {AUTHENTICATION_SERVICE} from "../../../../apps/authentication/src/authentication.metadata";
 interface ClientCustomProxy {
   name: string;
   config: ClientOptions;
@@ -30,7 +30,7 @@ export interface ClientProxyFactoryCustomConfig {
 }
 
 const tcpClientFactoryMap = {
-  [AUTHENTICATION_SERVICE]: AuthenticationTCPClient,
+  [AUTHENTICATION_SERVICE]: AuthenticationServiceTcpclient,
   [AUTHORIZATION_SERVICE]: AuthorizaionTCPClient,
   [FRIEND_SERVICE]: FriendTCPClient,
   [ROOM_SERVICE]: RoomTCPClient,
@@ -38,7 +38,7 @@ const tcpClientFactoryMap = {
 };
 
 const localClientFactoryMap = {
-  [AUTHENTICATION_SERVICE]: AuthenticationServiceImpl,
+  [AUTHENTICATION_SERVICE]: AuthenticationServiceLocal,
   [AUTHORIZATION_SERVICE]: AuthorizationServiceImpl,
   [FRIEND_SERVICE]: FriendServiceImpl,
   [ROOM_SERVICE]: RoomService,

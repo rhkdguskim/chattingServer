@@ -7,7 +7,7 @@ import {
   UpdateDateColumn,
   JoinColumn,
 } from "typeorm";
-import { UserTypeORM } from "@app/common/typeorm/entity/users.typeorm.entity";
+import { UserTypeORM } from "../../../../../apps/authentication/src/entity/users.typeorm.entity";
 import { Friend } from "../../entity/friend.entity";
 
 @Entity({ name: "Friend" })

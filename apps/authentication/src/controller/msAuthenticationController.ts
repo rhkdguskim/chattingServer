@@ -14,16 +14,14 @@ import {
   FIND_ONE_BY_ID_USER,
   FIND_ALL_USER,
   DELETE_USER,
-} from "apps/authentication/src/authentication.message";
-import {
-  AuthenticationController,
-  AuthenticationService,
-  AUTHENTICATION_SERVICE,
-} from "apps/authentication/src/authentication.interface";
-import { User } from "@app/common/entity/users.entity";
+} from "../authentication.message";
+import { User } from "../entity/users.entity";
+import {AuthenticationService} from "../providers/authenticationservice.interface";
+import {AuthenticationController} from "./interface";
+import {AUTHENTICATION_SERVICE} from "../authentication.metadata";
 
 @Controller()
-export class AuthenticationMicroServiceTCPController
+export class MsAuthenticationController
   implements AuthenticationController
 {
   constructor(

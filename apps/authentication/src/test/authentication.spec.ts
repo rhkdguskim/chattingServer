@@ -1,29 +1,27 @@
 import { Test, TestingModule } from "@nestjs/testing";
-import { AuthenticationModule } from "../authentication.module";
+import { AuthenticationModule } from "../module/authentication.module";
 import { CreateUserRequest } from "@app/common/dto";
 import {
   CustomException,
   ExceptionType,
 } from "@app/common/exception/custom.exception";
-import {
-  AuthenticationService,
-  AUTHENTICATION_SERVICE,
-} from "apps/authentication/src/authentication.interface";
-import { AuthenticationBcrypt } from "../authentication.bcrpy";
-import { AuthenticationServiceMoudle } from "../authentication.service.module";
+import { NodeBcryptService } from "../providers/bcrypt/bcrpy.service";
+import { AuthenticationServiceModule } from "../module/authentication.service.module";
+import {AuthenticationService} from "../providers/authenticationservice.interface";
+import {AUTHENTICATION_SERVICE} from "../authentication.metadata";
 
 describe("AuthenticationController", () => {
-  let authenticationDomain: AuthenticationBcrypt;
+  let authenticationDomain: NodeBcryptService;
   let authenticationService: AuthenticationService;
   beforeEach(async () => {
     const app: TestingModule = await Test.createTestingModule({
-      imports: [AuthenticationServiceMoudle.forRoot({
+      imports: [AuthenticationServiceModule.forRoot({
         isDev: true,
         isGlobal : false,
       })],
     }).compile();
 
-    authenticationDomain = app.get<AuthenticationBcrypt>(AuthenticationBcrypt);
+    authenticationDomain = app.get<NodeBcryptService>(NodeBcryptService);
     authenticationService = app.get<AuthenticationService>(
       AUTHENTICATION_SERVICE
     );

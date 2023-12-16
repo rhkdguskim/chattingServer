@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from "typeorm";
 import { ChattingTypeORM } from "@app/common/typeorm/entity/chatting.typeorm.entity";
-import { UserTypeORM } from "@app/common/typeorm/entity/users.typeorm.entity";
+import { UserTypeORM } from "../../../../../apps/authentication/src/entity/users.typeorm.entity";
 import { ReadBy } from "../../entity/readby.entity";
 
 @Entity({ name: "Readby" })

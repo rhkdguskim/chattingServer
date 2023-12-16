@@ -1,5 +1,5 @@
 import { Chatting } from "./chatting.entity";
-import { User } from "./users.entity";
+import { User } from "../../../../apps/authentication/src/entity/users.entity";
 
 export interface ReadBy {
   id: number;

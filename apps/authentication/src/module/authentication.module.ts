@@ -1,8 +1,8 @@
 import { DynamicModule, Logger, Module } from "@nestjs/common";
-import { AuthenticationMicroServiceTCPController } from "./authentication.microservice.tcp.controller";
+import { MsAuthenticationController } from "../controller/msAuthenticationController";
 import { typeOrmConfig } from "@app/common/module";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { AuthenticationServiceMoudle } from "./authentication.service.module";
+import { AuthenticationServiceModule } from "./authentication.service.module";
 
 export interface AuthenticationModuleConfig {
   isDev: boolean;
@@ -11,13 +11,13 @@ export interface AuthenticationModuleConfig {
 @Module({})
 export class AuthenticationModule {
   static forRoot(config: AuthenticationModuleConfig): DynamicModule {
-    const AuthenticationController = AuthenticationMicroServiceTCPController;
+    const AuthenticationController = MsAuthenticationController;
 
     return {
       module: AuthenticationModule,
       imports: [
         TypeOrmModule.forRoot(typeOrmConfig),
-        AuthenticationServiceMoudle.forRoot({ isDev: false, isGlobal : false }),
+        AuthenticationServiceModule.forRoot({ isDev: false, isGlobal : false }),
       ],
       controllers: [AuthenticationController],
       providers: [Logger],

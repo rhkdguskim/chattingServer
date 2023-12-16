@@ -7,11 +7,10 @@ import {
   UpdateDateColumn,
   OneToMany,
 } from "typeorm";
-import * as bsrypt from "bcrypt";
 import { FriendTypeORM } from "@app/common/typeorm/entity/friend.typeorm.entity";
 import { ChattingTypeORM } from "@app/common/typeorm/entity/chatting.typeorm.entity";
 import { ParticipantTypeORM } from "@app/common/typeorm/entity/participant.typeorm.entity";
-import { User } from "../../entity/users.entity";
+import { User } from "./users.entity";
 
 @Entity({ name: "User" })
 export class UserTypeORM implements User {
@@ -35,11 +34,6 @@ export class UserTypeORM implements User {
 
   @Column({ nullable: true })
   background_img_url: string;
-
-  @BeforeInsert()
-  private beforeInsert() {
-    this.password = bsrypt.hashSync(this.password, 10);
-  }
 
   @CreateDateColumn()
   createdAt!: Date;

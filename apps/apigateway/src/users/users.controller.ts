@@ -50,7 +50,7 @@ export class UsersController {
     type: UpdateUserRequest,
   })
   @ApiCreatedResponse({ description: "사용자 정보를 업데이트 합니다." })
-  async updateUser(@Body() user: UpdateUserRequest): Promise<UserResponse> {
+  async updateUser(@Body() user: UpdateUserRequest): Promise<UserResponse | boolean> {
     return await this.usersService.updateUser(user);
   }
 

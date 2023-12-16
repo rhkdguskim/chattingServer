@@ -1,5 +1,5 @@
 import { Room } from "./room.entity";
-import { User } from "./users.entity";
+import { User } from "../../../../apps/authentication/src/entity/users.entity";
 import { ReadBy } from "./readby.entity";
 
 export interface Chatting {

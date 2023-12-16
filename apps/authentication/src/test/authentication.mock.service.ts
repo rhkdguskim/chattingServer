@@ -3,13 +3,11 @@ import {
   CreateUserRequest,
   UpdateUserRequest,
 } from "@app/common/dto";
-import { User } from "@app/common/entity/users.entity";
-import {
-  AuthenticationService,
-  USER_REPOSITORY,
-  UserRepository,
-} from "apps/authentication/src/authentication.interface";
+import { User } from "../entity/users.entity";
 import { Inject } from "@nestjs/common";
+import {AuthenticationService} from "../providers/authenticationservice.interface";
+import {USER_REPOSITORY} from "../authentication.metadata";
+import {UserRepository} from "../repository/users.interface.repository";
 
 export class AuthenticationMockService implements AuthenticationService {
   constructor(

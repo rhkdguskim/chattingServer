@@ -14,9 +14,10 @@ import {
   AUTHORIZATION_SERVICE,
 } from "@app/common/message/authorization";
 
-import { AUTHENTICATION_SERVICE, AuthenticationService } from "apps/authentication/src/authentication.interface";
-import { User } from "@app/common/entity/users.entity";
+import { User } from "../../../authentication/src/entity/users.entity";
 import { AuthorizationService } from "apps/authorization/src/authorization.interface";
+import {AuthenticationService} from "../../../authentication/src/providers/authenticationservice.interface";
+import {AUTHENTICATION_SERVICE} from "../../../authentication/src/authentication.metadata";
 
 @Injectable()
 export class AuthService {

@@ -1,13 +1,14 @@
 import { Inject, Injectable, Logger, LoggerService } from "@nestjs/common";
-import { AUTHENTICATION_SERVICE, AuthenticationClient } from "apps/authentication/src/authentication.interface";
 import { UpdateUserRequest } from "@app/common/dto";
-import { User } from "@app/common/entity/users.entity";
+import { User } from "../../../authentication/src/entity/users.entity";
+import {AUTHENTICATION_SERVICE} from "../../../authentication/src/authentication.metadata";
+import {AuthenticationService} from "../../../authentication/src/providers/authenticationservice.interface";
 
 @Injectable()
 export class UsersService {
   constructor(
     @Inject(AUTHENTICATION_SERVICE)
-    private readonly userClient: AuthenticationClient
+    private readonly userClient: AuthenticationService
   ) {}
 
   async findAll(): Promise<User[]> {

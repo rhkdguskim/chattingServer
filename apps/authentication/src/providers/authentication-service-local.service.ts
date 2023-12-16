@@ -1,24 +1,22 @@
 import { Inject, Injectable } from "@nestjs/common";
 import { LoginUserRequest, UpdateUserRequest } from "@app/common/dto";
 import { CreateUserRequest } from "@app/common/dto";
-import { AuthenticationBcrypt } from "./authentication.bcrpy";
+import { NodeBcryptService } from "./bcrypt/bcrpy.service";
 import {
   CustomException,
   ExceptionType,
 } from "@app/common/exception/custom.exception";
 import { NullCheck } from "@app/common/util/util";
-import {
-  AUTHENTICATION_BCRPY,
-  AuthenticationService,
-  USER_REPOSITORY,
-  UserRepository,
-} from "apps/authentication/src/authentication.interface";
-import { User } from "@app/common/entity/users.entity";
+import { User } from "../entity/users.entity";
+import {AuthenticationService} from "./authenticationservice.interface";
+import {AUTHENTICATION_BCRYPT, USER_REPOSITORY} from "../authentication.metadata";
+import {UserRepository} from "../repository/users.interface.repository";
+
 @Injectable()
-export class AuthenticationServiceImpl implements AuthenticationService {
+export class AuthenticationServiceLocal implements AuthenticationService {
   constructor(
-    @Inject(AUTHENTICATION_BCRPY)
-    private authenticationDomain: AuthenticationBcrypt,
+    @Inject(AUTHENTICATION_BCRYPT)
+    private authenticationDomain: NodeBcryptService,
     @Inject(USER_REPOSITORY)
     private userRepository: UserRepository
   ) {}
@@ -45,7 +43,6 @@ export class AuthenticationServiceImpl implements AuthenticationService {
 
   async signUp(createUserDto: CreateUserRequest): Promise<User> {
     const user = await this.userRepository.findOneByID(createUserDto.user_id);
-
     if (!NullCheck(user)) {
       throw new CustomException({
         message: "이미 등록된 사용자입니다.",
@@ -53,13 +50,12 @@ export class AuthenticationServiceImpl implements AuthenticationService {
       });
     }
 
-    createUserDto.password = await this.authenticationDomain.hash(createUserDto.password);
+    createUserDto.password = this.authenticationDomain.hash(createUserDto.password);
 
     return this.userRepository.create(createUserDto);
   }
 
   async findOne(id: number): Promise<User> {
-    try {
       const user = await this.userRepository.findOne(id);
 
       if (NullCheck(user)) {
@@ -68,13 +64,8 @@ export class AuthenticationServiceImpl implements AuthenticationService {
           code: ExceptionType.AUTHENTICATION_ERROR,
         });
       }
+
       return user;
-    } catch (e) {
-      throw new CustomException({
-        message: e,
-        code: ExceptionType.AUTHENTICATION_ERROR,
-      });
-    }
   }
 
   async update(payload: UpdateUserRequest): Promise<User | boolean> {

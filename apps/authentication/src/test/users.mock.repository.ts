@@ -1,5 +1,6 @@
-import { User } from "@app/common/entity/users.entity";
-import { UserRepository } from "apps/authentication/src/authentication.interface";
+import { User } from "../entity/users.entity";
+
+import {UserRepository} from "../repository/users.interface.repository";
 
 export class UserMockRepository implements UserRepository {
   findOneByID(user_id: string): Promise<User> {

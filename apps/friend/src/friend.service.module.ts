@@ -13,10 +13,10 @@ export interface FriendServiceModuleConfig {
   }
 
 @Module({})
-export class FriendServiceMoudle {
+export class FriendServiceModule {
     static forRoot(config :FriendServiceModuleConfig) : DynamicModule {
         const module: DynamicModule = {
-            module : FriendServiceMoudle,
+            module : FriendServiceModule,
             imports: [TypeOrmModule.forFeature([FriendTypeORM])],
             providers: [
             {

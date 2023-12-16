@@ -1,4 +1,4 @@
-import { User } from "./users.entity";
+import { User } from "../../../../apps/authentication/src/entity/users.entity";
 
 export interface Friend {
   id: number;

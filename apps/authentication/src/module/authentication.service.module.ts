@@ -1,16 +1,12 @@
 import { DynamicModule, Module } from "@nestjs/common";
-import { AuthenticationMockService } from "./test/authentication.mock.service";
-import { AuthenticationServiceImpl } from "./authentication.service";
-import {
-  AUTHENTICATION_BCRPY,
-  AUTHENTICATION_SERVICE,
-  USER_REPOSITORY,
-} from "./authentication.interface";
-import { UserMockRepository } from "./test/users.mock.repository";
-import { UserTypeORMRepository } from "@app/common/typeorm/repository/users.typeorm.repository";
-import { AuthenticationBcrypt } from "./authentication.bcrpy";
+import { AuthenticationMockService } from "../test/authentication.mock.service";
+import { AuthenticationServiceLocal } from "../providers/authentication-service-local.service";
+import { UserMockRepository } from "../test/users.mock.repository";
+import { UserTypeORMRepository } from "../repository/users.typeorm.repository";
+import { NodeBcryptService } from "../providers/bcrypt/bcrpy.service";
 import { UserTypeORM } from "@app/common/typeorm/entity";
 import { TypeOrmModule } from "@nestjs/typeorm";
+import {AUTHENTICATION_BCRYPT, AUTHENTICATION_SERVICE, USER_REPOSITORY} from "../authentication.metadata";
 
 export interface AuthenticationServiceModuleConfig {
   isDev: boolean;
@@ -18,10 +14,10 @@ export interface AuthenticationServiceModuleConfig {
 }
 
 @Module({})
-export class AuthenticationServiceMoudle {
+export class AuthenticationServiceModule {
   static forRoot(config: AuthenticationServiceModuleConfig): DynamicModule {
     const module: DynamicModule = {
-      module : AuthenticationServiceMoudle,
+      module : AuthenticationServiceModule,
       imports: [TypeOrmModule.forFeature([UserTypeORM])],
       providers: [
         {
@@ -32,14 +28,14 @@ export class AuthenticationServiceMoudle {
           provide: AUTHENTICATION_SERVICE,
           useClass: config.isDev
             ? AuthenticationMockService
-            : AuthenticationServiceImpl,
+            : AuthenticationServiceLocal,
         },
         {
-          provide: AUTHENTICATION_BCRPY,
-          useClass: AuthenticationBcrypt,
+          provide: AUTHENTICATION_BCRYPT,
+          useClass: NodeBcryptService,
         },
       ],
-      exports: [AUTHENTICATION_BCRPY, AUTHENTICATION_SERVICE, USER_REPOSITORY]
+      exports: [AUTHENTICATION_BCRYPT, AUTHENTICATION_SERVICE, USER_REPOSITORY]
     };
     if (config.isGlobal) {
       module.global = true
