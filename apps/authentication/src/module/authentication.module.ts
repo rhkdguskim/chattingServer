@@ -1,5 +1,5 @@
 import { DynamicModule, Logger, Module } from "@nestjs/common";
-import { MsAuthenticationController } from "../controller/msAuthenticationController";
+import { AuthenticationControllerMicroservice } from "../controller/authentication.controller.microservice";
 import { typeOrmConfig } from "@app/common/module";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { AuthenticationServiceModule } from "./authentication.service.module";
@@ -11,7 +11,7 @@ export interface AuthenticationModuleConfig {
 @Module({})
 export class AuthenticationModule {
   static forRoot(config: AuthenticationModuleConfig): DynamicModule {
-    const AuthenticationController = MsAuthenticationController;
+    const AuthenticationController = AuthenticationControllerMicroservice;
 
     return {
       module: AuthenticationModule,

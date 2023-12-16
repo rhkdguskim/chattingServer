@@ -1,11 +1,12 @@
 import { Controller, Get, Inject } from "@nestjs/common";
 import { MessagePattern } from "@nestjs/microservices";
-import { JWTRequest, JWTResponse, LoginUserResponse } from "@app/common/dto";
-import { JWT_VERIFY, JWT_SIGN } from "@app/common/message/authorization";
-import { AUTHORIZATION_SERVICE, AuthorizationService } from "./authorization.interface";
+import { AUTHORIZATION_SERVICE } from "../authorization.metadata";
+import {AuthorizationService} from "../providers/authorization.service.interface";
+import {JWTRequest, JWTResponse, TokenResponse} from "../dto/authorization.dto";
+import {JWT_SIGN, JWT_VERIFY} from "../authorization.message";
 
 @Controller()
-export class AuthorizationHttpController {
+export class AuthorizationMicroserviceController {
   constructor(
     @Inject(AUTHORIZATION_SERVICE)
     private readonly authorizationService: AuthorizationService
@@ -16,7 +17,7 @@ export class AuthorizationHttpController {
     return this.authorizationService.verify(payload);
   }
   @MessagePattern({ cmd: JWT_SIGN })
-  async sign(payload: JWTRequest): Promise<LoginUserResponse> {
+  async sign(payload: JWTRequest): Promise<TokenResponse> {
     return this.authorizationService.sign(payload);
   }
 }

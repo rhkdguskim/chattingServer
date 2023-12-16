@@ -116,6 +116,7 @@
     ],
     "moduleNameMapper": {
       "^@src/(.*)$": "<rootDir>/$1",
+      "^@app/authentication(|/.*)$": "<rootDir>/apps/authentication/src/$1",
       "^@app/common(|/.*)$": "<rootDir>/libs/common/src/$1"
     },
     "coverageDirectory": "./coverage",

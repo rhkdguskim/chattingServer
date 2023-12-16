@@ -1,14 +1,14 @@
 import { Inject } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
-import { JWTRequest, JWTResponse, LoginUserResponse } from "@app/common/dto";
 import { OauthServiceFactory } from "./oauth.factory.service";
 import {
-  AuthorizationService,
   JWT_SERVICE,
   OAUTH_FACTORY_SERVICE,
-} from "./authorization.interface";
+} from "../authorization.metadata";
+import {AuthorizationService} from "./authorization.service.interface";
+import {JWTRequest, JWTResponse, TokenResponse} from "../dto/authorization.dto";
 
-export class AuthorizationServiceImpl implements AuthorizationService {
+export class AuthorizationLocalService implements AuthorizationService {
   constructor(
     @Inject(JWT_SERVICE) private jwtService: JwtService,
     @Inject(OAUTH_FACTORY_SERVICE)
@@ -19,7 +19,7 @@ export class AuthorizationServiceImpl implements AuthorizationService {
     return await this.jwtService.verifyAsync<JWTResponse>(payload);
   }
 
-  async sign(payload: JWTRequest): Promise<LoginUserResponse> {
+  async sign(payload: JWTRequest): Promise<TokenResponse> {
     const access_token: string = await this.jwtService.signAsync(payload);
     const refresh_payload = {
       ...payload,
@@ -31,8 +31,7 @@ export class AuthorizationServiceImpl implements AuthorizationService {
     return { access_token, refresh_token };
   }
 
-  async refreshVerify(payload: string): Promise<LoginUserResponse> {
-    // refresh_token에 담겨져있는 값들을 가지고 auth_token을 재발급 한다.
+  async refreshVerify(payload: string): Promise<TokenResponse> {
     const response: JWTResponse =
       await this.jwtService.verifyAsync<JWTResponse>(payload);
 

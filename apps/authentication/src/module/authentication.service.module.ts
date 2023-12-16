@@ -1,6 +1,6 @@
 import { DynamicModule, Module } from "@nestjs/common";
 import { AuthenticationMockService } from "../test/authentication.mock.service";
-import { AuthenticationServiceLocal } from "../providers/authentication-service-local.service";
+import { AuthenticationLocalService } from "../providers/authentication.local.service";
 import { UserMockRepository } from "../test/users.mock.repository";
 import { UserTypeORMRepository } from "../repository/users.typeorm.repository";
 import { NodeBcryptService } from "../providers/bcrypt/bcrpy.service";
@@ -28,7 +28,7 @@ export class AuthenticationServiceModule {
           provide: AUTHENTICATION_SERVICE,
           useClass: config.isDev
             ? AuthenticationMockService
-            : AuthenticationServiceLocal,
+            : AuthenticationLocalService,
         },
         {
           provide: AUTHENTICATION_BCRYPT,

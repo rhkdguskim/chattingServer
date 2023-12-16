@@ -7,7 +7,7 @@ import {
   DelteFriendRequest,
 } from "@app/common/dto/friend.createfriend.dto";
 import { FriendTypeORM } from "@app/common/typeorm/entity";
-import { UserResponse } from "@app/common/dto";
+
 import { lastValueFrom } from "rxjs";
 import {
   ADD_FRIEND,
@@ -15,6 +15,7 @@ import {
   FIND_ALL_FRIEND,
   UPDATE_FRIEND,
 } from "@app/common/message/friend";
+import {UserResponse} from "@app/authentication/dto/authenticaion.dto";
 
 export class FriendTCPClient extends ClientTCP implements IFriendClient {
   constructor(options: TcpClientOptions["options"]) {

@@ -1,4 +1,4 @@
-import {Repository} from "@app/common/interface";
+import {Repository} from "@app/common/interface/repository.interface";
 import {User} from "../entity/users.entity";
 
 export interface UserRepository extends Repository<User> {

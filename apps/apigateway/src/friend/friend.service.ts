@@ -6,9 +6,10 @@ import {
   FindFriendAllRequest,
 } from "@app/common/dto/friend.createfriend.dto";
 import { FRIEND_SERVICE } from "@app/common/message/friend";
-import { UserResponse } from "@app/common/dto";
+
 import { IFriendClient } from "@app/common/clients/friend.interface.client";
 import { Friend } from "@app/common/entity/friend.entity";
+import {UserResponse} from "@app/authentication/dto/authenticaion.dto";
 
 @Injectable()
 export class FriendService {

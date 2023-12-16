@@ -9,7 +9,7 @@ import {
   OneToMany,
 } from "typeorm";
 import { RoomTypeORM } from "@app/common/typeorm/entity/room.typeorm.entity";
-import { UserTypeORM } from "../../../../../apps/authentication/src/entity/users.typeorm.entity";
+import { UserTypeORM } from "@app/authentication/entity/users.typeorm.entity";
 import { ReadByTypeORM } from "@app/common/typeorm/entity/readby.typeorm.entity";
 import { Chatting } from "../../entity/chatting.entity";
 

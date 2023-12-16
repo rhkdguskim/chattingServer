@@ -1,0 +1,7 @@
+[32m[AuthenticationMicroService][39m [33mInfo[39m	2023-12-17 00:48:55.700 [33m[NestFactory][39m [32mStarting Nest application...[39m - {} [33m+1ms[39m
+[32m[AuthenticationMicroService][39m [33mInfo[39m	2023-12-17 00:48:55.742 [33m[InstanceLoader][39m [32mTypeOrmModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[AuthenticationMicroService][39m [33mInfo[39m	2023-12-17 00:48:55.774 [33m[InstanceLoader][39m [32mTypeOrmCoreModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[AuthenticationMicroService][39m [33mInfo[39m	2023-12-17 00:48:55.774 [33m[InstanceLoader][39m [32mTypeOrmModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[AuthenticationMicroService][39m [33mInfo[39m	2023-12-17 00:48:55.774 [33m[InstanceLoader][39m [32mAuthenticationServiceModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[AuthenticationMicroService][39m [33mInfo[39m	2023-12-17 00:48:55.774 [33m[InstanceLoader][39m [32mAuthenticationModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[AuthenticationMicroService][39m [33mInfo[39m	2023-12-17 00:48:55.779 [33m[NestMicroservice][39m [32mNest microservice successfully started[39m - {} [33m+0ms[39m

@@ -7,11 +7,12 @@ import {
   UnauthorizedException,
 } from "@nestjs/common";
 
-import { AUTHORIZATION_SERVICE } from "@app/common/message/authorization";
 import { Request } from "express";
-import { AuthorizationService } from "apps/authorization/src/authorization.interface";
-import {AuthenticationService} from "../../../../authentication/src/providers/authenticationservice.interface";
-import {AUTHENTICATION_SERVICE} from "../../../../authentication/src/authentication.metadata";
+import {AuthenticationService} from "@app/authentication/providers/authentication.service.interface";
+import {AUTHENTICATION_SERVICE} from "@app/authentication/authentication.metadata";
+import {AuthorizationService} from "../providers/authorization.service.interface";
+import {AUTHORIZATION_SERVICE} from "../authorization.metadata";
+
 
 @Injectable()
 export class JwtGuard implements CanActivate {
@@ -24,7 +25,6 @@ export class JwtGuard implements CanActivate {
   ) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
-    try {
       const request: Request = context.switchToHttp().getRequest();
 
       const authToken: string = request.headers["authentication"] as string;
@@ -39,11 +39,7 @@ export class JwtGuard implements CanActivate {
       request.user = await this.authenticationClient.findOneByID(
         payload.user_id
       );
-
+      
       return true;
-    } catch (err) {
-      this.logger.error(err);
-      throw new UnauthorizedException(err.message);
-    }
   }
 }

@@ -18,8 +18,9 @@ import {
   InviteRoomRequest,
 } from "@app/common/dto/room.dto";
 import { UserTypeORM } from "@app/common/typeorm/entity";
-import { UserResponse } from "@app/common/dto";
+
 import { ValidateCreateRoom } from "@app/common/decoration/room.deco";
+import {UserResponse} from "@app/authentication/dto/authenticaion.dto";
 
 @Injectable()
 export class RoomService {

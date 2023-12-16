@@ -9,7 +9,7 @@ import { Participant } from "@src/entitys/participant.entity";
 import { Room } from "@src/entitys/room.entity";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { ReadBy } from "../../entitys/readby.entity";
-import { JwtStrategy } from "@src/auth/guards/jwt.strategy";
+import { AuthorizationJwtStrategy } from "../../../../authorization/src/guards/authorization.jwt.strategy";
 import { AuthModule } from "@src/auth/auth.module";
 
 describe("ChattingController", () => {
@@ -24,7 +24,7 @@ describe("ChattingController", () => {
         TypeOrmModule.forFeature([Chatting, Room, Participant, ReadBy]),
       ],
       controllers: [ChattingController],
-      providers: [JwtStrategy, Logger, ChattingService],
+      providers: [AuthorizationJwtStrategy, Logger, ChattingService],
     }).compile();
 
     controller = module.get<ChattingController>(ChattingController);

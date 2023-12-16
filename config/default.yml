@@ -18,8 +18,8 @@ log:
   loglevel : 'debug'
 db:
   type: 'mysql'
-  host : 'svc.sel3.cloudtype.app'
-  port: 30804
+  host : '127.0.0.1'
+  port: 13306
   username: 'root'
   password: 'root'
   database: 'kwangtalk'

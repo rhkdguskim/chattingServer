@@ -1,6 +1,5 @@
 import { Module, DynamicModule, Global } from "@nestjs/common";
-import { AUTHORIZATION_SERVICE } from "../message/authorization";
-import { AuthorizaionTCPClient } from "../../../../apps/authorization/src/authorization.microservice.tcp.controller";
+import { AuthorizationTCPClient } from "../../../../apps/authorization/src/providers/authorization.tcpclient.service";
 import {
   ClientOptions,
   TcpClientOptions,
@@ -12,13 +11,14 @@ import { ROOM_SERVICE } from "../message/room";
 import { RoomTCPClient } from "../clients/tcp/room.tcp.client";
 import { CHAT_SERVICE } from "../message/chat";
 import { ChatTCPClient } from "../clients/tcp/chat.tcp.client";
-import { AuthorizationServiceImpl } from "apps/authorization/src/authorization.service";
+import { AuthorizationLocalService } from "../../../../apps/authorization/src/providers/authorization.local.service";
 import { FriendServiceImpl } from "apps/friend/src/friend.service";
-import { AuthenticationServiceLocal } from "../../../../apps/authentication/src/providers/authentication-service-local.service";
+import { AuthenticationLocalService } from "@app/authentication/providers/authentication.local.service";
 import { RoomService } from "apps/room/src/room.service";
 import { ChatService } from "apps/chat/src/chat.service";
-import {AuthenticationServiceTcpclient} from "../../../../apps/authentication/src/providers/authenticationServiceTcpclient";
+import {AuthenticationTcpclientService} from "@app/authentication/providers/authentication.tcpclient.service";
 import {AUTHENTICATION_SERVICE} from "../../../../apps/authentication/src/authentication.metadata";
+import {AUTHORIZATION_SERVICE} from "../../../../apps/authorization/src/authorization.metadata";
 interface ClientCustomProxy {
   name: string;
   config: ClientOptions;
@@ -30,16 +30,16 @@ export interface ClientProxyFactoryCustomConfig {
 }
 
 const tcpClientFactoryMap = {
-  [AUTHENTICATION_SERVICE]: AuthenticationServiceTcpclient,
-  [AUTHORIZATION_SERVICE]: AuthorizaionTCPClient,
+  [AUTHENTICATION_SERVICE]: AuthenticationTcpclientService,
+  [AUTHORIZATION_SERVICE]: AuthorizationTCPClient,
   [FRIEND_SERVICE]: FriendTCPClient,
   [ROOM_SERVICE]: RoomTCPClient,
   [CHAT_SERVICE]: ChatTCPClient,
 };
 
 const localClientFactoryMap = {
-  [AUTHENTICATION_SERVICE]: AuthenticationServiceLocal,
-  [AUTHORIZATION_SERVICE]: AuthorizationServiceImpl,
+  [AUTHENTICATION_SERVICE]: AuthenticationLocalService,
+  [AUTHORIZATION_SERVICE]: AuthorizationLocalService,
   [FRIEND_SERVICE]: FriendServiceImpl,
   [ROOM_SERVICE]: RoomService,
   [CHAT_SERVICE]: ChatService,

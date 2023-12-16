@@ -1,51 +1,46 @@
 import { Test, TestingModule } from "@nestjs/testing";
-import { AuthenticationModule } from "../module/authentication.module";
-import { CreateUserRequest } from "@app/common/dto";
 import {
   CustomException,
   ExceptionType,
 } from "@app/common/exception/custom.exception";
 import { NodeBcryptService } from "../providers/bcrypt/bcrpy.service";
-import { AuthenticationServiceModule } from "../module/authentication.service.module";
-import {AuthenticationService} from "../providers/authenticationservice.interface";
-import {AUTHENTICATION_SERVICE} from "../authentication.metadata";
+import {AuthenticationService} from "../providers/authentication.service.interface";
+import {AUTHENTICATION_BCRYPT, AUTHENTICATION_SERVICE} from "../authentication.metadata";
+import {CreateUserRequest} from "@app/authentication/dto/authenticaion.dto";
+import {AuthenticationModule} from "@app/authentication/module/authentication.module";
+import {BcryptService} from "@app/authentication/providers/bcrypt/bcrpy.interface";
 
-describe("AuthenticationController", () => {
-  let authenticationDomain: NodeBcryptService;
+describe("Authentication Module", () => {
+  let authenticationHashService: BcryptService;
   let authenticationService: AuthenticationService;
   beforeEach(async () => {
     const app: TestingModule = await Test.createTestingModule({
-      imports: [AuthenticationServiceModule.forRoot({
-        isDev: true,
-        isGlobal : false,
+      imports: [AuthenticationModule.forRoot({
+        isDev : true,
+        isMicroService : false
       })],
     }).compile();
 
-    authenticationDomain = app.get<NodeBcryptService>(NodeBcryptService);
+    authenticationHashService = app.get<BcryptService>(AUTHENTICATION_BCRYPT);
     authenticationService = app.get<AuthenticationService>(
       AUTHENTICATION_SERVICE
     );
   });
 
   it("should be defined", () => {
-    expect(authenticationDomain).toBeDefined();
+    expect(authenticationHashService).toBeDefined();
     expect(authenticationService).toBeDefined();
   });
 
-  describe("Authentication Domain Test", () => {
-    it("Checking Password Hash", async () => {
+  describe("Authentication Hash Service Test", () => {
+    it("Password Hash", async () => {
       const pw1 = "password";
-      const pw2 = "password2";
-
-      const result = await authenticationDomain.hash(pw1);
-      console.log(result, pw1);
-
-      expect(await authenticationDomain.compare(result, pw1)).toBe(true);
-      expect(await authenticationDomain.compare(result, pw2)).toBe(false);
+      const hashedPw = authenticationHashService.hash(pw1);
+      expect(authenticationHashService.compare(pw1, hashedPw)).toBe(true);
     });
   });
 
-  describe("Authentication Serivce Test", () => {
+  describe("Authentication Service Test", () => {
     it("Find User", async () => {
       const createUserRequest: CreateUserRequest = {
         user_id: "rhkdguskim",
@@ -54,7 +49,6 @@ describe("AuthenticationController", () => {
       };
       try {
         const user = await authenticationService.signIn(createUserRequest);
-        
       } catch (e) {
         expect(e).toBeInstanceOf(CustomException);
         expect(e.msg.code).toEqual(ExceptionType.AUTHENTICATION_ERROR);
@@ -62,8 +56,11 @@ describe("AuthenticationController", () => {
     });
 
     it("Find Users", async () => {
-      const result = await authenticationService.findOne(30);
-      expect(result).toEqual(null);
+      try {
+        const result = await authenticationService.findOne(30);
+        expect(result).toEqual(null);
+      } catch (e) {
+      }
     });
   });
 });

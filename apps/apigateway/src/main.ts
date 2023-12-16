@@ -6,10 +6,15 @@ import * as cookieParser from "cookie-parser";
 import { LoggingInterceptor } from "./common/interceptors/logging.interceptor";
 import { Logger, ValidationPipe } from "@nestjs/common";
 import { MAIN_PORT } from "@app/common/config";
-import {getWinstonLogger} from "@app/common/util/util";
+import winstonLogger, {winstonLoggerConfig} from "@app/common/logger/nestwinstonlogger";
 
 async function bootstrap() {
-  const logger = getWinstonLogger('APIGateWay', 'ApiGateWay');
+  const loggerConfig : winstonLoggerConfig = {
+    filepath: "ApiGateWay",
+    loglevel: "debug",
+    name: "ApiGateWay"
+  }
+  const logger = winstonLogger(loggerConfig);
   const app = await NestFactory.create(AppModule, {
     logger,
   });

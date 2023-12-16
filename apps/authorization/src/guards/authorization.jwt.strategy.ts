@@ -12,10 +12,10 @@ import { UsersService } from "@src/users/users.service";
 import { Request } from "express";
 import { CACHE_MANAGER } from "@nestjs/cache-manager";
 import { Cache } from "cache-manager";
-import { User } from "../../../../authentication/src/entity/users.entity";
+import { User } from "@app/authentication/entity/users.entity";
 
 @Injectable()
-export class JwtStrategy extends PassportStrategy(Strategy, "jwt") {
+export class AuthorizationJwtStrategy extends PassportStrategy(Strategy, "jwt") {
   constructor(
     private userService: UsersService,
     @Inject(CACHE_MANAGER)

@@ -1,5 +1,5 @@
-import {CreateUserRequest, LoginUserRequest, UpdateUserRequest} from "@app/common/dto";
 import {User} from "../entity/users.entity";
+import {CreateUserRequest, LoginUserRequest, UpdateUserRequest} from "@app/authentication/dto/authenticaion.dto";
 
 export interface AuthenticationService {
     signIn(loginUser: LoginUserRequest): Promise<User>;

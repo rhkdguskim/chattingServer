@@ -1,168 +1,90 @@
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:26:50.911 [33m[NestFactory][39m [32mStarting Nest application...[39m - {} [33m+1ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:26:50.962 [33m[InstanceLoader][39m [32mAppModule dependencies initialized[39m - {} [33m+1ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:26:50.962 [33m[InstanceLoader][39m [32mClientProxyFactoryCustomModule dependencies initialized[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:26:50.962 [33m[InstanceLoader][39m [32mTypeOrmModule dependencies initialized[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:26:50.962 [33m[InstanceLoader][39m [32mCacheRedisModule dependencies initialized[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:26:50.962 [33m[InstanceLoader][39m [32mMulterModule dependencies initialized[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:26:50.962 [33m[InstanceLoader][39m [32mCacheModule dependencies initialized[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:26:50.963 [33m[InstanceLoader][39m [32mAuthorizationServiceModule dependencies initialized[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:26:50.963 [33m[InstanceLoader][39m [32mFileModule dependencies initialized[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:26:51.001 [33m[InstanceLoader][39m [32mTypeOrmCoreModule dependencies initialized[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:26:51.001 [33m[InstanceLoader][39m [32mTypeOrmModule dependencies initialized[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:26:51.001 [33m[InstanceLoader][39m [32mTypeOrmModule dependencies initialized[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:26:51.001 [33m[InstanceLoader][39m [32mAuthenticationServiceModule dependencies initialized[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:26:51.001 [33m[InstanceLoader][39m [32mFriendServiceModule dependencies initialized[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:26:51.003 [33m[InstanceLoader][39m [32mChattingModule dependencies initialized[39m - {} [33m+1ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:26:51.003 [33m[InstanceLoader][39m [32mFriendModule dependencies initialized[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:26:51.003 [33m[InstanceLoader][39m [32mUsersModule dependencies initialized[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:26:51.003 [33m[InstanceLoader][39m [32mAuthModule dependencies initialized[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:26:51.029 [33m[RoutesResolver][39m [32mAuthController {/api/auth}:[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:26:51.030 [33m[RouterExplorer][39m [32mMapped {/api/auth/login, POST} route[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:26:51.030 [33m[RouterExplorer][39m [32mMapped {/api/auth/signup, POST} route[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:26:51.031 [33m[RouterExplorer][39m [32mMapped {/api/auth/refreshtoken, POST} route[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:26:51.031 [33m[RoutesResolver][39m [32mUsersController {/api/users}:[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:26:51.031 [33m[RouterExplorer][39m [32mMapped {/api/users, GET} route[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:26:51.031 [33m[RouterExplorer][39m [32mMapped {/api/users/:id, PUT} route[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:26:51.031 [33m[RouterExplorer][39m [32mMapped {/api/users/:id, GET} route[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:26:51.031 [33m[RouterExplorer][39m [32mMapped {/api/users/user_id/:id, GET} route[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:26:51.031 [33m[RoutesResolver][39m [32mFriendController {/api/friend}:[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:26:51.032 [33m[RouterExplorer][39m [32mMapped {/api/friend/:id, GET} route[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:26:51.032 [33m[RouterExplorer][39m [32mMapped {/api/friend/:id, POST} route[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:26:51.032 [33m[RouterExplorer][39m [32mMapped {/api/friend/:id, PUT} route[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:26:51.032 [33m[RouterExplorer][39m [32mMapped {/api/friend/:id, DELETE} route[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:26:51.032 [33m[RoutesResolver][39m [32mChattingController {/api/chatting}:[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:26:51.032 [33m[RouterExplorer][39m [32mMapped {/api/chatting/:id, GET} route[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:26:51.033 [33m[RoutesResolver][39m [32mRoomController {/api/room}:[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:26:51.033 [33m[RouterExplorer][39m [32mMapped {/api/room/:id, GET} route[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:26:51.033 [33m[RouterExplorer][39m [32mMapped {/api/room/:id, POST} route[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:26:51.033 [33m[RouterExplorer][39m [32mMapped {/api/room/invite, POST} route[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:26:51.033 [33m[RoutesResolver][39m [32mFileController {/api/file}:[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:26:51.033 [33m[RouterExplorer][39m [32mMapped {/api/file, POST} route[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:26:51.033 [33m[RouterExplorer][39m [32mMapped {/api/file/:fileName, GET} route[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:26:51.034 [33m[NestApplication][39m [32mNest application successfully started[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:12.113 [33m[NestFactory][39m [32mStarting Nest application...[39m - {} [33m+1ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:12.163 [33m[InstanceLoader][39m [32mAppModule dependencies initialized[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:12.163 [33m[InstanceLoader][39m [32mClientProxyFactoryCustomModule dependencies initialized[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:12.163 [33m[InstanceLoader][39m [32mTypeOrmModule dependencies initialized[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:12.163 [33m[InstanceLoader][39m [32mCacheRedisModule dependencies initialized[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:12.164 [33m[InstanceLoader][39m [32mMulterModule dependencies initialized[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:12.164 [33m[InstanceLoader][39m [32mCacheModule dependencies initialized[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:12.164 [33m[InstanceLoader][39m [32mAuthorizationServiceModule dependencies initialized[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:12.165 [33m[InstanceLoader][39m [32mFileModule dependencies initialized[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:12.202 [33m[InstanceLoader][39m [32mTypeOrmCoreModule dependencies initialized[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:12.202 [33m[InstanceLoader][39m [32mTypeOrmModule dependencies initialized[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:12.203 [33m[InstanceLoader][39m [32mTypeOrmModule dependencies initialized[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:12.203 [33m[InstanceLoader][39m [32mAuthenticationServiceModule dependencies initialized[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:12.203 [33m[InstanceLoader][39m [32mFriendServiceModule dependencies initialized[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:12.204 [33m[InstanceLoader][39m [32mChattingModule dependencies initialized[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:12.204 [33m[InstanceLoader][39m [32mFriendModule dependencies initialized[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:12.204 [33m[InstanceLoader][39m [32mUsersModule dependencies initialized[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:12.204 [33m[InstanceLoader][39m [32mAuthModule dependencies initialized[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:12.229 [33m[RoutesResolver][39m [32mAuthController {/api/auth}:[39m - {} [33m+1ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:12.230 [33m[RouterExplorer][39m [32mMapped {/api/auth/login, POST} route[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:12.230 [33m[RouterExplorer][39m [32mMapped {/api/auth/signup, POST} route[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:12.230 [33m[RouterExplorer][39m [32mMapped {/api/auth/refreshtoken, POST} route[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:12.230 [33m[RoutesResolver][39m [32mUsersController {/api/users}:[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:12.230 [33m[RouterExplorer][39m [32mMapped {/api/users, GET} route[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:12.231 [33m[RouterExplorer][39m [32mMapped {/api/users/:id, PUT} route[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:12.231 [33m[RouterExplorer][39m [32mMapped {/api/users/:id, GET} route[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:12.231 [33m[RouterExplorer][39m [32mMapped {/api/users/user_id/:id, GET} route[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:12.231 [33m[RoutesResolver][39m [32mFriendController {/api/friend}:[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:12.231 [33m[RouterExplorer][39m [32mMapped {/api/friend/:id, GET} route[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:12.231 [33m[RouterExplorer][39m [32mMapped {/api/friend/:id, POST} route[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:12.231 [33m[RouterExplorer][39m [32mMapped {/api/friend/:id, PUT} route[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:12.232 [33m[RouterExplorer][39m [32mMapped {/api/friend/:id, DELETE} route[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:12.232 [33m[RoutesResolver][39m [32mChattingController {/api/chatting}:[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:12.232 [33m[RouterExplorer][39m [32mMapped {/api/chatting/:id, GET} route[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:12.232 [33m[RoutesResolver][39m [32mRoomController {/api/room}:[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:12.232 [33m[RouterExplorer][39m [32mMapped {/api/room/:id, GET} route[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:12.232 [33m[RouterExplorer][39m [32mMapped {/api/room/:id, POST} route[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:12.232 [33m[RouterExplorer][39m [32mMapped {/api/room/invite, POST} route[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:12.232 [33m[RoutesResolver][39m [32mFileController {/api/file}:[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:12.232 [33m[RouterExplorer][39m [32mMapped {/api/file, POST} route[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:12.232 [33m[RouterExplorer][39m [32mMapped {/api/file/:fileName, GET} route[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:12.233 [33m[NestApplication][39m [32mNest application successfully started[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:37.343 [33m[NestFactory][39m [32mStarting Nest application...[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:37.407 [33m[InstanceLoader][39m [32mAppModule dependencies initialized[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:37.407 [33m[InstanceLoader][39m [32mClientProxyFactoryCustomModule dependencies initialized[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:37.407 [33m[InstanceLoader][39m [32mTypeOrmModule dependencies initialized[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:37.407 [33m[InstanceLoader][39m [32mCacheRedisModule dependencies initialized[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:37.408 [33m[InstanceLoader][39m [32mMulterModule dependencies initialized[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:37.408 [33m[InstanceLoader][39m [32mCacheModule dependencies initialized[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:37.408 [33m[InstanceLoader][39m [32mAuthorizationServiceModule dependencies initialized[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:37.409 [33m[InstanceLoader][39m [32mFileModule dependencies initialized[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:37.453 [33m[InstanceLoader][39m [32mTypeOrmCoreModule dependencies initialized[39m - {} [33m+1ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:37.453 [33m[InstanceLoader][39m [32mTypeOrmModule dependencies initialized[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:37.453 [33m[InstanceLoader][39m [32mTypeOrmModule dependencies initialized[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:37.453 [33m[InstanceLoader][39m [32mAuthenticationServiceModule dependencies initialized[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:37.453 [33m[InstanceLoader][39m [32mFriendServiceModule dependencies initialized[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:37.455 [33m[InstanceLoader][39m [32mChattingModule dependencies initialized[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:37.455 [33m[InstanceLoader][39m [32mFriendModule dependencies initialized[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:37.456 [33m[InstanceLoader][39m [32mUsersModule dependencies initialized[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:37.456 [33m[InstanceLoader][39m [32mAuthModule dependencies initialized[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:37.495 [33m[RoutesResolver][39m [32mAuthController {/api/auth}:[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:37.497 [33m[RouterExplorer][39m [32mMapped {/api/auth/login, POST} route[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:37.497 [33m[RouterExplorer][39m [32mMapped {/api/auth/signup, POST} route[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:37.497 [33m[RouterExplorer][39m [32mMapped {/api/auth/refreshtoken, POST} route[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:37.497 [33m[RoutesResolver][39m [32mUsersController {/api/users}:[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:37.498 [33m[RouterExplorer][39m [32mMapped {/api/users, GET} route[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:37.498 [33m[RouterExplorer][39m [32mMapped {/api/users/:id, PUT} route[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:37.498 [33m[RouterExplorer][39m [32mMapped {/api/users/:id, GET} route[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:37.498 [33m[RouterExplorer][39m [32mMapped {/api/users/user_id/:id, GET} route[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:37.498 [33m[RoutesResolver][39m [32mFriendController {/api/friend}:[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:37.499 [33m[RouterExplorer][39m [32mMapped {/api/friend/:id, GET} route[39m - {} [33m+1ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:37.499 [33m[RouterExplorer][39m [32mMapped {/api/friend/:id, POST} route[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:37.499 [33m[RouterExplorer][39m [32mMapped {/api/friend/:id, PUT} route[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:37.499 [33m[RouterExplorer][39m [32mMapped {/api/friend/:id, DELETE} route[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:37.499 [33m[RoutesResolver][39m [32mChattingController {/api/chatting}:[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:37.499 [33m[RouterExplorer][39m [32mMapped {/api/chatting/:id, GET} route[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:37.500 [33m[RoutesResolver][39m [32mRoomController {/api/room}:[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:37.500 [33m[RouterExplorer][39m [32mMapped {/api/room/:id, GET} route[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:37.500 [33m[RouterExplorer][39m [32mMapped {/api/room/:id, POST} route[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:37.500 [33m[RouterExplorer][39m [32mMapped {/api/room/invite, POST} route[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:37.500 [33m[RoutesResolver][39m [32mFileController {/api/file}:[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:37.500 [33m[RouterExplorer][39m [32mMapped {/api/file, POST} route[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:37.500 [33m[RouterExplorer][39m [32mMapped {/api/file/:fileName, GET} route[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:27:37.508 [33m[NestApplication][39m [32mNest application successfully started[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:28:04.731 [33m[NestFactory][39m [32mStarting Nest application...[39m - {} [33m+1ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:28:04.785 [33m[InstanceLoader][39m [32mAppModule dependencies initialized[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:28:04.785 [33m[InstanceLoader][39m [32mClientProxyFactoryCustomModule dependencies initialized[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:28:04.785 [33m[InstanceLoader][39m [32mTypeOrmModule dependencies initialized[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:28:04.785 [33m[InstanceLoader][39m [32mCacheRedisModule dependencies initialized[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:28:04.785 [33m[InstanceLoader][39m [32mMulterModule dependencies initialized[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:28:04.786 [33m[InstanceLoader][39m [32mCacheModule dependencies initialized[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:28:04.786 [33m[InstanceLoader][39m [32mAuthorizationServiceModule dependencies initialized[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:28:04.787 [33m[InstanceLoader][39m [32mFileModule dependencies initialized[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:28:04.843 [33m[InstanceLoader][39m [32mTypeOrmCoreModule dependencies initialized[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:28:04.844 [33m[InstanceLoader][39m [32mTypeOrmModule dependencies initialized[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:28:04.845 [33m[InstanceLoader][39m [32mTypeOrmModule dependencies initialized[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:28:04.845 [33m[InstanceLoader][39m [32mAuthenticationServiceModule dependencies initialized[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:28:04.845 [33m[InstanceLoader][39m [32mFriendServiceModule dependencies initialized[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:28:04.847 [33m[InstanceLoader][39m [32mChattingModule dependencies initialized[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:28:04.847 [33m[InstanceLoader][39m [32mFriendModule dependencies initialized[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:28:04.848 [33m[InstanceLoader][39m [32mUsersModule dependencies initialized[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:28:04.848 [33m[InstanceLoader][39m [32mAuthModule dependencies initialized[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:28:04.874 [33m[RoutesResolver][39m [32mAuthController {/api/auth}:[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:28:04.875 [33m[RouterExplorer][39m [32mMapped {/api/auth/login, POST} route[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:28:04.876 [33m[RouterExplorer][39m [32mMapped {/api/auth/signup, POST} route[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:28:04.876 [33m[RouterExplorer][39m [32mMapped {/api/auth/refreshtoken, POST} route[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:28:04.876 [33m[RoutesResolver][39m [32mUsersController {/api/users}:[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:28:04.876 [33m[RouterExplorer][39m [32mMapped {/api/users, GET} route[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:28:04.876 [33m[RouterExplorer][39m [32mMapped {/api/users/:id, PUT} route[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:28:04.877 [33m[RouterExplorer][39m [32mMapped {/api/users/:id, GET} route[39m - {} [33m+1ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:28:04.877 [33m[RouterExplorer][39m [32mMapped {/api/users/user_id/:id, GET} route[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:28:04.877 [33m[RoutesResolver][39m [32mFriendController {/api/friend}:[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:28:04.877 [33m[RouterExplorer][39m [32mMapped {/api/friend/:id, GET} route[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:28:04.877 [33m[RouterExplorer][39m [32mMapped {/api/friend/:id, POST} route[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:28:04.877 [33m[RouterExplorer][39m [32mMapped {/api/friend/:id, PUT} route[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:28:04.877 [33m[RouterExplorer][39m [32mMapped {/api/friend/:id, DELETE} route[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:28:04.878 [33m[RoutesResolver][39m [32mChattingController {/api/chatting}:[39m - {} [33m+1ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:28:04.878 [33m[RouterExplorer][39m [32mMapped {/api/chatting/:id, GET} route[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:28:04.878 [33m[RoutesResolver][39m [32mRoomController {/api/room}:[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:28:04.878 [33m[RouterExplorer][39m [32mMapped {/api/room/:id, GET} route[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:28:04.878 [33m[RouterExplorer][39m [32mMapped {/api/room/:id, POST} route[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:28:04.878 [33m[RouterExplorer][39m [32mMapped {/api/room/invite, POST} route[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:28:04.878 [33m[RoutesResolver][39m [32mFileController {/api/file}:[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:28:04.878 [33m[RouterExplorer][39m [32mMapped {/api/file, POST} route[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:28:04.878 [33m[RouterExplorer][39m [32mMapped {/api/file/:fileName, GET} route[39m - {} [33m+0ms[39m
-[32m[APIGateWay][39m [33mInfo[39m	2023-12-16 22:28:04.880 [33m[NestApplication][39m [32mNest application successfully started[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 00:48:55.776 [33m[NestFactory][39m [32mStarting Nest application...[39m - {} [33m+1ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 00:48:55.820 [33m[InstanceLoader][39m [32mAppModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 00:48:55.821 [33m[InstanceLoader][39m [32mClientProxyFactoryCustomModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 00:48:55.821 [33m[InstanceLoader][39m [32mTypeOrmModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 00:48:55.821 [33m[InstanceLoader][39m [32mCacheRedisModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 00:48:55.821 [33m[InstanceLoader][39m [32mMulterModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 00:48:55.821 [33m[InstanceLoader][39m [32mCacheModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 00:48:55.822 [33m[InstanceLoader][39m [32mAuthorizationServiceModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 00:48:55.822 [33m[InstanceLoader][39m [32mFileModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 00:48:55.848 [33m[InstanceLoader][39m [32mTypeOrmCoreModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 00:48:55.848 [33m[InstanceLoader][39m [32mTypeOrmModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 00:48:55.848 [33m[InstanceLoader][39m [32mTypeOrmModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 00:48:55.848 [33m[InstanceLoader][39m [32mAuthenticationServiceModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 00:48:55.848 [33m[InstanceLoader][39m [32mFriendServiceModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 00:48:55.850 [33m[InstanceLoader][39m [32mChattingModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 00:48:55.850 [33m[InstanceLoader][39m [32mFriendModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 00:48:55.850 [33m[InstanceLoader][39m [32mUsersModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 00:48:55.850 [33m[InstanceLoader][39m [32mAuthModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 00:48:55.877 [33m[RoutesResolver][39m [32mAuthenticationControllerHttp {/api/auth}:[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 00:48:55.878 [33m[RouterExplorer][39m [32mMapped {/api/auth/login, POST} route[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 00:48:55.878 [33m[RouterExplorer][39m [32mMapped {/api/auth/signup, POST} route[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 00:48:55.878 [33m[RouterExplorer][39m [32mMapped {/api/auth, DELETE} route[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 00:48:55.878 [33m[RouterExplorer][39m [32mMapped {/api/auth, GET} route[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 00:48:55.879 [33m[RouterExplorer][39m [32mMapped {/api/auth/:id, GET} route[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 00:48:55.879 [33m[RouterExplorer][39m [32mMapped {/api/auth, PUT} route[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 00:48:55.879 [33m[RoutesResolver][39m [32mUsersController {/api/users}:[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 00:48:55.879 [33m[RouterExplorer][39m [32mMapped {/api/users, GET} route[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 00:48:55.879 [33m[RouterExplorer][39m [32mMapped {/api/users/:id, PUT} route[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 00:48:55.880 [33m[RouterExplorer][39m [32mMapped {/api/users/:id, GET} route[39m - {} [33m+1ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 00:48:55.880 [33m[RouterExplorer][39m [32mMapped {/api/users/user_id/:id, GET} route[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 00:48:55.880 [33m[RoutesResolver][39m [32mFriendController {/api/friend}:[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 00:48:55.880 [33m[RouterExplorer][39m [32mMapped {/api/friend/:id, GET} route[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 00:48:55.880 [33m[RouterExplorer][39m [32mMapped {/api/friend/:id, POST} route[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 00:48:55.880 [33m[RouterExplorer][39m [32mMapped {/api/friend/:id, PUT} route[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 00:48:55.880 [33m[RouterExplorer][39m [32mMapped {/api/friend/:id, DELETE} route[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 00:48:55.880 [33m[RoutesResolver][39m [32mChattingController {/api/chatting}:[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 00:48:55.880 [33m[RouterExplorer][39m [32mMapped {/api/chatting/:id, GET} route[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 00:48:55.880 [33m[RoutesResolver][39m [32mRoomController {/api/room}:[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 00:48:55.880 [33m[RouterExplorer][39m [32mMapped {/api/room/:id, GET} route[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 00:48:55.881 [33m[RouterExplorer][39m [32mMapped {/api/room/:id, POST} route[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 00:48:55.881 [33m[RouterExplorer][39m [32mMapped {/api/room/invite, POST} route[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 00:48:55.881 [33m[RoutesResolver][39m [32mFileController {/api/file}:[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 00:48:55.881 [33m[RouterExplorer][39m [32mMapped {/api/file, POST} route[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 00:48:55.881 [33m[RouterExplorer][39m [32mMapped {/api/file/:fileName, GET} route[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 00:48:55.882 [33m[NestApplication][39m [32mNest application successfully started[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 01:12:52.607 [33m[NestFactory][39m [32mStarting Nest application...[39m - {} [33m+1ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 01:12:52.672 [33m[InstanceLoader][39m [32mAppModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 01:12:52.672 [33m[InstanceLoader][39m [32mClientProxyFactoryCustomModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 01:12:52.672 [33m[InstanceLoader][39m [32mTypeOrmModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 01:12:52.672 [33m[InstanceLoader][39m [32mCacheRedisModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 01:12:52.673 [33m[InstanceLoader][39m [32mMulterModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 01:12:52.673 [33m[InstanceLoader][39m [32mCacheModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 01:12:52.674 [33m[InstanceLoader][39m [32mAuthorizationServiceModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 01:12:52.675 [33m[InstanceLoader][39m [32mFileModule dependencies initialized[39m - {} [33m+1ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 01:12:52.734 [33m[InstanceLoader][39m [32mTypeOrmCoreModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 01:12:52.734 [33m[InstanceLoader][39m [32mTypeOrmModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 01:12:52.734 [33m[InstanceLoader][39m [32mTypeOrmModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 01:12:52.735 [33m[InstanceLoader][39m [32mAuthenticationServiceModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 01:12:52.735 [33m[InstanceLoader][39m [32mFriendServiceModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 01:12:52.739 [33m[InstanceLoader][39m [32mChattingModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 01:12:52.739 [33m[InstanceLoader][39m [32mFriendModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 01:12:52.741 [33m[InstanceLoader][39m [32mUsersModule dependencies initialized[39m - {} [33m+1ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 01:12:52.741 [33m[InstanceLoader][39m [32mAuthModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 01:12:52.778 [33m[RoutesResolver][39m [32mAuthenticationControllerHttp {/api/auth}:[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 01:12:52.780 [33m[RouterExplorer][39m [32mMapped {/api/auth/login, POST} route[39m - {} [33m+1ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 01:12:52.780 [33m[RouterExplorer][39m [32mMapped {/api/auth/signup, POST} route[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 01:12:52.780 [33m[RouterExplorer][39m [32mMapped {/api/auth, DELETE} route[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 01:12:52.780 [33m[RouterExplorer][39m [32mMapped {/api/auth, GET} route[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 01:12:52.781 [33m[RouterExplorer][39m [32mMapped {/api/auth/:id, GET} route[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 01:12:52.781 [33m[RouterExplorer][39m [32mMapped {/api/auth, PUT} route[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 01:12:52.781 [33m[RoutesResolver][39m [32mUsersController {/api/users}:[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 01:12:52.781 [33m[RouterExplorer][39m [32mMapped {/api/users, GET} route[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 01:12:52.781 [33m[RouterExplorer][39m [32mMapped {/api/users/:id, PUT} route[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 01:12:52.781 [33m[RouterExplorer][39m [32mMapped {/api/users/:id, GET} route[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 01:12:52.782 [33m[RouterExplorer][39m [32mMapped {/api/users/user_id/:id, GET} route[39m - {} [33m+1ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 01:12:52.782 [33m[RoutesResolver][39m [32mFriendController {/api/friend}:[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 01:12:52.782 [33m[RouterExplorer][39m [32mMapped {/api/friend/:id, GET} route[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 01:12:52.782 [33m[RouterExplorer][39m [32mMapped {/api/friend/:id, POST} route[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 01:12:52.782 [33m[RouterExplorer][39m [32mMapped {/api/friend/:id, PUT} route[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 01:12:52.782 [33m[RouterExplorer][39m [32mMapped {/api/friend/:id, DELETE} route[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 01:12:52.782 [33m[RoutesResolver][39m [32mChattingController {/api/chatting}:[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 01:12:52.782 [33m[RouterExplorer][39m [32mMapped {/api/chatting/:id, GET} route[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 01:12:52.782 [33m[RoutesResolver][39m [32mRoomController {/api/room}:[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 01:12:52.782 [33m[RouterExplorer][39m [32mMapped {/api/room/:id, GET} route[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 01:12:52.782 [33m[RouterExplorer][39m [32mMapped {/api/room/:id, POST} route[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 01:12:52.782 [33m[RouterExplorer][39m [32mMapped {/api/room/invite, POST} route[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 01:12:52.782 [33m[RoutesResolver][39m [32mFileController {/api/file}:[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 01:12:52.783 [33m[RouterExplorer][39m [32mMapped {/api/file, POST} route[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 01:12:52.783 [33m[RouterExplorer][39m [32mMapped {/api/file/:fileName, GET} route[39m - {} [33m+0ms[39m
+[32m[ApiGateWay][39m [33mInfo[39m	2023-12-17 01:12:52.785 [33m[NestApplication][39m [32mNest application successfully started[39m - {} [33m+0ms[39m

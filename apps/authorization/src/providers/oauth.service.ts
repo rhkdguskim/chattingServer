@@ -1,6 +1,6 @@
 import { HttpService } from "@nestjs/axios";
 import { Inject } from "@nestjs/common";
-import { HTTP_SERVICE } from "./authorization.interface";
+import { HTTP_SERVICE } from "../authorization.metadata";
 export interface OAuthService {
   token(code: string);
   userInfo(access_token: string);

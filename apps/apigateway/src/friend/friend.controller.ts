@@ -22,8 +22,8 @@ import {
   CreateFriendResponse,
   DelteFriendRequest,
 } from "@app/common/dto/friend.createfriend.dto";
-import { JwtGuard } from "@src/auth/guards/auth.jwt.guard";
-import { UserResponse } from "@app/common/dto";
+import { JwtGuard } from "../../../authorization/src/guards/authorization.jwt.guard";
+
 import { FRIEND_SERVICE } from "@app/common/message/friend";
 import { Friend } from "@app/common/entity/friend.entity";
 import { FriendService } from "apps/friend/src/friend.interface";

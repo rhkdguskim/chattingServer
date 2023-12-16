@@ -4,8 +4,8 @@ import {
   JWT_SERVICE,
   KAKAO_OAUTH,
   OAUTH_FACTORY_SERVICE,
-} from "./authorization.interface";
-import { AuthorizationServiceImpl } from "./authorization.service";
+} from "../authorization.metadata";
+import { AuthorizationLocalService } from "../providers/authorization.local.service";
 import { JwtService } from "@nestjs/jwt";
 import { JWT_EXPIREIN, JWT_SECRET } from "@app/common/config";
 import { HttpService } from "@nestjs/axios";
@@ -13,8 +13,8 @@ import axios from "axios";
 import {
   OauthServiceFactoryConfig,
   OauthServiceFactory,
-} from "./oauth.factory.service";
-import { KakaoOAuthService } from "./oauth.service";
+} from "../providers/oauth.factory.service";
+import { KakaoOAuthService } from "../providers/oauth.service";
 
 export interface AuthorizationServiceModuleConfig {
   isDev: boolean;
@@ -50,7 +50,7 @@ export class AuthorizationServiceModule {
           },
         {
           provide: AUTHORIZATION_SERVICE,
-          useClass: AuthorizationServiceImpl,
+          useClass: AuthorizationLocalService,
         },
         {
           provide: KAKAO_OAUTH,

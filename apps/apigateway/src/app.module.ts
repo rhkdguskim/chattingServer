@@ -21,7 +21,7 @@ import { Transport } from "@nestjs/microservices";
 import { ROOM_SERVICE } from "@app/common/message/room";
 import { CHAT_SERVICE } from "@app/common/message/chat";
 import { AuthenticationServiceModule } from "../../authentication/src/module/authentication.service.module";
-import { AuthorizationServiceModule } from "apps/authorization/src/authorization.service.module";
+import { AuthorizationServiceModule } from "../../authorization/src/module/authorization.service.module";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { typeOrmConfig } from "@app/common/module";
 

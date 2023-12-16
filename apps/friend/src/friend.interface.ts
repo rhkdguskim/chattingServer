@@ -1,6 +1,6 @@
 import { CreateFriendRequest, CreateFriendResponse, DelteFriendRequest } from "@app/common/dto/friend.createfriend.dto";
 import { Friend } from "@app/common/entity/friend.entity";
-import { Repository } from "@app/common/interface";
+import { Repository } from "@app/common/interface/repository.interface";
 
 export const FRIEND_REPOSITORY = 'FRIEND_REPOSITORY'
 

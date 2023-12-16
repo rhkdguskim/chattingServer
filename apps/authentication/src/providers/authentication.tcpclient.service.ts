@@ -1,10 +1,4 @@
 import {
-  LoginUserRequest,
-  CreateUserRequest,
-  UpdateUserRequest,
-} from "@app/common/dto/users.dto";
-
-import {
   DELETE_USER,
   FIND_ALL_USER,
   FIND_ONE_BY_ID_USER,
@@ -16,9 +10,10 @@ import {
 import { ClientTCP, TcpClientOptions } from "@nestjs/microservices";
 import { lastValueFrom } from "rxjs";
 import { User } from "../entity/users.entity";
-import {AuthenticationService} from "./authenticationservice.interface";
+import {AuthenticationService} from "./authentication.service.interface";
+import {CreateUserRequest, LoginUserRequest, UpdateUserRequest} from "@app/authentication/dto/authenticaion.dto";
 
-export class AuthenticationServiceTcpclient
+export class AuthenticationTcpclientService
   implements AuthenticationService
 {
   private readonly tcpClientAdaptor : ClientTCP;

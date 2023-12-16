@@ -1,4 +1,3 @@
-import { UserResponse } from "@app/common/dto";
 import {
   FindFriendAllRequest,
   CreateFriendRequest,
@@ -7,6 +6,7 @@ import {
 } from "@app/common/dto/friend.createfriend.dto";
 import { FriendTypeORM } from "@app/common/typeorm/entity";
 import { IFriendClient } from "../friend.interface.client";
+import {UserResponse} from "@app/authentication/dto/authenticaion.dto";
 
 export class FriendLocalClient implements IFriendClient {
   findAllFriend(payload: FindFriendAllRequest): Promise<UserResponse[]> {

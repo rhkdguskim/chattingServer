@@ -19,7 +19,13 @@
       ],
       "@app/common/*": [
         "libs/common/src/*"
-      ]
+      ],
+      "@app/authentication/": [
+        "apps/authentication/src/"
+      ],
+      "@app/authentication/*": [
+        "apps/authentication/src/*"
+      ],
     },
     "incremental": true,
     "skipLibCheck": true,

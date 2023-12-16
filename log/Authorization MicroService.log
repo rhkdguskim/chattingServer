@@ -1,0 +1,180 @@
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:15:39.033 [33m[NestFactory][39m [32mStarting Nest application...[39m - {} [33m+1ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:15:39.038 [33m[InstanceLoader][39m [32mAuthorizationServiceModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:15:39.038 [33m[InstanceLoader][39m [32mAuthorizationModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:15:39.043 [33m[NestMicroservice][39m [32mNest microservice successfully started[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:16:08.182 [33m[NestFactory][39m [32mStarting Nest application...[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:16:08.188 [33m[InstanceLoader][39m [32mAuthorizationServiceModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:16:08.188 [33m[InstanceLoader][39m [32mAuthorizationModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:16:08.194 [33m[NestMicroservice][39m [32mNest microservice successfully started[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:16:30.588 [33m[NestFactory][39m [32mStarting Nest application...[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:16:30.594 [33m[InstanceLoader][39m [32mAuthorizationServiceModule dependencies initialized[39m - {} [33m+1ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:16:30.594 [33m[InstanceLoader][39m [32mAuthorizationModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:16:30.599 [33m[NestMicroservice][39m [32mNest microservice successfully started[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:17:17.899 [33m[NestFactory][39m [32mStarting Nest application...[39m - {} [33m+1ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:17:17.904 [33m[InstanceLoader][39m [32mAuthorizationServiceModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:17:17.904 [33m[InstanceLoader][39m [32mAuthorizationModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:17:17.910 [33m[NestMicroservice][39m [32mNest microservice successfully started[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:18:45.454 [33m[NestFactory][39m [32mStarting Nest application...[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:18:45.460 [33m[InstanceLoader][39m [32mAuthorizationServiceModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:18:45.460 [33m[InstanceLoader][39m [32mAuthorizationModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:18:45.465 [33m[NestMicroservice][39m [32mNest microservice successfully started[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:19:13.964 [33m[NestFactory][39m [32mStarting Nest application...[39m - {} [33m+1ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:19:13.969 [33m[InstanceLoader][39m [32mAuthorizationServiceModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:19:13.969 [33m[InstanceLoader][39m [32mAuthorizationModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:19:13.975 [33m[NestMicroservice][39m [32mNest microservice successfully started[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:19:22.325 [33m[NestFactory][39m [32mStarting Nest application...[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:19:22.331 [33m[InstanceLoader][39m [32mAuthorizationServiceModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:19:22.331 [33m[InstanceLoader][39m [32mAuthorizationModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:19:22.337 [33m[NestMicroservice][39m [32mNest microservice successfully started[39m - {} [33m+1ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:19:35.586 [33m[NestFactory][39m [32mStarting Nest application...[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:19:35.592 [33m[InstanceLoader][39m [32mAuthorizationServiceModule dependencies initialized[39m - {} [33m+1ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:19:35.592 [33m[InstanceLoader][39m [32mAuthorizationModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:19:35.597 [33m[NestMicroservice][39m [32mNest microservice successfully started[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:19:49.076 [33m[NestFactory][39m [32mStarting Nest application...[39m - {} [33m+1ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:19:49.081 [33m[InstanceLoader][39m [32mAuthorizationServiceModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:19:49.082 [33m[InstanceLoader][39m [32mAuthorizationModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:19:49.088 [33m[NestMicroservice][39m [32mNest microservice successfully started[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:19:51.005 [33m[NestFactory][39m [32mStarting Nest application...[39m - {} [33m+1ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:19:51.010 [33m[InstanceLoader][39m [32mAuthorizationServiceModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:19:51.010 [33m[InstanceLoader][39m [32mAuthorizationModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:19:51.015 [33m[NestMicroservice][39m [32mNest microservice successfully started[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:19:55.537 [33m[NestFactory][39m [32mStarting Nest application...[39m - {} [33m+1ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:19:55.543 [33m[InstanceLoader][39m [32mAuthorizationServiceModule dependencies initialized[39m - {} [33m+1ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:19:55.543 [33m[InstanceLoader][39m [32mAuthorizationModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:19:55.548 [33m[NestMicroservice][39m [32mNest microservice successfully started[39m - {} [33m+1ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:19:57.683 [33m[NestFactory][39m [32mStarting Nest application...[39m - {} [33m+1ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:19:57.688 [33m[InstanceLoader][39m [32mAuthorizationServiceModule dependencies initialized[39m - {} [33m+1ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:19:57.688 [33m[InstanceLoader][39m [32mAuthorizationModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:19:57.693 [33m[NestMicroservice][39m [32mNest microservice successfully started[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:20:34.955 [33m[NestFactory][39m [32mStarting Nest application...[39m - {} [33m+1ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:20:34.961 [33m[InstanceLoader][39m [32mAuthorizationServiceModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:20:34.961 [33m[InstanceLoader][39m [32mAuthorizationModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:20:34.966 [33m[NestMicroservice][39m [32mNest microservice successfully started[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:20:36.925 [33m[NestFactory][39m [32mStarting Nest application...[39m - {} [33m+1ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:20:36.930 [33m[InstanceLoader][39m [32mAuthorizationServiceModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:20:36.930 [33m[InstanceLoader][39m [32mAuthorizationModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:20:36.935 [33m[NestMicroservice][39m [32mNest microservice successfully started[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:20:46.544 [33m[NestFactory][39m [32mStarting Nest application...[39m - {} [33m+1ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:20:46.549 [33m[InstanceLoader][39m [32mAuthorizationServiceModule dependencies initialized[39m - {} [33m+1ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:20:46.549 [33m[InstanceLoader][39m [32mAuthorizationModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:20:46.553 [33m[NestMicroservice][39m [32mNest microservice successfully started[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:21:07.098 [33m[NestFactory][39m [32mStarting Nest application...[39m - {} [33m+1ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:21:07.103 [33m[InstanceLoader][39m [32mAuthorizationServiceModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:21:07.103 [33m[InstanceLoader][39m [32mAuthorizationModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:21:07.108 [33m[NestMicroservice][39m [32mNest microservice successfully started[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:21:13.804 [33m[NestFactory][39m [32mStarting Nest application...[39m - {} [33m+1ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:21:13.809 [33m[InstanceLoader][39m [32mAuthorizationServiceModule dependencies initialized[39m - {} [33m+1ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:21:13.809 [33m[InstanceLoader][39m [32mAuthorizationModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:21:13.814 [33m[NestMicroservice][39m [32mNest microservice successfully started[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:22:04.098 [33m[NestFactory][39m [32mStarting Nest application...[39m - {} [33m+1ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:22:04.103 [33m[InstanceLoader][39m [32mAuthorizationServiceModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:22:04.103 [33m[InstanceLoader][39m [32mAuthorizationModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:22:04.109 [33m[NestMicroservice][39m [32mNest microservice successfully started[39m - {} [33m+1ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:22:16.635 [33m[NestFactory][39m [32mStarting Nest application...[39m - {} [33m+1ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:22:16.640 [33m[InstanceLoader][39m [32mAuthorizationServiceModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:22:16.641 [33m[InstanceLoader][39m [32mAuthorizationModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:22:16.646 [33m[NestMicroservice][39m [32mNest microservice successfully started[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:22:28.065 [33m[NestFactory][39m [32mStarting Nest application...[39m - {} [33m+1ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:22:28.070 [33m[InstanceLoader][39m [32mAuthorizationServiceModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:22:28.070 [33m[InstanceLoader][39m [32mAuthorizationModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:22:28.075 [33m[NestMicroservice][39m [32mNest microservice successfully started[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:23:00.798 [33m[NestFactory][39m [32mStarting Nest application...[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:23:00.803 [33m[InstanceLoader][39m [32mAuthorizationServiceModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:23:00.804 [33m[InstanceLoader][39m [32mAuthorizationModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:23:00.809 [33m[NestMicroservice][39m [32mNest microservice successfully started[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:24:01.631 [33m[NestFactory][39m [32mStarting Nest application...[39m - {} [33m+1ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:24:01.637 [33m[InstanceLoader][39m [32mAuthorizationServiceModule dependencies initialized[39m - {} [33m+1ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:24:01.637 [33m[InstanceLoader][39m [32mAuthorizationModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:24:01.643 [33m[NestMicroservice][39m [32mNest microservice successfully started[39m - {} [33m+1ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:27:59.074 [33m[NestFactory][39m [32mStarting Nest application...[39m - {} [33m+1ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:27:59.080 [33m[InstanceLoader][39m [32mAuthorizationServiceModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:27:59.080 [33m[InstanceLoader][39m [32mAuthorizationModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:27:59.085 [33m[NestMicroservice][39m [32mNest microservice successfully started[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:28:00.956 [33m[NestFactory][39m [32mStarting Nest application...[39m - {} [33m+2ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:28:00.963 [33m[InstanceLoader][39m [32mAuthorizationServiceModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:28:00.963 [33m[InstanceLoader][39m [32mAuthorizationModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:28:00.968 [33m[NestMicroservice][39m [32mNest microservice successfully started[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:28:08.346 [33m[NestFactory][39m [32mStarting Nest application...[39m - {} [33m+1ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:28:08.352 [33m[InstanceLoader][39m [32mAuthorizationServiceModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:28:08.352 [33m[InstanceLoader][39m [32mAuthorizationModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:28:08.357 [33m[NestMicroservice][39m [32mNest microservice successfully started[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:28:10.442 [33m[NestFactory][39m [32mStarting Nest application...[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:28:10.448 [33m[InstanceLoader][39m [32mAuthorizationServiceModule dependencies initialized[39m - {} [33m+1ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:28:10.448 [33m[InstanceLoader][39m [32mAuthorizationModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:28:10.453 [33m[NestMicroservice][39m [32mNest microservice successfully started[39m - {} [33m+1ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:28:21.123 [33m[NestFactory][39m [32mStarting Nest application...[39m - {} [33m+1ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:28:21.128 [33m[InstanceLoader][39m [32mAuthorizationServiceModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:28:21.129 [33m[InstanceLoader][39m [32mAuthorizationModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:28:21.135 [33m[NestMicroservice][39m [32mNest microservice successfully started[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:28:22.870 [33m[NestFactory][39m [32mStarting Nest application...[39m - {} [33m+1ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:28:22.875 [33m[InstanceLoader][39m [32mAuthorizationServiceModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:28:22.875 [33m[InstanceLoader][39m [32mAuthorizationModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:28:22.880 [33m[NestMicroservice][39m [32mNest microservice successfully started[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:28:27.666 [33m[NestFactory][39m [32mStarting Nest application...[39m - {} [33m+1ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:28:27.672 [33m[InstanceLoader][39m [32mAuthorizationServiceModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:28:27.673 [33m[InstanceLoader][39m [32mAuthorizationModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:28:27.678 [33m[NestMicroservice][39m [32mNest microservice successfully started[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:28:29.790 [33m[NestFactory][39m [32mStarting Nest application...[39m - {} [33m+1ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:28:29.795 [33m[InstanceLoader][39m [32mAuthorizationServiceModule dependencies initialized[39m - {} [33m+1ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:28:29.795 [33m[InstanceLoader][39m [32mAuthorizationModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:28:29.800 [33m[NestMicroservice][39m [32mNest microservice successfully started[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:28:35.544 [33m[NestFactory][39m [32mStarting Nest application...[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:28:35.549 [33m[InstanceLoader][39m [32mAuthorizationServiceModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:28:35.549 [33m[InstanceLoader][39m [32mAuthorizationModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:28:35.554 [33m[NestMicroservice][39m [32mNest microservice successfully started[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:28:37.679 [33m[NestFactory][39m [32mStarting Nest application...[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:28:37.684 [33m[InstanceLoader][39m [32mAuthorizationServiceModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:28:37.685 [33m[InstanceLoader][39m [32mAuthorizationModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:28:37.689 [33m[NestMicroservice][39m [32mNest microservice successfully started[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:28:45.138 [33m[NestFactory][39m [32mStarting Nest application...[39m - {} [33m+1ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:28:45.144 [33m[InstanceLoader][39m [32mAuthorizationServiceModule dependencies initialized[39m - {} [33m+1ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:28:45.144 [33m[InstanceLoader][39m [32mAuthorizationModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:28:45.149 [33m[NestMicroservice][39m [32mNest microservice successfully started[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:28:47.268 [33m[NestFactory][39m [32mStarting Nest application...[39m - {} [33m+1ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:28:47.273 [33m[InstanceLoader][39m [32mAuthorizationServiceModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:28:47.273 [33m[InstanceLoader][39m [32mAuthorizationModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:28:47.278 [33m[NestMicroservice][39m [32mNest microservice successfully started[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:28:54.442 [33m[NestFactory][39m [32mStarting Nest application...[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:28:54.448 [33m[InstanceLoader][39m [32mAuthorizationServiceModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:28:54.448 [33m[InstanceLoader][39m [32mAuthorizationModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:28:54.453 [33m[NestMicroservice][39m [32mNest microservice successfully started[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:28:56.551 [33m[NestFactory][39m [32mStarting Nest application...[39m - {} [33m+1ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:28:56.556 [33m[InstanceLoader][39m [32mAuthorizationServiceModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:28:56.557 [33m[InstanceLoader][39m [32mAuthorizationModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:28:56.561 [33m[NestMicroservice][39m [32mNest microservice successfully started[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:30:20.486 [33m[NestFactory][39m [32mStarting Nest application...[39m - {} [33m+1ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:30:20.492 [33m[InstanceLoader][39m [32mAuthorizationServiceModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:30:20.492 [33m[InstanceLoader][39m [32mAuthorizationModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:30:20.499 [33m[NestMicroservice][39m [32mNest microservice successfully started[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:30:22.308 [33m[NestFactory][39m [32mStarting Nest application...[39m - {} [33m+1ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:30:22.313 [33m[InstanceLoader][39m [32mAuthorizationServiceModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:30:22.313 [33m[InstanceLoader][39m [32mAuthorizationModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:30:22.318 [33m[NestMicroservice][39m [32mNest microservice successfully started[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:30:26.890 [33m[NestFactory][39m [32mStarting Nest application...[39m - {} [33m+1ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:30:26.896 [33m[InstanceLoader][39m [32mAuthorizationServiceModule dependencies initialized[39m - {} [33m+1ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:30:26.896 [33m[InstanceLoader][39m [32mAuthorizationModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:30:26.905 [33m[NestMicroservice][39m [32mNest microservice successfully started[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:30:28.991 [33m[NestFactory][39m [32mStarting Nest application...[39m - {} [33m+1ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:30:28.996 [33m[InstanceLoader][39m [32mAuthorizationServiceModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:30:28.996 [33m[InstanceLoader][39m [32mAuthorizationModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:30:29.001 [33m[NestMicroservice][39m [32mNest microservice successfully started[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:30:32.190 [33m[NestFactory][39m [32mStarting Nest application...[39m - {} [33m+1ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:30:32.195 [33m[InstanceLoader][39m [32mAuthorizationServiceModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:30:32.195 [33m[InstanceLoader][39m [32mAuthorizationModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:30:32.200 [33m[NestMicroservice][39m [32mNest microservice successfully started[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:30:34.302 [33m[NestFactory][39m [32mStarting Nest application...[39m - {} [33m+1ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:30:34.307 [33m[InstanceLoader][39m [32mAuthorizationServiceModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:30:34.307 [33m[InstanceLoader][39m [32mAuthorizationModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:30:34.312 [33m[NestMicroservice][39m [32mNest microservice successfully started[39m - {} [33m+1ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:30:36.606 [33m[NestFactory][39m [32mStarting Nest application...[39m - {} [33m+1ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:30:36.612 [33m[InstanceLoader][39m [32mAuthorizationServiceModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:30:36.612 [33m[InstanceLoader][39m [32mAuthorizationModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:30:36.618 [33m[NestMicroservice][39m [32mNest microservice successfully started[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:30:38.661 [33m[NestFactory][39m [32mStarting Nest application...[39m - {} [33m+1ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:30:38.666 [33m[InstanceLoader][39m [32mAuthorizationServiceModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:30:38.666 [33m[InstanceLoader][39m [32mAuthorizationModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:30:38.671 [33m[NestMicroservice][39m [32mNest microservice successfully started[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:34:40.407 [33m[NestFactory][39m [32mStarting Nest application...[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:34:40.412 [33m[InstanceLoader][39m [32mAuthorizationServiceModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:34:40.412 [33m[InstanceLoader][39m [32mAuthorizationModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[Authorization MicroService][39m [33mInfo[39m	2023-12-17 01:34:40.418 [33m[NestMicroservice][39m [32mNest microservice successfully started[39m - {} [33m+1ms[39m

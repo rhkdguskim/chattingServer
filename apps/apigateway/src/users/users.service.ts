@@ -1,8 +1,9 @@
 import { Inject, Injectable, Logger, LoggerService } from "@nestjs/common";
-import { UpdateUserRequest } from "@app/common/dto";
-import { User } from "../../../authentication/src/entity/users.entity";
-import {AUTHENTICATION_SERVICE} from "../../../authentication/src/authentication.metadata";
-import {AuthenticationService} from "../../../authentication/src/providers/authenticationservice.interface";
+
+import { User } from "@app/authentication/entity/users.entity";
+import {AUTHENTICATION_SERVICE} from "@app/authentication/authentication.metadata";
+import {AuthenticationService} from "@app/authentication/providers/authentication.service.interface";
+import {UpdateUserRequest} from "@app/authentication/dto/authenticaion.dto";
 
 @Injectable()
 export class UsersService {

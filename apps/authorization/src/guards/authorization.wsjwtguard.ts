@@ -1,9 +1,10 @@
-import { CanActivate, ExecutionContext, Injectable } from "@nestjs/common";
-import { WsException } from "@nestjs/websockets";
-import { Socket } from "socket.io";
-import { JwtService } from "@nestjs/jwt";
+import {CanActivate, ExecutionContext, Injectable} from "@nestjs/common";
+import {WsException} from "@nestjs/websockets";
+import {Socket} from "socket.io";
+import {JwtService} from "@nestjs/jwt";
 import * as config from "config";
-import { UsersService } from "@src/users/users.service";
+import {UsersService} from "@src/users/users.service";
+
 const jwtConstants = config.get("jwt");
 
 @Injectable()
@@ -25,8 +26,7 @@ export class WsJwtGuard implements CanActivate {
       const payload = await this.jwtService.verifyAsync(authToken, {
         secret: jwtConstants.secret,
       });
-      const user = await this.userService.findOne(payload.id);
-      client.data.user = user;
+      client.data.user = await this.userService.findOne(payload.id);
       return true;
     } catch (err) {
       throw new WsException(err.message);

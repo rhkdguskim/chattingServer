@@ -13,33 +13,14 @@ import {
 } from "@app/common/config";
 import { RcpExceptionsFilter } from "@app/common/exception/exception.filter";
 import {AUTHENTICATION_SERVICE} from "./authentication.metadata";
+import winstonLogger from "@app/common/logger/nestwinstonlogger";
 
 async function bootstrap() {
-    const logger = WinstonModule.createLogger({
-        level: LOGLEVEL,
-        transports: [
-            new winston.transports.Console({
-                format: winston.format.combine(
-                    winston.format.ms(),
-                    winston.format.timestamp({
-                        format: 'YYYY-MM-DD HH:mm:ss.SSS'
-                    }),
-                    utilities.format.nestLike(AUTHENTICATION_SERVICE)
-                ),
-
-            }),
-            new winston.transports.File({
-                filename : "log/Authentication.log",
-                format: winston.format.combine(
-                    winston.format.ms(),
-                    winston.format.timestamp({
-                        format: 'YYYY-MM-DD HH:mm:ss.SSS'
-                    }),
-                    utilities.format.nestLike(AUTHENTICATION_SERVICE),
-                ),
-            }),
-        ],
-    })
+    const logger = winstonLogger({
+        name : "AuthenticationMicroService",
+        filepath: "AuthenticationMicroService",
+        loglevel: "debug"
+    });
   const app = await NestFactory.createMicroservice<MicroserviceOptions>(
     AuthenticationModule.forRoot({ isDev: false, isMicroService: true }),
     {

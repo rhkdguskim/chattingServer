@@ -1,22 +1,21 @@
 import { Inject, Injectable } from "@nestjs/common";
-import { LoginUserRequest, UpdateUserRequest } from "@app/common/dto";
-import { CreateUserRequest } from "@app/common/dto";
-import { NodeBcryptService } from "./bcrypt/bcrpy.service";
 import {
   CustomException,
   ExceptionType,
 } from "@app/common/exception/custom.exception";
 import { NullCheck } from "@app/common/util/util";
 import { User } from "../entity/users.entity";
-import {AuthenticationService} from "./authenticationservice.interface";
+import {AuthenticationService} from "./authentication.service.interface";
 import {AUTHENTICATION_BCRYPT, USER_REPOSITORY} from "../authentication.metadata";
 import {UserRepository} from "../repository/users.interface.repository";
+import {CreateUserRequest, LoginUserRequest, UpdateUserRequest} from "@app/authentication/dto/authenticaion.dto";
+import {BcryptService} from "@app/authentication/providers/bcrypt/bcrpy.interface";
 
 @Injectable()
-export class AuthenticationServiceLocal implements AuthenticationService {
+export class AuthenticationLocalService implements AuthenticationService {
   constructor(
     @Inject(AUTHENTICATION_BCRYPT)
-    private authenticationDomain: NodeBcryptService,
+    private bcryptService: BcryptService,
     @Inject(USER_REPOSITORY)
     private userRepository: UserRepository
   ) {}
@@ -31,7 +30,7 @@ export class AuthenticationServiceLocal implements AuthenticationService {
       });
     }
 
-    if (!this.authenticationDomain.compare(loginUser.password, user.password)) {
+    if (!this.bcryptService.compare(loginUser.password, user.password)) {
       throw new CustomException({
         message: "잘못된 패스워드 입니다.",
         code: ExceptionType.AUTHENTICATION_ERROR,
@@ -50,7 +49,7 @@ export class AuthenticationServiceLocal implements AuthenticationService {
       });
     }
 
-    createUserDto.password = this.authenticationDomain.hash(createUserDto.password);
+    createUserDto.password = this.bcryptService.hash(createUserDto.password);
 
     return this.userRepository.create(createUserDto);
   }

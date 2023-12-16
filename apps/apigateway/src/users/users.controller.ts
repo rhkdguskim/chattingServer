@@ -20,8 +20,9 @@ import {
 } from "@nestjs/swagger";
 import { HttpCacheInterceptor } from "@src/common/interceptors/httpcache.interceptor";
 import { AuthGuard } from "@nestjs/passport";
-import { JwtGuard } from "@src/auth/guards/auth.jwt.guard";
-import { UpdateUserRequest, UserResponse } from "@app/common/dto";
+import { JwtGuard } from "../../../authorization/src/guards/authorization.jwt.guard";
+import {UpdateUserRequest, UserResponse} from "@app/authentication/dto/authenticaion.dto";
+
 
 @UseGuards(JwtGuard)
 @Controller("users")

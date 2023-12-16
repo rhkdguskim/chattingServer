@@ -5,14 +5,14 @@ import { AppModule } from "@src/app.module";
 import { OpenaiModule } from "@src/openai/openai.module";
 import { OpenaiController } from "@src/openai/openai.controller";
 import { OpenaiService } from "@src/openai/openai.service";
-import { AuthController } from "@src/auth/auth.controller";
+import { AuthenticationControllerHttp } from "../../authentication/src/controller/authentication.controller.http";
 
 describe("OpenaiController (e2e)", () => {
   let app: INestApplication;
 
   beforeEach(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
-      controllers: [AuthController], // 테스트할 컨트롤러를 포함시킵니다.
+      controllers: [AuthenticationControllerHttp], // 테스트할 컨트롤러를 포함시킵니다.
       providers: [OpenaiService], // 테스트할 컨트롤러가 사용하는 서비스를 포함시킵니다.
     }).compile();
 

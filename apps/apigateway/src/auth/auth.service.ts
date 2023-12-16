@@ -4,20 +4,18 @@ import {
   Logger,
   Inject,
 } from "@nestjs/common";
+
+import { User } from "@app/authentication/entity/users.entity";
+import {AuthenticationService} from "@app/authentication/providers/authentication.service.interface";
+import {AUTHENTICATION_SERVICE} from "@app/authentication/authentication.metadata";
+import {AuthorizationService} from "../../../authorization/src/providers/authorization.service.interface";
 import {
-  NewTokenRequest,
-  LoginUserResponse,
   CreateUserRequest,
   LoginUserRequest,
-} from "@app/common/dto";
-import {
-  AUTHORIZATION_SERVICE,
-} from "@app/common/message/authorization";
-
-import { User } from "../../../authentication/src/entity/users.entity";
-import { AuthorizationService } from "apps/authorization/src/authorization.interface";
-import {AuthenticationService} from "../../../authentication/src/providers/authenticationservice.interface";
-import {AUTHENTICATION_SERVICE} from "../../../authentication/src/authentication.metadata";
+  LoginUserResponse,
+  NewTokenRequest
+} from "@app/authentication/dto/authenticaion.dto";
+import {AUTHORIZATION_SERVICE} from "../../../authorization/src/authorization.metadata";
 
 @Injectable()
 export class AuthService {
