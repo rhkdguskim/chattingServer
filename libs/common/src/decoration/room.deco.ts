@@ -3,9 +3,10 @@ import {
   CreateRoomReqeust,
   CreateRoomResponse,
   RoomType,
-} from "@app/common/dto/room.dto";
+} from "../../../../apps/chat/src/dto/room.dto";
 import { ForbiddenException } from "@nestjs/common";
-import { RoomTypeORM } from "@app/common/typeorm/entity";
+import {RoomTypeORM} from "@app/common/typeorm/entity/room.typeorm.entity";
+
 
 export function ValidateCreateRoom() {
   return function (

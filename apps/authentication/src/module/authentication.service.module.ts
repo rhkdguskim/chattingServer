@@ -4,9 +4,9 @@ import { AuthenticationLocalService } from "../providers/authentication.local.se
 import { UserMockRepository } from "../test/users.mock.repository";
 import { UserTypeORMRepository } from "../repository/users.typeorm.repository";
 import { NodeBcryptService } from "../providers/bcrypt/bcrpy.service";
-import { UserTypeORM } from "@app/common/typeorm/entity";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import {AUTHENTICATION_BCRYPT, AUTHENTICATION_SERVICE, USER_REPOSITORY} from "../authentication.metadata";
+import {UserTypeORM} from "@app/authentication/entity/users.typeorm.entity";
 
 export interface AuthenticationServiceModuleConfig {
   isDev: boolean;

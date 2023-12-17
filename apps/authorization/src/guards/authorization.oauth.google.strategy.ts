@@ -1,6 +1,6 @@
 import { PassportStrategy } from "@nestjs/passport";
 import { Strategy } from "passport-google-oauth20";
-import { OAuthData } from "@app/common/dto/oauth.dto";
+import { OAuthData } from "@app/authorization/dto/oauth.dto";
 import config from "config";
 
 interface google {

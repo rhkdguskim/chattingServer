@@ -1,10 +1,11 @@
 import { DynamicModule, Module } from "@nestjs/common";
 import { FRIEND_REPOSITORY } from "../friend.metadata";
-import { FriendTypeORMRepository } from "@app/common/typeorm/repository/friend.typeorm.repository";
+import { FriendTypeORMRepository } from "../repository/friend.typeorm.repository";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { FriendTypeORM } from "@app/common/typeorm/entity";
-import { FRIEND_SERVICE } from "@app/common/message/friend";
+
+import { FRIEND_SERVICE } from "../friend.message";
 import { FriendLocalService } from "../providers/friend.local.service";
+import {FriendTypeORM} from "@app/common/typeorm/entity/friend.typeorm.entity";
 
 
 export interface FriendServiceModuleConfig {

@@ -31,6 +31,24 @@
       ],
       "@app/authorization/*": [
         "apps/authorization/src/*"
+      ],
+      "@app/chat/": [
+        "apps/chat/src/"
+      ],
+      "@app/chat/*": [
+        "apps/chat/src/*"
+      ],
+      "@app/friend/": [
+        "apps/friend/src/"
+      ],
+      "@app/friend/*": [
+        "apps/friend/src/*"
+      ],
+      "@app/file/": [
+        "apps/file/src/"
+      ],
+      "@app/file/*": [
+        "apps/file/src/*"
       ]
     },
     "incremental": true,

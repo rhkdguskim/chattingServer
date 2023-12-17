@@ -6,15 +6,11 @@ import {
   Logger,
 } from "@nestjs/common";
 
-import {
-  CreateFriendRequest,
-  CreateFriendResponse,
-  DelteFriendRequest,
-} from "@app/common/dto/friend.createfriend.dto";
 import { FRIEND_REPOSITORY } from "../friend.metadata";
-import { Friend } from "@app/common/entity/friend.entity";
+import { Friend } from "../entity/friend.entity";
 import {FriendService} from "./friend.service.interface";
 import {FriendRepository} from "../repository/friend.repository.interface";
+import {CreateFriendRequest, CreateFriendResponse, DelteFriendRequest} from "../dto/friend.dto";
 
 @Injectable()
 export class FriendLocalService implements FriendService {

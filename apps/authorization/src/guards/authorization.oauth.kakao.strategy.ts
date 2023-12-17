@@ -1,8 +1,8 @@
 import { PassportStrategy } from "@nestjs/passport";
 import { Strategy } from "passport-kakao";
 import * as config from "config";
-import { KakaoUserResponse } from "@app/common/dto/kakao.auth.dto";
-import { OAuthData } from "@app/common/dto/oauth.dto";
+import { KakaoUserResponse } from "@app/authorization/dto/kakao.auth.dto";
+import { OAuthData } from "@app/authorization/dto/oauth.dto";
 
 interface Kakao {
   restApiKey : string,

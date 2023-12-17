@@ -10,7 +10,7 @@ import {
 } from "typeorm";
 import { RoomTypeORM } from "@app/common/typeorm/entity/room.typeorm.entity";
 import { UserTypeORM } from "../../../../../apps/authentication/src/entity/users.typeorm.entity";
-import { Participant } from "../../entity/participant.entity";
+import { Participant } from "../../../../../apps/chat/src/entity/participant.entity";
 
 // 유저와 방의 Join Table
 @Entity({ name: "Participant" })

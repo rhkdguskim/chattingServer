@@ -3,7 +3,7 @@ import { INestApplication } from "@nestjs/common";
 import * as request from "supertest";
 import { ChatModule } from "./../src/chat.module";
 
-describe("ChatController (e2e)", () => {
+describe("ChatMicroserviceController (e2e)", () => {
   let app: INestApplication;
 
   beforeEach(async () => {

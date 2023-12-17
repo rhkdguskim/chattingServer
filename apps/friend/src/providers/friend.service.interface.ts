@@ -1,5 +1,6 @@
-import {Friend} from "@app/common/entity/friend.entity";
-import {CreateFriendRequest, CreateFriendResponse, DelteFriendRequest} from "@app/common/dto/friend.createfriend.dto";
+import {Friend} from "../entity/friend.entity";
+
+import {CreateFriendRequest, CreateFriendResponse, DelteFriendRequest} from "../dto/friend.dto";
 
 export interface FriendService {
     getFriends(id: number): Promise<Friend[]>;

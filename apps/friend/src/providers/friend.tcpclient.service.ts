@@ -1,18 +1,14 @@
 import { ClientTCP, TcpClientOptions } from "@nestjs/microservices";
-import {
-  CreateFriendRequest,
-  CreateFriendResponse,
-  DelteFriendRequest,
-} from "@app/common/dto/friend.createfriend.dto";
 import { lastValueFrom } from "rxjs";
 import {
   ADD_FRIEND,
   DELETE_FRIEND,
   FIND_ALL_FRIEND,
   UPDATE_FRIEND,
-} from "@app/common/message/friend";
-import {Friend} from "@app/common/entity/friend.entity";
+} from "../friend.message";
+import {Friend} from "../entity/friend.entity";
 import {FriendService} from "./friend.service.interface";
+import {CreateFriendRequest, CreateFriendResponse, DelteFriendRequest} from "../dto/friend.dto";
 
 export class FriendTCPClientService implements FriendService {
   private tcpClientAdaptor : ClientTCP;

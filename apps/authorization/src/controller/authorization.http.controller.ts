@@ -2,7 +2,7 @@ import {Body, Controller, Inject, Post, UseGuards} from "@nestjs/common";
 import {ApiCreatedResponse, ApiOperation, ApiTags} from "@nestjs/swagger";
 import {AuthGuard} from "@nestjs/passport";
 import {GetOAuthData} from "@app/common/decoration/auth.decorator";
-import {OAuthData} from "@app/common/dto/oauth.dto";
+import {OAuthData} from "@app/authorization/dto/oauth.dto";
 import {AuthorizationController} from "./authorization.controller.interface";
 import {JWTRequest, JWTResponse, TokenResponse} from "../dto/authorization.dto";
 import {AUTHORIZATION_SERVICE} from "../authorization.metadata";

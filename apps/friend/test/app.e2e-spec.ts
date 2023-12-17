@@ -3,7 +3,7 @@ import { INestApplication } from "@nestjs/common";
 import * as request from "supertest";
 import { FriendModule } from "../src/module/friend.module";
 
-describe("FriendController (e2e)", () => {
+describe("FriendMicroserviceController (e2e)", () => {
   let app: INestApplication;
 
   beforeEach(async () => {

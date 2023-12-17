@@ -5,7 +5,7 @@ import {AuthorizationService} from "../providers/authorization.service.interface
 import {JWTRequest, JWTResponse, TokenResponse} from "../dto/authorization.dto";
 import {JWT_SIGN, JWT_VERIFY} from "../authorization.message";
 import {AuthorizationController} from "@app/authorization/controller/authorization.controller.interface";
-import { OAuthData } from "@app/common/dto/oauth.dto";
+import { OAuthData } from "@app/authorization/dto/oauth.dto";
 
 @Controller()
 export class AuthorizationMicroserviceController implements AuthorizationController {

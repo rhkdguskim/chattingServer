@@ -1,14 +1,10 @@
-import { DynamicModule, Global, Module } from "@nestjs/common";
-import { TypeOrmModule } from "@nestjs/typeorm";
-import {
-  UserTypeORM,
-  FriendTypeORM,
-  ChattingTypeORM,
-  RoomTypeORM,
-  ParticipantTypeORM,
-  ReadByTypeORM,
-} from "@app/common/typeorm/entity";
 import * as config from "config";
+import {UserTypeORM} from "@app/authentication/entity/users.typeorm.entity";
+import {FriendTypeORM} from "@app/common/typeorm/entity/friend.typeorm.entity";
+import {ChattingTypeORM} from "@app/common/typeorm/entity/chatting.typeorm.entity";
+import {RoomTypeORM} from "@app/common/typeorm/entity/room.typeorm.entity";
+import {ParticipantTypeORM} from "@app/common/typeorm/entity/participant.typeorm.entity";
+import {ReadByTypeORM} from "@app/common/typeorm/entity/readby.typeorm.entity";
 const dbConfig = config.get<any>("db");
 
 export const typeOrmConfig = {

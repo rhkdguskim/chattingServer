@@ -8,7 +8,7 @@ import {
   JoinColumn,
 } from "typeorm";
 import { UserTypeORM } from "../../../../../apps/authentication/src/entity/users.typeorm.entity";
-import { Friend } from "../../entity/friend.entity";
+import { Friend } from "../../../../../apps/friend/src/entity/friend.entity";
 
 @Entity({ name: "Friend" })
 export class FriendTypeORM implements Friend {

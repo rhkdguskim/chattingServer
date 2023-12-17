@@ -1,5 +1,5 @@
 import {JWTRequest, JWTResponse, TokenResponse} from "../dto/authorization.dto";
-import {OAuthData} from "@app/common/dto/oauth.dto";
+import {OAuthData} from "@app/authorization/dto/oauth.dto";
 
 export interface AuthorizationController {
     verify(payload: string): Promise<JWTResponse>;
