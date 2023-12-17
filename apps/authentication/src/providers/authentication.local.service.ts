@@ -11,6 +11,7 @@ import {UserRepository} from "../repository/users.interface.repository";
 import {CreateUserRequest, LoginUserRequest, UpdateUserRequest} from "@app/authentication/dto/authenticaion.dto";
 import {BcryptService} from "@app/authentication/providers/bcrypt/bcrpy.interface";
 
+
 @Injectable()
 export class AuthenticationLocalService implements AuthenticationService {
   constructor(
@@ -87,6 +88,14 @@ export class AuthenticationLocalService implements AuthenticationService {
   }
 
   async findOneByID(user_id: string): Promise<User | null> {
-    return await this.userRepository.findOneByID(user_id);
+    const user =  await this.userRepository.findOneByID(user_id)
+
+    if (NullCheck(user)) {
+      throw new CustomException({
+        message: "회원 정보를 찾을 수 없습니다.",
+        code: ExceptionType.AUTHENTICATION_ERROR,
+      });
+    }
+    return user;
   }
 }

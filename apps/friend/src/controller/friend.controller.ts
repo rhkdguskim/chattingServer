@@ -13,8 +13,8 @@ import {
   DelteFriendRequest,
   FindFriendAllRequest,
 } from "@app/common/dto/friend.createfriend.dto";
-import { FriendService } from "./friend.interface";
 import { Friend } from "@app/common/entity/friend.entity";
+import {FriendService} from "../providers/friend.service.interface";
 
 @Controller()
 export class FriendController {

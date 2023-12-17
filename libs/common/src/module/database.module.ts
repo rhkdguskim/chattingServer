@@ -9,7 +9,7 @@ import {
   ReadByTypeORM,
 } from "@app/common/typeorm/entity";
 import * as config from "config";
-const dbConfig = config.get("db");
+const dbConfig = config.get<any>("db");
 
 export const typeOrmConfig = {
   type: dbConfig.type,

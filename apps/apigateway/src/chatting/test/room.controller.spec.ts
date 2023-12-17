@@ -12,7 +12,7 @@ import { RoomController } from "../room.controller";
 import { RoomService } from "../room.service";
 import { CreateRoomReqeust } from "@app/common/dto/room.dto";
 import { User } from "@src/entitys/users.entity";
-import { AuthorizationJwtStrategy } from "../../../../authorization/src/guards/authorization.jwt.strategy";
+import { AuthorizationJwtStrategy } from "@app/authorization/guards/authorization.jwt.strategy";
 import { AuthModule } from "@src/auth/auth.module";
 
 describe("Room Controller", () => {

@@ -2,10 +2,13 @@ import {CanActivate, ExecutionContext, Injectable} from "@nestjs/common";
 import {WsException} from "@nestjs/websockets";
 import {Socket} from "socket.io";
 import {JwtService} from "@nestjs/jwt";
-import * as config from "config";
+import config from "config";
 import {UsersService} from "@src/users/users.service";
 
-const jwtConstants = config.get("jwt");
+interface Jwt {
+  secret : string;
+}
+const jwtConstants = config.get<Jwt>("jwt");
 
 @Injectable()
 export class WsJwtGuard implements CanActivate {

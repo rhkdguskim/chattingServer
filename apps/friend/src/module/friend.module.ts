@@ -1,5 +1,5 @@
 import { Logger, Module } from "@nestjs/common";
-import { FriendController } from "./friend.controller";
+import { FriendController } from "../controller/friend.controller";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { typeOrmConfig } from "@app/common/module";
 import { FriendServiceModule } from "./friend.service.module";

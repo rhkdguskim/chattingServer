@@ -1,23 +1,6 @@
 import {IsNumber, IsString, Matches} from "class-validator";
 import {ApiProperty} from "@nestjs/swagger";
 
-export class UpdateUserRequest {
-    @ApiProperty({description: "아이디"})
-    user_id!: string;
-
-    @ApiProperty({description: "이름"})
-    name: string;
-
-    @ApiProperty({description: "상태메세지"})
-    status_msg: string;
-
-    @ApiProperty({description: "프로필 URL"})
-    profile_img_url: string;
-
-    @ApiProperty({description: "배경화면 URL"})
-    background_img_url: string;
-}
-
 export class CreateUserRequest {
     @IsString()
     @ApiProperty({description: "아이디"})
@@ -80,6 +63,23 @@ export class UserResponse {
     profile_img_url: string;
 
     @ApiProperty({description: "배경 URL"})
+    background_img_url: string;
+}
+
+export class UpdateUserRequest {
+    @ApiProperty({description: "아이디"})
+    user_id!: string;
+
+    @ApiProperty({description: "이름"})
+    name: string;
+
+    @ApiProperty({description: "상태메세지"})
+    status_msg: string;
+
+    @ApiProperty({description: "프로필 URL"})
+    profile_img_url: string;
+
+    @ApiProperty({description: "배경화면 URL"})
     background_img_url: string;
 }
 

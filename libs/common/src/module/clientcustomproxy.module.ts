@@ -6,13 +6,13 @@ import {
   Transport,
 } from "@nestjs/microservices";
 import { FRIEND_SERVICE } from "../message/friend";
-import { FriendTCPClient } from "../clients/tcp/friend.tcp.client";
+import { FriendTCPClientService } from "../../../../apps/friend/src/providers/friend.tcpclient.service";
 import { ROOM_SERVICE } from "../message/room";
 import { RoomTCPClient } from "../clients/tcp/room.tcp.client";
 import { CHAT_SERVICE } from "../message/chat";
 import { ChatTCPClient } from "../clients/tcp/chat.tcp.client";
 import { AuthorizationLocalService } from "../../../../apps/authorization/src/providers/authorization.local.service";
-import { FriendServiceImpl } from "apps/friend/src/friend.service";
+import { FriendLocalService } from "../../../../apps/friend/src/providers/friend.local.service";
 import { AuthenticationLocalService } from "@app/authentication/providers/authentication.local.service";
 import { RoomService } from "apps/room/src/room.service";
 import { ChatService } from "apps/chat/src/chat.service";
@@ -32,7 +32,7 @@ export interface ClientProxyFactoryCustomConfig {
 const tcpClientFactoryMap = {
   [AUTHENTICATION_SERVICE]: AuthenticationTcpclientService,
   [AUTHORIZATION_SERVICE]: AuthorizationTCPClient,
-  [FRIEND_SERVICE]: FriendTCPClient,
+  [FRIEND_SERVICE]: FriendTCPClientService,
   [ROOM_SERVICE]: RoomTCPClient,
   [CHAT_SERVICE]: ChatTCPClient,
 };
@@ -40,7 +40,7 @@ const tcpClientFactoryMap = {
 const localClientFactoryMap = {
   [AUTHENTICATION_SERVICE]: AuthenticationLocalService,
   [AUTHORIZATION_SERVICE]: AuthorizationLocalService,
-  [FRIEND_SERVICE]: FriendServiceImpl,
+  [FRIEND_SERVICE]: FriendLocalService,
   [ROOM_SERVICE]: RoomService,
   [CHAT_SERVICE]: ChatService,
 };

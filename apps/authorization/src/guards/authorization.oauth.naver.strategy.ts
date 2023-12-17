@@ -3,8 +3,13 @@ import { Strategy } from "passport-naver";
 import { OAuthData } from "@app/common/dto/oauth.dto";
 import * as config from "config";
 
-const naver = config.get("naver");
+interface Naver {
+  restApiKey : string,
+  secret : string,
+  redirectURL: string,
+}
 
+const naver = config.get<Naver>("naver");
 export class JwtNaverStrategy extends PassportStrategy(Strategy, "naver") {
   constructor() {
     super({

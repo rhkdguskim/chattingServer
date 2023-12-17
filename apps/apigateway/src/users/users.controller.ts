@@ -20,7 +20,7 @@ import {
 } from "@nestjs/swagger";
 import { HttpCacheInterceptor } from "@src/common/interceptors/httpcache.interceptor";
 import { AuthGuard } from "@nestjs/passport";
-import { JwtGuard } from "../../../authorization/src/guards/authorization.jwt.guard";
+import { JwtGuard } from "@app/authorization/guards/authorization.jwt.guard";
 import {UpdateUserRequest, UserResponse} from "@app/authentication/dto/authenticaion.dto";
 
 

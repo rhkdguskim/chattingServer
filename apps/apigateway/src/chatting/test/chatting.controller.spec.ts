@@ -9,7 +9,7 @@ import { Participant } from "@src/entitys/participant.entity";
 import { Room } from "@src/entitys/room.entity";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { ReadBy } from "../../entitys/readby.entity";
-import { AuthorizationJwtStrategy } from "../../../../authorization/src/guards/authorization.jwt.strategy";
+import { AuthorizationJwtStrategy } from "@app/authorization/guards/authorization.jwt.strategy";
 import { AuthModule } from "@src/auth/auth.module";
 
 describe("ChattingController", () => {

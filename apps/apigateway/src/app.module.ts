@@ -50,7 +50,6 @@ import { typeOrmConfig } from "@app/common/module";
     TypeOrmModule.forRoot(typeOrmConfig),
     CacheRedisModule,
     AuthModule,
-    UsersModule,
     FriendModule,
     ChattingModule,
     FileModule,

@@ -1,0 +1,2 @@
+export const FRIEND_REPOSITORY = 'FRIEND_REPOSITORY'
+

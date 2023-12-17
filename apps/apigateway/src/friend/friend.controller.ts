@@ -22,11 +22,12 @@ import {
   CreateFriendResponse,
   DelteFriendRequest,
 } from "@app/common/dto/friend.createfriend.dto";
-import { JwtGuard } from "../../../authorization/src/guards/authorization.jwt.guard";
+import { JwtGuard } from "@app/authorization/guards/authorization.jwt.guard";
 
 import { FRIEND_SERVICE } from "@app/common/message/friend";
 import { Friend } from "@app/common/entity/friend.entity";
-import { FriendService } from "apps/friend/src/friend.interface";
+
+import {FriendService} from "../../../friend/src/providers/friend.service.interface";
 
 @Controller("friend")
 @UseGuards(JwtGuard)

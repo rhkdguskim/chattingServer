@@ -3,13 +3,14 @@ import {User} from "../entity/users.entity";
 import {
     CreateUserRequest,
     LoginUserRequest,
-    LoginUserResponse, UpdateUserRequest,
-    UserResponse
+    LoginUserResponse, UpdateUserRequest, UserResponse
 } from "@app/authentication/dto/authenticaion.dto";
 
 export interface AuthenticationController {
     signIn(payload: LoginUserRequest): Promise<LoginUserResponse>;
+}
 
+export interface UsersController {
     signUp(payload: CreateUserRequest): Promise<UserResponse>;
 
     updateUser(payload: UpdateUserRequest): Promise<User | boolean>;

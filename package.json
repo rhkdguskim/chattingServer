@@ -24,7 +24,7 @@
     "test:watch": "jest --watch --detectOpenHandles",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./apps/apigateway/test/jest-e2e.json"
+    "test:e2e": "jest --config apps/apigateway/test/jest-e2e.json"
   },
   "dependencies": {
     "@grpc/grpc-js": "^1.9.3",
@@ -47,6 +47,7 @@
     "@nestjsx/crud-typeorm": "^5.0.0-alpha.3",
     "@types/cache-manager": "^4.0.2",
     "@types/cache-manager-redis-store": "^2.0.1",
+    "@types/config": "^3.3.3",
     "@types/passport-google-oauth20": "^2.0.11",
     "@types/passport-kakao": "^1.0.0",
     "@types/passport-naver": "^1.0.1",
@@ -81,6 +82,7 @@
     "@types/jest": "29.5.1",
     "@types/multer": "^1.4.7",
     "@types/node": "18.16.12",
+    "@types/passport-jwt": "^3.0.13",
     "@types/supertest": "^2.0.11",
     "@typescript-eslint/eslint-plugin": "^6.7.5",
     "@typescript-eslint/parser": "^6.7.5",
@@ -117,6 +119,7 @@
     "moduleNameMapper": {
       "^@src/(.*)$": "<rootDir>/$1",
       "^@app/authentication(|/.*)$": "<rootDir>/apps/authentication/src/$1",
+      "^@app/authorization(|/.*)$": "<rootDir>/apps/authorization/src/$1",
       "^@app/common(|/.*)$": "<rootDir>/libs/common/src/$1"
     },
     "coverageDirectory": "./coverage",

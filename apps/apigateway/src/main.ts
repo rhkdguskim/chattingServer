@@ -19,7 +19,7 @@ async function bootstrap() {
     logger,
   });
 
-  const cors = config.get("cors");
+  const cors = config.get<any>("cors");
   app.setGlobalPrefix("api");
   app.use(cookieParser());
   app.enableCors({

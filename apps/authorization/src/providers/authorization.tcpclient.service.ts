@@ -11,15 +11,15 @@ export class AuthorizationTCPClient
   constructor(options: TcpClientOptions) {
     this.clientAdaptor = new ClientTCP(options['options'])
   }
-  Verify(payload: string): Promise<JWTResponse> {
+
+  verify(payload: string): Promise<JWTResponse> {
     return lastValueFrom<JWTResponse>(
         this.clientAdaptor.send<JWTResponse>({ cmd: JWT_VERIFY }, payload)
     );
-  }
-
-  Sign(payload: JWTRequest): Promise<TokenResponse> {
-    return lastValueFrom<TokenResponse>(
-        this.clientAdaptor.send<TokenResponse>({ cmd: JWT_SIGN }, payload)
-    );
-  }
+    }
+    sign(payload: JWTRequest): Promise<TokenResponse> {
+      return lastValueFrom<TokenResponse>(
+          this.clientAdaptor.send<TokenResponse>({ cmd: JWT_SIGN }, payload)
+      );
+    }
 }

@@ -5,7 +5,7 @@ import { RpcException } from "@nestjs/microservices";
 
 export enum ExceptionType {
   AUTHENTICATION_ERROR = "인증에러",
-  AUTHORIZAION_ERROR = "인가에러",
+  AUTHORIZATION_ERROR = "인가에러",
 }
 
 export interface CustomExceptionMessage {
@@ -14,7 +14,7 @@ export interface CustomExceptionMessage {
 }
 
 export class CustomException extends Error {
-  private msg: CustomExceptionMessage;
+  private readonly msg: CustomExceptionMessage;
   constructor(msg: CustomExceptionMessage) {
     super();
     this.msg = msg;

@@ -11,11 +11,13 @@ import {
   CreateFriendResponse,
   DelteFriendRequest,
 } from "@app/common/dto/friend.createfriend.dto";
-import { FRIEND_REPOSITORY, FriendRepository, FriendService } from "./friend.interface";
+import { FRIEND_REPOSITORY } from "../friend.metadata";
 import { Friend } from "@app/common/entity/friend.entity";
+import {FriendService} from "./friend.service.interface";
+import {FriendRepository} from "../repository/friend.repository.interface";
 
 @Injectable()
-export class FriendServiceImpl implements FriendService {
+export class FriendLocalService implements FriendService {
   constructor(
     @Inject(FRIEND_REPOSITORY)
     private friendRepository: FriendRepository

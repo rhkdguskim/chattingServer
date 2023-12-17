@@ -24,7 +24,7 @@ export class AuthorizationJwtStrategy extends PassportStrategy(Strategy, "jwt") 
     private readonly logger: LoggerService
   ) {
     super({
-      secretOrKey: process.env.JWT_SECRET || config.get("jwt.secret"),
+      secretOrKey: process.env.JWT_SECRET || config.get<any>("jwt.secret"),
 
       jwtFromRequest: ExtractJwt.fromExtractors([
         (request: Request) => {

@@ -3,7 +3,7 @@ import { CacheModule } from "@nestjs/cache-manager";
 import * as redisCacheStore from "cache-manager-ioredis";
 import * as config from "config";
 
-const redisConfig = config.get("redis");
+const redisConfig = config.get<any>("redis");
 
 @Module({
   imports: [

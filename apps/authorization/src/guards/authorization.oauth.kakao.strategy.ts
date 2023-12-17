@@ -4,7 +4,13 @@ import * as config from "config";
 import { KakaoUserResponse } from "@app/common/dto/kakao.auth.dto";
 import { OAuthData } from "@app/common/dto/oauth.dto";
 
-const kakao = config.get("kakao");
+interface Kakao {
+  restApiKey : string,
+  secret : string,
+  redirectURL: string,
+}
+
+const kakao = config.get<Kakao>("kakao");
 export class JwtKakaoStrategy extends PassportStrategy(Strategy, "kakao") {
   constructor() {
     super({

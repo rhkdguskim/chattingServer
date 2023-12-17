@@ -1,9 +1,10 @@
 import { Injectable } from "@nestjs/common";
-import { FindFriendRequest, FriendRepository } from "apps/friend/src/friend.interface";
 import { FriendTypeORM } from "../entity";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 import { Friend } from "@app/common/entity/friend.entity";
+import {FindFriendRequest} from "../../../../../apps/friend/src/dto/friend.dto";
+import {FriendRepository} from "../../../../../apps/friend/src/repository/friend.repository.interface";
 
 @Injectable()
 export class FriendTypeORMRepository implements FriendRepository {

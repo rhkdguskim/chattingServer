@@ -8,7 +8,7 @@ import { ParticipantTypeORM } from "@app/common/typeorm/entity";
 import { ReadByTypeORM } from "@app/common/typeorm/entity";
 import * as config from "config";
 
-const dbConfig = config.get("db");
+const dbConfig = config.get<any>("db");
 @Module({
   imports: [
     TypeOrmModule.forRoot({

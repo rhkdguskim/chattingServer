@@ -26,6 +26,12 @@
       "@app/authentication/*": [
         "apps/authentication/src/*"
       ],
+      "@app/authorization/": [
+        "apps/authorization/src/"
+      ],
+      "@app/authorization/*": [
+        "apps/authorization/src/*"
+      ]
     },
     "incremental": true,
     "skipLibCheck": true,
