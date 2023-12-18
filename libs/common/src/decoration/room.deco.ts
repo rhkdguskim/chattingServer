@@ -55,7 +55,7 @@ export function ValidateCreateRoom() {
           this.logger.log("이미 생성된 채팅방입니다.");
           const createroomResponse: CreateRoomResponse = {
             ...alreadyRoom,
-            room_name: alreadyRoom.participant[0].room_name,
+            room_name: alreadyRoom.participants[0].room_name,
           };
           return createroomResponse;
         }

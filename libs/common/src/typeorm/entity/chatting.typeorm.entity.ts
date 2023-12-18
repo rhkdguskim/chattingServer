@@ -11,10 +11,10 @@ import {
 import { RoomTypeORM } from "@app/common/typeorm/entity/room.typeorm.entity";
 import { UserTypeORM } from "@app/common/typeorm/entity/users.typeorm.entity";
 import { ReadByTypeORM } from "@app/common/typeorm/entity/readby.typeorm.entity";
-import { Chatting } from "@app/chat/entity/chatting.entity";
+import { ChatEntity } from "@app/chat/entity/chatting.entity";
 
 @Entity({ name: "chat" })
-export class ChattingTypeORM implements Chatting {
+export class ChattingTypeORM implements ChatEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 

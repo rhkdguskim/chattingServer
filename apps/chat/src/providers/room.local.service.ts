@@ -6,8 +6,8 @@ import {ParticipantTypeORM} from "@app/common/typeorm/entity/participant.typeorm
 import {RoomService} from "./room.service.interface";
 import { ROOM_REPOSITORY} from "@app/chat/chat.metadata";
 import { RoomTransactionRepository} from "@app/chat/repository/room.repository.interface";
-import {Room} from "@app/chat/entity/room.entity";
-import { Participant } from "../entity/participant.entity";
+import {RoomEntity} from "@app/chat/entity/room.entity";
+import { ParticipantEntity } from "../entity/participant.entity";
 
 @Injectable()
 export class RoomLocalService implements RoomService {
@@ -20,7 +20,7 @@ export class RoomLocalService implements RoomService {
     ) {
     }
 
-    getParticipaintsByUserID(id: number): Promise<Participant[]> {
+    getParticipaintsByUserID(id: number): Promise<ParticipantEntity[]> {
         return this.roomRepository.getParticipantByUserID(id);
     }
 
@@ -50,11 +50,11 @@ export class RoomLocalService implements RoomService {
         return this.roomRepository.getUserRoom(user_id)
     }
 
-    async getRoombyID(id: number): Promise<Room> {
+    async getRoombyID(id: number): Promise<RoomEntity> {
         return await this.roomRepository.getRoomByID(id)
     }
 
-    async updateRoomStatus(room: Room): Promise<boolean> {
+    async updateRoomStatus(room: RoomEntity): Promise<boolean> {
         return await this.roomRepository.updateRoom(room);
     }
 }

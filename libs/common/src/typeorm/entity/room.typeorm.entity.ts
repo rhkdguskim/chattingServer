@@ -8,15 +8,18 @@ import {
 } from "typeorm";
 import { ParticipantTypeORM } from "@app/common/typeorm/entity/participant.typeorm.entity";
 import { ChattingTypeORM } from "./chatting.typeorm.entity";
-import { Room } from "@app/chat/entity/room.entity";
+import { RoomEntity } from "@app/chat/entity/room.entity";
 
 @Entity({ name: "room" })
-export class RoomTypeORM implements Room {
+export class RoomTypeORM implements RoomEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
   @Column()
   owner_id!: number;
+
+  @Column()
+  room_name : string;
 
   @Column()
   type!: number;
@@ -34,7 +37,7 @@ export class RoomTypeORM implements Room {
     eager: true,
     cascade: true,
   })
-  participant: ParticipantTypeORM[]; // 관련된 참가자들을 eager 로딩하고, 채팅방이 저장될 때 함께 저장(cascade)
+  participants: ParticipantTypeORM[]; // 관련된 참가자들을 eager 로딩하고, 채팅방이 저장될 때 함께 저장(cascade)
 
   @OneToMany((type) => ChattingTypeORM, (chatting) => chatting.room, {
     eager: false,

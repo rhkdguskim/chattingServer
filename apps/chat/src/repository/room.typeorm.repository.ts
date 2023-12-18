@@ -1,7 +1,7 @@
 import {TypeormRepository} from "@app/common/typeorm/typeormrepository";
 import {RoomTypeORM} from "@app/common/typeorm/entity/room.typeorm.entity";
 import {RoomRepository} from "@app/chat/repository/room.repository.interface";
-import { Room } from "../entity/room.entity";
+import { RoomEntity } from "../entity/room.entity";
 import {InjectRepository} from "@nestjs/typeorm";
 
 import {Repository} from "typeorm";
@@ -13,7 +13,7 @@ export class RoomTypeormRepository extends TypeormRepository<RoomTypeORM> implem
         super(roomRepository);
     }
 
-    async findOne(id: number): Promise<Room> {
+    async findOne(id: number): Promise<RoomEntity> {
         return await this.roomRepository.findOne({where: {id}});
     }
 }

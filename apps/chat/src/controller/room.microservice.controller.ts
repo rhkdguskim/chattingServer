@@ -18,7 +18,7 @@ import {
 import {RoomTypeORM} from "@app/common/typeorm/entity/room.typeorm.entity";
 import {ParticipantTypeORM} from "@app/common/typeorm/entity/participant.typeorm.entity";
 import {UserTypeORM} from "@app/common/typeorm/entity/users.typeorm.entity";
-import {Room} from "@app/chat/entity/room.entity";
+import {RoomEntity} from "@app/chat/entity/room.entity";
 
 @Controller("room")
 @ApiTags("채팅방")
@@ -31,7 +31,7 @@ export class RoomMicroserviceController {
   }
 
   @MessagePattern({ cmd: FIND_ROOM })
-  findRoom(payload: number): Promise<Room> {
+  findRoom(payload: number): Promise<RoomEntity> {
     return this.roomService.getRoombyID(payload);
   }
 

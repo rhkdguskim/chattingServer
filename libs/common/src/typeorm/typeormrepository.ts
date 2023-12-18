@@ -2,8 +2,8 @@ import {DeepPartial, DeleteResult, Repository} from "typeorm";
 import {QueryDeepPartialEntity} from "typeorm/query-builder/QueryPartialEntity";
 
 export abstract class TypeormRepository<T> {
-    protected repository : Repository<T>
-    protected constructor(repository : Repository<T>) {
+    protected repository : Repository<any>
+    protected constructor(repository : Repository<any>) {
         this.repository = repository;
     }
 

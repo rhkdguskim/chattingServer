@@ -26,8 +26,8 @@ export class UsersMicroServiceController implements UsersController {
     }
 
     @MessagePattern({ cmd: UPDATE_USER })
-    async updateUser(payload: UpdateUserRequest): Promise<void> {
-        await this.authenticationService.update(payload);
+    async updateUser(id:number, payload: UpdateUserRequest): Promise<void> {
+        await this.authenticationService.update(id, payload);
     }
 
     @MessagePattern({ cmd: DELETE_USER })

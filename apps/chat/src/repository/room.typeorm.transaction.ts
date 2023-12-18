@@ -5,7 +5,7 @@ import {RoomTypeORM} from "@app/common/typeorm/entity/room.typeorm.entity";
 import {ParticipantTypeORM} from "@app/common/typeorm/entity/participant.typeorm.entity";
 import {UserInfoResponse} from "@app/authentication/dto/authenticaion.dto";
 import {RoomTransactionRepository} from "@app/chat/repository/room.repository.interface";
-import { Room } from "../entity/room.entity";
+import { RoomEntity } from "../entity/room.entity";
 
 export class RoomTypeormTransactionRepository implements RoomTransactionRepository {
     constructor(@Inject(EntityManager) private readonly manager: EntityManager) {
@@ -19,13 +19,13 @@ export class RoomTypeormTransactionRepository implements RoomTransactionReposito
                     room: {id}}})
     }
 
-    async getRoomByID(id: number): Promise<Room> {
+    async getRoomByID(id: number): Promise<RoomEntity> {
         return await this.manager
             .getRepository(RoomTypeORM)
             .findOne({where : {id}})
     }
 
-    async updateRoom(room: Room): Promise<boolean> {
+    async updateRoom(room: RoomEntity): Promise<boolean> {
         const result = await this.manager
             .getRepository(RoomTypeORM)
             .update(room.id,room);

@@ -1,8 +1,8 @@
-import { Chatting } from "./chatting.entity";
+import { ChatEntity } from "./chatting.entity";
 import { UserEntity } from "@app/authentication/entity/users.entity";
 
-export interface ReadBy {
+export class ReadByEntity {
   id: number;
-  chatting: Chatting;
+  chatting: ChatEntity;
   user: UserEntity;
 }

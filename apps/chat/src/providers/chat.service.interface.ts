@@ -2,27 +2,27 @@ import {ChattingListRequest, ChattingResponse, RequestMessage} from "../dto/chat
 import {UserTypeORM} from "@app/common/typeorm/entity/users.typeorm.entity";
 import {RoomTypeORM} from "@app/common/typeorm/entity/room.typeorm.entity";
 import {ChattingTypeORM} from "@app/common/typeorm/entity/chatting.typeorm.entity";
-import {Chatting} from "@app/chat/entity/chatting.entity";
+import {ChatEntity} from "@app/chat/entity/chatting.entity";
 import {UserEntity} from "@app/authentication/entity/users.entity";
-import {Room} from "@app/chat/entity/room.entity";
+import {RoomEntity} from "@app/chat/entity/room.entity";
 
 export interface ChatService {
     createChatting(
         requestMessage: RequestMessage,
         user: UserEntity,
-        room: Room
-    ): Promise<Chatting>;
+        room: RoomEntity
+    ): Promise<ChatEntity>;
 
-    findChattingById(id: number): Promise<Chatting>;
+    findChattingById(id: number): Promise<ChatEntity>;
 
-    findChattingByRoomID(id: number): Promise<Chatting[]>;
+    findChattingByRoomID(id: number): Promise<ChatEntity[]>;
 
-    updateChatting(chat: Chatting): Promise<boolean>;
+    updateChatting(chat: ChatEntity): Promise<boolean>;
 
     readChatting(
         user: UserEntity,
-        room: Room
-    ): Promise<Chatting[]>;
+        room: RoomEntity
+    ): Promise<ChatEntity[]>;
 
     getChattingList(payload: ChattingListRequest): Promise<ChattingResponse[]>;
 }

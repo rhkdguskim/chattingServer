@@ -3,8 +3,8 @@ import {ParticipantTypeORM} from "@app/common/typeorm/entity/participant.typeorm
 import {ParticipantRepository} from "@app/chat/repository/participant.repository.interface";
 import {InjectRepository} from "@nestjs/typeorm";
 import {Repository} from "typeorm";
-import { Participant } from "../entity/participant.entity";
-import {Room} from "@app/chat/entity/room.entity";
+import { ParticipantEntity } from "../entity/participant.entity";
+import {RoomEntity} from "@app/chat/entity/room.entity";
 
 export class ParticipantTypeormRepository extends TypeormRepository<ParticipantTypeORM> implements ParticipantRepository {
     constructor(@InjectRepository(ParticipantTypeORM)
@@ -21,14 +21,14 @@ export class ParticipantTypeormRepository extends TypeormRepository<ParticipantT
         });
     }
 
-    async getParticipantsByRoomID(room_id: number): Promise<Participant[]> {
+    async getParticipantsByRoomID(room_id: number): Promise<ParticipantEntity[]> {
         return await this.participantRepository
             .createQueryBuilder("participant")
             .where("participant.room_id = :id", {id: room_id})
             .innerJoinAndSelect("participant.user", "user")
             .getMany();
     }
-    async getParticipantsByUserID(user_id: number): Promise<Participant[]> {
+    async getParticipantsByUserID(user_id: number): Promise<ParticipantEntity[]> {
         return await this.participantRepository
             .createQueryBuilder("participant")
             .where("participant.user_id = :id", {id: user_id})

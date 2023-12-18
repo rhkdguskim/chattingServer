@@ -10,15 +10,15 @@ import {
 } from "typeorm";
 import { RoomTypeORM } from "@app/common/typeorm/entity/room.typeorm.entity";
 import { UserTypeORM } from "@app/common/typeorm/entity/users.typeorm.entity";
-import { Participant } from "@app/chat/entity/participant.entity";
+import { ParticipantEntity } from "@app/chat/entity/participant.entity";
 
 // 유저와 방의 Join Table
 @Entity({ name: "participant" })
-export class ParticipantTypeORM implements Participant {
+export class ParticipantTypeORM implements ParticipantEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @ManyToOne(() => RoomTypeORM, (room) => room.participant, {
+  @ManyToOne(() => RoomTypeORM, (room) => room.participants, {
     eager: false,
     nullable: false,
   })

@@ -4,8 +4,8 @@ import {ChatService} from "./chat.service.interface";
 import {CHAT_REPOSITORY, ROOM_REPOSITORY} from "@app/chat/chat.metadata";
 import {RoomTransactionRepository} from "@app/chat/repository/room.repository.interface";
 import {ChatRepository} from "@app/chat/repository/chat.repository.interface";
-import {Chatting} from "@app/chat/entity/chatting.entity";
-import {Room} from "@app/chat/entity/room.entity";
+import {ChatEntity} from "@app/chat/entity/chatting.entity";
+import {RoomEntity} from "@app/chat/entity/room.entity";
 import {UserEntity} from "@app/authentication/entity/users.entity";
 
 @Injectable()
@@ -24,8 +24,8 @@ export class ChatLocalService implements ChatService {
   async createChatting(
       requestMessage: RequestMessage,
       user: UserEntity,
-      room: Room
-  ): Promise<Chatting> {
+      room: RoomEntity
+  ): Promise<ChatEntity> {
 
     const participantsCount = await this.roomRepository.countParticipantsByRoomID(room.id);
 
@@ -40,39 +40,30 @@ export class ChatLocalService implements ChatService {
     });
   }
 
-  async findChattingById(id: number): Promise<Chatting> {
+  async findChattingById(id: number): Promise<ChatEntity> {
     return await this.chattingRepository.findChattingById(id);
   }
 
-  async findChattingByRoomID(id: number): Promise<Chatting[]> {
+  async findChattingByRoomID(id: number): Promise<ChatEntity[]> {
     return await this.chattingRepository.findChattingByRoomId(id)
   }
 
-  async updateChatting(chat: Chatting): Promise<boolean> {
+  async updateChatting(chat: ChatEntity): Promise<boolean> {
     return await this.chattingRepository.update(chat.id, chat) as boolean
   }
 
   async readChatting(
       user: UserEntity,
-      room: Room
-  ): Promise<Chatting[]> {
+      room: RoomEntity
+  ): Promise<ChatEntity[]> {
     return await this.chattingRepository.readChatting(user.id, room.id)
   }
 
   async getChattingList(payload: ChattingListRequest): Promise<ChattingResponse[]> {
-      if ((payload.cursor as any) == "null") {
-          payload.cursor = 9999999999;
-      }
+
       const chatting = await this.chattingRepository.getChattingList(payload)
       return chatting.map(chat => {
-          return {
-              id : chat.id,
-              room_id: chat.room.id,
-              user_id: chat.user.id,
-              message: chat.message,
-              not_read_chat: chat.not_read_chat,
-              createdAt: chat.createdAt
-          }
+          return new ChattingResponse(chat)
       })
   }
 }
