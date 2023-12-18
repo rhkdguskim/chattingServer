@@ -1,7 +1,6 @@
 import {CreateRoomReqeust, CreateRoomResponse, InviteRoomRequest, RoomListResponse} from "../dto/room.dto";
-import {RoomTypeORM} from "@app/common/typeorm/entity/room.typeorm.entity";
-import {ParticipantTypeORM} from "@app/common/typeorm/entity/participant.typeorm.entity";
-import {UserTypeORM} from "@app/authentication/entity/users.typeorm.entity";
+import {Room} from "@app/chat/entity/room.entity";
+import {Participant} from "@app/chat/entity/participant.entity";
 
 export interface RoomService {
     createRoom(
@@ -10,11 +9,13 @@ export interface RoomService {
 
     InviteRoom(
         inviteToRoom: InviteRoomRequest
-    ): Promise<ParticipantTypeORM[]>;
+    ): Promise<Participant[]>;
 
     GetUserRooms(user_id: number): Promise<Array<RoomListResponse>>;
 
-    getRoombyID(id: number): Promise<RoomTypeORM | undefined>;
+    getRoombyID(id: number): Promise<Room>;
 
-    updateRoomStatus(room: RoomTypeORM): Promise<RoomTypeORM>;
+    getParticipaintsByUserID(id: number) : Promise<Participant[]>
+
+    updateRoomStatus(room: Room): Promise<boolean>;
 }

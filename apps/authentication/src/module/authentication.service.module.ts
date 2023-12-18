@@ -1,12 +1,11 @@
 import { DynamicModule, Module } from "@nestjs/common";
-import { AuthenticationMockService } from "../test/authentication.mock.service";
 import { AuthenticationLocalService } from "../providers/authentication.local.service";
-import { UserMockRepository } from "../test/users.mock.repository";
 import { UserTypeORMRepository } from "../repository/users.typeorm.repository";
 import { NodeBcryptService } from "../providers/bcrypt/bcrpy.service";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import {AUTHENTICATION_BCRYPT, AUTHENTICATION_SERVICE, USER_REPOSITORY} from "../authentication.metadata";
-import {UserTypeORM} from "@app/authentication/entity/users.typeorm.entity";
+import {UserTypeORM} from "@app/common/typeorm/entity/users.typeorm.entity";
+import {JwtModule} from "@app/common/auth/jwtModule";
 
 export interface AuthenticationServiceModuleConfig {
   isDev: boolean;
@@ -18,17 +17,15 @@ export class AuthenticationServiceModule {
   static forRoot(config: AuthenticationServiceModuleConfig): DynamicModule {
     const module: DynamicModule = {
       module : AuthenticationServiceModule,
-      imports: [TypeOrmModule.forFeature([UserTypeORM])],
+      imports: [JwtModule, TypeOrmModule.forFeature([UserTypeORM])],
       providers: [
         {
           provide: USER_REPOSITORY,
-          useClass: config.isDev ? UserMockRepository : UserTypeORMRepository,
+          useClass: UserTypeORMRepository,
         },
         {
           provide: AUTHENTICATION_SERVICE,
-          useClass: config.isDev
-            ? AuthenticationMockService
-            : AuthenticationLocalService,
+          useClass: AuthenticationLocalService,
         },
         {
           provide: AUTHENTICATION_BCRYPT,

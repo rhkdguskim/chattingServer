@@ -12,7 +12,8 @@ import { UsersService } from "@src/users/users.service";
 import { Request } from "express";
 import { CACHE_MANAGER } from "@nestjs/cache-manager";
 import { Cache } from "cache-manager";
-import { User } from "@app/authentication/entity/users.entity";
+import { UserEntity } from "@app/authentication/entity/users.entity";
+import {UserInfoResponse} from "@app/authentication/dto/authenticaion.dto";
 
 @Injectable()
 export class AuthorizationJwtStrategy extends PassportStrategy(Strategy, "jwt") {
@@ -34,9 +35,9 @@ export class AuthorizationJwtStrategy extends PassportStrategy(Strategy, "jwt") 
     });
   }
 
-  async validate(payload): Promise<User> {
+  async validate(payload): Promise<UserInfoResponse> {
     const { id } = payload;
-    let user: User;
+    let user: UserInfoResponse;
     const cachedData = await this.cacheManager.get<any>(`login/${id}`);
     if (cachedData) {
       // 캐시가 있다면 메모리 조회
@@ -45,7 +46,6 @@ export class AuthorizationJwtStrategy extends PassportStrategy(Strategy, "jwt") 
       // 캐시가 없다면 DB조회
       user = await this.userService.findOne(id);
       // 패스워드 정보는 보내지 않는다.
-      user.password = "";
       await this.cacheManager.set(`login/${id}`, user);
     }
 

@@ -21,7 +21,7 @@ import {
 import { HttpCacheInterceptor } from "@src/common/interceptors/httpcache.interceptor";
 import { AuthGuard } from "@nestjs/passport";
 import { JwtGuard } from "@app/authorization/guards/authorization.jwt.guard";
-import {UpdateUserRequest, UserResponse} from "@app/authentication/dto/authenticaion.dto";
+import {UpdateUserRequest, UserInfoResponse} from "@app/authentication/dto/authenticaion.dto";
 
 
 @UseGuards(JwtGuard)
@@ -37,7 +37,7 @@ export class UsersController {
     description: "모든 사용자의 정보를 가져옵니다.",
   })
   @ApiCreatedResponse({ description: "모든 사용자의 정보를 가져옵니다." })
-  async getAllUser(): Promise<UserResponse[]> {
+  async getAllUser(): Promise<UserInfoResponse[]> {
     return await this.usersService.findAll();
   }
 
@@ -51,7 +51,7 @@ export class UsersController {
     type: UpdateUserRequest,
   })
   @ApiCreatedResponse({ description: "사용자 정보를 업데이트 합니다." })
-  async updateUser(@Body() user: UpdateUserRequest): Promise<UserResponse | boolean> {
+  async updateUser(@Body() user: UpdateUserRequest): Promise<UserInfoResponse | boolean> {
     return await this.usersService.updateUser(user);
   }
 
@@ -61,7 +61,7 @@ export class UsersController {
     description: "특정 사용자를 찾는 기능입니다.",
   })
   @ApiCreatedResponse({ description: "특정 사용자를 찾는 기능입니다." })
-  async SearchUserByID(@Param("id") id: number): Promise<UserResponse> {
+  async SearchUserByID(@Param("id") id: number): Promise<UserInfoResponse> {
     return this.usersService.findOne(id);
   }
 
@@ -71,7 +71,7 @@ export class UsersController {
     description: "아이디를 사용하여 특정 사용자를 찾는 기능입니다.",
   })
   @ApiCreatedResponse({ description: "특정 사용자를 찾는 기능입니다." })
-  async SearchUser(@Param("id") user_id: string): Promise<UserResponse> {
+  async SearchUser(@Param("id") user_id: string): Promise<UserInfoResponse> {
     return this.usersService.findbyUserId(user_id);
   }
 }

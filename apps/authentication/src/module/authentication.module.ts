@@ -6,6 +6,7 @@ import { AuthenticationServiceModule } from "./authentication.service.module";
 import {AuthenticationControllerHttp} from "@app/authentication/controller/authentication.controller.http";
 import {UsersMicroServiceController} from "@app/authentication/controller/user.controller.microservice";
 import {UsersHttpController} from "@app/authentication/controller/user.controller.http";
+import {JwtModule} from "@app/common/auth/jwtModule";
 
 export interface AuthenticationModuleConfig {
   isDev: boolean;
@@ -14,8 +15,8 @@ export interface AuthenticationModuleConfig {
 @Module({})
 export class AuthenticationModule {
   static forRoot(config: AuthenticationModuleConfig): DynamicModule {
-    const AuthenticationController = config.isMicroService ? AuthenticationControllerMicroservice : AuthenticationControllerHttp;
-    const UserController = config.isMicroService ? UsersMicroServiceController : UsersHttpController
+    const AuthenticationController = AuthenticationControllerHttp;
+    const UserController = UsersHttpController
     return {
       module: AuthenticationModule,
       imports: [

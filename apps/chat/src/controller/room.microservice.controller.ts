@@ -17,7 +17,7 @@ import {
 } from "../room.message";
 import {RoomTypeORM} from "@app/common/typeorm/entity/room.typeorm.entity";
 import {ParticipantTypeORM} from "@app/common/typeorm/entity/participant.typeorm.entity";
-import {UserTypeORM} from "@app/authentication/entity/users.typeorm.entity";
+import {UserTypeORM} from "@app/common/typeorm/entity/users.typeorm.entity";
 import {Room} from "@app/chat/entity/room.entity";
 
 @Controller("room")
@@ -51,6 +51,6 @@ export class RoomMicroserviceController {
 
   @MessagePattern({ cmd: FIND_ALL_PARTICIPANT })
   findParticipant(payload: UserTypeORM) {
-    return this.roomService.GetParticipants(payload);
+    //return this.roomService.GetParticipants(payload);
   }
 }

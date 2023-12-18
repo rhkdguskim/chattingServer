@@ -1,8 +1,8 @@
 import {ApiProperty} from "@nestjs/swagger";
 
-import {UserResponse} from "@app/authentication/dto/authenticaion.dto";
+import {UserInfoResponse} from "@app/authentication/dto/authenticaion.dto";
 import {RoomTypeORM} from "@app/common/typeorm/entity/room.typeorm.entity";
-import {UserTypeORM} from "@app/authentication/entity/users.typeorm.entity";
+import {UserTypeORM} from "@app/common/typeorm/entity/users.typeorm.entity";
 import {ArrayMinSize, IsNumber, IsString} from "class-validator";
 
 
@@ -17,7 +17,7 @@ export class RoomListResponse {
   room_name!: string;
 
   @ApiProperty({ description: "참가유저목록" })
-  participant!: UserResponse[];
+  participant!: UserInfoResponse[];
 
   @ApiProperty({ description: "방 ID" })
   id: number;
@@ -82,5 +82,8 @@ export class CreateRoomReqeust {
 
   @ApiProperty({description: "참가유저목록"})
   @ArrayMinSize(1, {message: "참가자 유저목록은 0명 이상이어야합니다."})
-  participant!: UserResponse[];
+  participant!: UserInfoResponse[];
+
+  @ApiProperty({description : "개인/그룹 채팅"})
+  room_type : RoomType;
 }

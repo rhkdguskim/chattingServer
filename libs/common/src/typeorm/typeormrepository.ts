@@ -16,7 +16,7 @@ export abstract class TypeormRepository<T> {
         return this.repository.find();
     }
 
-    public async update(id: string | number, data: QueryDeepPartialEntity<T>): Promise<T | null | boolean> {
+    public async update(id: string | number, data: QueryDeepPartialEntity<T>): Promise<boolean> {
         const result = await this.repository.update(id, data);
         return result.affected >= 1;
     }

@@ -22,13 +22,16 @@ import { RoomType } from "../dto/room.dto";
 import { Socket } from "socket.io";
 import { GetWsUser } from "@app/common/decoration/auth.decorator";
 import {ParticipantTypeORM} from "@app/common/typeorm/entity/participant.typeorm.entity";
-import {UserTypeORM} from "@app/authentication/entity/users.typeorm.entity";
+import {UserTypeORM} from "@app/common/typeorm/entity/users.typeorm.entity";
 import {RoomTypeORM} from "@app/common/typeorm/entity/room.typeorm.entity";
 import {ChattingTypeORM} from "@app/common/typeorm/entity/chatting.typeorm.entity";
 import {ReadByTypeORM} from "@app/common/typeorm/entity/readby.typeorm.entity";
 import {RoomService} from "../providers/room.service.interface";
 import {ChatService} from "../providers/chat.service.interface";
 import {CHAT_SERVICE, ROOM_SERVICE} from "../chat.metadata";
+import {Room} from "@app/chat/entity/room.entity";
+import {Participant} from "@app/chat/entity/participant.entity";
+import {Chatting} from "@app/chat/entity/chatting.entity";
 
 @WebSocketGateway({ cors: true })
 //@UseGuards(WsJwtGuard)
@@ -60,7 +63,7 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
     @ConnectedSocket() client: Socket,
     @GetWsUser() user: UserTypeORM
   ): Promise<void> {
-    const participants: ParticipantTypeORM[] = await this.roomService.GetParticipants(user)
+    const participants: Participant[] = await this.roomService.getParticipaintsByUserID(user.id)
     participants.forEach((participant) => {
       client.join(String(participant.room.id));
     });
@@ -78,14 +81,14 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
     @MessageBody() message: RequestMessage
   ): Promise<ResponseMessage> {
     // 여기에도 캐싱전략이 들어갔으면 좋겠음. (방 정보를 바로바로 최신화 )
-    const room: RoomTypeORM = await this.roomService.getRoombyID(message.room_id)
+    const room: Room = await this.roomService.getRoombyID(message.room_id)
 
     room.last_chat = message.message;
     await this.roomService.updateRoomStatus(room);
 
     const not_read_chat: number =
       room.type !== RoomType.Individual ? room.participant.length : 0;
-    const ChattingMessage: ChattingTypeORM =
+    const ChattingMessage: Chatting =
       await this.chattingService.createChatting(message, user, room);
     const responseMessage: ResponseMessage = {
       id: ChattingMessage.id,
@@ -125,13 +128,6 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
       // not_read_chat 값을 1 감소시킵니다.
       chattingMessage.not_read_chat -= 1;
 
-      // ReadBy 엔터티에 사용자 정보를 추가합니다.
-      const readBy = new ReadByTypeORM();
-      readBy.user = user;
-      readBy.chatting = chattingMessage;
-
-      chattingMessage.readBys.push(readBy);
-
       await this.chattingService.updateChatting(chattingMessage);
     }
 
@@ -153,7 +149,7 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
     @MessageBody() message: RequestMultiRead
   ): Promise<ResponseMultiRead> {
     // roomId를 기준으로 채팅 메시지들을 가져옵니다.
-    const chattings = await this.chattingService.findChattingsByRoomId(
+    const chattings = await this.chattingService.findChattingByRoomID(
       message.id
     );
     const readChattingIds: number[] = [];
@@ -167,13 +163,6 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
       if (!alreadyRead) {
         // not_read_chat 값을 1 감소시킵니다.
         chattingMessage.not_read_chat -= 1;
-
-        // ReadBy 엔터티에 사용자 정보를 추가합니다.
-        const readBy = new ReadByTypeORM();
-        readBy.user = user;
-        readBy.chatting = chattingMessage;
-
-        chattingMessage.readBys.push(readBy);
 
         await this.chattingService.updateChatting(chattingMessage);
         readChattingIds.push(chattingMessage.id);

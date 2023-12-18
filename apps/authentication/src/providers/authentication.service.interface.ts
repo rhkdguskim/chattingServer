@@ -1,18 +1,22 @@
-import {User} from "../entity/users.entity";
-import {CreateUserRequest, LoginUserRequest, UpdateUserRequest} from "@app/authentication/dto/authenticaion.dto";
+import {UserEntity} from "../entity/users.entity";
+import {
+    CreateUserRequest,
+    LoginUserRequest, LoginUserResponse,
+    UpdateUserRequest, UserInfoResponse
+} from "@app/authentication/dto/authenticaion.dto";
 
 export interface AuthenticationService {
-    signIn(loginUser: LoginUserRequest): Promise<User>;
+    signIn(loginUser: LoginUserRequest): Promise<LoginUserResponse>;
 
-    signUp(createUserDto: CreateUserRequest): Promise<User>;
+    signUp(createUserDto: CreateUserRequest): Promise<UserInfoResponse>;
 
-    update(payload: UpdateUserRequest): Promise<User | boolean>;
+    update(id:number, payload: UpdateUserRequest): Promise<boolean>;
 
-    delete(payload: number): Promise<any>;
+    delete(id: number): Promise<boolean>;
 
-    findOne(id: number): Promise<User>;
+    findOne(id: number): Promise<UserInfoResponse>;
 
-    findOneByID(user_id: string): Promise<User | null>;
+    findOneByID(user_id: string): Promise<UserInfoResponse | null>;
 
-    findAll(): Promise<User[]>;
+    findAll(): Promise<UserInfoResponse[]>;
 }

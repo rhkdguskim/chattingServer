@@ -51,7 +51,7 @@ describe("Authentication Module", () => {
         const user = await authenticationService.signIn(createUserRequest);
       } catch (e) {
         expect(e).toBeInstanceOf(CustomException);
-        expect(e.msg.code).toEqual(ExceptionType.AUTHENTICATION_ERROR);
+        expect(e.msg.code).toEqual(ExceptionType.AUTHENTICATION);
       }
     });
 

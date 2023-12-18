@@ -1,25 +1,28 @@
-import {ChattingListRequest, RequestMessage} from "../dto/chat.dto";
-import {UserTypeORM} from "@app/authentication/entity/users.typeorm.entity";
+import {ChattingListRequest, ChattingResponse, RequestMessage} from "../dto/chat.dto";
+import {UserTypeORM} from "@app/common/typeorm/entity/users.typeorm.entity";
 import {RoomTypeORM} from "@app/common/typeorm/entity/room.typeorm.entity";
 import {ChattingTypeORM} from "@app/common/typeorm/entity/chatting.typeorm.entity";
+import {Chatting} from "@app/chat/entity/chatting.entity";
+import {UserEntity} from "@app/authentication/entity/users.entity";
+import {Room} from "@app/chat/entity/room.entity";
 
 export interface ChatService {
     createChatting(
         requestMessage: RequestMessage,
-        user: UserTypeORM,
-        room: RoomTypeORM
-    ): Promise<ChattingTypeORM>;
+        user: UserEntity,
+        room: Room
+    ): Promise<Chatting>;
 
-    findChattingById(id: number): Promise<ChattingTypeORM>;
+    findChattingById(id: number): Promise<Chatting>;
 
-    findChattingsByRoomId(id: number): Promise<ChattingTypeORM[]>;
+    findChattingByRoomID(id: number): Promise<Chatting[]>;
 
-    updateChatting(chat: ChattingTypeORM): Promise<ChattingTypeORM>;
+    updateChatting(chat: Chatting): Promise<boolean>;
 
     readChatting(
-        user: UserTypeORM,
-        room: RoomTypeORM
-    ): Promise<ChattingTypeORM[]>;
+        user: UserEntity,
+        room: Room
+    ): Promise<Chatting[]>;
 
-    getChattingList(payload: ChattingListRequest): Promise<any[]>;
+    getChattingList(payload: ChattingListRequest): Promise<ChattingResponse[]>;
 }

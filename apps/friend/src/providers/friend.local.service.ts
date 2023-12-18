@@ -7,10 +7,12 @@ import {
 } from "@nestjs/common";
 
 import { FRIEND_REPOSITORY } from "../friend.metadata";
-import { Friend } from "../entity/friend.entity";
+import { FriendEntity } from "../entity/friend.entity";
 import {FriendService} from "./friend.service.interface";
 import {FriendRepository} from "../repository/friend.repository.interface";
-import {CreateFriendRequest, CreateFriendResponse, DelteFriendRequest} from "../dto/friend.dto";
+import {CreateFriendRequest, CreateFriendResponse, DeleteFriendRequest, UpdateFriendRequest} from "../dto/friend.dto";
+import {UserEntity} from "@app/authentication/entity/users.entity";
+import {CustomException, ExceptionType} from "@app/common/exception/custom.exception";
 
 @Injectable()
 export class FriendLocalService implements FriendService {
@@ -19,67 +21,73 @@ export class FriendLocalService implements FriendService {
     private friendRepository: FriendRepository
   ) {}
 
-  async getFriends(id: number): Promise<Friend[]> {
-    return this.friendRepository.getMyFriends(id);
+  async getFriends(id: number): Promise<FriendEntity[]> {
+    const friends = await this.friendRepository.getMyFriends(id)
+
+    return friends.map((friend) => {
+      return new FriendEntity(friend)
+    })
   }
 
-  async getMyFriends(id: number): Promise<Friend[]> {
-    return await this.friendRepository.getMyFriends(id);
+  async getMyFriends(id: number): Promise<FriendEntity[]> {
+    const friends = await this.friendRepository.getMyFriends(id);
+    return friends.map(friend => {
+      return new FriendEntity(friend)
+    });
   }
 
-  async addFriend(
+  async addFriend(user_id:number,
     createFriend: CreateFriendRequest
-  ): Promise<CreateFriendResponse> {
-    const { friend_id, friend_name } = createFriend;
-    const friend = await this.friendRepository.create({
-      friend_id,
-      friend_name,
-    });
-
-    // 이미 등록된 친구라면
-    const friends: Friend[] = await this.getMyFriends(createFriend.id);
-    friends.map((myfriend: Friend) => {
-      if (myfriend.friend_id == friend_id) {
-        Logger.log("이미 등록된 친구입니다.");
-        throw new ForbiddenException({
-          statusCode: HttpStatus.FORBIDDEN,
-          message: [`이미 등록된 친구입니다.`],
-          error: "Forbidden",
-        });
-      }
-    });
-    return await this.friendRepository.create(friend);
-  }
-
-  async delFriend(
-    delFriend: DelteFriendRequest,
-  ): Promise<any> {
-    // 해당 Friend가 현재 유저에 속하는지 확인
-    const foundFriend = await this.friendRepository.findFirendById({id:delFriend.id, friend_id:delFriend.friend_id});
-    if (!foundFriend) {
-      throw new ForbiddenException({
-        statusCode: HttpStatus.FORBIDDEN,
-        message: [`이 친구는 삭제할 수 없습니다.`],
-        error: "Forbidden",
-      });
+  ): Promise<FriendEntity> {
+    if (user_id == createFriend.friend_id) {
+      throw new CustomException({code: ExceptionType.FORBIDDEN,
+        message: "자기자신을 친구로 설정 할 수 없습니다."})
     }
 
+    const { friend_id, friend_name } = createFriend;
+
+    // 이미 등록된 친구라면
+    const friends: FriendEntity[] = await this.getMyFriends(user_id);
+
+    friends.map((friend) => {
+      if (friend.friend_id == friend_id) {
+        throw new CustomException({code: ExceptionType.ALREADY_EXIST,
+          message: "이미 등록된 친구입니다."})
+      }
+    });
+
+    return new FriendEntity(await this.friendRepository.create({
+      user : {id:user_id} as UserEntity,
+      friend_id,
+      friend_name
+    }));
+  }
+
+  async delFriend(user_id:number,
+    delFriend: DeleteFriendRequest,
+  ): Promise<any> {
+    const foundFriend = await this.friendRepository.findFriendById({user_id:user_id, id:delFriend.id});
+    if (!foundFriend) {
+      throw new CustomException({
+        code: ExceptionType.NOT_FOUND, message: "Can't Find Friend"
+      });
+    }
     return this.friendRepository.delete(foundFriend.id);
   }
 
   async changeFriendName(
-    createFriend: CreateFriendRequest,
+      user_id:number,
+    updateFriend: UpdateFriendRequest,
   ): Promise<any> {
-    const { friend_id, friend_name } = createFriend;
-    const friend: Friend = await this.friendRepository.findFirendById({id:createFriend.id, friend_id : createFriend.friend_id})
-    if (friend) {
-      friend.friend_name = friend_name;
-      return await this.friendRepository.update(createFriend.friend_id, createFriend);
+
+    const { id, friend_id, friend_name } = updateFriend;
+    const friend: FriendEntity = await this.friendRepository.findFriendById({user_id:user_id, id})
+
+    if (friend && friend.friend_id == updateFriend.friend_id) {
+      return await this.friendRepository.update(id, updateFriend);
     } else {
-      throw new ForbiddenException({
-        statusCode: HttpStatus.FORBIDDEN,
-        message: [`해당하는 친구가 없습니다.`],
-        error: "Forbidden",
+      throw new CustomException({
+        code: ExceptionType.NOT_FOUND, message: "Can't Find Friend"
       });
     }
   }

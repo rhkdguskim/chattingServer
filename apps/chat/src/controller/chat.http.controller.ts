@@ -8,7 +8,7 @@ import {ChatService} from "../providers/chat.service.interface";
 import {CHAT_SERVICE} from "../chat.metadata";
 
 @Controller("chatting")
-@UseGuards(JwtGuard)
+//@UseGuards(JwtGuard)
 @ApiTags("채팅리스트")
 export class ChatHttpController {
   constructor(@Inject(CHAT_SERVICE) private chattingService: ChatService) {}

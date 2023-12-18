@@ -9,7 +9,7 @@ import {
 } from "../authentication.message";
 import { ClientTCP, TcpClientOptions } from "@nestjs/microservices";
 import { lastValueFrom } from "rxjs";
-import { User } from "../entity/users.entity";
+import { UserEntity } from "../entity/users.entity";
 import {AuthenticationService} from "./authentication.service.interface";
 import {CreateUserRequest, LoginUserRequest, UpdateUserRequest} from "@app/authentication/dto/authenticaion.dto";
 
@@ -21,31 +21,31 @@ export class AuthenticationTcpclientService
   constructor(options: TcpClientOptions) {
     this.tcpClientAdaptor = new ClientTCP(options['options']);
   }
-  signIn(payload: LoginUserRequest): Promise<User> {
-    return lastValueFrom<User>(this.tcpClientAdaptor.send<User>({ cmd: SIGN_IN }, payload));
+  signIn(payload: LoginUserRequest): Promise<UserEntity> {
+    return lastValueFrom<UserEntity>(this.tcpClientAdaptor.send<UserEntity>({ cmd: SIGN_IN }, payload));
   }
 
-  signUp(payload: CreateUserRequest): Promise<User> {
-    return lastValueFrom<User>(this.tcpClientAdaptor.send<User>({ cmd: SIGN_UP }, payload));
+  signUp(payload: CreateUserRequest): Promise<UserEntity> {
+    return lastValueFrom<UserEntity>(this.tcpClientAdaptor.send<UserEntity>({ cmd: SIGN_UP }, payload));
   }
 
-  update(payload: UpdateUserRequest): Promise<User> {
-    return lastValueFrom<User>(this.tcpClientAdaptor.send<User>({ cmd: UPDATE_USER }, payload));
+  update(payload: UpdateUserRequest): Promise<UserEntity> {
+    return lastValueFrom<UserEntity>(this.tcpClientAdaptor.send<UserEntity>({ cmd: UPDATE_USER }, payload));
   }
-  delete(payload: number): Promise<User> {
-    return lastValueFrom<User>(this.tcpClientAdaptor.send<User>({ cmd: DELETE_USER }, payload));
+  delete(payload: number): Promise<UserEntity> {
+    return lastValueFrom<UserEntity>(this.tcpClientAdaptor.send<UserEntity>({ cmd: DELETE_USER }, payload));
   }
-  findOne(payload: number): Promise<User> {
-    return lastValueFrom<User>(
-        this.tcpClientAdaptor.send<User>({ cmd: FIND_ONE_USER }, payload)
+  findOne(payload: number): Promise<UserEntity> {
+    return lastValueFrom<UserEntity>(
+        this.tcpClientAdaptor.send<UserEntity>({ cmd: FIND_ONE_USER }, payload)
     );
   }
-  findOneByID(payload: string): Promise<User> {
-    return lastValueFrom<User>(
-        this.tcpClientAdaptor.send<User>({ cmd: FIND_ONE_BY_ID_USER }, payload)
+  findOneByID(payload: string): Promise<UserEntity> {
+    return lastValueFrom<UserEntity>(
+        this.tcpClientAdaptor.send<UserEntity>({ cmd: FIND_ONE_BY_ID_USER }, payload)
     );
   }
-  findAll(): Promise<User[]> {
-    return lastValueFrom<User[]>(this.tcpClientAdaptor.send<User[]>({ cmd: FIND_ALL_USER }, {}));
+  findAll(): Promise<UserEntity[]> {
+    return lastValueFrom<UserEntity[]>(this.tcpClientAdaptor.send<UserEntity[]>({ cmd: FIND_ALL_USER }, {}));
   }
 }

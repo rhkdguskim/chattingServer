@@ -1,9 +1,9 @@
 import {Repository} from "@app/common/interface/repository.interface";
-import {Friend} from "../entity/friend.entity";
+import {FriendEntity} from "../entity/friend.entity";
 import {FindFriendRequest} from "../dto/friend.dto";
 
-export interface FriendRepository extends Repository<Friend> {
-    findFirendById(payload: FindFriendRequest): Promise<Friend>;
+export interface FriendRepository extends Repository<FriendEntity> {
+    findFriendById(payload: FindFriendRequest): Promise<FriendEntity>;
 
-    getMyFriends(id: number): Promise<Friend[]>;
+    getMyFriends(id: number): Promise<FriendEntity[]>;
 }

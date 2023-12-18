@@ -5,7 +5,6 @@ import {InjectRepository} from "@nestjs/typeorm";
 import {Repository} from "typeorm";
 import {ChatRepository} from "@app/chat/repository/chat.repository.interface";
 import { ChattingListRequest } from "../dto/chat.dto";
-import { Chatting } from "../entity/chatting.entity";
 
 @Injectable()
 export class ChatTypeormRepository extends TypeormRepository<ChattingTypeORM> implements ChatRepository {
@@ -15,24 +14,24 @@ export class ChatTypeormRepository extends TypeormRepository<ChattingTypeORM> im
         super(chatRepository);
     }
 
-    async findChattingById(id: number): Promise<Chatting> {
+    async findChattingById(id: number): Promise<ChattingTypeORM> {
         return await this.chatRepository.findOne({
             where: {id},
             relations: ["readBys"],
         });
     }
-    async findChattingByRoomId(id: number): Promise<Chatting[]> {
+    async findChattingByRoomId(id: number): Promise<ChattingTypeORM[]> {
         return await this.chatRepository.find({
             where: {room: {id}},
             relations: ["readBys"],
         });
     }
-    async readChatting(user_id: number, room_id: number): Promise<Chatting[]> {
+    async readChatting(user_id: number, room_id: number): Promise<ChattingTypeORM[]> {
         return await this.chatRepository.find({
             where: {user: {id: user_id}, room: {id: room_id}},
         });
     }
-    async getChattingList(chatListRequest: ChattingListRequest): Promise<Chatting[]> {
+    async getChattingList(chatListRequest: ChattingListRequest): Promise<ChattingTypeORM[]> {
         if ((chatListRequest.cursor as any) == "null") {
             chatListRequest.cursor = 9999999999;
         }
@@ -42,7 +41,7 @@ export class ChatTypeormRepository extends TypeormRepository<ChattingTypeORM> im
         const chatList = await this.chatRepository
             .createQueryBuilder("chatting")
             .where("chat.room_id = :id", {id})
-            .andWhere("chat.id < :cursor", {cursor: cursor}) // 추가된 부분
+            .andWhere("chat.id < :cursor", {cursor: cursor})
             .leftJoinAndSelect("chat.user", "user")
             .select([
                 "chat.id",
@@ -52,8 +51,8 @@ export class ChatTypeormRepository extends TypeormRepository<ChattingTypeORM> im
                 "user.id",
                 "chat.room_id",
             ])
-            .orderBy("chat.id", "DESC") // 정렬 추가
-            .limit(50) // 추가된 부분
+            .orderBy("chat.id", "DESC")
+            .limit(50)
             .getRawMany();
 
         return chatList.reverse();

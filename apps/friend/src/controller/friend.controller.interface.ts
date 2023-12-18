@@ -1,13 +1,13 @@
-import {Friend} from "../entity/friend.entity";
+import {FriendEntity} from "../entity/friend.entity";
 
-import {CreateFriendRequest, CreateFriendResponse, DelteFriendRequest} from "../dto/friend.dto";
+import {CreateFriendRequest, CreateFriendResponse, DeleteFriendRequest, UpdateFriendRequest} from "../dto/friend.dto";
 
 export interface FriendController {
-    FindAllFriends(id: number): Promise<Friend[]>;
+    FindAllFriends(id: number): Promise<CreateFriendResponse[]>
 
-    AddFriend(createFriend: CreateFriendRequest): Promise<CreateFriendResponse>
+    AddFriend(id:number, createFriend: CreateFriendRequest): Promise<CreateFriendResponse>
 
-    updateFriend(payload: CreateFriendRequest): Promise<Friend>
+    updateFriend(id:number, payload: UpdateFriendRequest): Promise<boolean>
 
-    deleteFriend(payload: DelteFriendRequest) : Promise<boolean>;
+    deleteFriend(id:number, payload: DeleteFriendRequest) : Promise<boolean>
 }

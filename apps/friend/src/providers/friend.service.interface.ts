@@ -1,15 +1,15 @@
-import {Friend} from "../entity/friend.entity";
+import {FriendEntity} from "../entity/friend.entity";
 
-import {CreateFriendRequest, CreateFriendResponse, DelteFriendRequest} from "../dto/friend.dto";
+import {CreateFriendRequest, CreateFriendResponse, DeleteFriendRequest, UpdateFriendRequest} from "../dto/friend.dto";
 
 export interface FriendService {
-    getFriends(id: number): Promise<Friend[]>;
+    getFriends(id: number): Promise<FriendEntity[]>;
 
-    getMyFriends(id: number): Promise<Friend[]>;
+    getMyFriends(id: number): Promise<FriendEntity[]>;
 
-    addFriend(createFriend: CreateFriendRequest): Promise<CreateFriendResponse>
+    addFriend(user_id:number, createFriend: CreateFriendRequest): Promise<FriendEntity>
 
-    delFriend(delFriend: DelteFriendRequest): Promise<any>
+    delFriend(user_id:number, delFriend: DeleteFriendRequest): Promise<boolean>
 
-    changeFriendName(createFriend: CreateFriendRequest): Promise<Friend>
+    changeFriendName(user_id:number, createFriend: UpdateFriendRequest): Promise<boolean>
 }

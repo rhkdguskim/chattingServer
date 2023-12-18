@@ -3,12 +3,11 @@ import {
     Body,
     Controller,
     Delete,
-    Get,
-    Inject,
-    NotFoundException,
+    Get, HttpCode, HttpStatus,
+    Inject, NotFoundException,
     Param,
     Post,
-    Put,
+    Put, UseGuards,
     UseInterceptors
 } from "@nestjs/common";
 import {UsersController} from "@app/authentication/controller/authentication.controller.interface";
@@ -17,8 +16,8 @@ import {AuthenticationService} from "@app/authentication/providers/authenticatio
 import {HttpCacheInterceptor} from "@src/common/interceptors/httpcache.interceptor";
 import {CacheEvict} from "@src/common/decorator/cache-decorator";
 import {ApiCreatedResponse, ApiOperation, ApiParam, ApiTags} from "@nestjs/swagger";
-import {CreateUserRequest, UpdateUserRequest, UserResponse} from "@app/authentication/dto/authenticaion.dto";
-import {User} from "@app/authentication/entity/users.entity";
+import {CreateUserRequest, UpdateUserRequest, UserInfoResponse} from "@app/authentication/dto/authenticaion.dto";
+import {SelfGuard} from "@app/authorization/guards/authorization.self.guard";
 
 @Controller('users')
 @ApiTags('Users')
@@ -33,7 +32,7 @@ export class UsersHttpController implements UsersController {
         summary: "전체 사용자 검색",
         description: "전체 사용자를 검색합니다.",
     })
-    findAllUsers(): Promise<User[]> {
+    findAllUsers(): Promise<UserInfoResponse[]> {
         return this.authenticationService.findAll();
     }
 
@@ -46,29 +45,32 @@ export class UsersHttpController implements UsersController {
     })
     @ApiCreatedResponse({
         description: "생성된 사용자 정보를 return 합니다.",
-        type: UserResponse,
+        type: UserInfoResponse,
     })
-    async signUp(@Body() user: CreateUserRequest): Promise<UserResponse> {
+    async signUp(@Body() user: CreateUserRequest): Promise<UserInfoResponse> {
         return await this.authenticationService.signUp(user);
     }
 
+    @UseGuards(SelfGuard)
     @Delete(":id")
     @ApiParam({ name: 'id', type: Number, description: '사용자 ID' })
     @ApiOperation({
         summary: "사용자 삭제",
         description: "사용자를 제거한다.",
     })
-    deleteUser(@Param('id')payload: number): Promise<any> {
-        return this.authenticationService.delete(payload);
+    @HttpCode(HttpStatus.NO_CONTENT)
+    async deleteUser(@Param('id')payload: number): Promise<void> {
+        await this.authenticationService.delete(payload);
     }
 
+    @UseGuards(SelfGuard)
     @Get(":id")
     @ApiParam({ name: 'id', description: '사용자 ID, user_id, id 필드 둘다 가능' })
     @ApiOperation({
         summary: "사용자 ID 검색",
         description: "전체 사용자를 검색합니다.",
     })
-    async findUser(@Param('id') id: string | number): Promise<User> {
+    async findUser(@Param('id') id: string | number): Promise<UserInfoResponse> {
         if (!isNaN(+id)) {
             return await this.authenticationService.findOne(+id);
         } else {
@@ -76,12 +78,14 @@ export class UsersHttpController implements UsersController {
         }
     }
 
-    @Put('')
+    @UseGuards(SelfGuard)
+    @Put(':id')
     @ApiOperation({
         summary: "사용자 수정",
         description: "사용자 정보를 수정합니다.",
     })
-    updateUser(@Body() payload: UpdateUserRequest): Promise<User | boolean> {
-        return this.authenticationService.update(payload);
+    @HttpCode(HttpStatus.NO_CONTENT)
+    async updateUser(@Param('id') id : number, @Body() payload: UpdateUserRequest): Promise<void> {
+        await this.authenticationService.update(id, payload);
     }
 }

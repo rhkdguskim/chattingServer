@@ -1,5 +1,5 @@
 import { Room } from "./room.entity";
-import { User } from "@app/authentication/entity/users.entity";
+import { UserEntity } from "@app/authentication/entity/users.entity";
 import { ReadBy } from "./readby.entity";
 
 export interface Chatting {
@@ -10,6 +10,6 @@ export interface Chatting {
   createdAt: Date;
   updatedAt: Date;
   room: Room;
-  user: User;
+  user: UserEntity;
   readBys: ReadBy[];
 }

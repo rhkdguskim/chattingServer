@@ -5,3 +5,74 @@
 [32m[AuthenticationMicroService][39m [33mInfo[39m	2023-12-17 00:48:55.774 [33m[InstanceLoader][39m [32mAuthenticationServiceModule dependencies initialized[39m - {} [33m+0ms[39m
 [32m[AuthenticationMicroService][39m [33mInfo[39m	2023-12-17 00:48:55.774 [33m[InstanceLoader][39m [32mAuthenticationModule dependencies initialized[39m - {} [33m+0ms[39m
 [32m[AuthenticationMicroService][39m [33mInfo[39m	2023-12-17 00:48:55.779 [33m[NestMicroservice][39m [32mNest microservice successfully started[39m - {} [33m+0ms[39m
+[32m[AuthenticationMicroService][39m [33mInfo[39m	2023-12-18 13:34:10.153 [33m[NestFactory][39m [32mStarting Nest application...[39m - {} [33m+1ms[39m
+[32m[AuthenticationMicroService][39m [33mInfo[39m	2023-12-18 13:34:10.195 [33m[InstanceLoader][39m [32mTypeOrmModule dependencies initialized[39m - {} [33m+1ms[39m
+[32m[AuthenticationMicroService][39m [33mInfo[39m	2023-12-18 13:34:10.234 [33m[InstanceLoader][39m [32mTypeOrmCoreModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[AuthenticationMicroService][39m [33mInfo[39m	2023-12-18 13:34:10.234 [33m[InstanceLoader][39m [32mTypeOrmModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[AuthenticationMicroService][39m [33mInfo[39m	2023-12-18 13:34:10.234 [33m[InstanceLoader][39m [32mAuthenticationServiceModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[AuthenticationMicroService][39m [33mInfo[39m	2023-12-18 13:34:10.235 [33m[InstanceLoader][39m [32mAuthenticationModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[AuthenticationMicroService][39m [33mInfo[39m	2023-12-18 13:34:10.239 [33m[NestMicroservice][39m [32mNest microservice successfully started[39m - {} [33m+0ms[39m
+[32m[AuthenticationMicroService][39m [33mInfo[39m	2023-12-18 13:34:48.349 [33m[NestFactory][39m [32mStarting Nest application...[39m - {} [33m+1ms[39m
+[32m[AuthenticationMicroService][39m [33mInfo[39m	2023-12-18 13:34:48.392 [33m[InstanceLoader][39m [32mJWTModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[AuthenticationMicroService][39m [33mInfo[39m	2023-12-18 13:34:48.392 [33m[InstanceLoader][39m [32mTypeOrmModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[AuthenticationMicroService][39m [33mInfo[39m	2023-12-18 13:34:48.422 [33m[InstanceLoader][39m [32mTypeOrmCoreModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[AuthenticationMicroService][39m [33mInfo[39m	2023-12-18 13:34:48.422 [33m[InstanceLoader][39m [32mTypeOrmModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[AuthenticationMicroService][39m [33mInfo[39m	2023-12-18 13:34:48.423 [33m[InstanceLoader][39m [32mAuthenticationServiceModule dependencies initialized[39m - {} [33m+1ms[39m
+[32m[AuthenticationMicroService][39m [33mInfo[39m	2023-12-18 13:34:48.423 [33m[InstanceLoader][39m [32mAuthenticationModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[AuthenticationMicroService][39m [33mInfo[39m	2023-12-18 13:34:48.429 [33m[NestMicroservice][39m [32mNest microservice successfully started[39m - {} [33m+0ms[39m
+[32m[AuthenticationMicroService][39m [33mInfo[39m	2023-12-18 13:35:38.203 [33m[NestFactory][39m [32mStarting Nest application...[39m - {} [33m+1ms[39m
+[32m[AuthenticationMicroService][39m [33mInfo[39m	2023-12-18 13:35:38.254 [33m[InstanceLoader][39m [32mJWTModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[AuthenticationMicroService][39m [33mInfo[39m	2023-12-18 13:35:38.254 [33m[InstanceLoader][39m [32mTypeOrmModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[AuthenticationMicroService][39m [33mInfo[39m	2023-12-18 13:35:38.292 [33m[InstanceLoader][39m [32mTypeOrmCoreModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[AuthenticationMicroService][39m [33mInfo[39m	2023-12-18 13:35:38.292 [33m[InstanceLoader][39m [32mTypeOrmModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[AuthenticationMicroService][39m [33mInfo[39m	2023-12-18 13:35:38.293 [33m[InstanceLoader][39m [32mAuthenticationServiceModule dependencies initialized[39m - {} [33m+1ms[39m
+[32m[AuthenticationMicroService][39m [33mInfo[39m	2023-12-18 13:35:38.293 [33m[InstanceLoader][39m [32mAuthenticationModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[AuthenticationMicroService][39m [33mInfo[39m	2023-12-18 13:35:38.299 [33m[NestMicroservice][39m [32mNest microservice successfully started[39m - {} [33m+0ms[39m
+[32m[AuthenticationMicroService][39m [33mInfo[39m	2023-12-18 13:36:48.690 [33m[NestFactory][39m [32mStarting Nest application...[39m - {} [33m+1ms[39m
+[32m[AuthenticationMicroService][39m [33mInfo[39m	2023-12-18 13:36:48.739 [33m[InstanceLoader][39m [32mJWTModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[AuthenticationMicroService][39m [33mInfo[39m	2023-12-18 13:36:48.739 [33m[InstanceLoader][39m [32mTypeOrmModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[AuthenticationMicroService][39m [33mInfo[39m	2023-12-18 13:36:48.787 [33m[InstanceLoader][39m [32mTypeOrmCoreModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[AuthenticationMicroService][39m [33mInfo[39m	2023-12-18 13:36:48.787 [33m[InstanceLoader][39m [32mTypeOrmModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[AuthenticationMicroService][39m [33mInfo[39m	2023-12-18 13:36:48.788 [33m[InstanceLoader][39m [32mAuthenticationServiceModule dependencies initialized[39m - {} [33m+1ms[39m
+[32m[AuthenticationMicroService][39m [33mInfo[39m	2023-12-18 13:36:48.788 [33m[InstanceLoader][39m [32mAuthenticationModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[AuthenticationMicroService][39m [33mInfo[39m	2023-12-18 13:36:48.796 [33m[NestMicroservice][39m [32mNest microservice successfully started[39m - {} [33m+0ms[39m
+[32m[AuthenticationMicroService][39m [33mInfo[39m	2023-12-18 13:43:58.989 [33m[NestFactory][39m [32mStarting Nest application...[39m - {} [33m+1ms[39m
+[32m[AuthenticationMicroService][39m [33mInfo[39m	2023-12-18 13:43:59.033 [33m[InstanceLoader][39m [32mTypeOrmModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[AuthenticationMicroService][39m [33mInfo[39m	2023-12-18 13:43:59.033 [33m[InstanceLoader][39m [32mJWTModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[AuthenticationMicroService][39m [33mInfo[39m	2023-12-18 13:43:59.075 [33m[InstanceLoader][39m [32mTypeOrmCoreModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[AuthenticationMicroService][39m [33mInfo[39m	2023-12-18 13:43:59.076 [33m[InstanceLoader][39m [32mTypeOrmModule dependencies initialized[39m - {} [33m+1ms[39m
+[32m[AuthenticationMicroService][39m [33mInfo[39m	2023-12-18 13:43:59.076 [33m[InstanceLoader][39m [32mAuthenticationServiceModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[AuthenticationMicroService][39m [33mInfo[39m	2023-12-18 13:43:59.076 [33m[InstanceLoader][39m [32mAuthenticationModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[AuthenticationMicroService][39m [33mInfo[39m	2023-12-18 13:43:59.082 [33m[NestMicroservice][39m [32mNest microservice successfully started[39m - {} [33m+0ms[39m
+[32m[AuthenticationMicroService][39m [33mInfo[39m	2023-12-18 13:45:23.077 [33m[NestFactory][39m [32mStarting Nest application...[39m - {} [33m+1ms[39m
+[32m[AuthenticationMicroService][39m [33mInfo[39m	2023-12-18 13:45:23.137 [33m[InstanceLoader][39m [32mTypeOrmModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[AuthenticationMicroService][39m [33mInfo[39m	2023-12-18 13:45:23.137 [33m[InstanceLoader][39m [32mJWTModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[AuthenticationMicroService][39m [33mInfo[39m	2023-12-18 13:45:23.193 [33m[InstanceLoader][39m [32mTypeOrmCoreModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[AuthenticationMicroService][39m [33mInfo[39m	2023-12-18 13:45:23.193 [33m[InstanceLoader][39m [32mTypeOrmModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[AuthenticationMicroService][39m [33mInfo[39m	2023-12-18 13:45:23.194 [33m[InstanceLoader][39m [32mAuthenticationServiceModule dependencies initialized[39m - {} [33m+1ms[39m
+[32m[AuthenticationMicroService][39m [33mInfo[39m	2023-12-18 13:45:23.194 [33m[InstanceLoader][39m [32mAuthenticationModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[AuthenticationMicroService][39m [33mInfo[39m	2023-12-18 13:45:23.201 [33m[NestMicroservice][39m [32mNest microservice successfully started[39m - {} [33m+0ms[39m
+[32m[AuthenticationMicroService][39m [33mInfo[39m	2023-12-18 13:45:26.137 [33m[NestFactory][39m [32mStarting Nest application...[39m - {} [33m+1ms[39m
+[32m[AuthenticationMicroService][39m [33mInfo[39m	2023-12-18 13:45:26.167 [33m[InstanceLoader][39m [32mTypeOrmModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[AuthenticationMicroService][39m [33mInfo[39m	2023-12-18 13:45:26.167 [33m[InstanceLoader][39m [32mJWTModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[AuthenticationMicroService][39m [33mInfo[39m	2023-12-18 13:45:26.199 [33m[InstanceLoader][39m [32mTypeOrmCoreModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[AuthenticationMicroService][39m [33mInfo[39m	2023-12-18 13:45:26.200 [33m[InstanceLoader][39m [32mTypeOrmModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[AuthenticationMicroService][39m [33mInfo[39m	2023-12-18 13:45:26.200 [33m[InstanceLoader][39m [32mAuthenticationServiceModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[AuthenticationMicroService][39m [33mInfo[39m	2023-12-18 13:45:26.200 [33m[InstanceLoader][39m [32mAuthenticationModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[AuthenticationMicroService][39m [33mInfo[39m	2023-12-18 13:45:26.205 [33m[NestMicroservice][39m [32mNest microservice successfully started[39m - {} [33m+0ms[39m
+[32m[AuthenticationMicroService][39m [33mInfo[39m	2023-12-18 13:45:38.867 [33m[NestFactory][39m [32mStarting Nest application...[39m - {} [33m+0ms[39m
+[32m[AuthenticationMicroService][39m [33mInfo[39m	2023-12-18 13:45:38.913 [33m[InstanceLoader][39m [32mTypeOrmModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[AuthenticationMicroService][39m [33mInfo[39m	2023-12-18 13:45:38.913 [33m[InstanceLoader][39m [32mJWTModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[AuthenticationMicroService][39m [33mInfo[39m	2023-12-18 13:45:38.941 [33m[InstanceLoader][39m [32mTypeOrmCoreModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[AuthenticationMicroService][39m [33mInfo[39m	2023-12-18 13:45:38.942 [33m[InstanceLoader][39m [32mTypeOrmModule dependencies initialized[39m - {} [33m+1ms[39m
+[32m[AuthenticationMicroService][39m [33mInfo[39m	2023-12-18 13:45:38.942 [33m[InstanceLoader][39m [32mAuthenticationServiceModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[AuthenticationMicroService][39m [33mInfo[39m	2023-12-18 13:45:38.942 [33m[InstanceLoader][39m [32mAuthenticationModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[AuthenticationMicroService][39m [33mInfo[39m	2023-12-18 13:45:38.947 [33m[NestMicroservice][39m [32mNest microservice successfully started[39m - {} [33m+0ms[39m
+[32m[AuthenticationMicroService][39m [33mInfo[39m	2023-12-18 13:45:50.343 [33m[NestFactory][39m [32mStarting Nest application...[39m - {} [33m+1ms[39m
+[32m[AuthenticationMicroService][39m [33mInfo[39m	2023-12-18 13:45:50.383 [33m[InstanceLoader][39m [32mTypeOrmModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[AuthenticationMicroService][39m [33mInfo[39m	2023-12-18 13:45:50.383 [33m[InstanceLoader][39m [32mJWTModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[AuthenticationMicroService][39m [33mInfo[39m	2023-12-18 13:45:50.432 [33m[InstanceLoader][39m [32mTypeOrmCoreModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[AuthenticationMicroService][39m [33mInfo[39m	2023-12-18 13:45:50.433 [33m[InstanceLoader][39m [32mTypeOrmModule dependencies initialized[39m - {} [33m+1ms[39m
+[32m[AuthenticationMicroService][39m [33mInfo[39m	2023-12-18 13:45:50.433 [33m[InstanceLoader][39m [32mAuthenticationServiceModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[AuthenticationMicroService][39m [33mInfo[39m	2023-12-18 13:45:50.433 [33m[InstanceLoader][39m [32mAuthenticationModule dependencies initialized[39m - {} [33m+0ms[39m
+[32m[AuthenticationMicroService][39m [33mInfo[39m	2023-12-18 13:45:50.439 [33m[NestMicroservice][39m [32mNest microservice successfully started[39m - {} [33m+0ms[39m

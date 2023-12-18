@@ -16,7 +16,7 @@ import {
 import { lastValueFrom } from "rxjs";
 import {RoomTypeORM} from "@app/common/typeorm/entity/room.typeorm.entity";
 import {ParticipantTypeORM} from "@app/common/typeorm/entity/participant.typeorm.entity";
-import {UserTypeORM} from "@app/authentication/entity/users.typeorm.entity";
+import {UserTypeORM} from "@app/common/typeorm/entity/users.typeorm.entity";
 import {RoomService} from "./room.service.interface";
 
 export class RoomTCPClientService implements RoomService {

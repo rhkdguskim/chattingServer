@@ -1,51 +1,60 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { Repository } from "typeorm";
-import { Friend } from "../entity/friend.entity";
+import { Repository} from "typeorm";
+import { FriendEntity } from "../entity/friend.entity";
 import {FindFriendRequest} from "../dto/friend.dto";
 import {FriendRepository} from "./friend.repository.interface";
 import {FriendTypeORM} from "@app/common/typeorm/entity/friend.typeorm.entity";
+import {TypeormRepository} from "@app/common/typeorm/typeormrepository";
+import {UserTypeORM} from "@app/common/typeorm/entity/users.typeorm.entity";
+import {CustomException, ExceptionType} from "@app/common/exception/custom.exception";
 
 @Injectable()
-export class FriendTypeORMRepository implements FriendRepository {
+export class FriendTypeORMRepository extends TypeormRepository<FriendEntity>implements FriendRepository {
   constructor(
     @InjectRepository(FriendTypeORM)
-    private friendRepository: Repository<FriendTypeORM>
-  ) {}
-    findFirendById(payload: FindFriendRequest): Promise<Friend> {
-        return this.friendRepository.findOne({where: {
+    private friendRepository: Repository<FriendTypeORM>,
+    @InjectRepository(UserTypeORM)
+    private  readonly userRepository : Repository<UserTypeORM>
+  ) {
+    super(friendRepository)
+  }
+    async findFriendById(payload: FindFriendRequest): Promise<FriendEntity> {
+      const result = await this.friendRepository.findOne({where: {
+          user : {id : payload.user_id},
           id : payload.id,
-          friend_id : payload.friend_id,
         }})
+        return new FriendEntity(result)
     }
 
-    getMyFriends(id: number): Promise<Friend[]> {
-        return this.friendRepository.find({
-          where : {
-            id
-          }
+    async getMyFriends(id: number): Promise<FriendEntity[]> {
+      const friends = await this.friendRepository.find({
+        where : {
+          user : {id}
+        }
+      })
+        return friends.map((friend) => {
+          return new FriendEntity(friend)
         })
     }
 
-  create(data: Partial<Friend>): Promise<Friend> {
-    return this.friendRepository.save(data);
+  async create(data: Partial<FriendEntity>): Promise<FriendEntity> {
+    const user = await this.userRepository.findOneBy({id : data.friend_id});
+
+    if (!user) {
+      throw new CustomException({code: ExceptionType.NOT_FOUND, message: "유저를 찾을 수 없습니다."});
+    }
+    return new FriendEntity(await super.create(data))
   }
 
-  findAll(): Promise<Friend[]> {
-    return this.friendRepository.find();
+  async findAll(): Promise<FriendEntity[]> {
+    const friends = await super.findAll()
+    return friends.map((friend) => {
+      return new FriendEntity(friend)
+    })
   }
   
-  findOne(id: number): Promise<Friend> {
-    return this.friendRepository.findOneBy({ id });
-  }
-
-  async update(id: string | number, data: Partial<Friend>): Promise<boolean> {
-    const result = await this.friendRepository.update(id, data);
-    return result.affected >= 1;
-  }
-
-  async delete(id: string | number): Promise<boolean> {
-    const result =  await this.friendRepository.delete(id);
-    return result.affected >= 1;
+  async findOne(id: number): Promise<FriendEntity> {
+    return new FriendEntity(await this.friendRepository.findOneBy({ id }));
   }
 }

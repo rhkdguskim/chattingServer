@@ -27,7 +27,7 @@ export class OauthServiceFactory {
       return this.OauthServices.get(key);
     } else {
       throw new CustomException({
-        code: ExceptionType.AUTHENTICATION_ERROR,
+        code: ExceptionType.AUTHENTICATION,
         message: `There is no Instance name of ${key}`,
       });
     }

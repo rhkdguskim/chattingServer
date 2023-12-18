@@ -9,11 +9,11 @@ import {
   OneToMany,
 } from "typeorm";
 import { RoomTypeORM } from "@app/common/typeorm/entity/room.typeorm.entity";
-import { UserTypeORM } from "@app/authentication/entity/users.typeorm.entity";
+import { UserTypeORM } from "@app/common/typeorm/entity/users.typeorm.entity";
 import { ReadByTypeORM } from "@app/common/typeorm/entity/readby.typeorm.entity";
-import { Chatting } from "../../../../../apps/chat/src/entity/chatting.entity";
+import { Chatting } from "@app/chat/entity/chatting.entity";
 
-@Entity({ name: "Chatting" })
+@Entity({ name: "chat" })
 export class ChattingTypeORM implements Chatting {
   @PrimaryGeneratedColumn()
   id!: number;

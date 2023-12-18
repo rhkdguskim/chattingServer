@@ -5,14 +5,12 @@ import {
   OneToMany,
   CreateDateColumn,
   UpdateDateColumn,
-  Unique,
-  Generated,
 } from "typeorm";
 import { ParticipantTypeORM } from "@app/common/typeorm/entity/participant.typeorm.entity";
 import { ChattingTypeORM } from "./chatting.typeorm.entity";
-import { Room } from "../../../../../apps/chat/src/entity/room.entity";
+import { Room } from "@app/chat/entity/room.entity";
 
-@Entity({ name: "Room" })
+@Entity({ name: "room" })
 export class RoomTypeORM implements Room {
   @PrimaryGeneratedColumn()
   id!: number;

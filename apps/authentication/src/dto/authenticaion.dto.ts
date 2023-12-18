@@ -1,16 +1,16 @@
-import {IsNumber, IsString, Matches} from "class-validator";
+import {IsString, Matches} from "class-validator";
 import {ApiProperty} from "@nestjs/swagger";
 
 export class CreateUserRequest {
     @IsString()
-    @ApiProperty({description: "아이디"})
+    @ApiProperty({description: "User ID"})
     user_id: string;
 
-    @ApiProperty({description: "이름"})
+    @ApiProperty({description: "User Name"})
     @IsString()
     name: string;
 
-    @ApiProperty({description: "비밀번호"})
+    @ApiProperty({description: "Password"})
     @Matches(/^(?=.*[a-zA-Z])(?=.*[0-9]).*$/, {
         message: "비밀번호는 반드시 문자와 숫자 조합으로 이루어져야 합니다.",
     })
@@ -20,33 +20,16 @@ export class CreateUserRequest {
     refresh_token?: string;
 }
 
-export class LoginUserRequest {
-    @IsString()
-    @ApiProperty({description: "아이디"})
-    user_id: string;
+export class UserInfoResponse {
+    constructor(user : UserInfoResponse) {
+        this.id = user.id;
+        this.name = user.name
+        this.user_id = user.user_id
+        this.status_msg = user.status_msg
+        this.profile_img_url = user.profile_img_url
+        this.background_img_url = user.background_img_url
+    }
 
-    @ApiProperty({description: "비밀번호"})
-    @Matches(/^(?=.*[a-zA-Z])(?=.*[0-9]).*$/, {
-        message: "비밀번호는 반드시 문자와 숫자 조합으로 이루어져야 합니다.",
-    })
-    password: string;
-}
-
-export class LoginUserResponse {
-    @IsString()
-    @ApiProperty({description: "Access 토큰"})
-    access_token: string;
-
-    @ApiProperty({description: "Refresh 토큰"})
-    refresh_token: string;
-}
-
-export interface NewTokenRequest {
-    refresh_token: string;
-    user_id: number;
-}
-
-export class UserResponse {
     @ApiProperty({description: "유저 ID"})
     id!: number;
 
@@ -66,6 +49,31 @@ export class UserResponse {
     background_img_url: string;
 }
 
+export class LoginUserRequest {
+    @IsString()
+    @ApiProperty({description: "User ID"})
+    user_id: string;
+
+    @ApiProperty({description: "User Password"})
+    @Matches(/^(?=.*[a-zA-Z])(?=.*[0-9]).*$/, {
+        message: "비밀번호는 반드시 문자와 숫자 조합으로 이루어져야 합니다.",
+    })
+    password: string;
+}
+
+export class LoginUserResponse {
+    constructor(loginUserResponse : LoginUserResponse) {
+        Object.assign(this, loginUserResponse)
+    }
+
+    @IsString()
+    @ApiProperty({description: "Access Token"})
+    access_token: string;
+
+    @ApiProperty({description: "Refresh Token"})
+    refresh_token: string;
+}
+
 export class UpdateUserRequest {
     @ApiProperty({description: "아이디"})
     user_id!: string;
@@ -81,13 +89,4 @@ export class UpdateUserRequest {
 
     @ApiProperty({description: "배경화면 URL"})
     background_img_url: string;
-}
-
-export class refreshtokenRequest {
-    @ApiProperty({description: "refresh token"})
-    @IsString()
-    refresh_token: string;
-
-    @IsNumber()
-    id: number;
 }

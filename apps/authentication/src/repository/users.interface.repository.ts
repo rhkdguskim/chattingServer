@@ -1,7 +1,7 @@
 import {Repository} from "@app/common/interface/repository.interface";
-import {User} from "../entity/users.entity";
+import {UserEntity} from "../entity/users.entity";
 
-export interface UserRepository extends Repository<User> {
-    findOneByID(user_id: string): Promise<User>;
-    findOne(id:number) : Promise<User>
+export interface UserRepository extends Repository<UserEntity> {
+    findOneByID(user_id: string): Promise<UserEntity>;
+    findOne(id:number) : Promise<UserEntity>
 }

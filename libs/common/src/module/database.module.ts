@@ -1,5 +1,5 @@
 import * as config from "config";
-import {UserTypeORM} from "@app/authentication/entity/users.typeorm.entity";
+import {UserTypeORM} from "@app/common/typeorm/entity/users.typeorm.entity";
 import {FriendTypeORM} from "@app/common/typeorm/entity/friend.typeorm.entity";
 import {ChattingTypeORM} from "@app/common/typeorm/entity/chatting.typeorm.entity";
 import {RoomTypeORM} from "@app/common/typeorm/entity/room.typeorm.entity";

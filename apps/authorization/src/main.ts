@@ -3,15 +3,12 @@ import { AuthorizationModule } from "./module/authorization.module";
 import { MicroserviceOptions, Transport } from "@nestjs/microservices";
 import { LoggingInterceptor } from "@app/common/interceptor";
 import { Logger } from "@nestjs/common";
-import { utilities, WinstonModule } from "nest-winston";
-import * as winston from "winston";
 import {
   AUTHORIZAION_HOST,
   AUTHORIZAION_PORT,
   LOGLEVEL,
 } from "@app/common/config";
 import winstonLogger from "@app/common/logger/nestwinstonlogger";
-import {AUTHORIZATION_SERVICE} from "./authorization.metadata";
 
 async function bootstrap() {
   const app = await NestFactory.createMicroservice<MicroserviceOptions>(

@@ -9,11 +9,11 @@ import {
   PrimaryColumn,
 } from "typeorm";
 import { RoomTypeORM } from "@app/common/typeorm/entity/room.typeorm.entity";
-import { UserTypeORM } from "../../../../../apps/authentication/src/entity/users.typeorm.entity";
-import { Participant } from "../../../../../apps/chat/src/entity/participant.entity";
+import { UserTypeORM } from "@app/common/typeorm/entity/users.typeorm.entity";
+import { Participant } from "@app/chat/entity/participant.entity";
 
 // 유저와 방의 Join Table
-@Entity({ name: "Participant" })
+@Entity({ name: "participant" })
 export class ParticipantTypeORM implements Participant {
   @PrimaryGeneratedColumn()
   id!: number;

@@ -1,9 +1,9 @@
 
-import {User} from "../entity/users.entity";
+import {UserEntity} from "../entity/users.entity";
 import {
     CreateUserRequest,
     LoginUserRequest,
-    LoginUserResponse, UpdateUserRequest, UserResponse
+    LoginUserResponse, UpdateUserRequest, UserInfoResponse
 } from "@app/authentication/dto/authenticaion.dto";
 
 export interface AuthenticationController {
@@ -11,13 +11,13 @@ export interface AuthenticationController {
 }
 
 export interface UsersController {
-    signUp(payload: CreateUserRequest): Promise<UserResponse>;
+    signUp(payload: CreateUserRequest): Promise<UserInfoResponse>;
 
-    updateUser(payload: UpdateUserRequest): Promise<User | boolean>;
+    updateUser(id:number, payload: UpdateUserRequest): Promise<void>;
 
-    deleteUser(payload: number): Promise<any>;
+    deleteUser(payload: number): Promise<void>;
 
-    findUser(payload: number): Promise<User>;
+    findUser(payload: number): Promise<UserInfoResponse>;
 
-    findAllUsers(): Promise<User[]>;
+    findAllUsers(): Promise<UserInfoResponse[]>;
 }

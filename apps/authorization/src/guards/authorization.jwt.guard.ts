@@ -9,6 +9,7 @@ import {
 import { Request } from "express";
 import {AuthorizationService} from "@app/authorization/providers/authorization.service.interface";
 import {AUTHORIZATION_SERVICE} from "@app/authorization/authorization.metadata";
+import {CustomException, ExceptionType} from "@app/common/exception/custom.exception";
 
 
 @Injectable()
@@ -24,10 +25,17 @@ export class JwtGuard implements CanActivate {
       const authToken: string = request.headers["authentication"] as string;
 
       if (!authToken && typeof authToken !== "string") {
-        throw new UnauthorizedException("토큰이 만료되었습니다.");
+          throw new CustomException({
+              code: ExceptionType.AUTHORIZATION, message: `Token is NULL`
+          });
       }
-      request.user = this.authService.verify(authToken);
-
+      try {
+          request.user = await this.authService.verify(authToken);
+      } catch (e) {
+          throw new CustomException({
+              code: ExceptionType.AUTHORIZATION, message: `Invalided Token`
+          });
+      }
       return true;
   }
 }

@@ -7,27 +7,29 @@ import {
   Body,
   Delete,
   Param,
-  Inject,
+  Inject, ParseIntPipe,
 } from "@nestjs/common";
 
 import {
   ApiTags,
   ApiOperation,
   ApiCreatedResponse,
-  ApiBasicAuth,
   ApiSecurity,
 } from "@nestjs/swagger";
 import { JwtGuard } from "@app/authorization/guards/authorization.jwt.guard";
 
 import { FRIEND_SERVICE } from "../friend.message";
-import { Friend } from "../entity/friend.entity";
+import { FriendEntity } from "../entity/friend.entity";
 
 import {FriendService} from "../providers/friend.service.interface";
 import {FriendController} from "./friend.controller.interface";
-import {CreateFriendRequest, CreateFriendResponse, DelteFriendRequest} from "../dto/friend.dto";
+import {CreateFriendRequest, CreateFriendResponse, DeleteFriendRequest, UpdateFriendRequest} from "../dto/friend.dto";
+import {Roles, RolesGuard} from "@app/authorization/guards/authorization.role.guard";
+import {Role} from "@app/authentication/entity/users.entity";
+import {SelfGuard} from "@app/authorization/guards/authorization.self.guard";
 
 @Controller("friend")
-@UseGuards(JwtGuard)
+@UseGuards(JwtGuard, RolesGuard, SelfGuard)
 @ApiSecurity("authentication")
 @ApiTags("친구")
 export class FriendHttpController implements FriendController {
@@ -36,6 +38,7 @@ export class FriendHttpController implements FriendController {
     private friendService: FriendService) {}
 
   @Get(":id")
+  @Roles(Role.USER)
   @ApiOperation({
     summary: "친구 목록 가져오기 API",
     description: "친구 목록을 가져온다.",
@@ -43,7 +46,7 @@ export class FriendHttpController implements FriendController {
   @ApiCreatedResponse({
     description: "사용자가 등록한 등록된 친구 목록을 가져옵니다.",
   })
-  async FindAllFriends(@Param("id") id: number): Promise<Friend[]> {
+  async FindAllFriends(@Param("id", ParseIntPipe) id: number): Promise<CreateFriendResponse[]> {
     return this.friendService.getMyFriends(id);
   }
 
@@ -58,9 +61,10 @@ export class FriendHttpController implements FriendController {
   })
   @ApiCreatedResponse({ description: "새로운 친구를 추가합니다." })
   async AddFriend(
+      @Param("id", ParseIntPipe) id : number,
     @Body() createFriend: CreateFriendRequest
   ): Promise<CreateFriendResponse> {
-    return this.friendService.addFriend(createFriend);
+    return await this.friendService.addFriend(id, createFriend);
   }
 
   @Put(":id")
@@ -68,15 +72,12 @@ export class FriendHttpController implements FriendController {
     summary: "친구 이름 변경하기 API",
     description: "등록된 친구중 친구정보를 변경합니다.",
   })
-  @ApiCreatedResponse({
-    description: "친구 정보를 변경합니다.",
-    type: CreateFriendResponse,
-  })
   @ApiCreatedResponse({ description: "등록된 친구중 친구정보를 변경합니다." })
   async updateFriend(
-    @Body() createFriend: CreateFriendRequest
-  ): Promise<Friend> {
-    return this.friendService.changeFriendName(createFriend);
+      @Param("id", ParseIntPipe) id : number,
+    @Body() createFriend: UpdateFriendRequest
+  ): Promise<boolean> {
+    return this.friendService.changeFriendName(id, createFriend);
   }
 
   @Delete(":id")
@@ -85,7 +86,9 @@ export class FriendHttpController implements FriendController {
     description: "등록된 친구중 친구를 삭제합니다.",
   })
   @ApiCreatedResponse({ description: "등록된 친구중 친구를 삭제합니다." })
-  async deleteFriend(@Body() delFriend: DelteFriendRequest): Promise<any> {
-    return this.friendService.delFriend(delFriend);
+  async deleteFriend(
+      @Param("id", ParseIntPipe) id : number,
+      @Body() delFriend: DeleteFriendRequest): Promise<any> {
+    return this.friendService.delFriend(id, delFriend);
   }
 }

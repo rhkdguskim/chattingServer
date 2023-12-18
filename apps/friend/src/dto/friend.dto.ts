@@ -1,9 +1,10 @@
 import {IsNumber, IsString} from "class-validator";
 import {ApiProperty} from "@nestjs/swagger";
+import {FriendEntity} from "@app/friend/entity/friend.entity";
 
-export interface FindFriendRequest {
-    id: number,
-    friend_id: number,
+export class FindFriendRequest {
+    id: number;
+    user_id: number;
 }
 
 export class FindFriendAllRequest {
@@ -13,18 +14,38 @@ export class FindFriendAllRequest {
 
 export class CreateFriendRequest {
     @IsNumber()
-    id: number;
-
-    @IsNumber()
-    @ApiProperty({description: "친구 아이디"})
+    @ApiProperty({description: "Friend ID"})
     friend_id: number;
 
-    @ApiProperty({description: "친구 이름"})
+    @ApiProperty({description: "Friend Name"})
+    @IsString()
+    friend_name: string;
+}
+
+export class UpdateFriendRequest {
+    @IsNumber()
+    @ApiProperty({description: "Friend Unique ID"})
+    id : number;
+
+    @IsNumber()
+    @ApiProperty({description: "Friend ID"})
+    friend_id: number;
+
+    @ApiProperty({description: "Friend Name"})
     @IsString()
     friend_name: string;
 }
 
 export class CreateFriendResponse {
+    constructor(friend : FriendEntity) {
+        this.id = friend.id
+        this.friend_id = friend.friend_id;
+        this.friend_name = friend.friend_name;
+    }
+    @IsNumber()
+    @ApiProperty({description: "ID"})
+    id : number;
+
     @IsNumber()
     @ApiProperty({description: "친구 아이디"})
     friend_id: number;
@@ -34,9 +55,10 @@ export class CreateFriendResponse {
     friend_name: string;
 }
 
-export class DelteFriendRequest {
+export class DeleteFriendRequest {
     @IsNumber()
-    id: number;
+    @ApiProperty({description: "Friend Unique ID"})
+    id : number;
 
     @IsNumber()
     @ApiProperty({description: "친구 아이디"})

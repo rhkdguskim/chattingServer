@@ -1,11 +1,13 @@
 /*
 https://docs.nestjs.com/exception-filters#custom-exceptions
 */
-import { RpcException } from "@nestjs/microservices";
 
 export enum ExceptionType {
-  AUTHENTICATION_ERROR = "인증에러",
-  AUTHORIZATION_ERROR = "인가에러",
+  AUTHENTICATION = 1,
+  AUTHORIZATION = 2,
+  NOT_FOUND = 3,
+  ALREADY_EXIST = 4,
+  FORBIDDEN = 5,
 }
 
 export interface CustomExceptionMessage {
@@ -15,9 +17,11 @@ export interface CustomExceptionMessage {
 
 export class CustomException extends Error {
   private readonly msg: CustomExceptionMessage;
+  private readonly code : ExceptionType;
   constructor(msg: CustomExceptionMessage) {
     super();
     this.msg = msg;
+    this.code = msg.code;
   }
 
   getMessage(): string {
@@ -26,5 +30,9 @@ export class CustomException extends Error {
 
   getError(): CustomExceptionMessage {
     return this.msg;
+  }
+
+  getCode() : ExceptionType {
+    return this.msg.code;
   }
 }

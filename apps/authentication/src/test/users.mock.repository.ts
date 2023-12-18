@@ -1,10 +1,10 @@
-import { User } from "../entity/users.entity";
+import { UserEntity } from "../entity/users.entity";
 
 import {UserRepository} from "../repository/users.interface.repository";
 
 export class UserMockRepository implements UserRepository {
-  findOneByID(user_id: string): Promise<User> {
-    const mockUser: User = {
+  findOneByID(user_id: string): Promise<UserEntity> {
+    const mockUser: UserEntity = {
       id: 1,
       name: "Mock User",
       user_id,
@@ -23,8 +23,8 @@ export class UserMockRepository implements UserRepository {
 
     return Promise.resolve(mockUser);
   }
-  create(data: Partial<User>): Promise<User> {
-    const mockData: User = {
+  create(data: Partial<UserEntity>): Promise<UserEntity> {
+    const mockData: UserEntity = {
       id: 0,
       user_id: "",
       password: "",
@@ -43,12 +43,12 @@ export class UserMockRepository implements UserRepository {
 
     return Promise.resolve(mockData);
   }
-  findAll(): Promise<User[]> {
+  findAll(): Promise<UserEntity[]> {
     throw new Error("Method not implemented.");
   }
-  findOne(id: string | number): Promise<User> {
+  findOne(id: string | number): Promise<UserEntity> {
     const number_id = id as number;
-    const mockUser: User = {
+    const mockUser: UserEntity = {
       id: number_id,
       name: "Mock User",
       user_id: "MockUserID",
@@ -67,7 +67,7 @@ export class UserMockRepository implements UserRepository {
 
     return Promise.resolve(mockUser);
   }
-  update(id: string | number, data: Partial<User>): Promise<boolean | User> {
+  update(id: string | number, data: Partial<UserEntity>): Promise<boolean | UserEntity> {
     throw new Error("Method not implemented.");
   }
   delete(id: string | number): Promise<boolean> {

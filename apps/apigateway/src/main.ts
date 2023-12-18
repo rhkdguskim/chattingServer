@@ -7,6 +7,7 @@ import { LoggingInterceptor } from "./common/interceptors/logging.interceptor";
 import { Logger, ValidationPipe } from "@nestjs/common";
 import { MAIN_PORT } from "@app/common/config";
 import winstonLogger, {winstonLoggerConfig} from "@app/common/logger/nestwinstonlogger";
+import { CustomExceptionFilter } from "@app/common/exception/exception.filter";
 
 async function bootstrap() {
   const loggerConfig : winstonLoggerConfig = {
@@ -37,6 +38,7 @@ async function bootstrap() {
     })
   );
   setupSwagger(app);
+  app.useGlobalFilters(new CustomExceptionFilter());
   await app.listen(MAIN_PORT);
 }
 bootstrap();

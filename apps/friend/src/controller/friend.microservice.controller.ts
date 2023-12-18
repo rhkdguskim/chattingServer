@@ -7,10 +7,16 @@ import {
   FRIEND_SERVICE,
   UPDATE_FRIEND,
 } from "../friend.message";
-import { Friend } from "../entity/friend.entity";
+import { FriendEntity } from "../entity/friend.entity";
 import {FriendService} from "../providers/friend.service.interface";
 import {FriendController} from "./friend.controller.interface";
-import {CreateFriendRequest, CreateFriendResponse, DelteFriendRequest, FindFriendAllRequest} from "../dto/friend.dto";
+import {
+  CreateFriendRequest,
+  CreateFriendResponse,
+  DeleteFriendRequest,
+  FindFriendAllRequest,
+  UpdateFriendRequest
+} from "../dto/friend.dto";
 
 @Controller()
 export class FriendMicroserviceController implements FriendController {
@@ -20,22 +26,22 @@ export class FriendMicroserviceController implements FriendController {
     private readonly friendService: FriendService) {}
 
   @MessagePattern({ cmd: FIND_ALL_FRIEND })
-    FindAllFriends(id: number): Promise<Friend[]> {
+    FindAllFriends(id: number): Promise<FriendEntity[]> {
     return this.friendService.getFriends(id);
     }
 
   @MessagePattern({ cmd: ADD_FRIEND })
-    AddFriend(createFriend: CreateFriendRequest): Promise<CreateFriendResponse> {
-    return this.friendService.addFriend(createFriend);
+    AddFriend(id : number, createFriend: CreateFriendRequest): Promise<CreateFriendResponse> {
+    return this.friendService.addFriend(id, createFriend);
     }
 
   @MessagePattern({ cmd: UPDATE_FRIEND })
-  async updateFriend(payload: CreateFriendRequest): Promise<Friend> {
-    return await this.friendService.changeFriendName(payload);
+  updateFriend(id:number, payload: UpdateFriendRequest): Promise<boolean> {
+    return this.friendService.changeFriendName(id, payload);
   }
 
   @MessagePattern({ cmd: DELETE_FRIEND })
-  async deleteFriend(payload: DelteFriendRequest) {
-    return await this.friendService.delFriend(payload);
+  async deleteFriend(id:number, payload: DeleteFriendRequest):Promise<boolean> {
+    return await this.friendService.delFriend(id, payload);
   }
 }

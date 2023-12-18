@@ -7,7 +7,7 @@ import {
 } from "../authorization.metadata";
 import { AuthorizationLocalService } from "../providers/authorization.local.service";
 import { JwtService } from "@nestjs/jwt";
-import { JWT_EXPIREIN, JWT_SECRET } from "@app/common/config";
+import { JWT_EXPIRE_IN, JWT_SECRET } from "@app/common/config";
 import { HttpService } from "@nestjs/axios";
 import axios from "axios";
 import {
@@ -15,6 +15,7 @@ import {
   OauthServiceFactory,
 } from "../providers/oauth.factory.service";
 import { KakaoOAuthService } from "../providers/oauth.service";
+import {JwtModule} from "@app/common/auth/jwtModule";
 
 export interface AuthorizationServiceModuleConfig {
   isDev: boolean;
@@ -26,16 +27,8 @@ export class AuthorizationServiceModule {
   static forRoot(config: AuthorizationServiceModuleConfig): DynamicModule {
     const module : DynamicModule = {
       module: AuthorizationServiceModule,
-      imports: [],
+      imports: [JwtModule],
       providers: [
-        {
-            provide: JWT_SERVICE,
-            useValue: new JwtService({
-              global: true,
-              secret: JWT_SECRET,
-              signOptions: { expiresIn: JWT_EXPIREIN },
-            }),
-        },
         {
             provide: OAUTH_FACTORY_SERVICE,
             useFactory: (kakaoService) => {

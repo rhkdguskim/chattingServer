@@ -13,15 +13,11 @@ import {RoomLocalService} from "./providers/room.local.service";
 import {
   CHAT_REPOSITORY,
   CHAT_SERVICE,
-  PARTICIPANT_REPOSITORY,
-  PARTICIPANT_SERVICE,
   ROOM_REPOSITORY,
   ROOM_SERVICE
 } from "./chat.metadata";
 import {ChatTypeormRepository} from "@app/chat/repository/chat.typeorm.repository";
-import {RoomTypeormRepository} from "@app/chat/repository/room.typeorm.repository";
-import {ParticipantTypeormRepository} from "@app/chat/repository/participant.typeorm.repository";
-import {ParticipantLocalService} from "@app/chat/providers/participant.local.service";
+import {RoomTypeormTransactionRepository} from "@app/chat/repository/room.typeorm.transaction";
 
 @Module({
   imports: [
@@ -35,15 +31,7 @@ import {ParticipantLocalService} from "@app/chat/providers/participant.local.ser
     },
     {
       provide : ROOM_REPOSITORY,
-      useClass : RoomTypeormRepository,
-    },
-    {
-      provide : PARTICIPANT_REPOSITORY,
-      useClass : ParticipantTypeormRepository,
-    },
-    {
-      provide : PARTICIPANT_SERVICE,
-      useClass : ParticipantLocalService,
+      useClass : RoomTypeormTransactionRepository,
     },
     {
       provide : CHAT_SERVICE,
