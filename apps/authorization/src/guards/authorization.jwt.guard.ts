@@ -9,7 +9,7 @@ import {
 import { Request } from "express";
 import {AuthorizationService} from "@app/authorization/providers/authorization.service.interface";
 import {AUTHORIZATION_SERVICE} from "@app/authorization/authorization.metadata";
-import {CustomException, ExceptionType} from "@app/common/exception/custom.exception";
+import {ChatServerException, ChatServerExceptionCode} from "@app/common/exception/chatServerException";
 
 
 @Injectable()
@@ -25,15 +25,15 @@ export class JwtGuard implements CanActivate {
       const authToken: string = request.headers["authentication"] as string;
 
       if (!authToken && typeof authToken !== "string") {
-          throw new CustomException({
-              code: ExceptionType.AUTHORIZATION, message: `Token is NULL`
+          throw new ChatServerException({
+              code: ChatServerExceptionCode.AUTHORIZATION, message: `Token is NULL`
           });
       }
       try {
           request.user = await this.authService.verify(authToken);
       } catch (e) {
-          throw new CustomException({
-              code: ExceptionType.AUTHORIZATION, message: `Invalided Token`
+          throw new ChatServerException({
+              code: ChatServerExceptionCode.AUTHORIZATION, message: `Invalided Token`
           });
       }
       return true;

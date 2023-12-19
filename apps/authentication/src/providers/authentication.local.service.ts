@@ -1,8 +1,8 @@
 import { Inject, Injectable } from "@nestjs/common";
 import {
-  CustomException,
-  ExceptionType,
-} from "@app/common/exception/custom.exception";
+  ChatServerException,
+  ChatServerExceptionCode,
+} from "@app/common/exception/chatServerException";
 import {NullCheck} from "@app/common/util/util";
 import {AuthenticationService} from "./authentication.service.interface";
 import {AUTHENTICATION_BCRYPT, USER_REPOSITORY} from "../authentication.metadata";
@@ -34,16 +34,16 @@ export class AuthenticationLocalService implements AuthenticationService {
     const user = await this.userRepository.findOneByID(loginUser.user_id);
 
     if (NullCheck(user)) {
-      throw new CustomException({
+      throw new ChatServerException({
         message: "There is no User",
-        code: ExceptionType.AUTHENTICATION,
+        code: ChatServerExceptionCode.AUTHENTICATION,
       });
     }
 
     if (!this.bcryptService.compare(loginUser.password, user.password)) {
-      throw new CustomException({
+      throw new ChatServerException({
         message: "Invalid Password",
-        code: ExceptionType.AUTHENTICATION,
+        code: ChatServerExceptionCode.AUTHENTICATION,
       });
     }
 
@@ -52,23 +52,24 @@ export class AuthenticationLocalService implements AuthenticationService {
 
   async signUp(createUserDto: CreateUserRequest): Promise<UserInfoResponse> {
     const user = await this.userRepository.findOneByID(createUserDto.user_id);
+
     if (!NullCheck(user)) {
-      throw new CustomException({
+      throw new ChatServerException({
         message: "Already Exist",
-        code: ExceptionType.ALREADY_EXIST,
+        code: ChatServerExceptionCode.ALREADY_EXIST,
       });
     }
     createUserDto.password = this.bcryptService.hash(createUserDto.password);
-    return new UserInfoResponse(user);
+    return new UserInfoResponse(await this.userRepository.create(createUserDto));
   }
 
   async findOne(id: number): Promise<UserInfoResponse> {
       const user = await this.userRepository.findOne(id);
 
       if (NullCheck(user)) {
-        throw new CustomException({
+        throw new ChatServerException({
           message: "Can't Find User Information",
-          code: ExceptionType.NOT_FOUND,
+          code: ChatServerExceptionCode.NOT_FOUND,
         });
       }
       return new UserInfoResponse(user);
@@ -78,9 +79,9 @@ export class AuthenticationLocalService implements AuthenticationService {
     try {
       return await this.userRepository.update(id, payload);
     } catch (e) {
-      throw new CustomException({
+      throw new ChatServerException({
         message: e,
-        code: ExceptionType.AUTHENTICATION,
+        code: ChatServerExceptionCode.AUTHENTICATION,
       });
     }
   }
@@ -88,9 +89,9 @@ export class AuthenticationLocalService implements AuthenticationService {
   async delete(payload: number): Promise<boolean> {
     const result = await this.userRepository.delete(payload)
     if(!result) {
-      throw new CustomException({
+      throw new ChatServerException({
         message: "Can't not found User",
-        code: ExceptionType.NOT_FOUND,
+        code: ChatServerExceptionCode.NOT_FOUND,
       });
     }
     return result
@@ -107,9 +108,9 @@ export class AuthenticationLocalService implements AuthenticationService {
     const user =  await this.userRepository.findOneByID(user_id)
 
     if (NullCheck(user)) {
-      throw new CustomException({
+      throw new ChatServerException({
         message: "Can't not found User",
-        code: ExceptionType.NOT_FOUND,
+        code: ChatServerExceptionCode.NOT_FOUND,
       });
     }
 

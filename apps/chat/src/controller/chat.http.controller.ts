@@ -8,9 +8,10 @@ import {ChatService} from "../providers/chat.service.interface";
 import {CHAT_SERVICE} from "../chat.metadata";
 import {UserEntity} from "@app/authentication/entity/users.entity";
 import {RoomEntity} from "@app/chat/entity/room.entity";
+import {SelfGuard} from "@app/authorization/guards/authorization.self.guard";
 
 @Controller("chatting")
-@UseGuards(JwtGuard)
+@UseGuards(JwtGuard, SelfGuard)
 @ApiSecurity("authentication")
 @ApiTags("chatting")
 export class ChatHttpController {
@@ -22,7 +23,7 @@ export class ChatHttpController {
   }
 
   @UseInterceptors(ReadChatCacheInterceptor)
-  @Get(":id")
+  @Get(":room_id")
   @ApiOperation({
     summary: "방 ID로 채팅리스트들을 가져옵니다. API",
     description: "방 ID로 채팅리스트들을 가져옵니다.",
@@ -32,7 +33,7 @@ export class ChatHttpController {
     type: Array<ChattingResponse[]>,
   })
   async GetChattingList(
-    @Param("id") id: number,
+    @Param("room_id") id: number,
     @Query("cursor") cursor: number
   ): Promise<ChattingResponse[]> {
     return await this.chattingService.getChattingList({id, cursor});

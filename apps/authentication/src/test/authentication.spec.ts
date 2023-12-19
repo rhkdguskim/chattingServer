@@ -1,8 +1,8 @@
 import { Test, TestingModule } from "@nestjs/testing";
 import {
-  CustomException,
-  ExceptionType,
-} from "@app/common/exception/custom.exception";
+  ChatServerException,
+  ChatServerExceptionCode,
+} from "@app/common/exception/chatServerException";
 import { NodeBcryptService } from "../providers/bcrypt/bcrpy.service";
 import {AuthenticationService} from "../providers/authentication.service.interface";
 import {AUTHENTICATION_BCRYPT, AUTHENTICATION_SERVICE} from "../authentication.metadata";
@@ -50,8 +50,8 @@ describe("Authentication Module", () => {
       try {
         const user = await authenticationService.signIn(createUserRequest);
       } catch (e) {
-        expect(e).toBeInstanceOf(CustomException);
-        expect(e.msg.code).toEqual(ExceptionType.AUTHENTICATION);
+        expect(e).toBeInstanceOf(ChatServerException);
+        expect(e.msg.code).toEqual(ChatServerExceptionCode.AUTHENTICATION);
       }
     });
 

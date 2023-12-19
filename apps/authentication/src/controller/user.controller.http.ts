@@ -4,7 +4,7 @@ import {
     Controller,
     Delete,
     Get, HttpCode, HttpStatus,
-    Inject, NotFoundException,
+    Inject,
     Param,
     Post,
     Put, UseGuards,
@@ -18,6 +18,7 @@ import {CacheEvict} from "@src/common/decorator/cache-decorator";
 import {ApiCreatedResponse, ApiOperation, ApiParam, ApiTags} from "@nestjs/swagger";
 import {CreateUserRequest, UpdateUserRequest, UserInfoResponse} from "@app/authentication/dto/authenticaion.dto";
 import {SelfGuard} from "@app/authorization/guards/authorization.self.guard";
+import {JwtGuard} from "@app/authorization/guards/authorization.jwt.guard";
 
 @Controller('users')
 @ApiTags('Users')
@@ -36,8 +37,6 @@ export class UsersHttpController implements UsersController {
         return this.authenticationService.findAll();
     }
 
-    @UseInterceptors(HttpCacheInterceptor)
-    @CacheEvict("/users")
     @Post("")
     @ApiOperation({
         summary: "사용자 생성",
@@ -51,7 +50,7 @@ export class UsersHttpController implements UsersController {
         return await this.authenticationService.signUp(user);
     }
 
-    @UseGuards(SelfGuard)
+    @UseGuards(JwtGuard, SelfGuard)
     @Delete(":id")
     @ApiParam({ name: 'id', type: Number, description: '사용자 ID' })
     @ApiOperation({
@@ -63,7 +62,7 @@ export class UsersHttpController implements UsersController {
         await this.authenticationService.delete(payload);
     }
 
-    @UseGuards(SelfGuard)
+    @UseGuards(JwtGuard, SelfGuard)
     @Get(":id")
     @ApiParam({ name: 'id', description: '사용자 ID, user_id, id 필드 둘다 가능' })
     @ApiOperation({
@@ -78,7 +77,7 @@ export class UsersHttpController implements UsersController {
         }
     }
 
-    @UseGuards(SelfGuard)
+    @UseGuards(JwtGuard, SelfGuard)
     @Put(':id')
     @ApiOperation({
         summary: "사용자 수정",

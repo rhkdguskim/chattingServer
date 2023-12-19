@@ -40,7 +40,7 @@ export class FriendHttpController implements FriendController {
   @Get(":id")
   @Roles(Role.USER)
   @ApiOperation({
-    summary: "친구 목록 가져오기 API",
+    summary: "친구 목록 가져오기",
     description: "친구 목록을 가져온다.",
   })
   @ApiCreatedResponse({
@@ -52,7 +52,7 @@ export class FriendHttpController implements FriendController {
 
   @Post(":id")
   @ApiOperation({
-    summary: "친구 추가하기 API",
+    summary: "친구 추가하기",
     description: "친구를 추가합니다.",
   })
   @ApiCreatedResponse({
@@ -69,7 +69,7 @@ export class FriendHttpController implements FriendController {
 
   @Put(":id")
   @ApiOperation({
-    summary: "친구 이름 변경하기 API",
+    summary: "친구 이름 변경하기",
     description: "등록된 친구중 친구정보를 변경합니다.",
   })
   @ApiCreatedResponse({ description: "등록된 친구중 친구정보를 변경합니다." })
@@ -82,7 +82,7 @@ export class FriendHttpController implements FriendController {
 
   @Delete(":id")
   @ApiOperation({
-    summary: "친구 삭제 API",
+    summary: "친구 삭제",
     description: "등록된 친구중 친구를 삭제합니다.",
   })
   @ApiCreatedResponse({ description: "등록된 친구중 친구를 삭제합니다." })

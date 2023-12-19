@@ -4,7 +4,7 @@ import {ChattingTypeORM} from "@app/common/typeorm/entity/chatting.typeorm.entit
 import {InjectRepository} from "@nestjs/typeorm";
 import {Repository} from "typeorm";
 import {ChatRepository} from "@app/chat/repository/chat.repository.interface";
-import { ChattingListRequest } from "../dto/chat.dto";
+import {ChattingListRequest, ChattingResponse} from "../dto/chat.dto";
 import {ChatEntity} from "@app/chat/entity/chatting.entity";
 
 @Injectable()
@@ -42,7 +42,7 @@ export class ChatTypeormRepository extends TypeormRepository<ChatEntity> impleme
             return new ChatEntity(chat)
         })
     }
-    async getChattingList(chatListRequest: ChattingListRequest): Promise<ChatEntity[]> {
+    async getChattingList(chatListRequest: ChattingListRequest): Promise<ChattingResponse[]> {
         const {id, cursor} = chatListRequest;
 
         const chatList = await this.chatRepository
@@ -50,20 +50,26 @@ export class ChatTypeormRepository extends TypeormRepository<ChatEntity> impleme
             .where("chat.room_id = :id", {id})
             .andWhere("chat.id < :cursor", {cursor: cursor})
             .leftJoinAndSelect("chat.user", "user")
-            // .select([
-            //     "chat.id",
-            //     "chat.message",
-            //     "chat.not_read_chat",
-            //     "chat.createdAt",
-            //     "user.id",
-            //     "chat.room_id",
-            // ])
+            .select([
+                "chat.id as id",
+                "chat.message as message",
+                "chat.not_read_chat as not_read_chat",
+                "chat.createdAt as createdAt",
+                "chat.user as user_id",
+                "chat.room_id as room_id",
+            ])
             .orderBy("chat.id", "DESC")
             .limit(50)
             .getRawMany();
-
         return chatList.reverse().map((chat) => {
-            return new ChatEntity(chat)
+            return new ChattingResponse({
+                createdAt: chat.createdAt,
+                id: chat.id,
+                message: chat.message,
+                not_read_chat: chat.not_read_chat,
+                room: {id : chat.room_id},
+                user: {id : chat.user_id}
+            })
         });
     }
 }

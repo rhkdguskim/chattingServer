@@ -12,7 +12,7 @@ import {FriendService} from "./friend.service.interface";
 import {FriendRepository} from "../repository/friend.repository.interface";
 import {CreateFriendRequest, CreateFriendResponse, DeleteFriendRequest, UpdateFriendRequest} from "../dto/friend.dto";
 import {UserEntity} from "@app/authentication/entity/users.entity";
-import {CustomException, ExceptionType} from "@app/common/exception/custom.exception";
+import {ChatServerException, ChatServerExceptionCode} from "@app/common/exception/chatServerException";
 
 @Injectable()
 export class FriendLocalService implements FriendService {
@@ -40,8 +40,8 @@ export class FriendLocalService implements FriendService {
     createFriend: CreateFriendRequest
   ): Promise<FriendEntity> {
     if (user_id == createFriend.friend_id) {
-      throw new CustomException({code: ExceptionType.FORBIDDEN,
-        message: "자기자신을 친구로 설정 할 수 없습니다."})
+      throw new ChatServerException({code: ChatServerExceptionCode.FORBIDDEN,
+        message: "You Can't be as Friend Self"})
     }
 
     const { friend_id, friend_name } = createFriend;
@@ -51,8 +51,8 @@ export class FriendLocalService implements FriendService {
 
     friends.map((friend) => {
       if (friend.friend_id == friend_id) {
-        throw new CustomException({code: ExceptionType.ALREADY_EXIST,
-          message: "이미 등록된 친구입니다."})
+        throw new ChatServerException({code: ChatServerExceptionCode.ALREADY_EXIST,
+          message: "Already Exist"})
       }
     });
 
@@ -68,8 +68,8 @@ export class FriendLocalService implements FriendService {
   ): Promise<any> {
     const foundFriend = await this.friendRepository.findFriendById({user_id:user_id, id:delFriend.id});
     if (!foundFriend) {
-      throw new CustomException({
-        code: ExceptionType.NOT_FOUND, message: "Can't Find Friend"
+      throw new ChatServerException({
+        code: ChatServerExceptionCode.NOT_FOUND, message: "Can't Find Friend"
       });
     }
     return this.friendRepository.delete(foundFriend.id);
@@ -86,8 +86,8 @@ export class FriendLocalService implements FriendService {
     if (friend && friend.friend_id == updateFriend.friend_id) {
       return await this.friendRepository.update(id, updateFriend);
     } else {
-      throw new CustomException({
-        code: ExceptionType.NOT_FOUND, message: "Can't Find Friend"
+      throw new ChatServerException({
+        code: ChatServerExceptionCode.NOT_FOUND, message: "Can't Find Friend"
       });
     }
   }

@@ -13,7 +13,7 @@ import {ROOM_REPOSITORY} from "@app/chat/chat.metadata";
 import {RoomTransactionRepository} from "@app/chat/repository/room.repository.interface";
 import {RoomEntity, RoomType} from "@app/chat/entity/room.entity";
 import {ParticipantEntity} from "../entity/participant.entity";
-import {CustomException, ExceptionType} from "@app/common/exception/custom.exception";
+import {ChatServerException, ChatServerExceptionCode} from "@app/common/exception/chatServerException";
 
 const INDIVIDUAL_CHAT_CNT = 1;
 const TWO_CHAT_CNT = 2;
@@ -42,8 +42,8 @@ export class RoomLocalService implements RoomService {
         createRoomDto.participant = this.GetParticipant(createRoomDto)
 
         if( await this.AlreadyRoom(room_type, createRoomDto)) {
-            throw new CustomException({
-                code: ExceptionType.ALREADY_EXIST, message: "Room is Already Exist"
+            throw new ChatServerException({
+                code: ChatServerExceptionCode.ALREADY_EXIST, message: "Room is Already Exist"
             })
         }
 
@@ -57,8 +57,8 @@ export class RoomLocalService implements RoomService {
         inviteToRoom: InviteRoomRequest
     ): Promise<ParticipantEntity[]> {
         if (this.GetRoomType(inviteToRoom.participants) !== RoomType.GROUP) {
-            throw new CustomException({
-                    code: ExceptionType.FORBIDDEN, message: "Only group chat rooms can invite participants."
+            throw new ChatServerException({
+                    code: ChatServerExceptionCode.FORBIDDEN, message: "Only group chat rooms can invite participants."
                 }
             );
         }

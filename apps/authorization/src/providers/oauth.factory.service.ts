@@ -1,9 +1,9 @@
 import { Injectable } from "@nestjs/common";
 import { OAuthService } from "./oauth.service";
 import {
-  CustomException,
-  ExceptionType,
-} from "@app/common/exception/custom.exception";
+  ChatServerException,
+  ChatServerExceptionCode,
+} from "@app/common/exception/chatServerException";
 
 interface OauthServiceConfig {
   name: string;
@@ -26,8 +26,8 @@ export class OauthServiceFactory {
     if (this.OauthServices.has(key)) {
       return this.OauthServices.get(key);
     } else {
-      throw new CustomException({
-        code: ExceptionType.AUTHENTICATION,
+      throw new ChatServerException({
+        code: ChatServerExceptionCode.AUTHENTICATION,
         message: `There is no Instance name of ${key}`,
       });
     }

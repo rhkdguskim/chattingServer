@@ -11,48 +11,49 @@ import {
   LoggerService,
   RpcExceptionFilter,
 } from "@nestjs/common";
-import {CustomException, ExceptionType} from "./custom.exception";
+import {ChatServerException, ChatServerExceptionCode} from "./chatServerException";
 import {Observable, throwError} from "rxjs";
 
-@Catch(CustomException)
+@Catch(ChatServerException)
 export class RcpExceptionsFilter
-  implements RpcExceptionFilter<CustomException>
+  implements RpcExceptionFilter<ChatServerException>
 {
   constructor(private readonly logger: LoggerService) {}
-  catch(exception: CustomException, host: ArgumentsHost): Observable<any> {
+  catch(exception: ChatServerException, host: ArgumentsHost): Observable<any> {
     this.logger.error(exception.getMessage());
     return throwError(() => exception.getError());
   }
 }
 
-@Catch(CustomException)
+@Catch(ChatServerException)
 export class CustomExceptionFilter implements ExceptionFilter {
-  catch(exception: CustomException, host: ArgumentsHost) {
+  catch(exception: ChatServerException, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse();
-    let status;
+    let status: HttpStatus;
+
     switch (exception.getCode()) {
-      case ExceptionType.AUTHORIZATION:
+      case ChatServerExceptionCode.AUTHORIZATION:
       {
         status = HttpStatus.UNAUTHORIZED
         break
       }
-      case ExceptionType.AUTHENTICATION:
+      case ChatServerExceptionCode.AUTHENTICATION:
       {
         status = HttpStatus.UNAUTHORIZED
         break
       }
-      case ExceptionType.NOT_FOUND:
+      case ChatServerExceptionCode.NOT_FOUND:
       {
         status = HttpStatus.NOT_FOUND
         break;
       }
-      case ExceptionType.ALREADY_EXIST:
+      case ChatServerExceptionCode.ALREADY_EXIST:
       {
         status = HttpStatus.CONFLICT
         break;
       }
-      case ExceptionType.FORBIDDEN:
+      case ChatServerExceptionCode.FORBIDDEN:
       {
         status = HttpStatus.FORBIDDEN
         break;
@@ -63,7 +64,6 @@ export class CustomExceptionFilter implements ExceptionFilter {
         break;
       }
     }
-
     Logger.error(exception.getError())
 
     response

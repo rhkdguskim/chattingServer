@@ -1,7 +1,13 @@
-import {IsString, Matches} from "class-validator";
+import {IsOptional, IsString, Matches} from "class-validator";
 import {ApiProperty} from "@nestjs/swagger";
 
 export class CreateUserRequest {
+    constructor(createUserRequest : CreateUserRequest) {
+        this.user_id = createUserRequest.user_id
+        this.name = createUserRequest.name
+        this.password = createUserRequest.password
+        this.status_msg = createUserRequest.status_msg
+    }
     @IsString()
     @ApiProperty({description: "User ID"})
     user_id: string;
@@ -16,8 +22,22 @@ export class CreateUserRequest {
     })
     password: string;
 
-    access_token?: string;
-    refresh_token?: string;
+    @ApiProperty({description: "상태 메세지"})
+    @IsOptional()
+    status_msg: string;
+}
+
+export class CreateUserRequestOAuth extends CreateUserRequest {
+    constructor(createUserRequest : CreateUserRequestOAuth) {
+        super(createUserRequest);
+        this.access_token = createUserRequest.access_token
+        this.refresh_token = createUserRequest.refresh_token
+    }
+    @ApiProperty({description: "access_token"})
+    access_token: string;
+
+    @ApiProperty({description: "refresh_token"})
+    refresh_token: string;
 }
 
 export class UserInfoResponse {
@@ -50,6 +70,11 @@ export class UserInfoResponse {
 }
 
 export class LoginUserRequest {
+    constructor(loginRequest : LoginUserRequest) {
+        this.user_id = loginRequest.user_id
+        this.password = loginRequest.password
+    }
+
     @IsString()
     @ApiProperty({description: "User ID"})
     user_id: string;
@@ -63,7 +88,8 @@ export class LoginUserRequest {
 
 export class LoginUserResponse {
     constructor(loginUserResponse : LoginUserResponse) {
-        Object.assign(this, loginUserResponse)
+        this.access_token = loginUserResponse.access_token
+        this.refresh_token = loginUserResponse.refresh_token
     }
 
     @IsString()
@@ -75,6 +101,12 @@ export class LoginUserResponse {
 }
 
 export class UpdateUserRequest {
+    constructor(updateInfo : UpdateUserRequest) {
+        this.user_id = updateInfo.user_id
+        this.name = updateInfo.name
+        this.status_msg = updateInfo.profile_img_url
+        this.background_img_url = updateInfo.background_img_url
+    }
     @ApiProperty({description: "아이디"})
     user_id!: string;
 

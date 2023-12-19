@@ -7,7 +7,7 @@ import {UserRepository} from "./users.interface.repository";
 import {UserTypeORM} from "@app/common/typeorm/entity/users.typeorm.entity";
 
 @Injectable()
-export class UserTypeORMRepository extends TypeormRepository<UserEntity> implements UserRepository {
+export class UserTypeORMRepository extends TypeormRepository<UserTypeORM> implements UserRepository {
   constructor(
     @InjectRepository(UserTypeORM)
     private userRepository: Repository<UserTypeORM>
@@ -15,22 +15,19 @@ export class UserTypeORMRepository extends TypeormRepository<UserEntity> impleme
     super(userRepository)
   }
 
-  public async create(data: DeepPartial<UserTypeORM>): Promise<UserEntity> {
-    return new UserEntity(await super.create(data));
+  public async create(data: DeepPartial<UserTypeORM>): Promise<UserTypeORM> {
+    return await super.create(data);
   }
 
-  public async findAll(): Promise<UserEntity[]> {
-    const users = await super.findAll()
-    return users.map(user => {
-      return new UserEntity(user);
-    });
+  public async findAll(): Promise<UserTypeORM[]> {
+    return await super.findAll()
   }
 
-  public async findOneByID(user_id: string): Promise<UserEntity> {
-    return new UserEntity(await this.userRepository.findOneBy({ user_id }));
+  public async findOneByID(user_id: string): Promise<UserTypeORM> {
+    return await this.userRepository.findOneBy({ user_id });
   }
 
   public async findOne(id: number): Promise<UserEntity> {
-    return new UserEntity(await this.userRepository.findOneBy({ id }));
+    return await this.userRepository.findOneBy({ id });
   }
 }

@@ -1,7 +1,7 @@
 import { Injectable, CanActivate, ExecutionContext, UnauthorizedException } from '@nestjs/common';
 import { Observable } from 'rxjs';
 import {Role} from "@app/authentication/entity/users.entity";
-import {CustomException, ExceptionType} from "@app/common/exception/custom.exception";
+import {ChatServerException, ChatServerExceptionCode} from "@app/common/exception/chatServerException";
 
 @Injectable()
 export class SelfGuard implements CanActivate {
@@ -16,6 +16,18 @@ export class SelfGuard implements CanActivate {
             return true;
         }
 
+        if(!user) {
+            throw new ChatServerException({
+                code: ChatServerExceptionCode.AUTHORIZATION, message: `no User Data`
+            });
+        }
+
+        if(!user.role) {
+            throw new ChatServerException({
+                code: ChatServerExceptionCode.AUTHORIZATION, message: `no Role`
+            });
+        }
+
         if (user.role == Role.ADMIN) {
             return true;
         }
@@ -23,8 +35,8 @@ export class SelfGuard implements CanActivate {
         if (user && user.id === Number(userId)) {
             return true;
         }
-        throw new CustomException({
-            code: ExceptionType.AUTHORIZATION, message: `You can only access your own data`
+        throw new ChatServerException({
+            code: ChatServerExceptionCode.AUTHORIZATION, message: `You can only access your own data`
         });
     }
 }

@@ -25,8 +25,8 @@ export class JWTResponse extends JWTRequest {
 
 export class TokenRequest {
     @IsString()
-    @ApiProperty({description: "Access Token"})
-    access_token : string;
+    @ApiProperty({description: "refresh Token"})
+    refresh_token : string;
 }
 
 export interface OAuthRequest {

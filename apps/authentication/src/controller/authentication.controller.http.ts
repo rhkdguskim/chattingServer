@@ -22,6 +22,14 @@ export class AuthenticationControllerHttp implements AuthenticationController {
   constructor(@Inject(AUTHENTICATION_SERVICE)private authenticationService: AuthenticationService) {}
 
   @Post('signin')
+  @ApiOperation({
+    summary: "Login Given Token",
+    description: "Given Token",
+  })
+  @ApiCreatedResponse({
+    description : "Access Token, Refresh Token",
+    type : LoginUserResponse
+  })
   async signIn(
     @Body()loginUser: LoginUserRequest
   ): Promise<LoginUserResponse> {
@@ -31,8 +39,12 @@ export class AuthenticationControllerHttp implements AuthenticationController {
   @Post("google")
   @UseGuards(AuthGuard("google"))
   @ApiOperation({
-    summary: "OAuth 2.0 구글 로그인 API",
-    description: "구글으로 인증하여 로그인을 구현입니다.",
+    summary: "OAuth Google Login",
+    description: "Oauth 2.0",
+  })
+  @ApiCreatedResponse({
+    description : "Access Token, Refresh Token",
+    type : LoginUserResponse
   })
   oAuthGoogle(@GetOAuthData()data: OAuthData): Promise<LoginUserResponse> {
     return Promise.resolve(undefined);
@@ -41,8 +53,12 @@ export class AuthenticationControllerHttp implements AuthenticationController {
   @Post("kakao")
   @UseGuards(AuthGuard("kakao"))
   @ApiOperation({
-    summary: "OAuth 2.0 카카오톡 로그인 API",
-    description: "카카오톡으로 인증하여 로그인을 구현합니다.",
+    summary: "OAuth Kakao Login",
+    description: "Oauth 2.0",
+  })
+  @ApiCreatedResponse({
+    description : "Access Token, Refresh Token",
+    type : LoginUserResponse
   })
   oAuthKakao(@GetOAuthData()data: OAuthData): Promise<LoginUserResponse> {
     return Promise.resolve(undefined);
@@ -51,8 +67,12 @@ export class AuthenticationControllerHttp implements AuthenticationController {
   @Post("naver")
   @UseGuards(AuthGuard("naver"))
   @ApiOperation({
-    summary: "OAuth 2.0 네이버 로그인 API",
-    description: "네이버으로 인증하여 로그인을 구현합니다.",
+    summary: "OAuth Naver Login",
+    description: "Oauth 2.0",
+  })
+  @ApiCreatedResponse({
+    description : "Access Token, Refresh Token",
+    type : LoginUserResponse
   })
   oAuthNaver(@GetOAuthData()data: OAuthData): Promise<LoginUserResponse> {
     return Promise.resolve(undefined);
@@ -60,8 +80,12 @@ export class AuthenticationControllerHttp implements AuthenticationController {
 
   @Post("refreshtoken")
   @ApiOperation({
-    summary: "사용자 Token 재발급 API",
+    summary: "Refresh Token",
     description: "Refresh Token을 사용한 access token, refresh token 재발급",
+  })
+  @ApiCreatedResponse({
+    description : "Access Token, Refresh Token",
+    type : LoginUserResponse
   })
   refreshToken(@Body() token: TokenRequest): Promise<LoginUserResponse> {
     return Promise.resolve(undefined);

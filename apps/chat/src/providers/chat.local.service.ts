@@ -60,7 +60,6 @@ export class ChatLocalService implements ChatService {
   }
 
   async getChattingList(payload: ChattingListRequest): Promise<ChattingResponse[]> {
-
       const chatting = await this.chattingRepository.getChattingList(payload)
       return chatting.map(chat => {
           return new ChattingResponse(chat)

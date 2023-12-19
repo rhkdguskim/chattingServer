@@ -20,10 +20,11 @@ import {ParticipantTypeORM} from "@app/common/typeorm/entity/participant.typeorm
 import {RoomLocalService} from "../providers/room.local.service";
 import {ROOM_SERVICE} from "../chat.metadata";
 import {ParticipantEntity} from "@app/chat/entity/participant.entity";
+import {SelfGuard} from "@app/authorization/guards/authorization.self.guard";
 
 @Controller("room")
-//@UseGuards(JwtGuard)
-//@ApiSecurity("authentication")
+@UseGuards(JwtGuard, SelfGuard)
+@ApiSecurity("authentication")
 @ApiTags("chatroom")
 export class RoomHttpController {
   constructor(@Inject(ROOM_SERVICE)private roomService: RoomLocalService) {}

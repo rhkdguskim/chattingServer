@@ -7,7 +7,7 @@ import {FriendRepository} from "./friend.repository.interface";
 import {FriendTypeORM} from "@app/common/typeorm/entity/friend.typeorm.entity";
 import {TypeormRepository} from "@app/common/typeorm/typeormrepository";
 import {UserTypeORM} from "@app/common/typeorm/entity/users.typeorm.entity";
-import {CustomException, ExceptionType} from "@app/common/exception/custom.exception";
+import {ChatServerException, ChatServerExceptionCode} from "@app/common/exception/chatServerException";
 
 @Injectable()
 export class FriendTypeORMRepository extends TypeormRepository<FriendEntity>implements FriendRepository {
@@ -39,11 +39,6 @@ export class FriendTypeORMRepository extends TypeormRepository<FriendEntity>impl
     }
 
   async create(data: Partial<FriendEntity>): Promise<FriendEntity> {
-    const user = await this.userRepository.findOneBy({id : data.friend_id});
-
-    if (!user) {
-      throw new CustomException({code: ExceptionType.NOT_FOUND, message: "유저를 찾을 수 없습니다."});
-    }
     return new FriendEntity(await super.create(data))
   }
 

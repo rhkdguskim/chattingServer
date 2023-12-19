@@ -4,7 +4,7 @@ import {Role} from "@app/authentication/entity/users.entity";
 
 import { SetMetadata } from '@nestjs/common';
 import {Request} from "express";
-import {CustomException, ExceptionType} from "@app/common/exception/custom.exception";
+import {ChatServerException, ChatServerExceptionCode} from "@app/common/exception/chatServerException";
 export const ROLES_KEY = 'roles';
 export const Roles = (roles: Role) => SetMetadata(ROLES_KEY, roles);
 
@@ -21,8 +21,8 @@ export class RolesGuard implements CanActivate {
         if(requiredRoles >= user.role) {
             return true;
         }
-        throw new CustomException({
-            code: ExceptionType.AUTHORIZATION, message: `You can only access Auth : ${Role[user.role]}`
+        throw new ChatServerException({
+            code: ChatServerExceptionCode.AUTHORIZATION, message: `You can only access Auth : ${Role[user.role]}`
         });
     }
 }
