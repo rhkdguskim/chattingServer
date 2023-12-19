@@ -1,60 +1,109 @@
 import {BadRequestException, Inject, Injectable, Logger, LoggerService,} from "@nestjs/common";
 import {EntityManager} from "typeorm";
-import {CreateRoomReqeust, CreateRoomResponse, InviteRoomRequest, RoomListResponse, RoomType,} from "../dto/room.dto";
-import {ValidateCreateRoom} from "@app/common/decoration/room.deco";
-import {ParticipantTypeORM} from "@app/common/typeorm/entity/participant.typeorm.entity";
+import {
+    CreateRoomRequest,
+    CreateRoomResponse,
+    DeleteRoomRequest,
+    InviteRoomRequest,
+    ParticipantUserInfo,
+    RoomInfoResponse,
+} from "../dto/room.dto";
 import {RoomService} from "./room.service.interface";
-import { ROOM_REPOSITORY} from "@app/chat/chat.metadata";
-import { RoomTransactionRepository} from "@app/chat/repository/room.repository.interface";
-import {RoomEntity} from "@app/chat/entity/room.entity";
-import { ParticipantEntity } from "../entity/participant.entity";
+import {ROOM_REPOSITORY} from "@app/chat/chat.metadata";
+import {RoomTransactionRepository} from "@app/chat/repository/room.repository.interface";
+import {RoomEntity, RoomType} from "@app/chat/entity/room.entity";
+import {ParticipantEntity} from "../entity/participant.entity";
+import {CustomException, ExceptionType} from "@app/common/exception/custom.exception";
+
+const INDIVIDUAL_CHAT_CNT = 1;
+const TWO_CHAT_CNT = 2;
 
 @Injectable()
 export class RoomLocalService implements RoomService {
     constructor(
         @Inject(EntityManager) private readonly manager: EntityManager,
         @Inject(ROOM_REPOSITORY)
-        private roomRepository: RoomTransactionRepository,
-        @Inject(Logger)
-        private readonly logger: LoggerService
+        private roomRepository: RoomTransactionRepository
     ) {
     }
 
-    getParticipaintsByUserID(id: number): Promise<ParticipantEntity[]> {
+    deleteRoom(deleteRoom: DeleteRoomRequest): Promise<boolean> {
+        throw new Error("Method not implemented.");
+    }
+
+    getParticipantByUserID(id: number): Promise<ParticipantEntity[]> {
         return this.roomRepository.getParticipantByUserID(id);
     }
 
-    @ValidateCreateRoom()
     async createRoom(
-        createRoomDto: CreateRoomReqeust
+        createRoomDto: CreateRoomRequest
     ): Promise<CreateRoomResponse> {
-        return await this.roomRepository.createRoom(createRoomDto);
+        const room_type = this.GetRoomType(createRoomDto.participant)
+        createRoomDto.participant = this.GetParticipant(createRoomDto)
+
+        if( await this.AlreadyRoom(room_type, createRoomDto)) {
+            throw new CustomException({
+                code: ExceptionType.ALREADY_EXIST, message: "Room is Already Exist"
+            })
+        }
+
+        return await this.roomRepository.createRoom(new CreateRoomRequest({
+            ...createRoomDto,
+            room_type
+        }));
     }
 
     async InviteRoom(
         inviteToRoom: InviteRoomRequest
-    ): Promise<ParticipantTypeORM[]> {
-        const results: ParticipantTypeORM[] = [];
-        const {room, room_name, participants} = inviteToRoom;
-
-        if (room.type !== RoomType.Group) {
-            throw new BadRequestException(
-                "Only group chat rooms can invite participants."
+    ): Promise<ParticipantEntity[]> {
+        if (this.GetRoomType(inviteToRoom.participants) !== RoomType.GROUP) {
+            throw new CustomException({
+                    code: ExceptionType.FORBIDDEN, message: "Only group chat rooms can invite participants."
+                }
             );
         }
 
         return await this.roomRepository.inviteRoom(inviteToRoom);
     }
 
-    async GetUserRooms(user_id: number): Promise<Array<RoomListResponse>> {
+    async GetUserRooms(user_id: number): Promise<Array<RoomInfoResponse>> {
         return this.roomRepository.getUserRoom(user_id)
     }
 
-    async getRoombyID(id: number): Promise<RoomEntity> {
+    async getRoomByID(id: number): Promise<RoomEntity> {
         return await this.roomRepository.getRoomByID(id)
     }
 
     async updateRoomStatus(room: RoomEntity): Promise<boolean> {
         return await this.roomRepository.updateRoom(room);
+    }
+
+    private GetRoomType(participants : ParticipantUserInfo[]) : RoomType {
+        switch(participants.length) {
+            case INDIVIDUAL_CHAT_CNT:
+                return RoomType.INDIVIDUAL
+            case TWO_CHAT_CNT:
+                return RoomType.TWO
+            default:
+                return RoomType.GROUP
+        }
+    }
+
+    private GetParticipant(createRoom : CreateRoomRequest) : ParticipantUserInfo[] {
+        const currentUserExists = createRoom.participant.find(participant => participant.id === createRoom.user.id);
+        if (!currentUserExists) {
+            createRoom.participant.push(createRoom.user);
+        }
+        return createRoom.participant.map(participant =>
+            new ParticipantUserInfo(participant));
+    }
+
+    private async AlreadyRoom(room_type : RoomType, createRoom : CreateRoomRequest) : Promise<boolean> {
+        if(room_type == RoomType.GROUP) {
+            return false
+        } else {
+            const roomInfo = await this.roomRepository.getRoomInfoByParticipants(createRoom)
+            return roomInfo != null;
+        }
     }
 }

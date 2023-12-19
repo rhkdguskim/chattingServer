@@ -17,7 +17,6 @@ import {
   ResponseMultiRead,
   ResponseSingleRead,
 } from "../dto/chat.dto";
-import { RoomType } from "../dto/room.dto";
 
 import { Socket } from "socket.io";
 import { GetWsUser } from "@app/common/decoration/auth.decorator";
@@ -29,7 +28,7 @@ import {ReadByTypeORM} from "@app/common/typeorm/entity/readby.typeorm.entity";
 import {RoomService} from "../providers/room.service.interface";
 import {ChatService} from "../providers/chat.service.interface";
 import {CHAT_SERVICE, ROOM_SERVICE} from "../chat.metadata";
-import {RoomEntity} from "@app/chat/entity/room.entity";
+import {RoomEntity, RoomType} from "@app/chat/entity/room.entity";
 import {ParticipantEntity} from "@app/chat/entity/participant.entity";
 import {ChatEntity} from "@app/chat/entity/chatting.entity";
 
@@ -63,7 +62,7 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
     @ConnectedSocket() client: Socket,
     @GetWsUser() user: UserTypeORM
   ): Promise<void> {
-    const participants: ParticipantEntity[] = await this.roomService.getParticipaintsByUserID(user.id)
+    const participants: ParticipantEntity[] = await this.roomService.getParticipantByUserID(user.id)
     participants.forEach((participant) => {
       client.join(String(participant.room.id));
     });
@@ -81,13 +80,13 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
     @MessageBody() message: RequestMessage
   ): Promise<ResponseMessage> {
     // 여기에도 캐싱전략이 들어갔으면 좋겠음. (방 정보를 바로바로 최신화 )
-    const room: RoomEntity = await this.roomService.getRoombyID(message.room_id)
+    const room: RoomEntity = await this.roomService.getRoomByID(message.room_id)
 
     room.last_chat = message.message;
     await this.roomService.updateRoomStatus(room);
 
     const not_read_chat: number =
-      room.type !== RoomType.Individual ? room.participants.length : 0;
+      room.type !== RoomType.INDIVIDUAL ? room.participants.length : 0;
     const ChattingMessage: ChatEntity =
       await this.chattingService.createChatting(message, user, room);
     const responseMessage: ResponseMessage = {

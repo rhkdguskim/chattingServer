@@ -1,5 +1,11 @@
-import { ChatEntity } from "./chatting.entity";
-import { ParticipantEntity } from "./participant.entity";
+import {ChatEntity} from "./chatting.entity";
+import {ParticipantEntity} from "./participant.entity";
+
+export enum RoomType {
+  INDIVIDUAL = 1,
+  TWO = 2,
+  GROUP = 3,
+}
 
 export class RoomEntity {
   constructor(roomInfo : RoomEntity) {
@@ -20,7 +26,7 @@ export class RoomEntity {
   id: number;
   owner_id: number;
   room_name : string;
-  type: number;
+  type: RoomType;
   last_chat: string;
   createdAt: Date;
   updatedAt: Date;

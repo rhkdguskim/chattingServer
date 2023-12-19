@@ -1,8 +1,8 @@
 import { ClientTCP, TcpClientOptions } from "@nestjs/microservices";
 import {
-  RoomListResponse,
+  RoomInfoResponse,
   CreateRoomResponse,
-  InviteRoomRequest, CreateRoomReqeust,
+  InviteRoomRequest, CreateRoomRequest,
 } from "../dto/room.dto";
 
 import {
@@ -24,14 +24,14 @@ export class RoomTCPClientService implements RoomService {
   constructor(options: TcpClientOptions["options"]) {
     this.clientAdaptor = new ClientTCP(options)
   }
-  GetRoomList(payload: number): Promise<RoomListResponse[]> {
-    return lastValueFrom<RoomListResponse[]>(
-        this.clientAdaptor.send<RoomListResponse[]>({ cmd: FIND_ALL_ROOM }, payload)
+  GetRoomList(payload: number): Promise<RoomInfoResponse[]> {
+    return lastValueFrom<RoomInfoResponse[]>(
+        this.clientAdaptor.send<RoomInfoResponse[]>({ cmd: FIND_ALL_ROOM }, payload)
     );
   }
-  findRoom(payload: number): Promise<RoomListResponse[]> {
-    return lastValueFrom<RoomListResponse[]>(
-        this.clientAdaptor.send<RoomListResponse[]>({ cmd: FIND_ROOM }, payload)
+  findRoom(payload: number): Promise<RoomInfoResponse[]> {
+    return lastValueFrom<RoomInfoResponse[]>(
+        this.clientAdaptor.send<RoomInfoResponse[]>({ cmd: FIND_ROOM }, payload)
     );
   }
   updateRoom(payload: RoomTypeORM): Promise<RoomTypeORM> {
@@ -39,7 +39,7 @@ export class RoomTCPClientService implements RoomService {
         this.clientAdaptor.send<RoomTypeORM>({ cmd: UPDATE_ROOM }, payload)
     );
   }
-  CreateRoom(payload: CreateRoomReqeust): Promise<CreateRoomResponse> {
+  CreateRoom(payload: CreateRoomRequest): Promise<CreateRoomResponse> {
     return lastValueFrom<CreateRoomResponse>(
         this.clientAdaptor.send<CreateRoomResponse>({ cmd: CREATE_ROOM }, payload)
     );

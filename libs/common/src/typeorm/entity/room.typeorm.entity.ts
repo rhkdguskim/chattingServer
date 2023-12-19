@@ -8,7 +8,7 @@ import {
 } from "typeorm";
 import { ParticipantTypeORM } from "@app/common/typeorm/entity/participant.typeorm.entity";
 import { ChattingTypeORM } from "./chatting.typeorm.entity";
-import { RoomEntity } from "@app/chat/entity/room.entity";
+import {RoomEntity, RoomType} from "@app/chat/entity/room.entity";
 
 @Entity({ name: "room" })
 export class RoomTypeORM implements RoomEntity {
@@ -21,8 +21,12 @@ export class RoomTypeORM implements RoomEntity {
   @Column()
   room_name : string;
 
-  @Column()
-  type!: number;
+  @Column({
+    type: 'enum',
+    enum: RoomType,
+    default: RoomType.INDIVIDUAL,
+  })
+  type: RoomType;
 
   @Column()
   last_chat!: string;

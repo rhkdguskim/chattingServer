@@ -1,4 +1,4 @@
-import {ChattingListRequest, ChattingResponse, RequestMessage} from "../dto/chat.dto";
+import {ChatRoomInfo, ChattingListRequest, ChattingResponse, ChatUserInfo, RequestMessage} from "../dto/chat.dto";
 import {UserTypeORM} from "@app/common/typeorm/entity/users.typeorm.entity";
 import {RoomTypeORM} from "@app/common/typeorm/entity/room.typeorm.entity";
 import {ChattingTypeORM} from "@app/common/typeorm/entity/chatting.typeorm.entity";
@@ -9,8 +9,8 @@ import {RoomEntity} from "@app/chat/entity/room.entity";
 export interface ChatService {
     createChatting(
         requestMessage: RequestMessage,
-        user: UserEntity,
-        room: RoomEntity
+        user: ChatRoomInfo,
+        room: ChatUserInfo
     ): Promise<ChatEntity>;
 
     findChattingById(id: number): Promise<ChatEntity>;

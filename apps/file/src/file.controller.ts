@@ -18,7 +18,7 @@ import { AuthGuard } from "@nestjs/passport";
 
 @Controller("file")
 @UseGuards(AuthGuard("jwt"))
-@ApiTags("파일업로드")
+@ApiTags("file")
 export class FileController {
   constructor(private readonly fileService: FileService) {}
   @Post("")

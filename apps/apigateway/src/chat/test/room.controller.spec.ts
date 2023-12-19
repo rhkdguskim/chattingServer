@@ -14,7 +14,7 @@ import { User } from "@src/entitys/users.entity";
 import { AuthorizationJwtStrategy } from "@app/authorization/guards/authorization.jwt.strategy";
 import { AuthModule } from "@src/auth/auth.module";
 
-import {CreateRoomReqeust} from "../../../../chat/src/dto/room.dto";
+import {CreateRoomRequest} from "../../../../chat/src/dto/room.dto";
 
 describe("Room Controller", () => {
   let controller: RoomHttpController;
@@ -50,14 +50,14 @@ describe("Room Controller", () => {
 
     // 참가자가 아예 없는경우
     it("GetChattingList", async () => {
-      const request: CreateRoomReqeust = {
+      const request: CreateRoomRequest = {
         room_name: "TestRoom",
         participant: [],
       };
       try {
         const transformedRequest = await validationPipe.transform(request, {
           type: "body",
-          metatype: CreateRoomReqeust,
+          metatype: CreateRoomRequest,
         }); // Validation Test
         await controller.CreateRoom(transformedRequest, 1);
       } catch (error) {

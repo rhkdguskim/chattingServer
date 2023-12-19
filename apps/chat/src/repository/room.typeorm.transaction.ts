@@ -1,14 +1,51 @@
 import {Inject} from "@nestjs/common";
 import {EntityManager} from "typeorm";
-import {CreateRoomReqeust, CreateRoomResponse, InviteRoomRequest, RoomListResponse,} from "@app/chat/dto/room.dto";
+import {
+    CreateRoomRequest,
+    CreateRoomResponse,
+    DeleteRoomRequest,
+    InviteRoomRequest,
+    ParticipantUserInfo,
+    RoomInfoResponse,
+} from "@app/chat/dto/room.dto";
 import {RoomTypeORM} from "@app/common/typeorm/entity/room.typeorm.entity";
 import {ParticipantTypeORM} from "@app/common/typeorm/entity/participant.typeorm.entity";
-import {UserInfoResponse} from "@app/authentication/dto/authenticaion.dto";
 import {RoomTransactionRepository} from "@app/chat/repository/room.repository.interface";
-import { RoomEntity } from "../entity/room.entity";
+import {RoomEntity} from "../entity/room.entity";
 
 export class RoomTypeormTransactionRepository implements RoomTransactionRepository {
     constructor(@Inject(EntityManager) private readonly manager: EntityManager) {
+    }
+
+    async deleteRoom(deleteRoom: DeleteRoomRequest): Promise<boolean> {
+        return await this.manager.transaction(async (transactionalEntityManager) => {
+            const roomToDelete = await transactionalEntityManager.findOne(RoomTypeORM, {where : {id : deleteRoom.room_id}});
+
+            if (!roomToDelete) {
+                return false;
+            }
+
+            await transactionalEntityManager.delete(ParticipantTypeORM, { room: roomToDelete });
+
+            await transactionalEntityManager.delete(RoomTypeORM, {where : {id : deleteRoom.room_id}});
+
+            return true;
+        });
+    }
+
+    async getRoomInfoByParticipants(createRoom: CreateRoomRequest): Promise<RoomTypeORM> {
+        const { participant } = createRoom;
+        const participantIds = participant.map((p) => p.id);
+
+        return await this.manager
+            .getRepository(RoomTypeORM)
+            .createQueryBuilder("room")
+            .innerJoinAndSelect("room.participants", "participant")
+            .innerJoinAndSelect("participant.user", "user")
+            .where("room.type = :roomType", { roomType: createRoom.room_type })
+            .andWhere("user.id IN (:...participantIds)", { participantIds })
+            .andWhere("user.id = :user_id", { user_id: createRoom.user.id })
+            .getOne();
     }
 
     async countParticipantsByRoomID(id: number): Promise<number> {
@@ -45,37 +82,24 @@ export class RoomTypeormTransactionRepository implements RoomTransactionReposito
         })
     }
 
-    async getUserRoom(user_id: number): Promise<Array<RoomListResponse>> {
+    async getUserRoom(user_id: number): Promise<Array<RoomInfoResponse>> {
         return await this.manager.transaction(async transactionalEntityManager => {
             const myRoomList = await this.GetParticipantsByUserIDTransactional(user_id, transactionalEntityManager)
-
-            const response: Array<RoomListResponse> = await Promise.all(
+            const response: Array<RoomInfoResponse> = await Promise.all(
                 myRoomList.map(async (participant) => {
                     const result = await this.GetParticipantsByRoomIDTransactional(participant.room.id, transactionalEntityManager);
 
-                    const userList: Array<UserInfoResponse> = result.map(newresult => {
+                    const userInfoList = result.map(newresult => {
                         const user = newresult.user;
-                        return {
-                            id: user.id,
-                            name: user.name,
-                            user_id: user.user_id,
-                            status_msg: user.status_msg,
-                            profile_img_url: user.profile_img_url,
-                            background_img_url: user.background_img_url,
-                        };
+                        return new ParticipantUserInfo(user);
                     });
 
-                    return {
-                        id: participant.room.id,
-                        room_name: participant.room_name,
-                        type: participant.room.type,
-                        owner_id: participant.room.owner_id,
-                        last_chat: participant.room.last_chat,
+                    return new RoomInfoResponse ({
+                        ...participant.room,
                         not_read_chat: 0,
                         last_read_chat_id: 0,
-                        updatedAt: participant.room.updatedAt,
-                        participant: userList,
-                    };
+                        participant: userInfoList,
+                    });
                 })
             );
 
@@ -97,14 +121,14 @@ export class RoomTypeormTransactionRepository implements RoomTransactionReposito
         return results
     }
 
-
-    async createRoom(createRoomDto: CreateRoomReqeust): Promise<CreateRoomResponse> {
+    async createRoom(createRoomDto: CreateRoomRequest): Promise<CreateRoomResponse> {
         return await this.manager.transaction(
             async (transactionalEntityManager) => {
                 const newRoom: RoomTypeORM = transactionalEntityManager.create(
                     RoomTypeORM,
                     {
-                        owner_id: createRoomDto.id,
+                        room_name : createRoomDto.room_name,
+                        owner_id: createRoomDto.user.id,
                         type: createRoomDto.room_type,
                         last_chat: "",
                     }
@@ -129,11 +153,10 @@ export class RoomTypeormTransactionRepository implements RoomTransactionReposito
                         newParticipant
                     );
                 }
-                const roomResponse: CreateRoomResponse = {
+                return new CreateRoomResponse({
                     ...createdRoom,
                     room_name: createRoomDto.room_name,
-                };
-                return roomResponse;
+                });
             }
         );
     }

@@ -1,17 +1,25 @@
-import {Controller, Get, Inject, Param, Query, UseInterceptors} from "@nestjs/common";
+import {Body, Controller, Get, Inject, Param, Post, Query, UseInterceptors} from "@nestjs/common";
 import { UseGuards } from "@nestjs/common";
-import { ApiOperation, ApiCreatedResponse, ApiTags } from "@nestjs/swagger";
+import {ApiOperation, ApiCreatedResponse, ApiTags, ApiSecurity} from "@nestjs/swagger";
 import { ReadChatCacheInterceptor } from "../interceptors/chatting.readchat.cache.interceptor";
 import { JwtGuard } from "@app/authorization/guards/authorization.jwt.guard";
-import {ChattingResponse} from "../dto/chat.dto";
+import {ChattingResponse, RequestMessage} from "../dto/chat.dto";
 import {ChatService} from "../providers/chat.service.interface";
 import {CHAT_SERVICE} from "../chat.metadata";
+import {UserEntity} from "@app/authentication/entity/users.entity";
+import {RoomEntity} from "@app/chat/entity/room.entity";
 
 @Controller("chatting")
-//@UseGuards(JwtGuard)
-@ApiTags("채팅리스트")
+@UseGuards(JwtGuard)
+@ApiSecurity("authentication")
+@ApiTags("chatting")
 export class ChatHttpController {
   constructor(@Inject(CHAT_SERVICE) private chattingService: ChatService) {}
+
+  @Post(":id")
+  async addChatting(@Param('id') user_id : number, @Body() chattingRequest : RequestMessage) {
+    return await this.chattingService.createChatting(chattingRequest, {id : user_id} , {id : chattingRequest.room_id});
+  }
 
   @UseInterceptors(ReadChatCacheInterceptor)
   @Get(":id")

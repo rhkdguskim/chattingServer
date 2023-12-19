@@ -31,7 +31,7 @@ import {SelfGuard} from "@app/authorization/guards/authorization.self.guard";
 @Controller("friend")
 @UseGuards(JwtGuard, RolesGuard, SelfGuard)
 @ApiSecurity("authentication")
-@ApiTags("친구")
+@ApiTags("friend")
 export class FriendHttpController implements FriendController {
   constructor(
     @Inject(FRIEND_SERVICE)

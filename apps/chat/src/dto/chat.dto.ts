@@ -32,11 +32,9 @@ export class ChatRoomInfo {
 export class ChatUserInfo {
   constructor(userInfo : ChatUserInfo) {
     this.id = userInfo.id
-    this.user_id = userInfo.user_id
   }
 
   id : number;
-  user_id : string;
 }
 
 export class ChattingResponse {

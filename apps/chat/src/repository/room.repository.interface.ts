@@ -1,7 +1,13 @@
 import {RoomEntity} from "@app/chat/entity/room.entity";
 import {Repository} from "@app/common/interface/repository.interface";
 import {ParticipantTypeORM} from "@app/common/typeorm/entity/participant.typeorm.entity";
-import {CreateRoomReqeust, CreateRoomResponse, InviteRoomRequest, RoomListResponse} from "@app/chat/dto/room.dto";
+import {
+    CreateRoomRequest,
+    CreateRoomResponse,
+    DeleteRoomRequest,
+    InviteRoomRequest,
+    RoomInfoResponse
+} from "@app/chat/dto/room.dto";
 import {RoomTypeORM} from "@app/common/typeorm/entity/room.typeorm.entity";
 
 export interface RoomRepository extends Repository<RoomEntity> {
@@ -17,11 +23,15 @@ export interface RoomTransactionRepository {
 
     getParticipantByRoomID(id: number): Promise<ParticipantTypeORM[]>;
 
-    getUserRoom(user_id: number): Promise<Array<RoomListResponse>>;
+    getRoomInfoByParticipants(createRoom : CreateRoomRequest) : Promise<RoomTypeORM>;
+
+    getUserRoom(user_id: number): Promise<Array<RoomInfoResponse>>;
 
     inviteRoom(inviteToRoomDto: InviteRoomRequest): Promise<ParticipantTypeORM[]>;
 
-    createRoom(createRoomDto: CreateRoomReqeust): Promise<CreateRoomResponse>;
+    createRoom(createRoomDto: CreateRoomRequest): Promise<CreateRoomResponse>;
 
     countParticipantsByRoomID(id : number) : Promise<number>;
+
+    deleteRoom(deleteRoom : DeleteRoomRequest) : Promise<boolean>;
 }

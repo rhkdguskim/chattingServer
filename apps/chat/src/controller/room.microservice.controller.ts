@@ -3,8 +3,8 @@ import { RoomLocalService } from "../providers/room.local.service";
 import { ApiTags } from "@nestjs/swagger";
 import {
   CreateRoomResponse,
-  RoomListResponse,
-  InviteRoomRequest, CreateRoomReqeust,
+  RoomInfoResponse,
+  InviteRoomRequest, CreateRoomRequest,
 } from "../dto/room.dto";
 import { MessagePattern } from "@nestjs/microservices";
 import {
@@ -26,13 +26,13 @@ export class RoomMicroserviceController {
   constructor(private roomService: RoomLocalService) {}
 
   @MessagePattern({ cmd: FIND_ALL_ROOM })
-  GetRoomList(payload: number): Promise<Array<RoomListResponse>> {
+  GetRoomList(payload: number): Promise<Array<RoomInfoResponse>> {
     return this.roomService.GetUserRooms(payload);
   }
 
   @MessagePattern({ cmd: FIND_ROOM })
   findRoom(payload: number): Promise<RoomEntity> {
-    return this.roomService.getRoombyID(payload);
+    return this.roomService.getRoomByID(payload);
   }
 
   @MessagePattern({ cmd: UPDATE_ROOM })
@@ -41,7 +41,7 @@ export class RoomMicroserviceController {
   }
 
   @MessagePattern({ cmd: CREATE_ROOM })
-  CreateRoom(payload: CreateRoomReqeust): Promise<CreateRoomResponse> {
+  CreateRoom(payload: CreateRoomRequest): Promise<CreateRoomResponse> {
     return this.roomService.createRoom(payload);
   }
   @MessagePattern({ cmd: INVITE_ROOM })

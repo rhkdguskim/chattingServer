@@ -1,21 +1,29 @@
-import {CreateRoomReqeust, CreateRoomResponse, InviteRoomRequest, RoomListResponse} from "../dto/room.dto";
+import {
+    CreateRoomRequest,
+    CreateRoomResponse,
+    DeleteRoomRequest,
+    InviteRoomRequest,
+    RoomInfoResponse
+} from "../dto/room.dto";
 import {RoomEntity} from "@app/chat/entity/room.entity";
 import {ParticipantEntity} from "@app/chat/entity/participant.entity";
 
 export interface RoomService {
     createRoom(
-        createRoomDto: CreateRoomReqeust
+        createRoomDto: CreateRoomRequest
     ): Promise<CreateRoomResponse>;
 
     InviteRoom(
         inviteToRoom: InviteRoomRequest
     ): Promise<ParticipantEntity[]>;
 
-    GetUserRooms(user_id: number): Promise<Array<RoomListResponse>>;
+    GetUserRooms(user_id: number): Promise<Array<RoomInfoResponse>>;
 
-    getRoombyID(id: number): Promise<RoomEntity>;
+    getRoomByID(id: number): Promise<RoomEntity>;
 
-    getParticipaintsByUserID(id: number) : Promise<ParticipantEntity[]>
+    getParticipantByUserID(id: number) : Promise<ParticipantEntity[]>
 
     updateRoomStatus(room: RoomEntity): Promise<boolean>;
+
+    deleteRoom(deleteRoom : DeleteRoomRequest) : Promise<boolean>;
 }
