@@ -1,12 +1,12 @@
 import { PassportStrategy } from "@nestjs/passport";
 import { Strategy } from "passport-naver";
-import { OAuthData } from "@app/authorization/dto/oauth.dto";
 import * as config from "config";
+import { OAuthData } from "@app/authentication/dto/authenticaion.dto";
 
 interface Naver {
-  restApiKey : string,
-  secret : string,
-  redirectURL: string,
+  restApiKey: string;
+  secret: string;
+  redirectURL: string;
 }
 
 const naver = config.get<Naver>("naver");
@@ -28,6 +28,7 @@ export class JwtNaverStrategy extends PassportStrategy(Strategy, "naver") {
         user_id: user.email,
         password: profile.id,
         name: user.nickname,
+        status_msg: "",
       },
     };
     return done(null, response);

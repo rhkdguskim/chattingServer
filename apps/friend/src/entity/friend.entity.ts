@@ -1,23 +1,23 @@
 import { UserEntity } from "@app/authentication/entity/users.entity";
 
 export class FriendUserInfo {
-  constructor(user : FriendUserInfo) {
-    this.id = user.id
+  constructor(user: FriendUserInfo) {
+    this.id = user.id;
   }
-  id : number;
+  id: number;
 }
 
 export class FriendEntity {
-  constructor(friend : FriendEntity) {
+  constructor(friend: FriendEntity) {
     if (friend) {
-      this.id = friend.id
-      this.friend_id = friend.friend_id
-      this.friend_name = friend.friend_name
-      this.createdAt = friend.createdAt
-      this.updateAt = friend.updateAt
+      this.id = friend.id;
+      this.friend_id = friend.friend_id;
+      this.friend_name = friend.friend_name;
+      this.createdAt = friend.createdAt;
+      this.updateAt = friend.updateAt;
 
-      if(friend.user) {
-        this.user = new FriendUserInfo(friend.user)
+      if (friend.user) {
+        this.user = new FriendUserInfo(friend.user);
       }
     }
   }
@@ -26,5 +26,5 @@ export class FriendEntity {
   friend_name: string;
   createdAt: Date;
   updateAt: Date;
-  user : FriendUserInfo;
+  user: FriendUserInfo;
 }

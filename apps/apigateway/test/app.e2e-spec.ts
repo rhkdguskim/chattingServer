@@ -1,15 +1,14 @@
 import { Test, TestingModule } from "@nestjs/testing";
 import { INestApplication } from "@nestjs/common";
 import * as request from "supertest";
-import { AppModule } from "@src/app.module";
-import { AuthenticationControllerHttp } from "../../authentication/src/controller/authentication.controller.http";
+import { AuthenticationControllerImpl } from "@app/authentication/controller/authentication.controller";
 
 describe("OpenaiController (e2e)", () => {
   let app: INestApplication;
 
   beforeEach(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
-      controllers: [AuthenticationControllerHttp], // 테스트할 컨트롤러를 포함시킵니다.
+      controllers: [AuthenticationControllerImpl], // 테스트할 컨트롤러를 포함시킵니다.
     }).compile();
 
     app = moduleFixture.createNestApplication();

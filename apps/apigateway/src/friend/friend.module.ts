@@ -1,11 +1,11 @@
 import { Logger, Module } from "@nestjs/common";
-import { FriendHttpController } from "../../../friend/src/controller/friend.http.controller";
+import { FriendControllerImpl } from "@app/friend/controller/friend.controller";
 import { FriendServiceModule } from "../../../friend/src/module/friend.service.module";
 
 @Module({
-  imports: [FriendServiceModule.forRoot({isDev : false, isGlobal : false})],
+  imports: [FriendServiceModule.forRoot({ isDev: false, isGlobal: false })],
   providers: [Logger],
   exports: [],
-  controllers: [FriendHttpController],
+  controllers: [FriendControllerImpl],
 })
 export class FriendModule {}

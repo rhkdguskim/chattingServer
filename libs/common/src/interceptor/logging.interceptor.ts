@@ -10,9 +10,7 @@ import { JsonSocket } from "@nestjs/microservices";
 
 @Injectable()
 export class LoggingInterceptor implements NestInterceptor {
-  constructor(
-    private readonly logger: LoggerService
-  ) {}
+  constructor(private readonly logger: LoggerService) {}
   intercept(
     context: ExecutionContext,
     next: CallHandler<any>

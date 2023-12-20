@@ -9,7 +9,7 @@ import {
 import { FriendTypeORM } from "@app/common/typeorm/entity/friend.typeorm.entity";
 import { ChattingTypeORM } from "@app/common/typeorm/entity/chatting.typeorm.entity";
 import { ParticipantTypeORM } from "@app/common/typeorm/entity/participant.typeorm.entity";
-import {Role, UserEntity} from "@app/authentication/entity/users.entity";
+import { Role, UserEntity } from "@app/authentication/entity/users.entity";
 
 @Entity({ name: "user" })
 export class UserTypeORM implements UserEntity {
@@ -70,5 +70,4 @@ export class UserTypeORM implements UserEntity {
 
   @Column({ type: "enum", enum: Role, default: Role.USER })
   role: Role;
-
 }

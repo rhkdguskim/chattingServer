@@ -1,20 +1,20 @@
 import * as config from "config";
 
 interface Server {
-    host : string,
-    port : number,
-    filehost : string,
-    fileport : number,
-    authenticationhost : string,
-    authenticationport : number,
-    authorizationhost  : string,
-    authorizationport : number,
-    friendhost  : string,
-    friendport : number,
-    chathost  : string,
-    chatport : number,
-    roomhost  : string,
-    roomport : number,
+  host: string;
+  port: number;
+  filehost: string;
+  fileport: number;
+  authenticationhost: string;
+  authenticationport: number;
+  authorizationhost: string;
+  authorizationport: number;
+  friendhost: string;
+  friendport: number;
+  chathost: string;
+  chatport: number;
+  roomhost: string;
+  roomport: number;
 }
 
 const server = config.get<Server>("server");

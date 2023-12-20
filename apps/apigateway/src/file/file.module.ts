@@ -1,17 +1,7 @@
 import { Module } from "@nestjs/common";
-import { MulterModule } from "@nestjs/platform-express";
-import { FileService } from "./file.service";
-import { multerOptionsFactory } from "@src/util/multer.options.factory";
-import { FileController } from "./file.controller";
+import { FileModuleService } from "@app/file/file.module";
 
 @Module({
-  imports: [
-    MulterModule.registerAsync({
-      useFactory: multerOptionsFactory,
-    }),
-  ],
-  controllers: [FileController],
-  providers: [FileService],
-  exports: [FileService],
+  imports: [FileModuleService],
 })
 export class FileModule {}

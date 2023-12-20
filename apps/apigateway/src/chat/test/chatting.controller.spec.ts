@@ -1,5 +1,5 @@
 import { Test, TestingModule } from "@nestjs/testing";
-import { ChatHttpController } from "../../../../chat/src/controller/chat.http.controller";
+import { ChatControllerImpl } from "@app/chat/controller/chat.controller";
 import { CacheRedisModule } from "@src/util/cacheRedis.module";
 import { Logger } from "@nestjs/common";
 import { ChattingService } from "../chat.service";
@@ -13,7 +13,7 @@ import { AuthorizationJwtStrategy } from "@app/authorization/guards/authorizatio
 import { AuthModule } from "@src/auth/auth.module";
 
 describe("ChattingController", () => {
-  let controller: ChatHttpController;
+  let controller: ChatControllerImpl;
 
   beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -23,11 +23,11 @@ describe("ChattingController", () => {
         AuthModule,
         TypeOrmModule.forFeature([Chatting, Room, Participant, ReadBy]),
       ],
-      controllers: [ChatHttpController],
+      controllers: [ChatControllerImpl],
       providers: [AuthorizationJwtStrategy, Logger, ChattingService],
     }).compile();
 
-    controller = module.get<ChatHttpController>(ChatHttpController);
+    controller = module.get<ChatControllerImpl>(ChatControllerImpl);
   });
 
   describe("ChattingController", () => {

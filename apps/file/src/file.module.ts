@@ -19,4 +19,4 @@ import * as path from "path";
   providers: [FileService],
   exports: [FileService],
 })
-export class FileModule {}
+export class FileModuleService {}

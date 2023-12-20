@@ -11,7 +11,7 @@ import { Observable, tap, of } from "rxjs";
 import { CACHE_MANAGER } from "@nestjs/cache-manager";
 import { Cluster } from "ioredis";
 import { Reflector } from "@nestjs/core";
-import {ResponseMessage} from "../dto/chat.dto";
+import { ResponseMessage } from "../dto/chat.dto";
 
 @Injectable()
 export class SendMessageCacheInterceptor implements NestInterceptor {

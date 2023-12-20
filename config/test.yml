@@ -4,8 +4,8 @@ db:
   port: 13306
   username: 'root'
   password: 'root'
-  database: 'kwangtalk'
-  synchronize: false
+  database: 'test'
+  synchronize: true
 
 log:
   loglevel : 'debug'

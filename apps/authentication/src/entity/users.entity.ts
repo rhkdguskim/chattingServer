@@ -1,4 +1,4 @@
-import {FriendEntity} from "@app/friend/entity/friend.entity";
+import { FriendEntity } from "@app/friend/entity/friend.entity";
 
 export enum Role {
   ADMIN = 0,
@@ -14,12 +14,12 @@ export class UserEntity {
     this.status_msg = user.status_msg;
     this.profile_img_url = user.profile_img_url;
     this.role = user.role;
-    if(user.friends) {
+    if (user.friends) {
       this.friends = user.friends.map((friend) => {
-        return new FriendEntity(friend)
+        return new FriendEntity(friend);
       });
     } else {
-      this.friends = []
+      this.friends = [];
     }
   }
   id: number;
@@ -29,6 +29,6 @@ export class UserEntity {
   status_msg: string;
   profile_img_url: string;
   background_img_url: string;
-  role : Role;
-  friends : FriendEntity[];
+  role: Role;
+  friends: FriendEntity[];
 }

@@ -9,11 +9,13 @@ import { SwaggerModule, DocumentBuilder } from "@nestjs/swagger";
 export function setupSwagger(app: INestApplication): void {
   const options = new DocumentBuilder()
     .setTitle("Chatting Server API Docs")
-    .setDescription("Chatting Server API description, RealTime Chatting Application")
+    .setDescription(
+      "Chatting Server API description, RealTime Chatting Application"
+    )
     .setVersion("1.0.0")
     .addApiKey(
       { type: "apiKey", name: "authentication", in: "header" },
-      "authentication",
+      "authentication"
     )
     .addOAuth2()
     .build();

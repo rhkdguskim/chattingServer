@@ -1,5 +1,5 @@
 export interface BcryptService {
-    compare(cmp1: string, cmp2: string): boolean;
+  compare(cmp1: string, cmp2: string): boolean;
 
-    hash(payload: string): string;
+  hash(payload: string): string;
 }

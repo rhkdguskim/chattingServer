@@ -1,13 +1,14 @@
 import { PassportStrategy } from "@nestjs/passport";
 import { Strategy } from "passport-kakao";
 import * as config from "config";
-import { KakaoUserResponse } from "@app/authorization/dto/kakao.auth.dto";
-import { OAuthData } from "@app/authorization/dto/oauth.dto";
+import { KakaoUserResponse } from "@app/authentication/dto/authentication.kakao.dto";
+
+import { OAuthData } from "@app/authentication/dto/authenticaion.dto";
 
 interface Kakao {
-  restApiKey : string,
-  secret : string,
-  redirectURL: string,
+  restApiKey: string;
+  secret: string;
+  redirectURL: string;
 }
 
 const kakao = config.get<Kakao>("kakao");
@@ -36,6 +37,7 @@ export class JwtKakaoStrategy extends PassportStrategy(Strategy, "kakao") {
         user_id: user.kakao_account.email,
         password: String(user.id),
         name: user.kakao_account.name,
+        status_msg: "",
       },
     };
     return done(null, response);

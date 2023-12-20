@@ -1,5 +1,5 @@
-import {JWTRequest, JWTResponse, TokenRequest} from "../dto/authorization.dto";
+import { TokenInfoRequest, TokenInfoResponse } from "../dto/authorization.dto";
 
 export interface AuthorizationController {
-    verify(payload: JWTRequest): Promise<JWTResponse>;
+  verify(payload: TokenInfoRequest): Promise<TokenInfoResponse>;
 }

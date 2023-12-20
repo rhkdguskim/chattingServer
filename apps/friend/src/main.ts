@@ -11,7 +11,9 @@ async function bootstrap() {
     FriendModule,
     {
       logger: winstonLogger({
-          filepath: "Friend MicroService", loglevel: "debug", name: "Friend MicroService"
+        filepath: "Friend MicroService",
+        loglevel: "debug",
+        name: "Friend MicroService",
       }),
       transport: Transport.TCP,
       options: {

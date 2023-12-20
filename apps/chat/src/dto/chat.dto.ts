@@ -1,9 +1,9 @@
-import {IsNumber, IsString} from "class-validator";
-import {ApiProperty} from "@nestjs/swagger";
+import { IsNumber, IsString } from "class-validator";
+import { ApiProperty } from "@nestjs/swagger";
 
 export class ChattingListRequest {
-  constructor(chatRequest : ChattingListRequest) {
-    this.id = chatRequest.id
+  constructor(chatRequest: ChattingListRequest) {
+    this.id = chatRequest.id;
     if ((chatRequest.cursor as any) == "null") {
       this.cursor = 9999999999;
     }
@@ -23,28 +23,28 @@ export enum ChatType {
 }
 
 export class ChatRoomInfo {
-  constructor(roomInfo : ChatRoomInfo) {
-    this.id = roomInfo.id
+  constructor(roomInfo: ChatRoomInfo) {
+    this.id = roomInfo.id;
   }
-  id : number;
+  id: number;
 }
 
 export class ChatUserInfo {
-  constructor(userInfo : ChatUserInfo) {
-    this.id = userInfo.id
+  constructor(userInfo: ChatUserInfo) {
+    this.id = userInfo.id;
   }
 
-  id : number;
+  id: number;
 }
 
 export class ChattingResponse {
-  constructor(chat : ChattingResponse) {
-    this.id = chat.id
-    this.user = new ChatUserInfo(chat.user)
-    this.room = new ChatRoomInfo(chat.room)
-    this.message = chat.message
-    this.not_read_chat = chat.not_read_chat
-    this.createdAt = chat.createdAt
+  constructor(chat: ChattingResponse) {
+    this.id = chat.id;
+    this.user = new ChatUserInfo(chat.user);
+    this.room = new ChatRoomInfo(chat.room);
+    this.message = chat.message;
+    this.not_read_chat = chat.not_read_chat;
+    this.createdAt = chat.createdAt;
   }
   @ApiProperty({ description: "ID" })
   id: number;
@@ -66,19 +66,28 @@ export class ChattingResponse {
 }
 
 export class RequestMessage {
-  @ApiProperty({ description: "방 ID" })
+  @IsNumber()
+  @ApiProperty({ description: "Room ID" })
   room_id: number;
 
   @IsString()
-  @ApiProperty({ description: "메세지" })
+  @ApiProperty({ description: "Message" })
   message: string;
 
   @IsNumber()
-  @ApiProperty({ description: "메세지 타입" })
+  @ApiProperty({ description: "Message Type" })
   messageType: ChatType;
 }
 
 export class ResponseMessage {
+  constructor(responseMessage: ResponseMessage) {
+    this.id = responseMessage.id;
+    this.room_id = responseMessage.room_id;
+    this.user_id = responseMessage.user_id;
+    this.message = responseMessage.message;
+    this.not_read_chat = responseMessage.not_read_chat;
+    this.createdAt = responseMessage.createdAt;
+  }
   @ApiProperty({ description: "채팅 ID" })
   id: number;
 
@@ -127,12 +136,12 @@ export class ResponseMultiRead {
 }
 
 export class ResponseSingleRead {
-  @ApiProperty({description: "Chatting ID"})
+  @ApiProperty({ description: "Chatting ID" })
   id: number;
 
-  @ApiProperty({description: "방 ID"})
+  @ApiProperty({ description: "방 ID" })
   room_id: number;
 
-  @ApiProperty({description: "읽은사람 ID"})
+  @ApiProperty({ description: "읽은사람 ID" })
   user_id: number;
 }

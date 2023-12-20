@@ -1,5 +1,5 @@
 import * as bcrypt from "bcrypt";
-import {BcryptService} from "./bcrpy.interface";
+import { BcryptService } from "./bcrpy.interface";
 
 export class NodeBcryptService implements BcryptService {
   constructor() {}

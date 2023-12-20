@@ -1,37 +1,38 @@
-import {RoomEntity} from "@app/chat/entity/room.entity";
-import {Repository} from "@app/common/interface/repository.interface";
-import {ParticipantTypeORM} from "@app/common/typeorm/entity/participant.typeorm.entity";
+import { RoomEntity } from "@app/chat/entity/room.entity";
 import {
-    CreateRoomRequest,
-    CreateRoomResponse,
-    DeleteRoomRequest,
-    InviteRoomRequest,
-    RoomInfoResponse
+  CreateRoomRequest,
+  CreateRoomResponse,
+  DeleteRoomRequest,
+  InviteRoomRequest,
+  RoomInfoResponse,
 } from "@app/chat/dto/room.dto";
-import {RoomTypeORM} from "@app/common/typeorm/entity/room.typeorm.entity";
+import { RoomTypeORM } from "@app/common/typeorm/entity/room.typeorm.entity";
+import { ParticipantEntity } from "@app/chat/entity/participant.entity";
 
-export interface RoomRepository extends Repository<RoomEntity> {
-    findOne(id : number) : Promise<RoomEntity>
-}
+export interface RoomRepository {
+  getRoomByID(id: number): Promise<RoomEntity>;
 
-export interface RoomTransactionRepository {
-    getRoomByID(id : number) : Promise<RoomEntity>;
+  updateRoom(room: RoomEntity): Promise<boolean>;
 
-    updateRoom(room : RoomEntity) : Promise<boolean>;
+  getParticipantByUserID(id: number): Promise<ParticipantEntity[]>;
 
-    getParticipantByUserID(id: number): Promise<ParticipantTypeORM[]>;
+  getParticipantByRoomID(id: number): Promise<ParticipantEntity[]>;
 
-    getParticipantByRoomID(id: number): Promise<ParticipantTypeORM[]>;
+  getRoomInfoByParticipants(
+    user_id: number,
+    createRoom: CreateRoomRequest
+  ): Promise<RoomTypeORM>;
 
-    getRoomInfoByParticipants(createRoom : CreateRoomRequest) : Promise<RoomTypeORM>;
+  getUserRoom(user_id: number): Promise<Array<RoomInfoResponse>>;
 
-    getUserRoom(user_id: number): Promise<Array<RoomInfoResponse>>;
+  inviteRoom(inviteToRoomDto: InviteRoomRequest): Promise<ParticipantEntity[]>;
 
-    inviteRoom(inviteToRoomDto: InviteRoomRequest): Promise<ParticipantTypeORM[]>;
+  createRoom(
+    user_id: number,
+    createRoomDto: CreateRoomRequest
+  ): Promise<CreateRoomResponse>;
 
-    createRoom(createRoomDto: CreateRoomRequest): Promise<CreateRoomResponse>;
+  countParticipantsByRoomID(id: number): Promise<number>;
 
-    countParticipantsByRoomID(id : number) : Promise<number>;
-
-    deleteRoom(deleteRoom : DeleteRoomRequest) : Promise<boolean>;
+  deleteRoom(deleteRoom: DeleteRoomRequest): Promise<boolean>;
 }

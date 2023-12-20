@@ -12,7 +12,8 @@ import { typeOrmConfig } from "@app/common/module";
 
 @Module({
   imports: [
-    AuthenticationServiceModule.forRoot({isDev : false, isGlobal :true}), AuthorizationServiceModule.forRoot({isDev: false, isGlobal:true}),
+    AuthenticationServiceModule.forRoot(),
+    AuthorizationServiceModule.forRoot({ isDev: false, isGlobal: true }),
     TypeOrmModule.forRoot(typeOrmConfig),
     CacheRedisModule,
     AuthModule,

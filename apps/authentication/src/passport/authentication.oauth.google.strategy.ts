@@ -1,12 +1,12 @@
 import { PassportStrategy } from "@nestjs/passport";
 import { Strategy } from "passport-google-oauth20";
-import { OAuthData } from "@app/authorization/dto/oauth.dto";
 import config from "config";
+import { OAuthData } from "@app/authentication/dto/authenticaion.dto";
 
 interface google {
-  restApiKey : string,
-  secret : string,
-  redirectURL: string,
+  restApiKey: string;
+  secret: string;
+  redirectURL: string;
 }
 
 const google = config.get<google>("google");
@@ -21,12 +21,7 @@ export class JwtGoogleStrategy extends PassportStrategy(Strategy, "google") {
     });
   }
 
-  async validate(
-    access_token: string,
-    refresh_token: string,
-    profile: any,
-    done
-  ) {
+  async validate(access_token: string, refresh_token: string, profile, done) {
     const user = profile._json;
     const response: OAuthData = {
       access_token,
@@ -35,6 +30,7 @@ export class JwtGoogleStrategy extends PassportStrategy(Strategy, "google") {
         user_id: user.email,
         password: String(profile.id),
         name: user.name,
+        status_msg: "",
       },
     };
     return done(null, response);

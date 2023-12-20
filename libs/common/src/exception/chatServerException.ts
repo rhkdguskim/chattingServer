@@ -3,11 +3,12 @@ https://docs.nestjs.com/exception-filters#custom-exceptions
 */
 
 export enum ChatServerExceptionCode {
-  AUTHENTICATION = 1,
-  AUTHORIZATION = 2,
-  NOT_FOUND = 3,
-  ALREADY_EXIST = 4,
-  FORBIDDEN = 5,
+  Database = 0,
+  Authentication = 1,
+  Authorization = 2,
+  NotFound = 3,
+  Already_Exist = 4,
+  Forbidden = 5,
 }
 
 export interface CustomExceptionMessage {
@@ -17,7 +18,7 @@ export interface CustomExceptionMessage {
 
 export class ChatServerException extends Error {
   private readonly msg: CustomExceptionMessage;
-  private readonly code : ChatServerExceptionCode;
+  private readonly code: ChatServerExceptionCode;
   constructor(msg: CustomExceptionMessage) {
     super();
     this.msg = msg;
@@ -32,7 +33,7 @@ export class ChatServerException extends Error {
     return this.msg;
   }
 
-  getCode() : ChatServerExceptionCode {
+  getCode(): ChatServerExceptionCode {
     return this.msg.code;
   }
 }

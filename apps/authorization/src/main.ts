@@ -14,7 +14,11 @@ async function bootstrap() {
   const app = await NestFactory.createMicroservice<MicroserviceOptions>(
     AuthorizationModule,
     {
-      logger: winstonLogger({name:'Authorization MicroService', loglevel : 'debug', filepath : 'Authorization MicroService'}),
+      logger: winstonLogger({
+        name: "Authorization MicroService",
+        loglevel: "debug",
+        filepath: "Authorization MicroService",
+      }),
       transport: Transport.TCP,
       options: {
         host: AUTHORIZAION_HOST,

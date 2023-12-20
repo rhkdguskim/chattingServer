@@ -1,35 +1,27 @@
-import {IsString} from "class-validator";
-import {ApiProperty} from "@nestjs/swagger";
-import {Role, UserEntity} from "@app/authentication/entity/users.entity";
+import { ApiProperty } from "@nestjs/swagger";
+import { Role } from "@app/authentication/entity/users.entity";
 
-export class JWTRequest {
-    constructor(user : UserEntity) {
-        this.id = user.id;
-        this.user_id =  user.user_id;
-        this.role = user.role
-    }
+export class TokenInfoRequest {
+  constructor(user: TokenInfoRequest) {
+    this.id = user.id;
+    this.user_id = user.user_id;
+    this.role = user.role;
+  }
 
-    @ApiProperty({description: "User indexed ID"})
-    id: number;
+  @ApiProperty({ description: "User indexed ID" })
+  id: number;
 
-    @ApiProperty({description: "User ID"})
-    user_id: string;
+  @ApiProperty({ description: "User ID" })
+  user_id: string;
 
-    @ApiProperty({description: "Role"})
-    role : Role
+  @ApiProperty({ description: "Role" })
+  role: Role;
 }
 
-export class JWTResponse extends JWTRequest {
-    iat: string;
-}
-
-export class TokenRequest {
-    @IsString()
-    @ApiProperty({description: "refresh Token"})
-    refresh_token : string;
-}
-
-export interface OAuthRequest {
-    access_token: string;
-    refresh_token: string;
+export class TokenInfoResponse extends TokenInfoRequest {
+  constructor(jwtResponse: TokenInfoResponse) {
+    super({ ...jwtResponse });
+    this.iat = jwtResponse.iat;
+  }
+  iat: string;
 }

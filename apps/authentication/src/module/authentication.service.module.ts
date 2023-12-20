@@ -1,22 +1,21 @@
 import { DynamicModule, Module } from "@nestjs/common";
-import { AuthenticationLocalService } from "../providers/authentication.local.service";
+import { AuthenticationServiceImpl } from "../providers/authentication.service";
 import { UserTypeORMRepository } from "../repository/users.typeorm.repository";
 import { NodeBcryptService } from "../providers/bcrypt/bcrpy.service";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import {AUTHENTICATION_BCRYPT, AUTHENTICATION_SERVICE, USER_REPOSITORY} from "../authentication.metadata";
-import {UserTypeORM} from "@app/common/typeorm/entity/users.typeorm.entity";
-import {JwtModule} from "@app/common/auth/jwtModule";
-
-export interface AuthenticationServiceModuleConfig {
-  isDev: boolean;
-  isGlobal : boolean;
-}
+import {
+  AUTHENTICATION_BCRYPT,
+  AUTHENTICATION_SERVICE,
+  USER_REPOSITORY,
+} from "../authentication.metadata";
+import { UserTypeORM } from "@app/common/typeorm/entity/users.typeorm.entity";
+import { JwtModule } from "@app/common/auth/jwtModule";
 
 @Module({})
 export class AuthenticationServiceModule {
-  static forRoot(config: AuthenticationServiceModuleConfig): DynamicModule {
-    const module: DynamicModule = {
-      module : AuthenticationServiceModule,
+  static forRoot(): DynamicModule {
+    return {
+      module: AuthenticationServiceModule,
       imports: [JwtModule, TypeOrmModule.forFeature([UserTypeORM])],
       providers: [
         {
@@ -25,18 +24,14 @@ export class AuthenticationServiceModule {
         },
         {
           provide: AUTHENTICATION_SERVICE,
-          useClass: AuthenticationLocalService,
+          useClass: AuthenticationServiceImpl,
         },
         {
           provide: AUTHENTICATION_BCRYPT,
           useClass: NodeBcryptService,
         },
       ],
-      exports: [AUTHENTICATION_BCRYPT, AUTHENTICATION_SERVICE, USER_REPOSITORY]
+      exports: [AUTHENTICATION_BCRYPT, AUTHENTICATION_SERVICE, USER_REPOSITORY],
     };
-    if (config.isGlobal) {
-      module.global = true
-    }
-    return module;
-  };
+  }
 }

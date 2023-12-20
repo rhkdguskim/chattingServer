@@ -1,5 +1,4 @@
 import { Test, TestingModule } from "@nestjs/testing";
-import { ChatHttpController } from "../../../../chat/src/controller/chat.http.controller";
 import { CacheRedisModule } from "@src/util/cacheRedis.module";
 import { ForbiddenException, Logger, ValidationPipe } from "@nestjs/common";
 import { DatabaseModule } from "@src/util/database.module";
@@ -8,16 +7,15 @@ import { Participant } from "@src/entitys/participant.entity";
 import { Room } from "@src/entitys/room.entity";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { ReadBy } from "../../entitys/readby.entity";
-import { RoomHttpController } from "../../../../chat/src/controller/room.http.controller";
+import { RoomControllerImpl } from "@app/chat/controller/room.controller";
 import { RoomService } from "../room.service";
-import { User } from "@src/entitys/users.entity";
 import { AuthorizationJwtStrategy } from "@app/authorization/guards/authorization.jwt.strategy";
 import { AuthModule } from "@src/auth/auth.module";
 
-import {CreateRoomRequest} from "../../../../chat/src/dto/room.dto";
+import { CreateRoomRequest } from "../../../../chat/src/dto/room.dto";
 
 describe("Room Controller", () => {
-  let controller: RoomHttpController;
+  let controller: RoomControllerImpl;
   let validationPipe: ValidationPipe;
 
   beforeAll(async () => {
@@ -28,7 +26,7 @@ describe("Room Controller", () => {
         AuthModule,
         TypeOrmModule.forFeature([Chatting, Room, Participant, ReadBy]),
       ],
-      controllers: [RoomHttpController],
+      controllers: [RoomControllerImpl],
       providers: [AuthorizationJwtStrategy, Logger, RoomService],
     }).compile();
 
@@ -40,7 +38,7 @@ describe("Room Controller", () => {
       },
     });
 
-    controller = module.get<RoomHttpController>(RoomHttpController);
+    controller = module.get<RoomControllerImpl>(RoomControllerImpl);
   });
 
   describe("Room Controller", () => {

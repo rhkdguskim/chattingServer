@@ -1,3 +1,7 @@
+### 기능
+- 인증 : token 발급
+- 
+
 ``` mermaid
 flowchart TD
     A[API GateWay] --> B(Authenication MicroService)

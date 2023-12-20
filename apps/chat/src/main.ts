@@ -9,7 +9,9 @@ async function bootstrap() {
     ChatModule,
     {
       logger: winstonLogger({
-          filepath: "Chatting MicroService", loglevel: "debug", name: "Chatting MicroService"
+        filepath: "Chatting MicroService",
+        loglevel: "debug",
+        name: "Chatting MicroService",
       }),
       transport: Transport.TCP,
       options: {
