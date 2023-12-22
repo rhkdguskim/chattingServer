@@ -23,7 +23,7 @@ export class JwtGuard implements CanActivate {
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const request: Request = context.switchToHttp().getRequest();
 
-    const authToken: string = request.headers["authentication"] as string;
+    const authToken: string = request.headers["authorization"] as string;
 
     if (!authToken && typeof authToken !== "string") {
       throw new ChatServerException({

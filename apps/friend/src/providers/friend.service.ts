@@ -5,6 +5,7 @@ import { FriendEntity } from "../entity/friend.entity";
 import { FriendRepository } from "../repository/friend.repository.interface";
 import {
   CreateFriendRequest,
+  CreateFriendResponse,
   DeleteFriendRequest,
   UpdateFriendRequest,
 } from "../dto/friend.dto";
@@ -13,55 +14,49 @@ import {
   ChatServerException,
   ChatServerExceptionCode,
 } from "@app/common/exception/chatServerException";
+import { UserInfoResponse } from "@app/authentication/dto/authenticaion.dto";
+import { FriendService } from "@app/friend/providers/friend.service.interface";
 
 @Injectable()
-export class FriendServiceImpl implements FriendServiceImpl {
+export class FriendServiceImpl implements FriendService {
   constructor(
     @Inject(FRIEND_REPOSITORY)
     private friendRepository: FriendRepository
   ) {}
 
-  async getFriends(id: number): Promise<FriendEntity[]> {
-    const friends = await this.friendRepository.getMyFriends(id);
+  async getFriends(user_id: number): Promise<UserInfoResponse[]> {
+    const friends = await this.friendRepository.getFriends(user_id);
 
     return friends.map((friend) => {
-      return new FriendEntity(friend);
-    });
-  }
-
-  async getMyFriends(id: number): Promise<FriendEntity[]> {
-    const friends = await this.friendRepository.getMyFriends(id);
-    return friends.map((friend) => {
-      return new FriendEntity(friend);
+      return new UserInfoResponse(friend);
     });
   }
 
   async addFriend(
     user_id: number,
     createFriend: CreateFriendRequest
-  ): Promise<FriendEntity> {
+  ): Promise<CreateFriendResponse> {
     if (user_id == createFriend.friend_id) {
       throw new ChatServerException({
         code: ChatServerExceptionCode.Forbidden,
         message: "You Can't be as Friend Self",
       });
     }
-
     const { friend_id, friend_name } = createFriend;
 
-    // 이미 등록된 친구라면
-    const friends: FriendEntity[] = await this.getMyFriends(user_id);
-
-    friends.map((friend) => {
-      if (friend.friend_id == friend_id) {
-        throw new ChatServerException({
-          code: ChatServerExceptionCode.Already_Exist,
-          message: "Already Exist",
-        });
-      }
+    const friend: FriendEntity = await this.friendRepository.findFriend({
+      user_id,
+      friend_id,
     });
 
-    return new FriendEntity(
+    if (friend) {
+      throw new ChatServerException({
+        code: ChatServerExceptionCode.Already_Exist,
+        message: "Already Exist",
+      });
+    }
+
+    return new CreateFriendResponse(
       await this.friendRepository.create({
         user: { id: user_id } as UserEntity,
         friend_id,
@@ -74,9 +69,9 @@ export class FriendServiceImpl implements FriendServiceImpl {
     user_id: number,
     delFriend: DeleteFriendRequest
   ): Promise<boolean> {
-    const foundFriend = await this.friendRepository.findFriendById({
+    const foundFriend = await this.friendRepository.findFriend({
       user_id: user_id,
-      id: delFriend.id,
+      friend_id: delFriend.friend_id,
     });
     if (!foundFriend) {
       throw new ChatServerException({
@@ -90,15 +85,23 @@ export class FriendServiceImpl implements FriendServiceImpl {
   async changeFriendName(
     user_id: number,
     updateFriend: UpdateFriendRequest
-  ): Promise<any> {
-    const { id } = updateFriend;
-    const friend: FriendEntity = await this.friendRepository.findFriendById({
+  ): Promise<boolean> {
+    const friend: FriendEntity = await this.friendRepository.findFriend({
       user_id: user_id,
-      id,
+      friend_id: updateFriend.friend_id,
     });
 
     if (friend && friend.friend_id == updateFriend.friend_id) {
-      return await this.friendRepository.update(id, updateFriend);
+      if (friend.friend_name === updateFriend.friend_name) {
+        throw new ChatServerException({
+          code: ChatServerExceptionCode.Already_Exist,
+          message: "Same Friend Name",
+        });
+      }
+
+      return await this.friendRepository.update(user_id, {
+        ...updateFriend,
+      });
     } else {
       throw new ChatServerException({
         code: ChatServerExceptionCode.NotFound,

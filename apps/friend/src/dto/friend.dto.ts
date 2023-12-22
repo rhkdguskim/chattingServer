@@ -4,12 +4,12 @@ import { FriendEntity } from "@app/friend/entity/friend.entity";
 
 export class FindFriendRequest {
   @IsNumber()
-  @ApiProperty({ description: "Friend Unique ID" })
-  id: number;
-
   @ApiProperty({ description: "User ID" })
-  @IsNumber()
   user_id: number;
+
+  @ApiProperty({ description: "Friend ID" })
+  @IsNumber()
+  friend_id: number;
 }
 
 export class FindFriendAllRequest {
@@ -29,10 +29,6 @@ export class CreateFriendRequest {
 }
 
 export class UpdateFriendRequest {
-  @IsNumber()
-  @ApiProperty({ description: "Friend Unique ID" })
-  id: number;
-
   @IsNumber()
   @ApiProperty({ description: "Friend ID" })
   friend_id: number;
@@ -62,10 +58,6 @@ export class CreateFriendResponse {
 }
 
 export class DeleteFriendRequest {
-  @IsNumber()
-  @ApiProperty({ description: "Friend Unique ID" })
-  id: number;
-
   @IsNumber()
   @ApiProperty({ description: "Friend ID" })
   friend_id: number;

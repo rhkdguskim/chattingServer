@@ -1,28 +1,24 @@
-import { Logger, Module } from "@nestjs/common";
-import { ChatServiceImpl } from "./providers/chat.service";
+import { Module } from "@nestjs/common";
+import { ChatServiceImpl } from "../providers/chat.service";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { ChatGatewayImpl } from "./gateway/chatGatewayImpl";
-import { typeOrmConfig } from "@app/common/module";
+import { ChatGatewayImpl } from "../gateway/chatGatewayImpl";
 import { ChattingTypeORM } from "@app/common/typeorm/entity/chatting.typeorm.entity";
 import { ParticipantTypeORM } from "@app/common/typeorm/entity/participant.typeorm.entity";
 import { RoomTypeORM } from "@app/common/typeorm/entity/room.typeorm.entity";
 import { ReadByTypeORM } from "@app/common/typeorm/entity/readby.typeorm.entity";
-import { ChatControllerImpl } from "./controller/chat.controller";
-import { RoomControllerImpl } from "./controller/room.controller";
-import { RoomServiceImpl } from "./providers/room.service";
+import { RoomServiceImpl } from "../providers/room.service";
 import {
   CHAT_GATEWAY,
   CHAT_REPOSITORY,
   CHAT_SERVICE,
   ROOM_REPOSITORY,
   ROOM_SERVICE,
-} from "./chat.metadata";
+} from "../chat.metadata";
 import { ChatTypeormRepository } from "@app/chat/repository/chat.typeorm.repository";
 import { RoomTypeormRepository } from "@app/chat/repository/room.typeorm.transaction";
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot(typeOrmConfig),
     TypeOrmModule.forFeature([
       ChattingTypeORM,
       ParticipantTypeORM,
@@ -51,8 +47,13 @@ import { RoomTypeormRepository } from "@app/chat/repository/room.typeorm.transac
       provide: CHAT_GATEWAY,
       useClass: ChatGatewayImpl,
     },
-    Logger,
   ],
-  controllers: [ChatControllerImpl, RoomControllerImpl],
+  exports: [
+    CHAT_REPOSITORY,
+    ROOM_REPOSITORY,
+    CHAT_SERVICE,
+    ROOM_SERVICE,
+    CHAT_GATEWAY,
+  ],
 })
-export class ChatModule {}
+export class ChatServiceModule {}

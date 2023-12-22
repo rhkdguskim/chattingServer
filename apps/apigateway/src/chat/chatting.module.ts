@@ -1,5 +1,5 @@
 import { Logger, Module } from "@nestjs/common";
-import { ChatModule } from "../../../chat/src/chat.module";
+import { ChatModule } from "@app/chat/module/chat.module";
 
 @Module({
   imports: [ChatModule],

@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { ArrayMinSize, IsNumber, IsOptional, IsString } from "class-validator";
+import { IsNumber, IsOptional, IsString } from "class-validator";
 import { RoomEntity, RoomType } from "@app/chat/entity/room.entity";
 
 export class RoomInfoResponse {
@@ -121,13 +121,13 @@ export class CreateRoomRequest {
   @ApiProperty({ description: "Room Name" })
   @IsString()
   @IsOptional()
-  room_name: string = "NO Name";
+  room_name: string = "";
 
   @ApiProperty({ description: "Participants Info" })
-  @ArrayMinSize(0, { message: "참가자 유저목록은 0명 이상이어야합니다." })
-  participant!: ParticipantUserInfo[];
+  participant: ParticipantUserInfo[];
 
   @ApiProperty({ description: "Room Type" })
   @IsNumber()
+  @IsOptional()
   room_type: RoomType;
 }

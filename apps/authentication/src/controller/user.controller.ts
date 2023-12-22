@@ -70,7 +70,7 @@ export class UsersControllerImpl implements UsersController {
     await this.authenticationService.deleteUser(payload);
   }
 
-  @UseGuards(JwtGuard, SelfGuard)
+  @UseGuards(JwtGuard)
   @Get(":id")
   @ApiParam({
     name: "id",
@@ -84,7 +84,7 @@ export class UsersControllerImpl implements UsersController {
     if (!isNaN(+id)) {
       id = Number(id);
     }
-    return await this.authenticationService.findUserByID(Number(id));
+    return await this.authenticationService.findUserByID(id);
   }
 
   @UseGuards(JwtGuard, SelfGuard)

@@ -1,9 +1,11 @@
 import { DeepPartial, DeleteResult, Repository } from "typeorm";
 import { QueryDeepPartialEntity } from "typeorm/query-builder/QueryPartialEntity";
+import { ObjectId } from "typeorm/driver/mongodb/typings";
+import { FindOptionsWhere } from "typeorm/find-options/FindOptionsWhere";
 
 export abstract class TypeormRepository<T> {
-  protected repository: Repository<any>;
-  protected constructor(repository: Repository<any>) {
+  protected repository: Repository<T>;
+  protected constructor(repository: Repository<T>) {
     this.repository = repository;
   }
 
@@ -17,10 +19,19 @@ export abstract class TypeormRepository<T> {
   }
 
   public async update(
-    id: string | number,
-    data: QueryDeepPartialEntity<T>
+    criteria:
+      | string
+      | string[]
+      | number
+      | number[]
+      | Date
+      | Date[]
+      | ObjectId
+      | ObjectId[]
+      | FindOptionsWhere<T>,
+    partialEntity: QueryDeepPartialEntity<T>
   ): Promise<boolean> {
-    const result = await this.repository.update(id, data);
+    const result = await this.repository.update(criteria, partialEntity);
     return result.affected >= 1;
   }
 

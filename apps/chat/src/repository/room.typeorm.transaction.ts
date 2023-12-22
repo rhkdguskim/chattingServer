@@ -48,15 +48,20 @@ export class RoomTypeormRepository implements RoomRepository {
     const { participant } = createRoom;
     const participantIds = participant.map((p) => p.id);
 
-    return await this.manager
-      .getRepository(RoomTypeORM)
-      .createQueryBuilder("room")
-      .innerJoinAndSelect("room.participants", "participant")
-      .innerJoinAndSelect("participant.user", "user")
-      .where("room.type = :roomType", { roomType: createRoom.room_type })
-      .andWhere("user.id IN (:...participantIds)", { participantIds })
-      .andWhere("user.id = :user_id", { user_id })
-      .getOne();
+    return await this.manager.transaction(
+      async (transactionalEntityManager) => {
+        return await transactionalEntityManager
+          .getRepository(RoomTypeORM)
+          .createQueryBuilder("room")
+          .innerJoinAndSelect("room.participants", "participant")
+          .innerJoinAndSelect("participant.user", "user")
+          .where("room.type = :roomType", { roomType: createRoom.room_type })
+          .andWhere("participant.user IN (:...participantIds)", {
+            participantIds,
+          })
+          .getOne();
+      }
+    );
   }
 
   async countParticipantsByRoomID(id: number): Promise<number> {

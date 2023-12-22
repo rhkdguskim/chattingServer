@@ -9,6 +9,7 @@ export enum ChatServerExceptionCode {
   NotFound = 3,
   Already_Exist = 4,
   Forbidden = 5,
+  Invalid = 6,
 }
 
 export interface CustomExceptionMessage {

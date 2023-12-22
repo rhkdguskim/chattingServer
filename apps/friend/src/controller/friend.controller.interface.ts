@@ -4,9 +4,10 @@ import {
   DeleteFriendRequest,
   UpdateFriendRequest,
 } from "../dto/friend.dto";
+import { UserInfoResponse } from "@app/authentication/dto/authenticaion.dto";
 
 export interface FriendController {
-  FindAllFriends(id: number): Promise<CreateFriendResponse[]>;
+  FindAllFriends(id: number): Promise<UserInfoResponse[]>;
 
   AddFriend(
     id: number,

@@ -1,12 +1,11 @@
 import {
-  Entity,
   Column,
-  PrimaryGeneratedColumn,
-  ManyToOne,
-  JoinColumn,
   CreateDateColumn,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
   UpdateDateColumn,
-  PrimaryColumn,
 } from "typeorm";
 import { RoomTypeORM } from "@app/common/typeorm/entity/room.typeorm.entity";
 import { UserTypeORM } from "@app/common/typeorm/entity/users.typeorm.entity";

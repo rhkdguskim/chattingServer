@@ -10,6 +10,10 @@ import winstonLogger, {
   winstonLoggerConfig,
 } from "@app/common/logger/nestwinstonlogger";
 import { CustomExceptionFilter } from "@app/common/exception/exception.filter";
+import {
+  ChatServerException,
+  ChatServerExceptionCode,
+} from "@app/common/exception/chatServerException";
 
 async function bootstrap() {
   const loggerConfig: winstonLoggerConfig = {
@@ -36,6 +40,19 @@ async function bootstrap() {
   app.useGlobalInterceptors(new LoggingInterceptor(app.get(Logger)));
   app.useGlobalPipes(
     new ValidationPipe({
+      exceptionFactory: (errors) => {
+        const message = errors
+          .map((error) => {
+            const constraints = Object.values(error.constraints).join(", ");
+            return `${error.property} - ${constraints}`;
+          })
+          .join("; ");
+
+        return new ChatServerException({
+          code: ChatServerExceptionCode.Invalid,
+          message,
+        });
+      },
       enableDebugMessages: true,
     })
   );

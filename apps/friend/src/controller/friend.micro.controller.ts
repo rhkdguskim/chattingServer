@@ -7,7 +7,6 @@ import {
   FRIEND_SERVICE,
   UPDATE_FRIEND,
 } from "../friend.message";
-import { FriendEntity } from "../entity/friend.entity";
 import { FriendService } from "../providers/friend.service.interface";
 import { FriendController } from "./friend.controller.interface";
 import {
@@ -16,6 +15,7 @@ import {
   DeleteFriendRequest,
   UpdateFriendRequest,
 } from "../dto/friend.dto";
+import { UserInfoResponse } from "@app/authentication/dto/authenticaion.dto";
 
 @Controller()
 export class FriendMicroController implements FriendController {
@@ -25,7 +25,7 @@ export class FriendMicroController implements FriendController {
   ) {}
 
   @MessagePattern({ cmd: FIND_ALL_FRIEND })
-  FindAllFriends(id: number): Promise<FriendEntity[]> {
+  FindAllFriends(id: number): Promise<UserInfoResponse[]> {
     return this.friendService.getFriends(id);
   }
 

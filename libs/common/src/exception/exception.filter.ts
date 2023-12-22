@@ -53,6 +53,10 @@ export class CustomExceptionFilter implements ExceptionFilter {
         status = HttpStatus.CONFLICT;
         break;
       }
+      case ChatServerExceptionCode.Invalid: {
+        status = HttpStatus.CONFLICT;
+        break;
+      }
       case ChatServerExceptionCode.Forbidden: {
         status = HttpStatus.FORBIDDEN;
         break;

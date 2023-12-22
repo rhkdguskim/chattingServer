@@ -7,10 +7,7 @@ import { FriendRepository } from "./friend.repository.interface";
 import { FriendTypeORM } from "@app/common/typeorm/entity/friend.typeorm.entity";
 import { TypeormRepository } from "@app/common/typeorm/typeormrepository";
 import { UserTypeORM } from "@app/common/typeorm/entity/users.typeorm.entity";
-import {
-  ChatServerException,
-  ChatServerExceptionCode,
-} from "@app/common/exception/chatServerException";
+import { UserEntity } from "@app/authentication/entity/users.entity";
 
 @Injectable()
 export class FriendTypeORMRepository
@@ -25,29 +22,52 @@ export class FriendTypeORMRepository
   ) {
     super(friendRepository);
   }
-  async findFriendById(payload: FindFriendRequest): Promise<FriendEntity> {
-    const result = await this.friendRepository.findOne({
-      where: {
-        user: { id: payload.user_id },
-        id: payload.id,
-      },
+
+  async findFriend(
+    findFriendRequest: FindFriendRequest
+  ): Promise<FriendEntity> {
+    const result = await this.friendRepository.findOneBy({
+      friend_id: findFriendRequest.friend_id,
+      user: { id: findFriendRequest.user_id },
     });
+
+    if (result == null) {
+      return null;
+    }
+
     return new FriendEntity(result);
   }
 
-  async getMyFriends(id: number): Promise<FriendEntity[]> {
+  async getFriends(id: number): Promise<UserEntity[]> {
     const friends = await this.friendRepository.find({
       where: {
         user: { id },
       },
     });
-    return friends.map((friend) => {
-      return new FriendEntity(friend);
-    });
+
+    return await Promise.all(
+      friends.map(async (friend) => {
+        return new UserEntity(
+          await this.userRepository.findOne({
+            where: {
+              id: friend.friend_id,
+            },
+          })
+        );
+      })
+    );
   }
 
   async create(data: Partial<FriendEntity>): Promise<FriendEntity> {
     return new FriendEntity(await super.create(data));
+  }
+
+  async update(
+    user_id: number,
+    data: Partial<FriendTypeORM>
+  ): Promise<boolean> {
+    const { friend_id, ...newData } = data;
+    return await super.update({ friend_id, user: { id: user_id } }, newData);
   }
 
   async findAll(): Promise<FriendEntity[]> {

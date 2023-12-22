@@ -3,10 +3,12 @@ import { ApiProperty } from "@nestjs/swagger";
 
 export class CreateUserRequest {
   constructor(createUserRequest: CreateUserRequest) {
-    this.user_id = createUserRequest.user_id;
-    this.name = createUserRequest.name;
-    this.password = createUserRequest.password;
-    this.status_msg = createUserRequest.status_msg;
+    if (createUserRequest) {
+      this.user_id = createUserRequest.user_id;
+      this.name = createUserRequest.name;
+      this.password = createUserRequest.password;
+      this.status_msg = createUserRequest.status_msg;
+    }
   }
   @IsString()
   @ApiProperty({ description: "User ID" })
@@ -81,8 +83,10 @@ export class UserInfoResponse {
 
 export class LoginUserRequest {
   constructor(loginRequest: LoginUserRequest) {
-    this.user_id = loginRequest.user_id;
-    this.password = loginRequest.password;
+    if (loginRequest) {
+      this.user_id = loginRequest.user_id;
+      this.password = loginRequest.password;
+    }
   }
 
   @IsString()
@@ -112,10 +116,12 @@ export class LoginUserResponse {
 
 export class UpdateUserRequest {
   constructor(updateInfo: UpdateUserRequest) {
-    this.user_id = updateInfo.user_id;
-    this.name = updateInfo.name;
-    this.status_msg = updateInfo.profile_img_url;
-    this.background_img_url = updateInfo.background_img_url;
+    if (updateInfo) {
+      this.user_id = updateInfo.user_id;
+      this.name = updateInfo.name;
+      this.status_msg = updateInfo.profile_img_url;
+      this.background_img_url = updateInfo.background_img_url;
+    }
   }
   @ApiProperty({ description: "아이디" })
   user_id!: string;

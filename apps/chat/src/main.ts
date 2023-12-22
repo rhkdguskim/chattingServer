@@ -1,7 +1,7 @@
 import { NestFactory } from "@nestjs/core";
-import { ChatModule } from "./chat.module";
+import { ChatModule } from "./module/chat.module";
 import { MicroserviceOptions, Transport } from "@nestjs/microservices";
-import { CHAT_HOST, CHAT_PORT, LOGLEVEL } from "@app/common/config";
+import { CHAT_HOST, CHAT_PORT } from "@app/common/config";
 import winstonLogger from "@app/common/logger/nestwinstonlogger";
 
 async function bootstrap() {

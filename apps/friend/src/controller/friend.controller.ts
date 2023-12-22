@@ -35,6 +35,7 @@ import {
 } from "@app/authorization/guards/authorization.role.guard";
 import { Role } from "@app/authentication/entity/users.entity";
 import { SelfGuard } from "@app/authorization/guards/authorization.self.guard";
+import { UserInfoResponse } from "@app/authentication/dto/authenticaion.dto";
 
 @Controller("friend")
 @UseGuards(JwtGuard, RolesGuard, SelfGuard)
@@ -57,8 +58,8 @@ export class FriendControllerImpl implements FriendController {
   })
   async FindAllFriends(
     @Param("id", ParseIntPipe) id: number
-  ): Promise<CreateFriendResponse[]> {
-    return this.friendService.getMyFriends(id);
+  ): Promise<UserInfoResponse[]> {
+    return this.friendService.getFriends(id);
   }
 
   @Post(":id")

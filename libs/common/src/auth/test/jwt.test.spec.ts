@@ -13,7 +13,7 @@ describe("JwtService Test", () => {
   it("Function", async () => {
     const token = await jwtService.sign({
       id: 0,
-      refresh_token: false,
+      role: 0,
       user_id: "test",
     });
     const acc_data = await jwtService.verify(token.access_token);

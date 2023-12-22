@@ -1,14 +1,14 @@
-import { UserEntity } from "@app/authentication/entity/users.entity";
-
 export class FriendUserInfo {
-  constructor(user: FriendUserInfo) {
-    this.id = user.id;
+  constructor(user?: FriendUserInfo) {
+    if (user) {
+      this.id = user.id;
+    }
   }
   id: number;
 }
 
 export class FriendEntity {
-  constructor(friend: FriendEntity) {
+  constructor(friend?: FriendEntity) {
     if (friend) {
       this.id = friend.id;
       this.friend_id = friend.friend_id;

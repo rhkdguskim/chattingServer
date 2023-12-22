@@ -36,7 +36,6 @@ export class AuthenticationServiceImpl implements AuthenticationService {
 
   async signIn(loginUser: LoginUserRequest): Promise<LoginUserResponse> {
     const user = await this.userRepository.findOneByUserID(loginUser.user_id);
-
     if (NullCheck(user)) {
       throw new ChatServerException({
         message: "There is no User",
@@ -59,12 +58,13 @@ export class AuthenticationServiceImpl implements AuthenticationService {
       createUserDto.user_id
     );
 
-    if (!NullCheck(user)) {
+    if (user) {
       throw new ChatServerException({
         message: "Already Exist",
         code: ChatServerExceptionCode.Already_Exist,
       });
     }
+
     createUserDto.password = this.bcryptService.hash(createUserDto.password);
     return new UserInfoResponse(
       await this.userRepository.create(createUserDto)

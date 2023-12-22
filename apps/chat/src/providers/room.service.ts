@@ -41,21 +41,23 @@ export class RoomServiceImpl implements RoomService {
     user_id: number,
     createRoomDto: CreateRoomRequest
   ): Promise<CreateRoomResponse> {
-    const room_type = this.GetRoomType(createRoomDto.participant);
     createRoomDto.participant = this.GetParticipant(user_id, createRoomDto);
+    createRoomDto.room_type = this.GetRoomType(createRoomDto.participant);
 
-    if (await this.AlreadyRoom(user_id, room_type, createRoomDto)) {
-      throw new ChatServerException({
-        code: ChatServerExceptionCode.Already_Exist,
-        message: "Room is Already Exist",
-      });
+    const roomInfo = await this.AlreadyRoom(
+      user_id,
+      createRoomDto.room_type,
+      createRoomDto
+    );
+
+    if (roomInfo) {
+      return new CreateRoomResponse(roomInfo);
     }
 
     return await this.roomRepository.createRoom(
       user_id,
       new CreateRoomRequest({
         ...createRoomDto,
-        room_type,
       })
     );
   }
@@ -100,9 +102,9 @@ export class RoomServiceImpl implements RoomService {
     user_id: number,
     createRoom: CreateRoomRequest
   ): ParticipantUserInfo[] {
-    const currentUserExists = createRoom.participant.find(
-      (participant) => participant.id === user_id
-    );
+    const currentUserExists = createRoom.participant.find((participant) => {
+      return participant.id === Number(user_id);
+    });
     if (!currentUserExists) {
       createRoom.participant.push(
         new ParticipantUserInfo({
@@ -120,15 +122,14 @@ export class RoomServiceImpl implements RoomService {
     user_id: number,
     room_type: RoomType,
     createRoom: CreateRoomRequest
-  ): Promise<boolean> {
+  ): Promise<RoomEntity> {
     if (room_type == RoomType.GROUP) {
-      return false;
+      return null;
     } else {
-      const roomInfo = await this.roomRepository.getRoomInfoByParticipants(
+      return await this.roomRepository.getRoomInfoByParticipants(
         user_id,
         createRoom
       );
-      return roomInfo != null;
     }
   }
 }

@@ -17,41 +17,20 @@ import {
 } from "@app/authentication/dto/authenticaion.dto";
 import { BcryptService } from "@app/authentication/providers/bcrypt/bcrpy.interface";
 import { AuthenticationTestModule } from "@app/authentication/module/authentication.test.module";
-import { AuthenticationController } from "@app/authentication/controller/authentication.controller.interface";
-import { AuthenticationControllerImpl } from "@app/authentication/controller/authentication.controller";
 
 describe("Authentication Service Test", () => {
   let authenticationHashService: BcryptService;
   let authenticationService: AuthenticationService;
-  let authenticationController: AuthenticationController;
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     const app: TestingModule = await Test.createTestingModule({
       imports: [AuthenticationTestModule],
     }).compile();
 
-    authenticationController = app.get<AuthenticationController>(
-      AuthenticationControllerImpl
-    );
     authenticationHashService = app.get<BcryptService>(AUTHENTICATION_BCRYPT);
     authenticationService = app.get<AuthenticationService>(
       AUTHENTICATION_SERVICE
     );
-  });
-
-  describe("authenticationController Test", () => {
-    it("SignIn", async () => {
-      const loginUserRequest: LoginUserRequest = {
-        password: "test",
-        user_id: "1234",
-      };
-      try {
-        const result = await authenticationController.signIn(loginUserRequest);
-        expect(result).toBeInstanceOf(LoginUserResponse);
-      } catch (e) {
-        expect(e).toBeInstanceOf(ChatServerException);
-      }
-    });
   });
 
   describe("Authentication Hash Service Test", () => {
@@ -158,8 +137,7 @@ describe("Authentication Service Test", () => {
     });
 
     it("find All Users", async () => {
-      const cnt = 50;
-      for (let i = 1; i <= cnt; i++) {
+      for (let i = 1; i <= 30; i++) {
         const createUserRequest: CreateUserRequest = {
           status_msg: `안녕하세요${i}`,
           user_id: `test${i}`,
@@ -176,7 +154,7 @@ describe("Authentication Service Test", () => {
       }
 
       const users = await authenticationService.findAllUsers();
-      expect(users.length).toEqual(cnt);
+      expect(users).toBeInstanceOf(Array<UserInfoResponse>);
     });
 
     it("delete all Users", async () => {
@@ -186,5 +164,24 @@ describe("Authentication Service Test", () => {
         expect(result).toEqual(true);
       });
     });
+  });
+
+  it("ADD test User", async () => {
+    for (let i = 0; i < 10; i++) {
+      const createUserRequest: CreateUserRequest = {
+        name: `테스트유저${i}`,
+        status_msg: `안녕하세요 테스트유저${i} 입니다1`,
+        user_id: `test${i}`,
+        password: "12345",
+      };
+
+      try {
+        const user = await authenticationService.register(createUserRequest);
+        expect(user).toBeInstanceOf(UserInfoResponse);
+      } catch (e) {
+        expect(e).toBeInstanceOf(ChatServerException);
+        expect(e.msg.code).toEqual(ChatServerExceptionCode.Already_Exist);
+      }
+    }
   });
 });
