@@ -1,5 +1,5 @@
 import { RoomEntity } from "./room.entity";
-import { UserEntity } from "@app/authentication/entity/users.entity";
+import { UserEntity } from "@app/user/entity/users.entity";
 
 export class ParticipantEntity {
   constructor(participant: ParticipantEntity) {

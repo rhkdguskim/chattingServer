@@ -9,9 +9,9 @@ import { Request } from "express";
 import { AuthorizationService } from "@app/authorization/providers/authorization.service.interface";
 import { AUTHORIZATION_SERVICE } from "@app/authorization/authorization.metadata";
 import {
-  ChatServerException,
-  ChatServerExceptionCode,
-} from "@app/common/exception/chatServerException";
+  ServerException,
+  ServerExceptionCode,
+} from "@app/common/exception/server.exception";
 
 @Injectable()
 export class JwtGuard implements CanActivate {
@@ -26,16 +26,16 @@ export class JwtGuard implements CanActivate {
     const authToken: string = request.headers["authorization"] as string;
 
     if (!authToken && typeof authToken !== "string") {
-      throw new ChatServerException({
-        code: ChatServerExceptionCode.Authorization,
+      throw new ServerException({
+        code: ServerExceptionCode.Authorization,
         message: `Invalid Token`,
       });
     }
     try {
       request.user = await this.authService.verify(authToken);
     } catch (e) {
-      throw new ChatServerException({
-        code: ChatServerExceptionCode.Authorization,
+      throw new ServerException({
+        code: ServerExceptionCode.Authorization,
         message: `Verify Error`,
       });
     }

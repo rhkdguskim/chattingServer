@@ -10,7 +10,7 @@ import { RoomRepository } from "@app/chat/repository/room.repository.interface";
 import { ChatRepository } from "@app/chat/repository/chat.repository.interface";
 import { ChatEntity } from "@app/chat/entity/chatting.entity";
 import { RoomEntity } from "@app/chat/entity/room.entity";
-import { UserEntity } from "@app/authentication/entity/users.entity";
+import { UserEntity } from "@app/user/entity/users.entity";
 
 @Injectable()
 export class ChatServiceImpl implements ChatService {

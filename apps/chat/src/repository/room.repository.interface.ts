@@ -10,9 +10,16 @@ import { RoomTypeORM } from "@app/common/typeorm/entity/room.typeorm.entity";
 import { ParticipantEntity } from "@app/chat/entity/participant.entity";
 
 export interface RoomRepository {
-  getRoomByID(id: number): Promise<RoomEntity>;
+  create(
+    user_id: number,
+    createRoomDto: CreateRoomRequest
+  ): Promise<CreateRoomResponse>;
 
-  updateRoom(room: Partial<RoomEntity>): Promise<boolean>;
+  update(room: Partial<RoomEntity>): Promise<boolean>;
+
+  find(id: number): Promise<RoomEntity>;
+
+  getRooms(user_id: number): Promise<Array<RoomInfoResponse>>;
 
   getParticipantByUserID(id: number): Promise<ParticipantEntity[]>;
 
@@ -23,14 +30,9 @@ export interface RoomRepository {
     createRoom: CreateRoomRequest
   ): Promise<RoomTypeORM>;
 
-  getUserRoom(user_id: number): Promise<Array<RoomInfoResponse>>;
-
-  inviteRoom(inviteToRoomDto: InviteRoomRequest): Promise<ParticipantEntity[]>;
-
-  createRoom(
-    user_id: number,
-    createRoomDto: CreateRoomRequest
-  ): Promise<CreateRoomResponse>;
+  inviteToRoom(
+    inviteToRoomDto: InviteRoomRequest
+  ): Promise<ParticipantEntity[]>;
 
   countParticipantsByRoomID(id: number): Promise<number>;
 

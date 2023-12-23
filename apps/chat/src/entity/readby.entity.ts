@@ -1,5 +1,5 @@
 import { ChatEntity } from "./chatting.entity";
-import { UserEntity } from "@app/authentication/entity/users.entity";
+import { UserEntity } from "@app/user/entity/users.entity";
 
 export class ReadByEntity {
   id: number;

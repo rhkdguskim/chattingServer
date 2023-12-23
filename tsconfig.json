@@ -38,11 +38,11 @@
       "@app/chat/*": [
         "apps/chat/src/*"
       ],
-      "@app/friend/": [
-        "apps/friend/src/"
+      "@app/user/": [
+        "apps/user/src/"
       ],
-      "@app/friend/*": [
-        "apps/friend/src/*"
+      "@app/user/*": [
+        "apps/user/src/*"
       ],
       "@app/file/": [
         "apps/file/src/"

@@ -11,9 +11,12 @@ export class RoomInfoResponse {
     this.last_chat = roomInfo.last_chat;
     this.updatedAt = roomInfo.updatedAt;
 
-    this.participant = roomInfo.participant.map((participant) => {
-      return new ParticipantUserInfo(participant);
-    });
+    if (roomInfo.participant) {
+      this.participant = roomInfo.participant.map((participant) => {
+        return new ParticipantUserInfo(participant);
+      });
+    }
+
     if (roomInfo.not_read_chat) {
       this.not_read_chat = roomInfo.not_read_chat;
     } else {

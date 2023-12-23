@@ -3,17 +3,17 @@ import { AppModule } from "./app.module";
 import { setupSwagger } from "@src/util/swagger";
 import * as config from "config";
 import * as cookieParser from "cookie-parser";
-import { LoggingInterceptor } from "./common/interceptors/logging.interceptor";
+import { LoggingInterceptor } from "@app/common/interceptor/logging.interceptor";
 import { Logger, ValidationPipe } from "@nestjs/common";
 import { MAIN_PORT } from "@app/common/config";
 import winstonLogger, {
   winstonLoggerConfig,
 } from "@app/common/logger/nestwinstonlogger";
-import { CustomExceptionFilter } from "@app/common/exception/exception.filter";
+import { ServerExceptionFilter } from "@app/common/exception/server.exception.filter";
 import {
-  ChatServerException,
-  ChatServerExceptionCode,
-} from "@app/common/exception/chatServerException";
+  ServerException,
+  ServerExceptionCode,
+} from "@app/common/exception/server.exception";
 
 async function bootstrap() {
   const loggerConfig: winstonLoggerConfig = {
@@ -24,6 +24,7 @@ async function bootstrap() {
   const logger = winstonLogger(loggerConfig);
   const app = await NestFactory.create(AppModule, {
     logger,
+    snapshot: true,
   });
 
   const cors = config.get<any>("cors");
@@ -48,8 +49,8 @@ async function bootstrap() {
           })
           .join("; ");
 
-        return new ChatServerException({
-          code: ChatServerExceptionCode.Invalid,
+        return new ServerException({
+          code: ServerExceptionCode.Invalid,
           message,
         });
       },
@@ -57,7 +58,7 @@ async function bootstrap() {
     })
   );
   setupSwagger(app);
-  app.useGlobalFilters(new CustomExceptionFilter());
+  app.useGlobalFilters(new ServerExceptionFilter());
   await app.listen(MAIN_PORT);
 }
 bootstrap();

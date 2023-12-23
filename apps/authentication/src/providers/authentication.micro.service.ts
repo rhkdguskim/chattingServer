@@ -9,14 +9,13 @@ import {
 } from "../authentication.message";
 import { ClientTCP, TcpClientOptions } from "@nestjs/microservices";
 import { lastValueFrom } from "rxjs";
-import { UserEntity } from "../entity/users.entity";
+import { UserEntity } from "@app/user/entity/users.entity";
 import { AuthenticationService } from "./authentication.service.interface";
 import {
-  CreateUserRequest,
   LoginUserRequest,
   LoginUserResponse,
-  UpdateUserRequest,
 } from "@app/authentication/dto/authenticaion.dto";
+import { CreateUserRequest, UpdateUserRequest } from "@app/user/dto/user.dto";
 
 export class AuthenticationMicroService implements AuthenticationService {
   private readonly tcpClientAdaptor: ClientTCP;

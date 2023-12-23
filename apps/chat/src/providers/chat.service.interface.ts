@@ -4,7 +4,7 @@ import {
   RequestMessage,
 } from "../dto/chat.dto";
 import { ChatEntity } from "@app/chat/entity/chatting.entity";
-import { UserEntity } from "@app/authentication/entity/users.entity";
+import { UserEntity } from "@app/user/entity/users.entity";
 import { RoomEntity } from "@app/chat/entity/room.entity";
 
 export interface ChatService {

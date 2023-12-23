@@ -1,14 +1,15 @@
-import { Inject } from "@nestjs/common";
+import { Inject, Injectable } from "@nestjs/common";
 import { JWT_SERVICE } from "../authorization.metadata";
 import { AuthorizationService } from "./authorization.service.interface";
 import { TokenInfoRequest, TokenInfoResponse } from "../dto/authorization.dto";
-import { CommonJwtService } from "@app/common/auth/common.jwtService";
+import { CommonJwtService } from "@app/common/auth/jwt/common.jwtService";
 import { LoginUserResponse } from "@app/authentication/dto/authenticaion.dto";
 import {
-  ChatServerException,
-  ChatServerExceptionCode,
-} from "@app/common/exception/chatServerException";
+  ServerException,
+  ServerExceptionCode,
+} from "@app/common/exception/server.exception";
 
+@Injectable()
 export class AuthorizationServiceImpl implements AuthorizationService {
   constructor(@Inject(JWT_SERVICE) private jwtService: CommonJwtService) {}
 
@@ -20,8 +21,8 @@ export class AuthorizationServiceImpl implements AuthorizationService {
     try {
       return new LoginUserResponse(await this.jwtService.sign(payload));
     } catch (e) {
-      throw new ChatServerException({
-        code: ChatServerExceptionCode.Authorization,
+      throw new ServerException({
+        code: ServerExceptionCode.Authorization,
         message: "Authorization Error",
       });
     }

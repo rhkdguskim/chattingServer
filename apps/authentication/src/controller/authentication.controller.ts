@@ -9,7 +9,7 @@ import {
 } from "@app/authentication/dto/authenticaion.dto";
 import { AUTHENTICATION_SERVICE } from "@app/authentication/authentication.metadata";
 import { AuthGuard } from "@nestjs/passport";
-import { GetOAuthData } from "@app/common/decoration/auth.decorator";
+import { GetOAuthData } from "@app/common/decorator/auth.decorator";
 
 @Controller("auth")
 @ApiTags("Authentication")

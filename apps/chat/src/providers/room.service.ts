@@ -14,9 +14,9 @@ import { RoomRepository } from "@app/chat/repository/room.repository.interface";
 import { RoomEntity, RoomType } from "@app/chat/entity/room.entity";
 import { ParticipantEntity } from "../entity/participant.entity";
 import {
-  ChatServerException,
-  ChatServerExceptionCode,
-} from "@app/common/exception/chatServerException";
+  ServerException,
+  ServerExceptionCode,
+} from "@app/common/exception/server.exception";
 
 const INDIVIDUAL_CHAT_CNT = 1;
 const TWO_CHAT_CNT = 2;
@@ -54,7 +54,7 @@ export class RoomServiceImpl implements RoomService {
       return new CreateRoomResponse(roomInfo);
     }
 
-    return await this.roomRepository.createRoom(
+    return await this.roomRepository.create(
       user_id,
       new CreateRoomRequest({
         ...createRoomDto,
@@ -66,25 +66,25 @@ export class RoomServiceImpl implements RoomService {
     inviteToRoom: InviteRoomRequest
   ): Promise<ParticipantEntity[]> {
     if (this.GetRoomType(inviteToRoom.participants) !== RoomType.GROUP) {
-      throw new ChatServerException({
-        code: ChatServerExceptionCode.Forbidden,
+      throw new ServerException({
+        code: ServerExceptionCode.Forbidden,
         message: "Only group chat rooms can invite participants.",
       });
     }
 
-    return await this.roomRepository.inviteRoom(inviteToRoom);
+    return await this.roomRepository.inviteToRoom(inviteToRoom);
   }
 
   async GetUserRooms(user_id: number): Promise<Array<RoomInfoResponse>> {
-    return this.roomRepository.getUserRoom(user_id);
+    return this.roomRepository.getRooms(user_id);
   }
 
   async getRoomByID(id: number): Promise<RoomEntity> {
-    return await this.roomRepository.getRoomByID(id);
+    return await this.roomRepository.find(id);
   }
 
   async updateRoomStatus(room: Partial<RoomEntity>): Promise<boolean> {
-    return await this.roomRepository.updateRoom(room);
+    return await this.roomRepository.update(room);
   }
 
   private GetRoomType(participants: ParticipantUserInfo[]): RoomType {

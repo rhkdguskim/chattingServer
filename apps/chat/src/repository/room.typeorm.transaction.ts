@@ -50,15 +50,26 @@ export class RoomTypeormRepository implements RoomRepository {
 
     return await this.manager.transaction(
       async (transactionalEntityManager) => {
-        return await transactionalEntityManager
+        const rooms = await transactionalEntityManager
           .getRepository(RoomTypeORM)
           .createQueryBuilder("room")
           .innerJoinAndSelect("room.participants", "participant")
+          .innerJoinAndSelect("participant.user", "user")
           .where("room.type = :roomType", { roomType: createRoom.room_type })
           .andWhere("participant.user IN (:...participantIds)", {
             participantIds,
           })
-          .getOne();
+          .getMany();
+
+        return rooms.find((room) => {
+          const roomParticipantIds = room.participants.map(
+            (participant) => participant.user.id
+          );
+          return (
+            roomParticipantIds.length === participantIds.length &&
+            participantIds.every((id) => roomParticipantIds.includes(id))
+          );
+        });
       }
     );
   }
@@ -71,13 +82,13 @@ export class RoomTypeormRepository implements RoomRepository {
     });
   }
 
-  async getRoomByID(id: number): Promise<RoomEntity> {
+  async find(id: number): Promise<RoomEntity> {
     return await this.manager
       .getRepository(RoomTypeORM)
       .findOne({ relations: ["participants"], where: { id } });
   }
 
-  async updateRoom(room: Partial<RoomEntity>): Promise<boolean> {
+  async update(room: Partial<RoomEntity>): Promise<boolean> {
     const result = await this.manager
       .getRepository(RoomTypeORM)
       .update(room.id, room);
@@ -107,7 +118,7 @@ export class RoomTypeormRepository implements RoomRepository {
     );
   }
 
-  async getUserRoom(user_id: number): Promise<Array<RoomInfoResponse>> {
+  async getRooms(user_id: number): Promise<Array<RoomInfoResponse>> {
     return await this.manager.transaction(
       async (transactionalEntityManager) => {
         const myRoomList = await this.GetParticipantsByUserIDTransactional(
@@ -140,7 +151,7 @@ export class RoomTypeormRepository implements RoomRepository {
     );
   }
 
-  async inviteRoom(
+  async inviteToRoom(
     inviteToRoomDto: InviteRoomRequest
   ): Promise<ParticipantTypeORM[]> {
     const results: ParticipantTypeORM[] = [];
@@ -163,7 +174,7 @@ export class RoomTypeormRepository implements RoomRepository {
     return results;
   }
 
-  async createRoom(
+  async create(
     user_id: number,
     createRoomDto: CreateRoomRequest
   ): Promise<CreateRoomResponse> {

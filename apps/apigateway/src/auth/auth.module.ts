@@ -3,14 +3,7 @@ import { AuthenticationModule } from "@app/authentication/module/authentication.
 import { AuthorizationModule } from "@app/authorization/module/authorization.module";
 
 @Module({
-  imports: [
-    AuthenticationModule.forRoot({ isDev: false, isMicroService: false }),
-    AuthorizationModule.forRoot({
-      isDev: false,
-      isMicroService: false,
-      isGlobal: true,
-    }),
-  ],
+  imports: [AuthenticationModule, AuthorizationModule],
   exports: [],
 })
 export class AuthModule {}

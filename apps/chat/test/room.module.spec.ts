@@ -6,9 +6,9 @@ import { ROOM_SERVICE } from "@app/chat/chat.metadata";
 import { RoomService } from "@app/chat/providers/room.service.interface";
 import { CreateRoomResponse } from "@app/chat/dto/room.dto";
 import {
-  ChatServerException,
-  ChatServerExceptionCode,
-} from "@app/common/exception/chatServerException";
+  ServerException,
+  ServerExceptionCode,
+} from "@app/common/exception/server.exception";
 import { RoomType } from "@app/chat/entity/room.entity";
 
 describe("Room Service Test", () => {
@@ -37,8 +37,8 @@ describe("Room Service Test", () => {
         expect(roomInfo).toBeInstanceOf(CreateRoomResponse);
         expect(roomInfo.type).toEqual(RoomType.INDIVIDUAL);
       } catch (e) {
-        expect(e).toBeInstanceOf(ChatServerException);
-        expect(e.msg.code).toEqual(ChatServerExceptionCode.Already_Exist);
+        expect(e).toBeInstanceOf(ServerException);
+        expect(e.msg.code).toEqual(ServerExceptionCode.Already_Exist);
       }
     }
   });
@@ -54,8 +54,8 @@ describe("Room Service Test", () => {
         expect(roomInfo).toBeInstanceOf(CreateRoomResponse);
         expect(roomInfo.type).toEqual(RoomType.TWO);
       } catch (e) {
-        expect(e).toBeInstanceOf(ChatServerException);
-        expect(e.msg.code).toEqual(ChatServerExceptionCode.Already_Exist);
+        expect(e).toBeInstanceOf(ServerException);
+        expect(e.msg.code).toEqual(ServerExceptionCode.Already_Exist);
       }
     }
   });
@@ -71,8 +71,8 @@ describe("Room Service Test", () => {
         expect(roomInfo).toBeInstanceOf(CreateRoomResponse);
         expect(roomInfo.type).toEqual(RoomType.GROUP);
       } catch (e) {
-        expect(e).toBeInstanceOf(ChatServerException);
-        expect(e.msg.code).toEqual(ChatServerExceptionCode.Already_Exist);
+        expect(e).toBeInstanceOf(ServerException);
+        expect(e.msg.code).toEqual(ServerExceptionCode.Already_Exist);
       }
     }
   });

@@ -1,15 +1,15 @@
 import {
-  Entity,
   Column,
-  PrimaryGeneratedColumn,
   CreateDateColumn,
-  UpdateDateColumn,
+  Entity,
   OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from "typeorm";
 import { FriendTypeORM } from "@app/common/typeorm/entity/friend.typeorm.entity";
 import { ChattingTypeORM } from "@app/common/typeorm/entity/chatting.typeorm.entity";
 import { ParticipantTypeORM } from "@app/common/typeorm/entity/participant.typeorm.entity";
-import { Role, UserEntity } from "@app/authentication/entity/users.entity";
+import { Role, UserEntity } from "@app/user/entity/users.entity";
 
 @Entity({ name: "user" })
 export class UserTypeORM implements UserEntity {
@@ -40,15 +40,19 @@ export class UserTypeORM implements UserEntity {
   @UpdateDateColumn()
   updateAt!: Date;
 
-  @OneToMany((type) => FriendTypeORM, (friend) => friend.user, { eager: false })
+  @OneToMany(() => FriendTypeORM, (friend) => friend.user, {
+    eager: false,
+    cascade: true,
+    onDelete: "CASCADE",
+  })
   friends: FriendTypeORM[];
 
-  @OneToMany((type) => ChattingTypeORM, (chatting) => chatting.user, {
+  @OneToMany(() => ChattingTypeORM, (chatting) => chatting.user, {
     eager: false,
   })
   chatting: ChattingTypeORM[];
 
-  @OneToMany((type) => ParticipantTypeORM, (participant) => participant.user, {
+  @OneToMany(() => ParticipantTypeORM, (participant) => participant.user, {
     eager: false,
   })
   participant: ParticipantTypeORM[];

@@ -1,4 +1,3 @@
-import { Logger } from "@nestjs/common";
 import { MulterOptions } from "@nestjs/platform-express/multer/interfaces/multer-options.interface";
 import * as multer from "multer";
 import * as path from "path";
@@ -6,13 +5,9 @@ import * as fs from "fs";
 
 // uploads 폴더가 존재하지 않으면 폴더를 생성하고, 존재하면 생성하지 않습니다.
 const mkdir = (directory: string) => {
-  const logger = new Logger("Mkdir");
   try {
     fs.readdirSync(path.join(process.cwd(), directory));
   } catch (err) {
-    logger.log(
-      `지정한 경로에 ${directory}가 존재하지 않아 ${directory}를 생성합니다.`
-    );
     fs.mkdirSync(path.join(process.cwd(), directory));
   }
 };

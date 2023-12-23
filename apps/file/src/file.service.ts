@@ -1,10 +1,17 @@
-import { BadRequestException, Injectable } from "@nestjs/common";
+import { Injectable } from "@nestjs/common";
+import {
+  ServerException,
+  ServerExceptionCode,
+} from "@app/common/exception/server.exception";
 
 @Injectable()
 export class FileService {
   uploadFile(file: Express.Multer.File) {
     if (!file) {
-      throw new BadRequestException("파일이 존재하지 않습니다.");
+      throw new ServerException({
+        code: ServerExceptionCode.NotFound,
+        message: "파일이 존재하지 않습니다.",
+      });
     }
 
     return file.path;
@@ -12,7 +19,10 @@ export class FileService {
 
   uploadFiles(files: Express.Multer.File[]) {
     if (!files || files.length === 0) {
-      throw new BadRequestException("파일이 존재하지 않습니다.");
+      throw new ServerException({
+        code: ServerExceptionCode.NotFound,
+        message: "파일이 존재하지 않습니다.",
+      });
     }
 
     const filePaths = files.map((file) => file.path);

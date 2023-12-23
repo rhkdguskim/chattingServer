@@ -1,22 +1,24 @@
 import { Test, TestingModule } from "@nestjs/testing";
 import {
-  ChatServerException,
-  ChatServerExceptionCode,
-} from "@app/common/exception/chatServerException";
+  ServerException,
+  ServerExceptionCode,
+} from "@app/common/exception/server.exception";
 import { AuthenticationService } from "@app/authentication/providers/authentication.service.interface";
 import {
-  AUTHENTICATION_BCRYPT,
   AUTHENTICATION_SERVICE,
+  BCRYPT_SERVICE,
 } from "@app/authentication/authentication.metadata";
 import {
-  CreateUserRequest,
   LoginUserRequest,
   LoginUserResponse,
+} from "@app/authentication/dto/authenticaion.dto";
+import { BcryptService } from "@app/common/auth/bcrypt/bcrpy.interface";
+import { AuthenticationTestModule } from "@app/authentication/module/authentication.test.module";
+import {
+  CreateUserRequest,
   UpdateUserRequest,
   UserInfoResponse,
-} from "@app/authentication/dto/authenticaion.dto";
-import { BcryptService } from "@app/authentication/providers/bcrypt/bcrpy.interface";
-import { AuthenticationTestModule } from "@app/authentication/module/authentication.test.module";
+} from "@app/user/dto/user.dto";
 
 describe("Authentication Service Test", () => {
   let authenticationHashService: BcryptService;
@@ -27,7 +29,7 @@ describe("Authentication Service Test", () => {
       imports: [AuthenticationTestModule],
     }).compile();
 
-    authenticationHashService = app.get<BcryptService>(AUTHENTICATION_BCRYPT);
+    authenticationHashService = app.get<BcryptService>(BCRYPT_SERVICE);
     authenticationService = app.get<AuthenticationService>(
       AUTHENTICATION_SERVICE
     );
@@ -53,8 +55,8 @@ describe("Authentication Service Test", () => {
         const user = await authenticationService.register(createUserRequest);
         expect(user).toBeInstanceOf(UserInfoResponse);
       } catch (e) {
-        expect(e).toBeInstanceOf(ChatServerException);
-        expect(e.msg.code).toEqual(ChatServerExceptionCode.Already_Exist);
+        expect(e).toBeInstanceOf(ServerException);
+        expect(e.msg.code).toEqual(ServerExceptionCode.Already_Exist);
       }
     });
 
@@ -69,8 +71,8 @@ describe("Authentication Service Test", () => {
         );
         expect(loginUserResponse).toBeInstanceOf(LoginUserResponse);
       } catch (e) {
-        expect(e).toBeInstanceOf(ChatServerException);
-        expect(e.msg.code).toEqual(ChatServerExceptionCode.Authorization);
+        expect(e).toBeInstanceOf(ServerException);
+        expect(e.msg.code).toEqual(ServerExceptionCode.Authorization);
       }
     });
 
@@ -85,8 +87,8 @@ describe("Authentication Service Test", () => {
         );
         expect(loginUserResponse).toBeInstanceOf(LoginUserResponse);
       } catch (e) {
-        expect(e).toBeInstanceOf(ChatServerException);
-        expect(e.msg.code).toEqual(ChatServerExceptionCode.Authentication);
+        expect(e).toBeInstanceOf(ServerException);
+        expect(e.msg.code).toEqual(ServerExceptionCode.Authentication);
       }
     });
 
@@ -95,7 +97,7 @@ describe("Authentication Service Test", () => {
         const result = await authenticationService.findUserByID("test");
         expect(result).toBeInstanceOf(UserInfoResponse);
       } catch (e) {
-        expect(e.msg.code).toEqual(ChatServerExceptionCode.NotFound);
+        expect(e.msg.code).toEqual(ServerExceptionCode.NotFound);
       }
     });
 
@@ -112,8 +114,8 @@ describe("Authentication Service Test", () => {
 
         expect(ret).toEqual(true);
       } catch (e) {
-        expect(e).toBeInstanceOf(ChatServerException);
-        expect(e.msg.code).toEqual(ChatServerExceptionCode.Already_Exist);
+        expect(e).toBeInstanceOf(ServerException);
+        expect(e.msg.code).toEqual(ServerExceptionCode.Already_Exist);
       }
     });
 
@@ -122,7 +124,7 @@ describe("Authentication Service Test", () => {
         const result = await authenticationService.findUserByID("test2");
         expect(result).toBeInstanceOf(UserInfoResponse);
       } catch (e) {
-        expect(e.msg.code).toEqual(ChatServerExceptionCode.NotFound);
+        expect(e.msg.code).toEqual(ServerExceptionCode.NotFound);
       }
     });
 
@@ -132,7 +134,7 @@ describe("Authentication Service Test", () => {
         const result = await authenticationService.deleteUser(user.id);
         expect(result).toEqual(true);
       } catch (e) {
-        expect(e.msg.code).toEqual(ChatServerExceptionCode.NotFound);
+        expect(e.msg.code).toEqual(ServerExceptionCode.NotFound);
       }
     });
 
@@ -148,8 +150,8 @@ describe("Authentication Service Test", () => {
           const user = await authenticationService.register(createUserRequest);
           expect(user).toBeInstanceOf(UserInfoResponse);
         } catch (e) {
-          expect(e).toBeInstanceOf(ChatServerException);
-          expect(e.msg.code).toEqual(ChatServerExceptionCode.Already_Exist);
+          expect(e).toBeInstanceOf(ServerException);
+          expect(e.msg.code).toEqual(ServerExceptionCode.Already_Exist);
         }
       }
 
@@ -179,8 +181,8 @@ describe("Authentication Service Test", () => {
         const user = await authenticationService.register(createUserRequest);
         expect(user).toBeInstanceOf(UserInfoResponse);
       } catch (e) {
-        expect(e).toBeInstanceOf(ChatServerException);
-        expect(e.msg.code).toEqual(ChatServerExceptionCode.Already_Exist);
+        expect(e).toBeInstanceOf(ServerException);
+        expect(e.msg.code).toEqual(ServerExceptionCode.Already_Exist);
       }
     }
   });

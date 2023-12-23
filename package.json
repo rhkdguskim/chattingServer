@@ -34,6 +34,7 @@
     "@nestjs/common": "^9.0.0",
     "@nestjs/config": "^3.0.0",
     "@nestjs/core": "^9.0.0",
+    "@nestjs/devtools-integration": "^0.1.5",
     "@nestjs/jwt": "^10.1.0",
     "@nestjs/microservices": "^9.4.3",
     "@nestjs/passport": "^10.0.0",
@@ -123,7 +124,7 @@
       "^@app/authentication(|/.*)$": "<rootDir>/apps/authentication/src/$1",
       "^@app/authorization(|/.*)$": "<rootDir>/apps/authorization/src/$1",
       "^@app/chat(|/.*)$": "<rootDir>/apps/chat/src/$1",
-      "^@app/friend(|/.*)$": "<rootDir>/apps/friend/src/$1",
+      "^@app/user(|/.*)$": "<rootDir>/apps/user/src/$1",
       "^@app/file(|/.*)$": "<rootDir>/apps/file/src/$1",
       "^@app/common(|/.*)$": "<rootDir>/libs/common/src/$1"
     },

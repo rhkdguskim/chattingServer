@@ -1,10 +1,10 @@
 import { Test, TestingModule } from "@nestjs/testing";
-import { ChatServerException } from "@app/common/exception/chatServerException";
+import { ServerException } from "@app/common/exception/server.exception";
 import { LoginUserResponse } from "@app/authentication/dto/authenticaion.dto";
 import { AuthorizationServiceModule } from "@app/authorization/module/authorization.service.module";
 import { AuthorizationService } from "@app/authorization/providers/authorization.service.interface";
 import { AUTHORIZATION_SERVICE } from "@app/authorization/authorization.metadata";
-import { Role } from "@app/authentication/entity/users.entity";
+import { Role } from "@app/user/entity/users.entity";
 import { TokenInfoResponse } from "@app/authorization/dto/authorization.dto";
 
 describe("Authorization Service Test", () => {
@@ -12,9 +12,7 @@ describe("Authorization Service Test", () => {
 
   beforeEach(async () => {
     const app: TestingModule = await Test.createTestingModule({
-      imports: [
-        AuthorizationServiceModule.forRoot({ isDev: false, isGlobal: true }),
-      ],
+      imports: [AuthorizationServiceModule],
     }).compile();
 
     authenticationService = app.get<AuthorizationService>(
@@ -34,7 +32,7 @@ describe("Authorization Service Test", () => {
         response = await authenticationService.sign(payload);
         expect(response).toBeInstanceOf(LoginUserResponse);
       } catch (e) {
-        expect(e).toBeInstanceOf(ChatServerException);
+        expect(e).toBeInstanceOf(ServerException);
       }
     });
 
@@ -49,7 +47,7 @@ describe("Authorization Service Test", () => {
         expect(response1).toBeInstanceOf(TokenInfoResponse);
         expect(response2).toBeInstanceOf(TokenInfoResponse);
       } catch (e) {
-        expect(e).toBeInstanceOf(ChatServerException);
+        expect(e).toBeInstanceOf(ServerException);
       }
 
       // try {

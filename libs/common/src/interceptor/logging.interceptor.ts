@@ -6,35 +6,55 @@ import {
   NestInterceptor,
 } from "@nestjs/common";
 import { Observable, tap } from "rxjs";
-import { JsonSocket } from "@nestjs/microservices";
 
 @Injectable()
 export class LoggingInterceptor implements NestInterceptor {
-  constructor(private readonly logger: LoggerService) {}
+  constructor(
+    private readonly logger: LoggerService // LoggerService 주입
+  ) {}
   intercept(
     context: ExecutionContext,
     next: CallHandler<any>
   ): Observable<any> | Promise<Observable<any>> {
-    const request = context.switchToRpc().getContext();
-    const [jsonSocket, requestData] = request.args as [JsonSocket, any];
-    const remoteAddress = jsonSocket.socket.remoteAddress;
-    const remotePort = jsonSocket.socket.remotePort;
-    this.logger.debug(
-      `Start - ${JSON.stringify(requestData)}`,
-      `${context.getClass().name}.${
-        context.getHandler().name
-      } [${remoteAddress}:${remotePort}] ${requestData}`
+    const request = context.switchToHttp().getRequest();
+    const response = context.switchToHttp().getResponse();
+    const { method, url, params, body, ip, query } = request;
+
+    this.logger.log(
+      `Start`,
+      `${context.getClass().name}.${context.getHandler().name}`
     );
     const now = Date.now();
+
+    this.logger.debug(
+      `Request ${method} ${url}`,
+      `${context.getClass().name}.${context.getHandler().name}`
+    );
+    this.logger.debug(
+      `Request Params : ${JSON.stringify(params)}`,
+      `${context.getClass().name}.${context.getHandler().name}`
+    );
+
+    this.logger.debug(
+      `Request Querys : ${JSON.stringify(query)}`,
+      `${context.getClass().name}.${context.getHandler().name}`
+    );
+
+    this.logger.debug(
+      `Request Body: ${JSON.stringify(body)}`,
+      `${context.getClass().name}.${context.getHandler().name}`
+    );
+
     return next.handle().pipe(
       tap((responseData) => {
         this.logger.debug(
-          `End: Time : {${Date.now() - now} ms} ${JSON.stringify(
-            responseData
-          )}`,
-          `${context.getClass().name}.${
-            context.getHandler().name
-          } [${remoteAddress}:${remotePort}]`
+          `Response : ${JSON.stringify(responseData)}`,
+          `${context.getClass().name}.${context.getHandler().name}`
+        );
+
+        this.logger.log(
+          `End: Time : {${Date.now() - now} ms}`,
+          `${context.getClass().name}.${context.getHandler().name}`
         );
       })
     );

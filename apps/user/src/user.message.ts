@@ -1,0 +1,4 @@
+export const FIND_ALL_FRIEND = "FIND_ALL_FRIEND";
+export const ADD_FRIEND = "ADD_FRIEND";
+export const UPDATE_FRIEND = "UPDATE_FRIEND";
+export const DELETE_FRIEND = "DELETE_FRIEND";

@@ -5,11 +5,11 @@ import {
   SetMetadata,
 } from "@nestjs/common";
 import { Reflector } from "@nestjs/core";
-import { Role } from "@app/authentication/entity/users.entity";
+import { Role } from "@app/user/entity/users.entity";
 import {
-  ChatServerException,
-  ChatServerExceptionCode,
-} from "@app/common/exception/chatServerException";
+  ServerException,
+  ServerExceptionCode,
+} from "@app/common/exception/server.exception";
 
 export const ROLES_KEY = "roles";
 export const Roles = (roles: Role) => SetMetadata(ROLES_KEY, roles);
@@ -34,8 +34,8 @@ export class RolesGuard implements CanActivate {
       return true;
     }
 
-    throw new ChatServerException({
-      code: ChatServerExceptionCode.Authorization,
+    throw new ServerException({
+      code: ServerExceptionCode.Authorization,
       message: `You can only access Auth : ${Role[user.role]}`,
     });
   }

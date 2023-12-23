@@ -1,41 +1,24 @@
 import * as config from "config";
 
-interface Server {
-  host: string;
-  port: number;
-  filehost: string;
-  fileport: number;
-  authenticationhost: string;
-  authenticationport: number;
-  authorizationhost: string;
-  authorizationport: number;
-  friendhost: string;
-  friendport: number;
-  chathost: string;
-  chatport: number;
-  roomhost: string;
-  roomport: number;
-}
-
-const server = config.get<Server>("server");
+const server = config.get<any>("server");
 
 export const MAIN_HOST = server.host;
 export const MAIN_PORT = server.port;
 
-export const FILE_HOST = server.filehost;
-export const FILE_PORT = server.fileport;
+export const FILE_HOST = server.fileHost;
+export const FILE_PORT = server.filePort;
 
-export const AUTHENTICATION_HOST = server.authenticationhost;
-export const AUTHENTICATION_PORT = server.authenticationport;
+export const AUTHENTICATION_HOST = server.authenticationHost;
+export const AUTHENTICATION_PORT = server.authenticationPort;
 
-export const AUTHORIZAION_HOST = server.authorizationhost;
-export const AUTHORIZAION_PORT = server.authorizationport;
+export const AUTHORIZATION_HOST = server.authorizationHost;
+export const AUTHORIZATION_PORT = server.authorizationPort;
 
-export const FRIEND_HOST = server.friendhost;
-export const FRIEND_PORT = server.friendport;
+export const FRIEND_HOST = server.friendHost;
+export const FRIEND_PORT = server.friendPort;
 
-export const CHAT_HOST = server.chathost;
-export const CHAT_PORT = server.chatport;
+export const CHAT_HOST = server.chatHost;
+export const CHAT_PORT = server.chatPort;
 
 export const ROOM_HOST = server.roomhost;
 export const ROOM_PORT = server.roomport;

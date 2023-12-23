@@ -5,10 +5,7 @@ import { typeOrmConfig } from "@app/common/module";
 import { AuthenticationControllerImpl } from "@app/authentication/controller/authentication.controller";
 
 @Module({
-  imports: [
-    TypeOrmModule.forRoot(typeOrmConfig),
-    AuthenticationServiceModule.forRoot(),
-  ],
+  imports: [TypeOrmModule.forRoot(typeOrmConfig), AuthenticationServiceModule],
   controllers: [AuthenticationControllerImpl],
 })
 export class AuthenticationTestModule {}
