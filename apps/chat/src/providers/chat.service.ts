@@ -61,7 +61,9 @@ export class ChatServiceImpl implements ChatService {
   async getChattingList(
     payload: ChattingListRequest
   ): Promise<ChattingResponse[]> {
-    const chatting = await this.chattingRepository.getChattingList(payload);
+    const chatting = await this.chattingRepository.getChattingList(
+      new ChattingListRequest(payload)
+    );
     return chatting.map((chat) => {
       return new ChattingResponse(chat);
     });

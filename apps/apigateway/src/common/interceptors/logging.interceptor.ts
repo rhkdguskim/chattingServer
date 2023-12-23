@@ -18,7 +18,7 @@ export class LoggingInterceptor implements NestInterceptor {
   ): Observable<any> | Promise<Observable<any>> {
     const request = context.switchToHttp().getRequest();
     const response = context.switchToHttp().getResponse();
-    const { method, url, params, body, ip } = request;
+    const { method, url, params, body, ip, query } = request;
 
     this.logger.log(
       `Start`,
@@ -34,6 +34,12 @@ export class LoggingInterceptor implements NestInterceptor {
       `Request Params : ${JSON.stringify(params)}`,
       `${context.getClass().name}.${context.getHandler().name}`
     );
+
+    this.logger.debug(
+      `Request Querys : ${JSON.stringify(query)}`,
+      `${context.getClass().name}.${context.getHandler().name}`
+    );
+
     this.logger.debug(
       `Request Body: ${JSON.stringify(body)}`,
       `${context.getClass().name}.${context.getHandler().name}`

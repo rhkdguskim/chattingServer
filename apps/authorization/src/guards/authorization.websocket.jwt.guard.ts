@@ -24,8 +24,8 @@ export class WebSocketJwtGuard implements CanActivate {
       if (!authToken) {
         return false;
       }
-
       client.data.user = await this.authService.verify(authToken);
+
       return true;
     } catch (err) {
       throw new WsException(err.message);

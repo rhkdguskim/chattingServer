@@ -54,7 +54,6 @@ export class RoomTypeormRepository implements RoomRepository {
           .getRepository(RoomTypeORM)
           .createQueryBuilder("room")
           .innerJoinAndSelect("room.participants", "participant")
-          .innerJoinAndSelect("participant.user", "user")
           .where("room.type = :roomType", { roomType: createRoom.room_type })
           .andWhere("participant.user IN (:...participantIds)", {
             participantIds,
@@ -75,10 +74,10 @@ export class RoomTypeormRepository implements RoomRepository {
   async getRoomByID(id: number): Promise<RoomEntity> {
     return await this.manager
       .getRepository(RoomTypeORM)
-      .findOne({ where: { id } });
+      .findOne({ relations: ["participants"], where: { id } });
   }
 
-  async updateRoom(room: RoomEntity): Promise<boolean> {
+  async updateRoom(room: Partial<RoomEntity>): Promise<boolean> {
     const result = await this.manager
       .getRepository(RoomTypeORM)
       .update(room.id, room);

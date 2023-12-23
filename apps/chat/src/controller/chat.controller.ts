@@ -49,9 +49,9 @@ export class ChatControllerImpl {
   })
   async GetChattingList(
     @Param("id") user_id: number,
-    @Query("room_id") id: number,
+    @Query("room_id") room_id: number,
     @Query("cursor") cursor: number
   ): Promise<ChattingResponse[]> {
-    return await this.chattingService.getChattingList({ id, cursor });
+    return await this.chattingService.getChattingList({ id: room_id, cursor });
   }
 }

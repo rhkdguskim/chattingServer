@@ -1,4 +1,4 @@
-import { Inject, UseGuards } from "@nestjs/common";
+import { Inject } from "@nestjs/common";
 import {
   ConnectedSocket,
   MessageBody,
@@ -24,15 +24,17 @@ import { CHAT_SERVICE, ROOM_SERVICE } from "../chat.metadata";
 import { RoomEntity, RoomType } from "@app/chat/entity/room.entity";
 import { ParticipantEntity } from "@app/chat/entity/participant.entity";
 import { ChatEntity } from "@app/chat/entity/chatting.entity";
-import { WebSocketJwtGuard } from "@app/authorization/guards/authorization.websocket.jwt.guard";
 import { ChatGateway } from "@app/chat/gateway/chat.gateway.interface";
+import { AUTHORIZATION_SERVICE } from "@app/authorization/authorization.metadata";
+import { AuthorizationService } from "@app/authorization/providers/authorization.service.interface";
 
 @WebSocketGateway({ cors: true })
-@UseGuards(WebSocketJwtGuard)
 export class ChatGatewayImpl
   implements OnGatewayConnection, OnGatewayDisconnect, ChatGateway
 {
   constructor(
+    @Inject(AUTHORIZATION_SERVICE)
+    private readonly authorizationService: AuthorizationService,
     @Inject(CHAT_SERVICE)
     private readonly chattingService: ChatService,
     @Inject(ROOM_SERVICE)
@@ -44,7 +46,14 @@ export class ChatGatewayImpl
 
   public async handleConnection(
     @ConnectedSocket() client: Socket
-  ): Promise<void> {}
+  ): Promise<void> {
+    const authToken = client.handshake?.query?.token as string;
+    try {
+      client.data.user = await this.authorizationService.verify(authToken);
+    } catch (e) {
+      client.disconnect();
+    }
+  }
 
   public handleDisconnect(@ConnectedSocket() client: Socket): void {
     if (client.data.rooms) {
@@ -55,7 +64,7 @@ export class ChatGatewayImpl
   }
 
   @SubscribeMessage("Join")
-  async enterRoom(
+  async joinRoom(
     @GetWsUserID() user_id: number,
     @ConnectedSocket() client: Socket
   ): Promise<void> {
@@ -67,33 +76,28 @@ export class ChatGatewayImpl
   }
 
   @SubscribeMessage("SendMessage")
-  async handleMessage(
+  async message(
     @GetWsUserID() user_id: number,
     @MessageBody() request: RequestMessage
   ): Promise<ResponseMessage> {
-    const room: RoomEntity = await this.roomService.getRoomByID(
-      request.room_id
-    );
-
+    const { room_id } = request;
+    const room: RoomEntity = await this.roomService.getRoomByID(room_id);
     room.last_chat = request.message;
-    await this.roomService.updateRoomStatus(
-      new RoomEntity({
-        ...room,
-        last_chat: request.message,
-      })
-    );
+    const { participants, ...newRoom } = room;
+    await this.roomService.updateRoomStatus(newRoom);
 
     const not_read_chat: number =
-      room.type !== RoomType.INDIVIDUAL ? room.participants.length : 0;
+      room.type !== RoomType.INDIVIDUAL ? participants.length : 0;
+
     const ChattingMessage: ChatEntity =
       await this.chattingService.createChatting(user_id, request);
 
     const msg = new ResponseMessage({
       id: ChattingMessage.id,
-      room_id: room.id,
-      user_id,
+      room: { id: room_id },
+      user: { id: user_id },
       message: request.message,
-      not_read_chat,
+      not_read_chat: not_read_chat - 1,
       createdAt: ChattingMessage.createdAt,
     });
 

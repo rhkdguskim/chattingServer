@@ -1,9 +1,9 @@
 import {
-  Entity,
   Column,
-  PrimaryGeneratedColumn,
-  OneToMany,
   CreateDateColumn,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
 import { ParticipantTypeORM } from "@app/common/typeorm/entity/participant.typeorm.entity";
@@ -38,7 +38,7 @@ export class RoomTypeORM implements RoomEntity {
   updatedAt!: Date;
 
   @OneToMany((type) => ParticipantTypeORM, (participant) => participant.room, {
-    eager: true,
+    eager: false,
     cascade: true,
   })
   participants: ParticipantTypeORM[]; // 관련된 참가자들을 eager 로딩하고, 채팅방이 저장될 때 함께 저장(cascade)

@@ -82,8 +82,8 @@ export class RequestMessage {
 export class ResponseMessage {
   constructor(responseMessage: ResponseMessage) {
     this.id = responseMessage.id;
-    this.room_id = responseMessage.room_id;
-    this.user_id = responseMessage.user_id;
+    this.room = responseMessage.room;
+    this.user = responseMessage.user;
     this.message = responseMessage.message;
     this.not_read_chat = responseMessage.not_read_chat;
     this.createdAt = responseMessage.createdAt;
@@ -91,11 +91,11 @@ export class ResponseMessage {
   @ApiProperty({ description: "채팅 ID" })
   id: number;
 
-  @ApiProperty({ description: "방 ID" })
-  room_id: number;
+  @ApiProperty({ description: "Room Info" })
+  room: ChatRoomInfo;
 
-  @ApiProperty({ description: "보낸사람 ID" })
-  user_id: number;
+  @ApiProperty({ description: "User Info" })
+  user: ChatUserInfo;
 
   @IsString()
   @ApiProperty({ description: "메세지" })

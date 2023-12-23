@@ -33,8 +33,8 @@ export class RoomServiceImpl implements RoomService {
     throw new Error("Method not implemented.");
   }
 
-  getParticipantByUserID(id: number): Promise<ParticipantEntity[]> {
-    return this.roomRepository.getParticipantByUserID(id);
+  async getParticipantByUserID(id: number): Promise<ParticipantEntity[]> {
+    return await this.roomRepository.getParticipantByUserID(id);
   }
 
   async createRoom(
@@ -83,7 +83,7 @@ export class RoomServiceImpl implements RoomService {
     return await this.roomRepository.getRoomByID(id);
   }
 
-  async updateRoomStatus(room: RoomEntity): Promise<boolean> {
+  async updateRoomStatus(room: Partial<RoomEntity>): Promise<boolean> {
     return await this.roomRepository.updateRoom(room);
   }
 

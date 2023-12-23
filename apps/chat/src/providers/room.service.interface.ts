@@ -22,7 +22,7 @@ export interface RoomService {
 
   getParticipantByUserID(id: number): Promise<ParticipantEntity[]>;
 
-  updateRoomStatus(room: RoomEntity): Promise<boolean>;
+  updateRoomStatus(room: Partial<RoomEntity>): Promise<boolean>;
 
   deleteRoom(deleteRoom: DeleteRoomRequest): Promise<boolean>;
 }

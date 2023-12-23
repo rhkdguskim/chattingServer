@@ -12,7 +12,7 @@ import { ParticipantEntity } from "@app/chat/entity/participant.entity";
 export interface RoomRepository {
   getRoomByID(id: number): Promise<RoomEntity>;
 
-  updateRoom(room: RoomEntity): Promise<boolean>;
+  updateRoom(room: Partial<RoomEntity>): Promise<boolean>;
 
   getParticipantByUserID(id: number): Promise<ParticipantEntity[]>;
 

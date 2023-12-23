@@ -52,7 +52,6 @@ export class ChatTypeormRepository
     chatListRequest: ChattingListRequest
   ): Promise<ChattingResponse[]> {
     const { id, cursor } = chatListRequest;
-
     const chatList = await this.chatRepository
       .createQueryBuilder("chat")
       .where("chat.room_id = :id", { id })

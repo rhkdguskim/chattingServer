@@ -9,12 +9,9 @@ import {
 } from "@app/chat/dto/chat.dto";
 
 export interface ChatGateway {
-  enterRoom(user_id: number, client: Socket): Promise<void>;
+  joinRoom(user_id: number, client: Socket): Promise<void>;
 
-  handleMessage(
-    user_id: number,
-    request: RequestMessage
-  ): Promise<ResponseMessage>;
+  message(user_id: number, request: RequestMessage): Promise<ResponseMessage>;
 
   readMessage(
     user_id: number,
