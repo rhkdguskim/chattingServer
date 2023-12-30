@@ -1,7 +1,7 @@
 import { Module } from "@nestjs/common";
 import { AuthenticationServiceImpl } from "../providers/authentication.service";
 import { UserTypeORMRepository } from "@app/user/repository/users.typeorm.repository";
-import { NodeBcryptService } from "@app/common/auth/bcrypt/bcrpy.service";
+import { BcryptServiceImpl } from "@app/common/auth/bcrypt/bcrpy.service";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import {
   AUTHENTICATION_SERVICE,
@@ -24,7 +24,7 @@ import { USER_REPOSITORY } from "@app/user/user.metadata";
     },
     {
       provide: BCRYPT_SERVICE,
-      useClass: NodeBcryptService,
+      useClass: BcryptServiceImpl,
     },
   ],
   exports: [BCRYPT_SERVICE, AUTHENTICATION_SERVICE, USER_REPOSITORY],

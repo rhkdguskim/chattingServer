@@ -14,7 +14,7 @@ import { UserTypeORM } from "@app/common/typeorm/entity/users.typeorm.entity";
 import { BCRYPT_SERVICE } from "@app/authentication/authentication.metadata";
 import { UserTypeORMRepository } from "@app/user/repository/users.typeorm.repository";
 import { UserServiceImpl } from "@app/user/providers/user.service";
-import { NodeBcryptService } from "@app/common/auth/bcrypt/bcrpy.service";
+import { BcryptServiceImpl } from "@app/common/auth/bcrypt/bcrpy.service";
 
 @Module({
   imports: [TypeOrmModule.forFeature([UserTypeORM, FriendTypeORM])],
@@ -37,7 +37,7 @@ import { NodeBcryptService } from "@app/common/auth/bcrypt/bcrpy.service";
     },
     {
       provide: BCRYPT_SERVICE,
-      useClass: NodeBcryptService,
+      useClass: BcryptServiceImpl,
     },
   ],
   exports: [FRIEND_SERVICE, USER_SERVICE],

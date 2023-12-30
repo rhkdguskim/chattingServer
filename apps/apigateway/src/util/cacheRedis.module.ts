@@ -1,19 +1,17 @@
 import { Module } from "@nestjs/common";
 import { CacheModule } from "@nestjs/cache-manager";
 import * as redisCacheStore from "cache-manager-ioredis";
-import * as config from "config";
-
-const redisConfig = config.get<any>("redis");
+import { DB_CONFIG } from "@config/config.interface";
 
 @Module({
   imports: [
     CacheModule.register({
       store: redisCacheStore,
-      host: process.env.REDIS_HOST || redisConfig.host,
-      port: parseInt(process.env.REDIS_PORT) || redisConfig.port,
-      password: process.env.REDIS_PASSWORD || redisConfig.password || undefined,
+      host: process.env.REDIS_HOST || DB_CONFIG.cache.host,
+      port: parseInt(process.env.REDIS_PORT) || DB_CONFIG.cache.port,
+      password: process.env.REDIS_PASSWORD || undefined,
       isGlobal: true,
-      ttl: process.env.REDIS_TTL || redisConfig.ttl || 60,
+      ttl: DB_CONFIG.cache.ttl,
     }),
   ],
 })

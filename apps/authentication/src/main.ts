@@ -1,12 +1,11 @@
 import { NestFactory } from "@nestjs/core";
 import { AuthenticationModule } from "./module/authentication.module";
 import { MicroserviceOptions, Transport } from "@nestjs/microservices";
-import { MicroServiceLoggingInterceptor } from "@app/common/interceptor";
 import { Logger } from "@nestjs/common";
-
-import { AUTHENTICATION_HOST, AUTHENTICATION_PORT } from "@app/common/config";
 import { RcpExceptionsFilter } from "@app/common/exception/server.exception.filter";
-import winstonLogger from "@app/common/logger/nestwinstonlogger";
+import winstonLogger from "@app/common/logger/nest.winston.logger";
+import { SERVER_INFO_CONFIG } from "../../../config/config.interface";
+import { MicroServiceLoggingInterceptor } from "@app/common/interceptor/micro.service.logging.interceptor";
 
 async function bootstrap() {
   const logger = winstonLogger({
@@ -20,14 +19,15 @@ async function bootstrap() {
       logger,
       transport: Transport.TCP,
       options: {
-        host: AUTHENTICATION_HOST,
-        port: AUTHENTICATION_PORT,
+        host: SERVER_INFO_CONFIG.authentication.host,
+        port: SERVER_INFO_CONFIG.authentication.port,
       },
     }
   );
   app.useGlobalInterceptors(
     new MicroServiceLoggingInterceptor(app.get(Logger))
   );
+
   app.useGlobalFilters(new RcpExceptionsFilter(app.get(Logger)));
   await app.listen();
 }

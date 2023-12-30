@@ -1,42 +1,39 @@
 import { NestFactory } from "@nestjs/core";
 import { AppModule } from "./app.module";
-import { setupSwagger } from "@src/util/swagger";
-import * as config from "config";
+import { setupSwagger } from "@src/util/setup.swagger";
 import * as cookieParser from "cookie-parser";
 import { LoggingInterceptor } from "@app/common/interceptor/logging.interceptor";
 import { Logger, ValidationPipe } from "@nestjs/common";
-import { MAIN_PORT } from "@app/common/config";
 import winstonLogger, {
   winstonLoggerConfig,
-} from "@app/common/logger/nestwinstonlogger";
+} from "@app/common/logger/nest.winston.logger";
 import { ServerExceptionFilter } from "@app/common/exception/server.exception.filter";
 import {
   ServerException,
   ServerExceptionCode,
 } from "@app/common/exception/server.exception";
+import {
+  CORS_CONFIG,
+  LOG_CONFIG,
+  SERVER_INFO_CONFIG,
+} from "@config/config.interface";
 
 async function bootstrap() {
   const loggerConfig: winstonLoggerConfig = {
-    filepath: "ApiGateWay",
-    loglevel: "debug",
-    name: "ApiGateWay",
+    filepath: LOG_CONFIG.filepath,
+    loglevel: LOG_CONFIG.loglevel,
+    name: LOG_CONFIG.name,
   };
   const logger = winstonLogger(loggerConfig);
   const app = await NestFactory.create(AppModule, {
     logger,
-    snapshot: true,
   });
 
-  const cors = config.get<any>("cors");
   app.setGlobalPrefix("api");
   app.use(cookieParser());
   app.enableCors({
-    origin: [
-      "https://web-kakaotalk-frontend-eu1k2lllawv5vy.sel3.cloudtype.app",
-      "http://localhost:3001",
-      cors.frontendHost || process.env.FRONT_END_HOST,
-    ],
-    credentials: true,
+    origin: CORS_CONFIG.urls,
+    credentials: CORS_CONFIG.credentials,
   });
   app.useGlobalInterceptors(new LoggingInterceptor(app.get(Logger)));
   app.useGlobalPipes(
@@ -59,6 +56,6 @@ async function bootstrap() {
   );
   setupSwagger(app);
   app.useGlobalFilters(new ServerExceptionFilter());
-  await app.listen(MAIN_PORT);
+  await app.listen(SERVER_INFO_CONFIG.main.port);
 }
 bootstrap();

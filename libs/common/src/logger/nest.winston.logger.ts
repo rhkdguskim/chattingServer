@@ -27,7 +27,7 @@ export default function winstonLogger(config: winstonLoggerConfig) {
           winston.format.timestamp({
             format: "YYYY-MM-DD HH:mm:ss.SSS",
           }),
-          utilities.format.nestLike(config.name)
+          winston.format.json()
         ),
       }),
     ],

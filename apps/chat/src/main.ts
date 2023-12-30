@@ -1,8 +1,10 @@
 import { NestFactory } from "@nestjs/core";
 import { ChatModule } from "./module/chat.module";
 import { MicroserviceOptions, Transport } from "@nestjs/microservices";
-import { CHAT_HOST, CHAT_PORT } from "@app/common/config";
-import winstonLogger from "@app/common/logger/nestwinstonlogger";
+import winstonLogger from "@app/common/logger/nest.winston.logger";
+import { SERVER_INFO_CONFIG } from "@config/config.interface";
+import { MicroServiceLoggingInterceptor } from "@app/common/interceptor/micro.service.logging.interceptor";
+import { Logger } from "@nestjs/common";
 
 async function bootstrap() {
   const app = await NestFactory.createMicroservice<MicroserviceOptions>(
@@ -15,10 +17,13 @@ async function bootstrap() {
       }),
       transport: Transport.TCP,
       options: {
-        host: CHAT_HOST,
-        port: CHAT_PORT,
+        host: SERVER_INFO_CONFIG.chat.host,
+        port: SERVER_INFO_CONFIG.chat.port,
       },
     }
+  );
+  app.useGlobalInterceptors(
+    new MicroServiceLoggingInterceptor(app.get(Logger))
   );
   await app.listen();
 }

@@ -1,13 +1,13 @@
-import { CommonJwtService } from "@app/common/auth/jwt/common.jwtService";
+import { JwtServiceImpl } from "@app/common/auth/jwt/jwtServiceImpl";
 
 describe("JwtService Test", () => {
-  const jwtService = new CommonJwtService({
+  const jwtService = new JwtServiceImpl({
     expire_in: "5s",
     secret: "test",
   });
 
   it("Class", () => {
-    expect(jwtService).toBeInstanceOf(CommonJwtService);
+    expect(jwtService).toBeInstanceOf(JwtServiceImpl);
   });
 
   it("Function", async () => {

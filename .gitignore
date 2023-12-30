@@ -25,7 +25,8 @@
 .env.production.local
 *.pem
 
+/configLog
 /log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+npm-debug.configLog*
+yarn-debug.configLog*
+yarn-error.configLog*

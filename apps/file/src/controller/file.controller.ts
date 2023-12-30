@@ -6,20 +6,19 @@ import {
   Post,
   Res,
   UploadedFile,
+  UseGuards,
   UseInterceptors,
 } from "@nestjs/common";
-import { UseGuards } from "@nestjs/common";
 import {
-  ApiOperation,
   ApiCreatedResponse,
-  ApiTags,
+  ApiOperation,
   ApiSecurity,
+  ApiTags,
 } from "@nestjs/swagger";
-import { FileService } from "./file.service";
+import { FileService } from "../providers/file.service";
 import { FileInterceptor } from "@nestjs/platform-express";
 import * as path from "path";
 import { Response } from "express";
-import { AuthGuard } from "@nestjs/passport";
 import { JwtGuard } from "@app/authorization/guards/authorization.jwt.guard";
 import { SelfGuard } from "@app/authorization/guards/authorization.self.guard";
 

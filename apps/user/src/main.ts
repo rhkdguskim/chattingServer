@@ -1,10 +1,10 @@
 import { NestFactory } from "@nestjs/core";
 import { UserModule } from "./module/user.module";
 import { MicroserviceOptions, Transport } from "@nestjs/microservices";
-import { FRIEND_HOST, FRIEND_PORT } from "@app/common/config";
-import { MicroServiceLoggingInterceptor } from "@app/common/interceptor";
 import { Logger } from "@nestjs/common";
-import winstonLogger from "@app/common/logger/nestwinstonlogger";
+import winstonLogger from "@app/common/logger/nest.winston.logger";
+import { MicroServiceLoggingInterceptor } from "@app/common/interceptor/micro.service.logging.interceptor";
+import { SERVER_INFO_CONFIG } from "@config/config.interface";
 
 async function bootstrap() {
   const app = await NestFactory.createMicroservice<MicroserviceOptions>(
@@ -17,8 +17,8 @@ async function bootstrap() {
       }),
       transport: Transport.TCP,
       options: {
-        host: FRIEND_HOST,
-        port: FRIEND_PORT,
+        host: SERVER_INFO_CONFIG.user.host,
+        port: SERVER_INFO_CONFIG.user.port,
       },
     }
   );

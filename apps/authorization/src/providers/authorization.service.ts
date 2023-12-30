@@ -2,7 +2,7 @@ import { Inject, Injectable } from "@nestjs/common";
 import { JWT_SERVICE } from "../authorization.metadata";
 import { AuthorizationService } from "./authorization.service.interface";
 import { TokenInfoRequest, TokenInfoResponse } from "../dto/authorization.dto";
-import { CommonJwtService } from "@app/common/auth/jwt/common.jwtService";
+import { JwtServiceImpl } from "@app/common/auth/jwt/jwtServiceImpl";
 import { LoginUserResponse } from "@app/authentication/dto/authenticaion.dto";
 import {
   ServerException,
@@ -11,7 +11,7 @@ import {
 
 @Injectable()
 export class AuthorizationServiceImpl implements AuthorizationService {
-  constructor(@Inject(JWT_SERVICE) private jwtService: CommonJwtService) {}
+  constructor(@Inject(JWT_SERVICE) private jwtService: JwtServiceImpl) {}
 
   async verify(payload: string): Promise<TokenInfoResponse> {
     return new TokenInfoResponse(await this.jwtService.verify(payload));

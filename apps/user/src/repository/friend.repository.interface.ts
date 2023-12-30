@@ -1,4 +1,4 @@
-import { Repository } from "@app/common/interface/repository.interface";
+import { Repository } from "@app/common/typeorm/typeorm.repository.interface";
 import { FriendEntity } from "../entity/friend.entity";
 import { FindFriendRequest } from "../dto/friend.dto";
 import { UserEntity } from "@app/user/entity/users.entity";

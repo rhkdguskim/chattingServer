@@ -1,39 +1,65 @@
-db:
-  type: 'mysql'
-  host : '127.0.0.1'
-  port: 13306
-  username: 'root'
-  password: 'root'
-  database: 'kwangtalk'
-  synchronize: true
+server:
+  main :
+    host : "127.0.0.1"
+    port : 3000
+  authentication :
+    host : "127.0.0.1"
+    port : 3001
+  authorization :
+    host : "127.0.0.1"
+    port : 3002
+  user:
+    host: "127.0.0.1"
+    port: 3003
+  chat:
+    host: "127.0.0.1"
+    port: 3004
+  file:
+    host: "127.0.0.1"
+    port: 3005
 
 log:
   loglevel : 'debug'
+  filepath : 'ApiGateWay'
+  name : 'ApiGateWay'
+
+db:
+  main:
+    type: 'mysql'
+    host : '127.0.0.1'
+    port: 13306
+    username: 'root'
+    password: 'root'
+    database: 'kwangtalk'
+    synchronize: true
+
+  cache:
+    host: '127.0.0.1'
+    port: 6379
+    ttl: 60
 
 jwt:
-  expiresIn: 100000
+  expires_in: 3600
   secret: 'bigkwangs'
 
+oauth :
+  kakao:
+    apiKey: '7dd48b864b7c129d14f8f65cf429093b'
+    secret: 'LjgAO0NAMk4XhenvumwOxlPacCJroBBG'
+    redirect_url : 'https://web-kakaotalk-frontend-eu1k2lllawv5vy.sel3.cloudtype.app/oauth'
 
-redis:
-  host : '127.0.0.1'
-  port: 6379
-  ttl : 60
+  naver:
+    apiKey: 'oTcoSe0Nvv4q6RaZyyAS'
+    secret: 'YA_OXE1Knz'
+    redirect_url : 'https://web-kakaotalk-frontend-eu1k2lllawv5vy.sel3.cloudtype.app/oauth'
 
-kakao:
-  restApiKey: '7dd48b864b7c129d14f8f65cf429093b'
-  secret: 'LjgAO0NAMk4XhenvumwOxlPacCJroBBG'
-  redirectURL : 'http://localhost:3001/oauth'
+  google:
+    apiKey: '846841962221-phpmlehpgrv1lj4ko9fkrmnalt3uo1fk.apps.googleusercontent.com'
+    secret: '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'
+    redirect_url : 'https://web-kakaotalk-frontend-eu1k2lllawv5vy.sel3.cloudtype.app/oauth'
 
-google:
-  restApiKey: '846841962221-phpmlehpgrv1lj4ko9fkrmnalt3uo1fk.apps.googleusercontent.com'
-  secret: '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'
-  redirectURL : 'http://localhost:3001/oauth'
-
-naver:
-  restApiKey: 'oTcoSe0Nvv4q6RaZyyAS'
-  secret: 'YA_OXE1Knz'
-  redirectURL : 'http://localhost:3001/oauth'
 
 cors:
-  frontendHost: 'http://localhost:3001'
+  credentials: true
+  urls: ['https://web-kakaotalk-frontend-eu1k2lllawv5vy.sel3.cloudtype.app', 'https://web-kakaotalk-frontend-eu1k2lllawv5vy.sel3.cloudtype.app', 'http://localhost:3001']
+

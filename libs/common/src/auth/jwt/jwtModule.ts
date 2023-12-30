@@ -1,15 +1,15 @@
 import { Module } from "@nestjs/common";
 import { JWT_SERVICE } from "@app/authorization/authorization.metadata";
-import { JWT_EXPIRE_IN, JWT_SECRET } from "@app/common/config";
-import { CommonJwtService } from "@app/common/auth/jwt/common.jwtService";
+import { JwtServiceImpl } from "@app/common/auth/jwt/jwtServiceImpl";
+import { JWT_CONFIG } from "../../../../../config/config.interface";
 
 @Module({
   providers: [
     {
       provide: JWT_SERVICE,
-      useValue: new CommonJwtService({
-        secret: JWT_SECRET,
-        expire_in: JWT_EXPIRE_IN,
+      useValue: new JwtServiceImpl({
+        secret: JWT_CONFIG.expires_in,
+        expire_in: JWT_CONFIG.secret,
       }),
     },
   ],

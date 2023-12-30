@@ -1,10 +1,10 @@
 import { NestFactory } from "@nestjs/core";
 import { AuthorizationModule } from "./module/authorization.module";
 import { MicroserviceOptions, Transport } from "@nestjs/microservices";
-import { MicroServiceLoggingInterceptor } from "@app/common/interceptor";
 import { Logger } from "@nestjs/common";
-import { AUTHORIZATION_HOST, AUTHORIZATION_PORT } from "@app/common/config";
-import winstonLogger from "@app/common/logger/nestwinstonlogger";
+import winstonLogger from "@app/common/logger/nest.winston.logger";
+import { SERVER_INFO_CONFIG } from "@config/config.interface";
+import { MicroServiceLoggingInterceptor } from "@app/common/interceptor/micro.service.logging.interceptor";
 
 async function bootstrap() {
   const app = await NestFactory.createMicroservice<MicroserviceOptions>(
@@ -17,8 +17,8 @@ async function bootstrap() {
       }),
       transport: Transport.TCP,
       options: {
-        host: AUTHORIZATION_HOST,
-        port: AUTHORIZATION_PORT,
+        host: SERVER_INFO_CONFIG.authorization.host,
+        port: SERVER_INFO_CONFIG.authorization.port,
       },
     }
   );

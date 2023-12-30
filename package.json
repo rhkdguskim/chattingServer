@@ -121,6 +121,7 @@
     ],
     "moduleNameMapper": {
       "^@src/(.*)$": "<rootDir>/$1",
+      "^@config/(.*)$": "<rootDir>/config/$1",
       "^@app/authentication(|/.*)$": "<rootDir>/apps/authentication/src/$1",
       "^@app/authorization(|/.*)$": "<rootDir>/apps/authorization/src/$1",
       "^@app/chat(|/.*)$": "<rootDir>/apps/chat/src/$1",

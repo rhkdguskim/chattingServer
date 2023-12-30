@@ -11,7 +11,7 @@ export interface CommonJwtConfig {
   expire_in: string;
 }
 
-export class CommonJwtService {
+export class JwtServiceImpl {
   private jwtService: JwtService;
   private option: JwtModuleOptions;
   constructor(options?: CommonJwtConfig) {

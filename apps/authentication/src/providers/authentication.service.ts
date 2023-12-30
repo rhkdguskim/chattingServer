@@ -12,7 +12,7 @@ import {
 } from "@app/authentication/dto/authenticaion.dto";
 import { BcryptService } from "@app/common/auth/bcrypt/bcrpy.interface";
 import { JWT_SERVICE } from "@app/authorization/authorization.metadata";
-import { CommonJwtService } from "@app/common/auth/jwt/common.jwtService";
+import { JwtServiceImpl } from "@app/common/auth/jwt/jwtServiceImpl";
 import { TokenInfoRequest } from "@app/authorization/dto/authorization.dto";
 import { USER_REPOSITORY } from "@app/user/user.metadata";
 
@@ -20,7 +20,7 @@ import { USER_REPOSITORY } from "@app/user/user.metadata";
 export class AuthenticationServiceImpl implements AuthenticationService {
   constructor(
     @Inject(JWT_SERVICE)
-    private readonly jwtService: CommonJwtService,
+    private readonly jwtService: JwtServiceImpl,
     @Inject(BCRYPT_SERVICE)
     private bcryptService: BcryptService,
     @Inject(USER_REPOSITORY)

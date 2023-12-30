@@ -1,4 +1,4 @@
-import { Repository } from "@app/common/interface/repository.interface";
+import { Repository } from "@app/common/typeorm/typeorm.repository.interface";
 import { UserEntity } from "@app/user/entity/users.entity";
 
 export interface UserRepository extends Repository<UserEntity> {

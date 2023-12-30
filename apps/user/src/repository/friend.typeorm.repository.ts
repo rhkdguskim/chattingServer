@@ -5,7 +5,7 @@ import { FriendEntity } from "../entity/friend.entity";
 import { FindFriendRequest } from "../dto/friend.dto";
 import { FriendRepository } from "./friend.repository.interface";
 import { FriendTypeORM } from "@app/common/typeorm/entity/friend.typeorm.entity";
-import { TypeormRepository } from "@app/common/typeorm/typeormrepository";
+import { TypeormRepository } from "@app/common/typeorm/typeorm.repository";
 import { UserTypeORM } from "@app/common/typeorm/entity/users.typeorm.entity";
 import { UserEntity } from "@app/user/entity/users.entity";
 
