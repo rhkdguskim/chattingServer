@@ -29,10 +29,6 @@
 - [유저, 친구 서비스 기능](apps/user/README.md)
 - [채팅, 채팅방, 참가자 서비스 기능](apps/chat/README.md)
 
-### 서비스 이용해보기
--
-- 
-
 ## Installation
 
 ```bash
