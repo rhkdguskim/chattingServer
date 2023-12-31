@@ -1,56 +1,37 @@
-### Archtechture
-```mermaid
-flowchart TD
-    A2[Frontend] --> A
-    A --> A2
-    A[API GateWay] --> B(Authenication Service)
-    A --> C(Authorizaion Service)
-    C --> A
-    A --> D(Chat Service)
-    D --> A
-    A --> E(Friend Service)
-    E --> A
-    A --> F(Room Service)
-    F --> A
-    A --> G(File Service)
-    G --> A
-```
+## 프로젝트 개요
+> 나만의채팅, 1:1, 그룹 실시간 채팅 기능을 제공하며, 사용자 프로필을 통하여 상태메세지, 배경화면, 프로필화면을 꾸밀 수 있으며, 친구 기능을 통하여 자기자신의 상태메세지를 다른 친구에게 보여줄 수 있습니다.
+- 프로젝트 이름 : Chatting Server
+- 프로젝트 지속기간 : 2023. 06 ~ 2024. 01
+- 프로젝트 담당자 : 김광현
+  
+## 환경구성
+### 개발환경
+- 플랫폼 : NodeJS
+- 언어 : TypeScript
+- IDE : VSCode, WebStrom
+- CI/CD : CloudType, Git Action
+- 저장소 : 모노레포 형식
 
-### AuthGuard Sequence Diagram ( JWT Token )
-``` mermaid
-sequenceDiagram;
-    FrontEnd ->> APIGateWay : Plz Check Verify
-    APIGateWay ->> AuthorizaionMicroService : Send to Authorizaion
-    AuthorizaionMicroService ->> APIGateWay : Verifyed
-    APIGateWay ->> FrontEnd : Verifyed
-```
-
-### Oauth 2.0 Sequence Diagram
-``` mermaid
-sequenceDiagram;
-    FrontEnd ->> OauthProiver: Get Code from Redirect
-    OauthProiver ->> FrontEnd : Okay Here is Code by Redirect
-    FrontEnd ->> APIGateWay : Plz Check Verify ( Code )
-    APIGateWay ->> AuthorizaionMicroService : Send to Authorizaion ( Code )
-    AuthorizaionMicroService ->> OauthProiver : Checking Verify...
-    OauthProiver ->> AuthorizaionMicroService : Vertifyed
-    AuthorizaionMicroService ->> APIGateWay : Verifyed
-    APIGateWay ->> FrontEnd : Verifyed
-```
-
-## Description
-- 실시간 채팅 기능을 제공합니다.
-- 프로필, 친구 기능을 제공합니다.
-
-
-## TechSpec
-- [x] OAuth 2.0
-- [x] AuthGuard by JWT Token
+### 핵심기술
 - [x] Websocket Realtime Chatting
-- [x] Redis Caching System
-- [x] TypeORM ( MySQL )
+- [x] MySQL, Maria DB ( TypeORM )
+- [x] Redis ( Caching Interceptor )
 - [x] Swagger API
-- [x] CI/CD PipeLine ( Deploy, Test )
+      
+## 기능
+### 시연 이미지
+<img width="721" alt="image" src="https://github.com/rhkdguskim/chattingServer/assets/111857144/50e7023d-f671-463b-a172-058eaca0fc52">
+<img width="738" alt="image" src="https://github.com/rhkdguskim/chattingServer/assets/111857144/52d520df-44df-4d1d-bd9d-ffc2b63fd424">
+
+### 세부 사항
+- 인증, 인가 서비스 기능
+- 유저, 친구 서비스 기능
+- 채팅, 채팅방, 참가자 서비스 기능
+- 이미지 파일 업로드 및 제공 기능
+
+### 서비스 이용해보기
+-
+- 
 
 ## Installation
 
@@ -59,7 +40,6 @@ $ npm install
 ```
 
 ## Running the app
-
 ```bash
 # development
 $ npm run start
@@ -83,10 +63,3 @@ $ npm run test:e2e
 # test coverage
 $ npm run test:cov
 ```
-
-## Swagger API
-- [https://port-0-kakaotalk-apigateway-eu1k2lllawv5vy.sel3.cloudtype.app/api](https://port-0-kakaotalk-backend-eu1k2lllawv5vy.sel3.cloudtype.app/api)
-
-## Open Server
-- 아래의 링크에서 서비스를 확인 할 수 있습니다.
-- https://web-kakaotalk-frontend-eu1k2lllawv5vy.sel3.cloudtype.app/
