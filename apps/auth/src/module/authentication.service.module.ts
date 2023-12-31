@@ -7,7 +7,7 @@ import {
   AUTHENTICATION_SERVICE,
   BCRYPT_SERVICE,
 } from "../authentication.metadata";
-import { UserTypeORM } from "@app/common/typeorm/entity/users.typeorm.entity";
+import { UserTypeORM } from "@app/common/database/entity/users.typeorm.entity";
 import { JwtModule } from "@app/auth/providers/jwt/jwtModule";
 import { USER_REPOSITORY } from "@app/user/user.metadata";
 

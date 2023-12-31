@@ -8,7 +8,7 @@ import {
   Unique,
   UpdateDateColumn,
 } from "typeorm";
-import { UserTypeORM } from "@app/common/typeorm/entity/users.typeorm.entity";
+import { UserTypeORM } from "@app/common/database/entity/users.typeorm.entity";
 import { FriendEntity } from "@app/user/entity/friend.entity";
 
 @Entity({ name: "friend" })

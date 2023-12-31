@@ -1,0 +1,65 @@
+server:
+  main :
+    host : "127.0.0.1"
+    port : 3000
+  authentication :
+    host : "127.0.0.1"
+    port : 3001
+  authorization :
+    host : "127.0.0.1"
+    port : 3002
+  user:
+    host: "127.0.0.1"
+    port: 3003
+  chat:
+    host: "127.0.0.1"
+    port: 3004
+  file:
+    host: "127.0.0.1"
+    port: 3005
+
+log:
+  loglevel : 'debug'
+  filepath : 'ApiGateWay'
+  name : 'ApiGateWay'
+
+db:
+  main:
+    type: 'mysql'
+    host : '127.0.0.1'
+    port: 13306
+    username: 'root'
+    password: 'root'
+    database: 'database'
+    synchronize: true
+
+  cache:
+    host: '127.0.0.1'
+    port: 6379
+    ttl: 60
+
+jwt:
+  expires_in: 3600
+  secret: 'secret'
+
+oauth :
+  kakao:
+    apiKey: ''
+    secret: ''
+    redirect_url : ''
+
+  naver:
+    apiKey: ''
+    secret: ''
+    redirect_url : ''
+
+  google:
+    apiKey: ''
+    secret: ''
+    redirect_url : ''
+
+
+cors:
+  credentials: true
+  urls: []
+

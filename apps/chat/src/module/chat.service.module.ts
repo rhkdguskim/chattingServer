@@ -1,10 +1,10 @@
 import { Module } from "@nestjs/common";
 import { ChatServiceImpl } from "../providers/chat.service";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { ChattingTypeORM } from "@app/common/typeorm/entity/chatting.typeorm.entity";
-import { ParticipantTypeORM } from "@app/common/typeorm/entity/participant.typeorm.entity";
-import { RoomTypeORM } from "@app/common/typeorm/entity/room.typeorm.entity";
-import { ReadByTypeORM } from "@app/common/typeorm/entity/readby.typeorm.entity";
+import { ChattingTypeORM } from "@app/common/database/entity/chatting.typeorm.entity";
+import { ParticipantTypeORM } from "@app/common/database/entity/participant.typeorm.entity";
+import { RoomTypeORM } from "@app/common/database/entity/room.typeorm.entity";
+import { ReadByTypeORM } from "@app/common/database/entity/readby.typeorm.entity";
 import { RoomServiceImpl } from "../providers/room.service";
 import {
   CHAT_REPOSITORY,

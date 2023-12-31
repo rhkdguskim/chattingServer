@@ -6,9 +6,9 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
-import { FriendTypeORM } from "@app/common/typeorm/entity/friend.typeorm.entity";
-import { ChattingTypeORM } from "@app/common/typeorm/entity/chatting.typeorm.entity";
-import { ParticipantTypeORM } from "@app/common/typeorm/entity/participant.typeorm.entity";
+import { FriendTypeORM } from "@app/common/database/entity/friend.typeorm.entity";
+import { ChattingTypeORM } from "@app/common/database/entity/chatting.typeorm.entity";
+import { ParticipantTypeORM } from "@app/common/database/entity/participant.typeorm.entity";
 import { Role, UserEntity } from "@app/user/entity/users.entity";
 
 @Entity({ name: "user" })

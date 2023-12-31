@@ -1,8 +1,8 @@
 import { ChatEntity } from "./chatting.entity";
-import { UserEntity } from "@app/user/entity/users.entity";
+import {ChatUserInfo} from "@app/chat/dto/chat.dto";
 
 export class ReadByEntity {
   id: number;
+  user : ChatUserInfo
   chatting: ChatEntity;
-  user: UserEntity;
 }

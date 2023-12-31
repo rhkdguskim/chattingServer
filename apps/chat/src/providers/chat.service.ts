@@ -31,7 +31,7 @@ export class ChatServiceImpl implements ChatService {
       await this.roomRepository.countParticipantsByRoomID(room_id);
 
     return await this.chattingRepository.create({
-      user: { id: user_id } as UserEntity,
+      user: { id: user_id },
       room: { id: room_id } as RoomEntity,
       message: requestMessage.message,
       messageType: requestMessage.messageType,

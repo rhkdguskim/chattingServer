@@ -9,7 +9,7 @@ import {
   ServerExceptionCode,
 } from "@app/common/exception/server.exception";
 import { RoomType } from "@app/chat/entity/room.entity";
-import { typeOrmConfig } from "@app/common/typeorm/typeorm.config";
+import { typeOrmConfig } from "@app/common/database/typeorm.config";
 import { DataSourceOptions } from "typeorm/data-source/DataSourceOptions";
 
 describe("Room Service Test", () => {

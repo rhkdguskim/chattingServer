@@ -7,8 +7,8 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
-import { RoomTypeORM } from "@app/common/typeorm/entity/room.typeorm.entity";
-import { UserTypeORM } from "@app/common/typeorm/entity/users.typeorm.entity";
+import { RoomTypeORM } from "@app/common/database/entity/room.typeorm.entity";
+import { UserTypeORM } from "@app/common/database/entity/users.typeorm.entity";
 import { ParticipantEntity } from "@app/chat/entity/participant.entity";
 
 // 유저와 방의 Join Table

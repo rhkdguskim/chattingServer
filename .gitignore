@@ -7,6 +7,10 @@
 /config/db
 /config/mysql/db
 /config/redis/db
+/config/default.yml
+/config/development.yml
+/config/production.yml
+/config/test.yml
 # testing
 /coverage
 .idea

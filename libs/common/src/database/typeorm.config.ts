@@ -1,13 +1,13 @@
 import { DB_CONFIG } from "@config/config.interface";
-import { UserTypeORM } from "@app/common/typeorm/entity/users.typeorm.entity";
-import { FriendTypeORM } from "@app/common/typeorm/entity/friend.typeorm.entity";
-import { ChattingTypeORM } from "@app/common/typeorm/entity/chatting.typeorm.entity";
-import { RoomTypeORM } from "@app/common/typeorm/entity/room.typeorm.entity";
-import { ParticipantTypeORM } from "@app/common/typeorm/entity/participant.typeorm.entity";
-import { ReadByTypeORM } from "@app/common/typeorm/entity/readby.typeorm.entity";
+import { UserTypeORM } from "@app/common/database/entity/users.typeorm.entity";
+import { FriendTypeORM } from "@app/common/database/entity/friend.typeorm.entity";
+import { ChattingTypeORM } from "@app/common/database/entity/chatting.typeorm.entity";
+import { RoomTypeORM } from "@app/common/database/entity/room.typeorm.entity";
+import { ParticipantTypeORM } from "@app/common/database/entity/participant.typeorm.entity";
+import { ReadByTypeORM } from "@app/common/database/entity/readby.typeorm.entity";
 
 export const typeOrmConfig = {
-  type: DB_CONFIG.main.type,
+  type: process.env.DB_TYPE || DB_CONFIG.main.type,
   host: process.env.DB_HOST || DB_CONFIG.main.host,
   port: parseInt(process.env.DB_PORT) || DB_CONFIG.main.port,
   username: process.env.DB_USER || DB_CONFIG.main.username,

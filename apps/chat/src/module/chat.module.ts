@@ -3,7 +3,7 @@ import { ChatControllerImpl } from "../controller/chat.controller";
 import { RoomControllerImpl } from "../controller/room.controller";
 import { ChatServiceModule } from "@app/chat/module/chat.service.module";
 import { CHAT_GATEWAY } from "@app/chat/chat.metadata";
-import { ChatGatewayImpl } from "@app/chat/gateway/chat.ㅎatewayImpl";
+import { ChatGatewayImpl } from "@app/chat/gateway/chat.gatewayImpl";
 
 @Module({
   imports: [ChatServiceModule],

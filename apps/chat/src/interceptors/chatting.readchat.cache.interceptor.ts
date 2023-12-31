@@ -10,7 +10,6 @@ import {
 import { Observable, tap, of } from "rxjs";
 import { CACHE_MANAGER } from "@nestjs/cache-manager";
 import { Cluster } from "ioredis";
-import { Reflector } from "@nestjs/core";
 
 @Injectable()
 export class ReadChatCacheInterceptor implements NestInterceptor {

@@ -8,9 +8,9 @@ import {
   JoinColumn,
   OneToMany,
 } from "typeorm";
-import { RoomTypeORM } from "@app/common/typeorm/entity/room.typeorm.entity";
-import { UserTypeORM } from "@app/common/typeorm/entity/users.typeorm.entity";
-import { ReadByTypeORM } from "@app/common/typeorm/entity/readby.typeorm.entity";
+import { RoomTypeORM } from "@app/common/database/entity/room.typeorm.entity";
+import { UserTypeORM } from "@app/common/database/entity/users.typeorm.entity";
+import { ReadByTypeORM } from "@app/common/database/entity/readby.typeorm.entity";
 import { ChatEntity } from "@app/chat/entity/chatting.entity";
 
 @Entity({ name: "chat" })
@@ -44,7 +44,7 @@ export class ChattingTypeORM implements ChatEntity {
   @JoinColumn({ name: "user_id" })
   user: UserTypeORM;
 
-  @OneToMany((type) => ReadByTypeORM, (readBy) => readBy.chatting, {
+  @OneToMany(() => ReadByTypeORM, (readBy) => readBy.chatting, {
     eager: false,
     cascade: true,
   })

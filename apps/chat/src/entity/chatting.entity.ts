@@ -1,6 +1,9 @@
 import { RoomEntity } from "./room.entity";
-import { UserEntity } from "@app/user/entity/users.entity";
 import { ReadByEntity } from "./readby.entity";
+
+export class ChatUserInfo {
+  id : number;
+}
 
 export class ChatEntity {
   constructor(chat: ChatEntity) {
@@ -12,7 +15,6 @@ export class ChatEntity {
       this.createdAt = chat.createdAt;
       this.updatedAt = chat.updatedAt;
       this.room = chat.room;
-      this.user = chat.user;
       this.readBys = chat.readBys;
     }
   }
@@ -22,7 +24,7 @@ export class ChatEntity {
   not_read_chat: number;
   createdAt: Date;
   updatedAt: Date;
+  user : ChatUserInfo;
   room: RoomEntity;
-  user: UserEntity;
   readBys: ReadByEntity[];
 }
