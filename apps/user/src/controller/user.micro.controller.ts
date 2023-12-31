@@ -5,10 +5,10 @@ import {
   FIND_ONE_USER,
   SIGN_UP,
   UPDATE_USER,
-} from "@app/authentication/authentication.message";
+} from "@app/auth/authentication.message";
 import { Controller, Inject } from "@nestjs/common";
-import { AUTHENTICATION_SERVICE } from "@app/authentication/authentication.metadata";
-import { AuthenticationService } from "@app/authentication/providers/authentication.service.interface";
+import { AUTHENTICATION_SERVICE } from "@app/auth/authentication.metadata";
+import { AuthenticationService } from "@app/auth/providers/authentication.service.interface";
 import { UsersController } from "@app/user/controller/user.controller.interface";
 import {
   CreateUserRequest,

@@ -17,7 +17,7 @@ import {
   ApiSecurity,
   ApiTags,
 } from "@nestjs/swagger";
-import { JwtGuard } from "@app/authorization/guards/authorization.jwt.guard";
+import { JwtGuard } from "@app/auth/guard/authorization.jwt.guard";
 
 import { FriendService } from "../providers/friend.service.interface";
 import { FriendController } from "./friend.controller.interface";
@@ -27,12 +27,9 @@ import {
   DeleteFriendRequest,
   UpdateFriendRequest,
 } from "../dto/friend.dto";
-import {
-  Roles,
-  RolesGuard,
-} from "@app/authorization/guards/authorization.role.guard";
+import { Roles, RolesGuard } from "@app/auth/guard/authorization.role.guard";
 import { Role } from "@app/user/entity/users.entity";
-import { SelfGuard } from "@app/authorization/guards/authorization.self.guard";
+import { SelfGuard } from "@app/auth/guard/authorization.self.guard";
 import { FRIEND_SERVICE } from "@app/user/user.metadata";
 import { UserInfoResponse } from "@app/user/dto/user.dto";
 

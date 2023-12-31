@@ -1,6 +1,5 @@
 import { Test, TestingModule } from "@nestjs/testing";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { typeOrmConfig } from "@app/common/module";
 import { ChatServiceModule } from "@app/chat/module/chat.service.module";
 import { ROOM_SERVICE } from "@app/chat/chat.metadata";
 import { RoomService } from "@app/chat/providers/room.service.interface";
@@ -10,13 +9,18 @@ import {
   ServerExceptionCode,
 } from "@app/common/exception/server.exception";
 import { RoomType } from "@app/chat/entity/room.entity";
+import { typeOrmConfig } from "@app/common/typeorm/typeorm.config";
+import { DataSourceOptions } from "typeorm/data-source/DataSourceOptions";
 
 describe("Room Service Test", () => {
   let roomService: RoomService;
 
   beforeAll(async () => {
     const app: TestingModule = await Test.createTestingModule({
-      imports: [TypeOrmModule.forRoot(typeOrmConfig), ChatServiceModule],
+      imports: [
+        TypeOrmModule.forRoot(typeOrmConfig as DataSourceOptions),
+        ChatServiceModule,
+      ],
     }).compile();
 
     roomService = app.get<RoomService>(ROOM_SERVICE);

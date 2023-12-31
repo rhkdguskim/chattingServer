@@ -17,8 +17,8 @@ import {
   ApiParam,
   ApiTags,
 } from "@nestjs/swagger";
-import { SelfGuard } from "@app/authorization/guards/authorization.self.guard";
-import { JwtGuard } from "@app/authorization/guards/authorization.jwt.guard";
+import { SelfGuard } from "@app/auth/guard/authorization.self.guard";
+import { JwtGuard } from "@app/auth/guard/authorization.jwt.guard";
 import { UsersController } from "@app/user/controller/user.controller.interface";
 import { USER_SERVICE } from "@app/user/user.metadata";
 import { UserService } from "@app/user/providers/user.service.interface";

@@ -6,19 +6,19 @@
   "compilerOptions": {
     "deleteOutDir": true,
     "webpack": true,
-    "tsConfigPath": "apps/apigateway/tsconfig.app.json"
+    "tsConfigPath": "apps/main/tsconfig.app.json"
   },
   "monorepo": true,
-  "root": "apps/apigateway",
+  "root": "apps/main",
   "projects": {
-    "apigateway": {
+    "main": {
       "type": "application",
-      "root": "apps/apigateway",
+      "root": "apps/main",
       "entryFile": "main",
-      "sourceRoot": "apps/apigateway/src",
+      "sourceRoot": "apps/main/src",
       "compilerOptions": {
         "watchAssets": true,
-        "tsConfigPath": "apps/apigateway/tsconfig.app.json"
+        "tsConfigPath": "apps/main/tsconfig.app.json"
       }
     },
     "common": {
@@ -30,31 +30,22 @@
         "tsConfigPath": "libs/common/tsconfig.lib.json"
       }
     },
-    "authentication": {
+    "auth": {
       "type": "application",
-      "root": "apps/authentication",
+      "root": "apps/auth",
       "entryFile": "main",
-      "sourceRoot": "apps/authentication/src",
+      "sourceRoot": "apps/auth/src",
       "compilerOptions": {
-        "tsConfigPath": "apps/authentication/tsconfig.app.json"
+        "tsConfigPath": "apps/auth/tsconfig.app.json"
       }
     },
-    "authorization": {
+    "user": {
       "type": "application",
-      "root": "apps/authorization",
+      "root": "apps/user",
       "entryFile": "main",
-      "sourceRoot": "apps/authorization/src",
+      "sourceRoot": "apps/user/src",
       "compilerOptions": {
-        "tsConfigPath": "apps/authorization/tsconfig.app.json"
-      }
-    },
-    "friend": {
-      "type": "application",
-      "root": "apps/friend",
-      "entryFile": "main",
-      "sourceRoot": "apps/friend/src",
-      "compilerOptions": {
-        "tsConfigPath": "apps/friend/tsconfig.app.json"
+        "tsConfigPath": "apps/user/tsconfig.app.json"
       }
     },
     "chat": {
@@ -64,15 +55,6 @@
       "sourceRoot": "apps/chat/src",
       "compilerOptions": {
         "tsConfigPath": "apps/chat/tsconfig.app.json"
-      }
-    },
-    "room": {
-      "type": "application",
-      "root": "apps/room",
-      "entryFile": "main",
-      "sourceRoot": "apps/room/src",
-      "compilerOptions": {
-        "tsConfigPath": "apps/room/tsconfig.app.json"
       }
     },
     "file": {

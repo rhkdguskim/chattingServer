@@ -22,10 +22,10 @@ import {
   InviteRoomRequest,
   RoomInfoResponse,
 } from "../dto/room.dto";
-import { JwtGuard } from "@app/authorization/guards/authorization.jwt.guard";
+import { JwtGuard } from "@app/auth/guard/authorization.jwt.guard";
 import { ROOM_SERVICE } from "../chat.metadata";
 import { ParticipantEntity } from "@app/chat/entity/participant.entity";
-import { SelfGuard } from "@app/authorization/guards/authorization.self.guard";
+import { SelfGuard } from "@app/auth/guard/authorization.self.guard";
 import { RoomService } from "@app/chat/providers/room.service.interface";
 
 @Controller("room")

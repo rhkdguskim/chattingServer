@@ -1,6 +1,6 @@
 import { createParamDecorator, ExecutionContext } from "@nestjs/common";
 import { Socket } from "socket.io";
-import { TokenInfoResponse } from "@app/authorization/dto/authorization.dto";
+import { TokenInfoResponse } from "@app/auth/dto/authorization.dto";
 
 export const GetUser = createParamDecorator(
   (data, ctx: ExecutionContext): TokenInfoResponse => {

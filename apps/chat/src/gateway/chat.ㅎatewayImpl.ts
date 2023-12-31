@@ -25,8 +25,8 @@ import { RoomEntity, RoomType } from "@app/chat/entity/room.entity";
 import { ParticipantEntity } from "@app/chat/entity/participant.entity";
 import { ChatEntity } from "@app/chat/entity/chatting.entity";
 import { ChatGateway } from "@app/chat/gateway/chat.gateway.interface";
-import { AUTHORIZATION_SERVICE } from "@app/authorization/authorization.metadata";
-import { AuthorizationService } from "@app/authorization/providers/authorization.service.interface";
+import { AUTHORIZATION_SERVICE } from "@app/auth/authorization.metadata";
+import { AuthorizationService } from "@app/auth/providers/authorization.service.interface";
 
 @WebSocketGateway({ cors: true })
 export class ChatGatewayImpl

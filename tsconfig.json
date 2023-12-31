@@ -15,7 +15,7 @@
         "config/*"
       ],
       "@src/*": [
-        "apps/apigateway/src/*"
+        "apps/main/src/*"
       ],
       "@app/common": [
         "libs/common/src"
@@ -23,11 +23,11 @@
       "@app/common/*": [
         "libs/common/src/*"
       ],
-      "@app/authentication/": [
-        "apps/authentication/src/"
+      "@app/auth/": [
+        "apps/auth/src/"
       ],
-      "@app/authentication/*": [
-        "apps/authentication/src/*"
+      "@app/auth/*": [
+        "apps/auth/src/*"
       ],
       "@app/authorization/": [
         "apps/authorization/src/"

@@ -1,17 +1,21 @@
 import { Test, TestingModule } from "@nestjs/testing";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { typeOrmConfig } from "@app/common/module";
 import { ChatService } from "@app/chat/providers/chat.service.interface";
 import { CHAT_SERVICE } from "@app/chat/chat.metadata";
 import { ChatServiceModule } from "@app/chat/module/chat.service.module";
 import { ChattingResponse, ChatType } from "@app/chat/dto/chat.dto";
 import { ChatEntity } from "@app/chat/entity/chatting.entity";
+import { typeOrmConfig } from "@app/common/typeorm/typeorm.config";
+import { DataSourceOptions } from "typeorm/data-source/DataSourceOptions";
 
 describe("Chat Service Test", () => {
   let chatService: ChatService;
   beforeAll(async () => {
     const app: TestingModule = await Test.createTestingModule({
-      imports: [TypeOrmModule.forRoot(typeOrmConfig), ChatServiceModule],
+      imports: [
+        TypeOrmModule.forRoot(typeOrmConfig as DataSourceOptions),
+        ChatServiceModule,
+      ],
     }).compile();
 
     chatService = app.get<ChatService>(CHAT_SERVICE);

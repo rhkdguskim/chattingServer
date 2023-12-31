@@ -1,7 +1,7 @@
 import { UserService } from "@app/user/providers/user.service.interface";
 import { Inject } from "@nestjs/common";
-import { BCRYPT_SERVICE } from "@app/authentication/authentication.metadata";
-import { BcryptService } from "@app/common/auth/bcrypt/bcrpy.interface";
+import { BCRYPT_SERVICE } from "@app/auth/authentication.metadata";
+import { BcryptService } from "@app/auth/providers/bcrypt/bcrpy.interface";
 import { UserRepository } from "@app/user/repository/users.interface.repository";
 import {
   ServerException,
