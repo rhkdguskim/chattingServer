@@ -6,7 +6,7 @@ import { FileModule } from "@src/file/file.module";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { CacheRedisModule } from "@src/util/cacheRedis.module";
 import { DataSourceOptions } from "typeorm/data-source/DataSourceOptions";
-import { typeOrmConfig } from "@app/common/database/typeorm.config";
+import { typeOrmConfig } from "@lib/common/database/typeorm.config";
 
 @Module({
   imports: [

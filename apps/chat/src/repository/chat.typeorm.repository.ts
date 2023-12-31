@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
-import { TypeormRepository } from "@app/common/database/typeorm.repository";
-import { ChattingTypeORM } from "@app/common/database/entity/chatting.typeorm.entity";
+import { TypeormRepository } from "@lib/common/database/typeorm.repository";
+import { ChattingTypeORM } from "@lib/common/database/entity/chatting.typeorm.entity";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 import { ChatRepository } from "@app/chat/repository/chat.repository.interface";

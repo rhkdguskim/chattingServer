@@ -17,10 +17,10 @@
       "@src/*": [
         "apps/main/src/*"
       ],
-      "@app/common": [
+      "@lib/common": [
         "libs/common/src"
       ],
-      "@app/common/*": [
+      "@lib/common/*": [
         "libs/common/src/*"
       ],
       "@app/auth/": [

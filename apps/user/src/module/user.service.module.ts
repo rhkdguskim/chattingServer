@@ -9,8 +9,8 @@ import { FriendTypeORMRepository } from "../repository/friend.typeorm.repository
 import { TypeOrmModule } from "@nestjs/typeorm";
 
 import { FriendServiceImpl } from "../providers/friend.service";
-import { FriendTypeORM } from "@app/common/database/entity/friend.typeorm.entity";
-import { UserTypeORM } from "@app/common/database/entity/users.typeorm.entity";
+import { FriendTypeORM } from "@lib/common/database/entity/friend.typeorm.entity";
+import { UserTypeORM } from "@lib/common/database/entity/users.typeorm.entity";
 import { BCRYPT_SERVICE } from "@app/auth/authentication.metadata";
 import { UserTypeORMRepository } from "@app/user/repository/users.typeorm.repository";
 import { UserServiceImpl } from "@app/user/providers/user.service";

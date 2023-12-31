@@ -2,10 +2,10 @@ import { Test, TestingModule } from "@nestjs/testing";
 import { UserServiceModule } from "@app/user/module/user.service.module";
 import { FriendService } from "@app/user/providers/friend.service.interface";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { ServerException } from "@app/common/exception/server.exception";
+import { ServerException } from "@lib/common/exception/server.exception";
 import { FRIEND_SERVICE, USER_SERVICE } from "@app/user/user.metadata";
 import { DataSourceOptions } from "typeorm/data-source/DataSourceOptions";
-import { typeOrmConfig } from "@app/common/database/typeorm.config";
+import { typeOrmConfig } from "@lib/common/database/typeorm.config";
 import { UserService } from "@app/user/providers/user.service.interface";
 import { UserInfoResponse } from "@app/user/dto/user.dto";
 

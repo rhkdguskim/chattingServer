@@ -6,7 +6,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
-import { ParticipantTypeORM } from "@app/common/database/entity/participant.typeorm.entity";
+import { ParticipantTypeORM } from "@lib/common/database/entity/participant.typeorm.entity";
 import { ChattingTypeORM } from "./chatting.typeorm.entity";
 import { RoomEntity, RoomType } from "@app/chat/entity/room.entity";
 

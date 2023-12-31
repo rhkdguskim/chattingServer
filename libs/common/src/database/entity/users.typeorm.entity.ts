@@ -6,10 +6,11 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
-import { FriendTypeORM } from "@app/common/database/entity/friend.typeorm.entity";
-import { ChattingTypeORM } from "@app/common/database/entity/chatting.typeorm.entity";
-import { ParticipantTypeORM } from "@app/common/database/entity/participant.typeorm.entity";
-import { Role, UserEntity } from "@app/user/entity/users.entity";
+import { FriendTypeORM } from "@lib/common/database/entity/friend.typeorm.entity";
+import { ChattingTypeORM } from "@lib/common/database/entity/chatting.typeorm.entity";
+import { ParticipantTypeORM } from "@lib/common/database/entity/participant.typeorm.entity";
+import { UserEntity } from "@app/user/entity/users.entity";
+import {Role} from "@lib/common/guard/authorization.role.guard";
 
 @Entity({ name: "user" })
 export class UserTypeORM implements UserEntity {

@@ -28,6 +28,14 @@ export class CreateUserRequest {
   @ApiProperty({ description: "상태 메세지" })
   @IsOptional()
   status_msg: string;
+
+  @IsString()
+  @ApiProperty({ description: "access_token" })
+  access_token?: string;
+
+  @IsString()
+  @ApiProperty({ description: "refresh_token" })
+  refresh_token?: string;
 }
 
 export class UserInfoResponse {

@@ -1,6 +1,6 @@
 import { Logger, Module } from "@nestjs/common";
 import { AuthorizationServiceModule } from "./authorization.service.module";
-import { JwtGuard } from "@app/auth/guard/authorization.jwt.guard";
+import { JwtGuard } from "@lib/common/guard/authorization.jwt.guard";
 
 @Module({
   imports: [AuthorizationServiceModule],

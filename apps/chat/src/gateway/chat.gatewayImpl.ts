@@ -17,7 +17,7 @@ import {
   ResponseMultiRead,
   ResponseSingleRead,
 } from "../dto/chat.dto";
-import { GetWsUserID } from "@app/common/decorator/auth.decorator";
+import { GetWsUserID } from "@lib/common/decorator/auth.decorator";
 import { RoomService } from "../providers/room.service.interface";
 import { ChatService } from "../providers/chat.service.interface";
 import { CHAT_SERVICE, ROOM_SERVICE } from "../chat.metadata";

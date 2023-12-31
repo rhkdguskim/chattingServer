@@ -5,7 +5,7 @@ import { CHAT_SERVICE } from "@app/chat/chat.metadata";
 import { ChatServiceModule } from "@app/chat/module/chat.service.module";
 import { ChattingResponse, ChatType } from "@app/chat/dto/chat.dto";
 import { ChatEntity } from "@app/chat/entity/chatting.entity";
-import { typeOrmConfig } from "@app/common/database/typeorm.config";
+import { typeOrmConfig } from "@lib/common/database/typeorm.config";
 import { DataSourceOptions } from "typeorm/data-source/DataSourceOptions";
 
 describe("Chat Service Test", () => {

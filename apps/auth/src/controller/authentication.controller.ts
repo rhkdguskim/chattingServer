@@ -3,13 +3,12 @@ import { ApiCreatedResponse, ApiOperation, ApiTags } from "@nestjs/swagger";
 import { AuthenticationController } from "./authentication.controller.interface";
 import { AuthenticationService } from "../providers/authentication.service.interface";
 import {
-  CreateUserRequestByOAuth,
   LoginUserRequest,
   LoginUserResponse,
 } from "@app/auth/dto/authenticaion.dto";
 import { AUTHENTICATION_SERVICE } from "@app/auth/authentication.metadata";
 import { AuthGuard } from "@nestjs/passport";
-import { GetOAuthData } from "@app/common/decorator/auth.decorator";
+import { GetOAuthData } from "@lib/common/decorator/auth.decorator";
 
 @Controller("auth")
 @ApiTags("Authentication")
@@ -44,10 +43,10 @@ export class AuthenticationControllerImpl implements AuthenticationController {
     description: "Access Token, Refresh Token",
     type: LoginUserResponse,
   })
-  googleSignIn(
-    @GetOAuthData() data: CreateUserRequestByOAuth
+  async googleSignIn(
+    @GetOAuthData() data: LoginUserRequest
   ): Promise<LoginUserResponse> {
-    return Promise.resolve(undefined);
+    return await this.authenticationService.signIn(data);
   }
 
   @Post("oauth/kakao")
@@ -60,10 +59,10 @@ export class AuthenticationControllerImpl implements AuthenticationController {
     description: "Access Token, Refresh Token",
     type: LoginUserResponse,
   })
-  kakaoSignIn(
-    @GetOAuthData() data: CreateUserRequestByOAuth
+  async kakaoSignIn(
+    @GetOAuthData() data: LoginUserRequest
   ): Promise<LoginUserResponse> {
-    return Promise.resolve(undefined);
+    return await this.authenticationService.signIn(data);
   }
 
   @Post("oauth/naver")
@@ -76,9 +75,9 @@ export class AuthenticationControllerImpl implements AuthenticationController {
     description: "Access Token, Refresh Token",
     type: LoginUserResponse,
   })
-  naverSignIn(
-    @GetOAuthData() data: CreateUserRequestByOAuth
+  async naverSignIn(
+    @GetOAuthData() data: LoginUserRequest
   ): Promise<LoginUserResponse> {
-    return Promise.resolve(undefined);
+    return await this.authenticationService.signIn(data);
   }
 }

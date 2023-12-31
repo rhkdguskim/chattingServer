@@ -1,10 +1,10 @@
 import { CanActivate, ExecutionContext, Injectable } from "@nestjs/common";
 import { Observable } from "rxjs";
-import { Role } from "@app/user/entity/users.entity";
 import {
   ServerException,
   ServerExceptionCode,
-} from "@app/common/exception/server.exception";
+} from "@lib/common/exception/server.exception";
+import {Role} from "@lib/common/guard/authorization.role.guard";
 
 @Injectable()
 export class SelfGuard implements CanActivate {

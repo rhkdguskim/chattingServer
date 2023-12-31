@@ -1,10 +1,10 @@
 import { DB_CONFIG } from "@config/config.interface";
-import { UserTypeORM } from "@app/common/database/entity/users.typeorm.entity";
-import { FriendTypeORM } from "@app/common/database/entity/friend.typeorm.entity";
-import { ChattingTypeORM } from "@app/common/database/entity/chatting.typeorm.entity";
-import { RoomTypeORM } from "@app/common/database/entity/room.typeorm.entity";
-import { ParticipantTypeORM } from "@app/common/database/entity/participant.typeorm.entity";
-import { ReadByTypeORM } from "@app/common/database/entity/readby.typeorm.entity";
+import { UserTypeORM } from "@lib/common/database/entity/users.typeorm.entity";
+import { FriendTypeORM } from "@lib/common/database/entity/friend.typeorm.entity";
+import { ChattingTypeORM } from "@lib/common/database/entity/chatting.typeorm.entity";
+import { RoomTypeORM } from "@lib/common/database/entity/room.typeorm.entity";
+import { ParticipantTypeORM } from "@lib/common/database/entity/participant.typeorm.entity";
+import { ReadByTypeORM } from "@lib/common/database/entity/readby.typeorm.entity";
 
 export const typeOrmConfig = {
   type: process.env.DB_TYPE || DB_CONFIG.main.type,

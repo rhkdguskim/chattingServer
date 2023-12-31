@@ -1,9 +1,5 @@
-import { FriendEntity } from "@app/user/entity/friend.entity";
-
-export enum Role {
-  ADMIN = 0,
-  USER = 1,
-}
+import {FriendEntity} from "@app/user/entity/friend.entity";
+import {Role} from "@lib/common/guard/authorization.role.guard";
 
 export class UserEntity {
   constructor(user: UserEntity) {

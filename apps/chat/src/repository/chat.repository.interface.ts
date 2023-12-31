@@ -1,4 +1,4 @@
-import { Repository } from "@app/common/database/typeorm.repository.interface";
+import { Repository } from "@lib/common/database/typeorm.repository.interface";
 import { ChatEntity } from "@app/chat/entity/chatting.entity";
 import { ChattingListRequest, ChattingResponse } from "@app/chat/dto/chat.dto";
 

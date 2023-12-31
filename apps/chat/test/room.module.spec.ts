@@ -7,9 +7,9 @@ import { CreateRoomResponse } from "@app/chat/dto/room.dto";
 import {
   ServerException,
   ServerExceptionCode,
-} from "@app/common/exception/server.exception";
+} from "@lib/common/exception/server.exception";
 import { RoomType } from "@app/chat/entity/room.entity";
-import { typeOrmConfig } from "@app/common/database/typeorm.config";
+import { typeOrmConfig } from "@lib/common/database/typeorm.config";
 import { DataSourceOptions } from "typeorm/data-source/DataSourceOptions";
 
 describe("Room Service Test", () => {

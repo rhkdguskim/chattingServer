@@ -4,9 +4,9 @@ import { Repository } from "typeorm";
 import { FriendEntity } from "../entity/friend.entity";
 import { FindFriendRequest } from "../dto/friend.dto";
 import { FriendRepository } from "./friend.repository.interface";
-import { FriendTypeORM } from "@app/common/database/entity/friend.typeorm.entity";
-import { TypeormRepository } from "@app/common/database/typeorm.repository";
-import { UserTypeORM } from "@app/common/database/entity/users.typeorm.entity";
+import { FriendTypeORM } from "@lib/common/database/entity/friend.typeorm.entity";
+import { TypeormRepository } from "@lib/common/database/typeorm.repository";
+import { UserTypeORM } from "@lib/common/database/entity/users.typeorm.entity";
 import { UserEntity } from "@app/user/entity/users.entity";
 
 @Injectable()

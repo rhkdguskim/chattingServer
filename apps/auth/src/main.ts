@@ -2,16 +2,16 @@ import { NestFactory } from "@nestjs/core";
 import { AuthenticationModule } from "./module/authentication.module";
 import { MicroserviceOptions, Transport } from "@nestjs/microservices";
 import { Logger } from "@nestjs/common";
-import { RcpExceptionsFilter } from "@app/common/exception/server.exception.filter";
-import winstonLogger from "@app/common/logger/nest.winston.logger";
-import { SERVER_INFO_CONFIG } from "../../../config/config.interface";
-import { MicroServiceLoggingInterceptor } from "@app/common/interceptor/micro.service.logging.interceptor";
+import { RcpExceptionsFilter } from "@lib/common/exception/server.exception.filter";
+import winstonLogger from "@lib/common/logger/nest.winston.logger";
+import { MicroServiceLoggingInterceptor } from "@lib/common/interceptor/micro.service.logging.interceptor";
+import {LOG_CONFIG, SERVER_INFO_CONFIG} from "@config/config.interface";
 
 async function bootstrap() {
   const logger = winstonLogger({
-    name: "AuthenticationMicroService",
-    filepath: "AuthenticationMicroService",
-    loglevel: "debug",
+    name: LOG_CONFIG.name,
+    filepath: LOG_CONFIG.filepath,
+    loglevel: LOG_CONFIG.loglevel,
   });
   const app = await NestFactory.createMicroservice<MicroserviceOptions>(
     AuthenticationModule,
@@ -19,8 +19,8 @@ async function bootstrap() {
       logger,
       transport: Transport.TCP,
       options: {
-        host: SERVER_INFO_CONFIG.authentication.host,
-        port: SERVER_INFO_CONFIG.authentication.port,
+        host: SERVER_INFO_CONFIG.auth.host,
+        port: SERVER_INFO_CONFIG.auth.port,
       },
     }
   );

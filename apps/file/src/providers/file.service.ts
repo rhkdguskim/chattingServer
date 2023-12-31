@@ -2,7 +2,7 @@ import { Injectable } from "@nestjs/common";
 import {
   ServerException,
   ServerExceptionCode,
-} from "@app/common/exception/server.exception";
+} from "@lib/common/exception/server.exception";
 
 @Injectable()
 export class FileService {

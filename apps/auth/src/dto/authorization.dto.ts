@@ -1,5 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { Role } from "@app/user/entity/users.entity";
+
+import {Role} from "@lib/common/guard/authorization.role.guard";
 
 export class TokenInfoRequest {
   constructor(user: TokenInfoRequest) {

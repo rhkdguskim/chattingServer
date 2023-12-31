@@ -3,7 +3,7 @@ import { AuthenticationServiceModule } from "@app/auth/module/authentication.ser
 import { TypeOrmModule } from "@nestjs/typeorm";
 
 import { AuthenticationControllerImpl } from "@app/auth/controller/authentication.controller";
-import { typeOrmConfig } from "@app/common/database/typeorm.config";
+import { typeOrmConfig } from "@lib/common/database/typeorm.config";
 import { DataSourceOptions } from "typeorm/data-source/DataSourceOptions";
 
 @Module({

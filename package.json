@@ -46,13 +46,6 @@
     "@nestjs/websockets": "^9.0.0",
     "@nestjsplus/cookies": "^1.1.1",
     "@nestjsx/crud-typeorm": "^5.0.0-alpha.3",
-    "@types/cache-manager": "^4.0.2",
-    "@types/cache-manager-redis-store": "^2.0.1",
-    "@types/config": "^3.3.3",
-    "@types/passport-google-oauth20": "^2.0.11",
-    "@types/passport-kakao": "^1.0.0",
-    "@types/passport-naver": "^1.0.1",
-    "@types/socket.io-client": "^3.0.0",
     "axios": "^1.6.0",
     "bcrypt": "^5.1.0",
     "cache-manager-ioredis": "^2.1.0",
@@ -76,6 +69,13 @@
     "winston": "^3.10.0"
   },
   "devDependencies": {
+    "@types/cache-manager": "^4.0.2",
+    "@types/cache-manager-redis-store": "^2.0.1",
+    "@types/config": "^3.3.3",
+    "@types/passport-google-oauth20": "^2.0.11",
+    "@types/passport-kakao": "^1.0.0",
+    "@types/passport-naver": "^1.0.1",
+    "@types/socket.io-client": "^3.0.0",
     "@nestjs/cli": "^9.0.0",
     "@nestjs/schematics": "^9.0.0",
     "@nestjs/testing": "^9.0.0",
@@ -127,7 +127,7 @@
       "^@app/chat(|/.*)$": "<rootDir>/apps/chat/src/$1",
       "^@app/user(|/.*)$": "<rootDir>/apps/user/src/$1",
       "^@app/file(|/.*)$": "<rootDir>/apps/file/src/$1",
-      "^@app/common(|/.*)$": "<rootDir>/libs/common/src/$1"
+      "^@lib/common(|/.*)$": "<rootDir>/libs/common/src/$1"
     },
     "coverageDirectory": "./coverage",
     "testEnvironment": "node",

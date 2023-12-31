@@ -16,11 +16,11 @@ import {
   ApiTags,
 } from "@nestjs/swagger";
 import { ReadChatCacheInterceptor } from "../interceptors/chatting.readchat.cache.interceptor";
-import { JwtGuard } from "@app/auth/guard/authorization.jwt.guard";
+import { JwtGuard } from "@lib/common/guard/authorization.jwt.guard";
 import { ChattingResponse, RequestMessage } from "../dto/chat.dto";
 import { ChatService } from "../providers/chat.service.interface";
 import { CHAT_SERVICE } from "../chat.metadata";
-import { SelfGuard } from "@app/auth/guard/authorization.self.guard";
+import { SelfGuard } from "@lib/common/guard/authorization.self.guard";
 
 @Controller("chatting")
 @UseGuards(JwtGuard, SelfGuard)

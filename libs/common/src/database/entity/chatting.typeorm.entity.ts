@@ -8,9 +8,9 @@ import {
   JoinColumn,
   OneToMany,
 } from "typeorm";
-import { RoomTypeORM } from "@app/common/database/entity/room.typeorm.entity";
-import { UserTypeORM } from "@app/common/database/entity/users.typeorm.entity";
-import { ReadByTypeORM } from "@app/common/database/entity/readby.typeorm.entity";
+import { RoomTypeORM } from "@lib/common/database/entity/room.typeorm.entity";
+import { UserTypeORM } from "@lib/common/database/entity/users.typeorm.entity";
+import { ReadByTypeORM } from "@lib/common/database/entity/readby.typeorm.entity";
 import { ChatEntity } from "@app/chat/entity/chatting.entity";
 
 @Entity({ name: "chat" })

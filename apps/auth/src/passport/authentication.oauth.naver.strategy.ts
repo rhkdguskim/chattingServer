@@ -1,27 +1,19 @@
 import { PassportStrategy } from "@nestjs/passport";
 import { Strategy } from "passport-naver";
-import * as config from "config";
-import { OAuthData } from "@app/auth/dto/authenticaion.dto";
+import {OAUTH_CONFIG} from "@config/config.interface";
 
-interface Naver {
-  restApiKey: string;
-  secret: string;
-  redirectURL: string;
-}
-
-const naver = config.get<Naver>("naver");
 export class JwtNaverStrategy extends PassportStrategy(Strategy, "naver") {
   constructor() {
     super({
-      clientID: naver.restApiKey,
-      clientSecret: naver.secret,
-      callbackURL: naver.redirectURL,
+      clientID: OAUTH_CONFIG.naver.apiKey,
+      clientSecret: OAUTH_CONFIG.naver.secret,
+      callbackURL: OAUTH_CONFIG.naver.redirect_url,
     });
   }
 
   validate(access_token: string, refresh_token: string, profile: any, done) {
     const user = profile._json;
-    const response: OAuthData = {
+    const response = {
       access_token,
       refresh_token,
       user: {

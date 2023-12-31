@@ -1,17 +1,14 @@
-import {
-  CanActivate,
-  ExecutionContext,
-  Injectable,
-  SetMetadata,
-} from "@nestjs/common";
-import { Reflector } from "@nestjs/core";
-import { Role } from "@app/user/entity/users.entity";
-import {
-  ServerException,
-  ServerExceptionCode,
-} from "@app/common/exception/server.exception";
+import {CanActivate, ExecutionContext, Injectable, SetMetadata,} from "@nestjs/common";
+import {Reflector} from "@nestjs/core";
+import {ServerException, ServerExceptionCode,} from "@lib/common/exception/server.exception";
 
 export const ROLES_KEY = "roles";
+
+export enum Role {
+    ADMIN = 0,
+    USER = 1,
+}
+
 export const Roles = (roles: Role) => SetMetadata(ROLES_KEY, roles);
 
 @Injectable()

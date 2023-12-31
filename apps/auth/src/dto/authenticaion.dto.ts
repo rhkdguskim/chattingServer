@@ -1,29 +1,6 @@
 import { IsString, Matches } from "class-validator";
 import { ApiProperty } from "@nestjs/swagger";
-import { CreateUserRequest } from "@app/user/dto/user.dto";
 
-export class CreateUserRequestByOAuth extends CreateUserRequest {
-  @IsString()
-  @ApiProperty({ description: "access_token" })
-  access_token: string;
-
-  @IsString()
-  @ApiProperty({ description: "refresh_token" })
-  refresh_token: string;
-}
-
-export class CreateUserRequestOAuth extends CreateUserRequest {
-  constructor(createUserRequest: CreateUserRequestOAuth) {
-    super(createUserRequest);
-    this.access_token = createUserRequest.access_token;
-    this.refresh_token = createUserRequest.refresh_token;
-  }
-  @ApiProperty({ description: "access_token" })
-  access_token: string;
-
-  @ApiProperty({ description: "refresh_token" })
-  refresh_token: string;
-}
 
 export class LoginUserRequest {
   constructor(loginRequest: LoginUserRequest) {

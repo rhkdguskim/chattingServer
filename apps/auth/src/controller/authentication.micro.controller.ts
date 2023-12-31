@@ -15,6 +15,16 @@ export class AuthenticationMicroController implements AuthenticationController {
     @Inject(AUTHENTICATION_SERVICE)
     private readonly authenticationService: AuthenticationService
   ) {}
+
+  googleSignIn(oauthData: LoginUserRequest): Promise<LoginUserResponse> {
+        throw new Error("Method not implemented.");
+    }
+    kakaoSignIn(oauthData: LoginUserRequest): Promise<LoginUserResponse> {
+        throw new Error("Method not implemented.");
+    }
+    naverSignIn(oauthData: LoginUserRequest): Promise<LoginUserResponse> {
+        throw new Error("Method not implemented.");
+    }
   @MessagePattern({ cmd: SIGN_IN })
   async signIn(payload: LoginUserRequest): Promise<LoginUserResponse> {
     return await this.authenticationService.signIn(payload);

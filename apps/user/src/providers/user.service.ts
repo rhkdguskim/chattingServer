@@ -6,7 +6,7 @@ import { UserRepository } from "@app/user/repository/users.interface.repository"
 import {
   ServerException,
   ServerExceptionCode,
-} from "@app/common/exception/server.exception";
+} from "@lib/common/exception/server.exception";
 import { UserEntity } from "@app/user/entity/users.entity";
 import { USER_REPOSITORY } from "@app/user/user.metadata";
 import {

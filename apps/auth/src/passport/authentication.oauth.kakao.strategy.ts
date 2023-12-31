@@ -1,23 +1,14 @@
 import { PassportStrategy } from "@nestjs/passport";
 import { Strategy } from "passport-kakao";
-import * as config from "config";
 import { KakaoUserResponse } from "@app/auth/dto/authentication.kakao.dto";
+import {OAUTH_CONFIG} from "@config/config.interface";
 
-import { OAuthData } from "@app/auth/dto/authenticaion.dto";
-
-interface Kakao {
-  restApiKey: string;
-  secret: string;
-  redirectURL: string;
-}
-
-const kakao = config.get<Kakao>("kakao");
 export class JwtKakaoStrategy extends PassportStrategy(Strategy, "kakao") {
   constructor() {
     super({
-      clientID: kakao.restApiKey,
-      clientSecret: kakao.secret,
-      callbackURL: kakao.redirectURL,
+      clientID: OAUTH_CONFIG.kakao.apiKey,
+      clientSecret: OAUTH_CONFIG.kakao.secret,
+      callbackURL: OAUTH_CONFIG.kakao.redirect_url,
       scope: ["account_email", "profile_nickname"],
     });
   }
@@ -30,7 +21,7 @@ export class JwtKakaoStrategy extends PassportStrategy(Strategy, "kakao") {
   ) {
     const user: KakaoUserResponse = profile._json;
 
-    const response: OAuthData = {
+    const response = {
       access_token,
       refresh_token,
       user: {

@@ -8,8 +8,8 @@ import {
   ParticipantUserInfo,
   RoomInfoResponse,
 } from "@app/chat/dto/room.dto";
-import { RoomTypeORM } from "@app/common/database/entity/room.typeorm.entity";
-import { ParticipantTypeORM } from "@app/common/database/entity/participant.typeorm.entity";
+import { RoomTypeORM } from "@lib/common/database/entity/room.typeorm.entity";
+import { ParticipantTypeORM } from "@lib/common/database/entity/participant.typeorm.entity";
 import { RoomRepository } from "@app/chat/repository/room.repository.interface";
 import { RoomEntity } from "../entity/room.entity";
 

@@ -2,7 +2,7 @@ import { Inject, Injectable } from "@nestjs/common";
 import {
   ServerException,
   ServerExceptionCode,
-} from "@app/common/exception/server.exception";
+} from "@lib/common/exception/server.exception";
 import { AuthenticationService } from "./authentication.service.interface";
 import { BCRYPT_SERVICE } from "../authentication.metadata";
 import { UserRepository } from "@app/user/repository/users.interface.repository";

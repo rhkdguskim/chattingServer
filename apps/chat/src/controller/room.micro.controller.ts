@@ -15,7 +15,7 @@ import {
   INVITE_ROOM,
   UPDATE_ROOM,
 } from "../room.message";
-import { RoomTypeORM } from "@app/common/database/entity/room.typeorm.entity";
+import { RoomTypeORM } from "@lib/common/database/entity/room.typeorm.entity";
 import { RoomEntity } from "@app/chat/entity/room.entity";
 import { ParticipantEntity } from "@app/chat/entity/participant.entity";
 

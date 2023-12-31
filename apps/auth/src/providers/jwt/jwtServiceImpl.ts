@@ -6,7 +6,7 @@ import {
 } from "@app/auth/dto/authorization.dto";
 import { LoginUserResponse } from "@app/auth/dto/authenticaion.dto";
 
-export interface CommonJwtConfig {
+export interface JwtConfig {
   secret: string;
   expire_in: string;
 }
@@ -14,7 +14,7 @@ export interface CommonJwtConfig {
 export class JwtServiceImpl {
   private jwtService: JwtService;
   private option: JwtModuleOptions;
-  constructor(options?: CommonJwtConfig) {
+  constructor(options?: JwtConfig) {
     const opt: JwtModuleOptions = {
       secret: options.secret,
       signOptions: {

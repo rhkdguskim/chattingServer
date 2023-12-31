@@ -6,7 +6,7 @@ import {
   InviteRoomRequest,
   RoomInfoResponse,
 } from "@app/chat/dto/room.dto";
-import { RoomTypeORM } from "@app/common/database/entity/room.typeorm.entity";
+import { RoomTypeORM } from "@lib/common/database/entity/room.typeorm.entity";
 import { ParticipantEntity } from "@app/chat/entity/participant.entity";
 
 export interface RoomRepository {

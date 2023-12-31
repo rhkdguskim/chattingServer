@@ -1,16 +1,16 @@
 import { NestFactory } from "@nestjs/core";
 import { AppModule } from "./app.module";
 import * as cookieParser from "cookie-parser";
-import { LoggingInterceptor } from "@app/common/interceptor/logging.interceptor";
+import { LoggingInterceptor } from "@lib/common/interceptor/logging.interceptor";
 import { Logger, ValidationPipe } from "@nestjs/common";
 import winstonLogger, {
   winstonLoggerConfig,
-} from "@app/common/logger/nest.winston.logger";
-import { ServerExceptionFilter } from "@app/common/exception/server.exception.filter";
+} from "@lib/common/logger/nest.winston.logger";
+import { ServerExceptionFilter } from "@lib/common/exception/server.exception.filter";
 import {
   ServerException,
   ServerExceptionCode,
-} from "@app/common/exception/server.exception";
+} from "@lib/common/exception/server.exception";
 import {
   CORS_CONFIG,
   LOG_CONFIG,

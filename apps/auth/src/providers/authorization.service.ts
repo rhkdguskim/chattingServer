@@ -10,7 +10,7 @@ import { LoginUserResponse } from "@app/auth/dto/authenticaion.dto";
 import {
   ServerException,
   ServerExceptionCode,
-} from "@app/common/exception/server.exception";
+} from "@lib/common/exception/server.exception";
 
 @Injectable()
 export class AuthorizationServiceImpl implements AuthorizationService {

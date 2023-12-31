@@ -13,7 +13,7 @@ import { UserEntity } from "@app/user/entity/users.entity";
 import {
   ServerException,
   ServerExceptionCode,
-} from "@app/common/exception/server.exception";
+} from "@lib/common/exception/server.exception";
 import { FriendService } from "@app/user/providers/friend.service.interface";
 
 import { UserInfoResponse } from "@app/user/dto/user.dto";

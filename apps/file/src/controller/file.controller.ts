@@ -19,8 +19,8 @@ import { FileService } from "../providers/file.service";
 import { FileInterceptor } from "@nestjs/platform-express";
 import * as path from "path";
 import { Response } from "express";
-import { JwtGuard } from "@app/auth/guard/authorization.jwt.guard";
-import { SelfGuard } from "@app/auth/guard/authorization.self.guard";
+import { JwtGuard } from "@lib/common/guard/authorization.jwt.guard";
+import { SelfGuard } from "@lib/common/guard/authorization.self.guard";
 
 @Controller("file")
 @UseGuards(JwtGuard, SelfGuard)

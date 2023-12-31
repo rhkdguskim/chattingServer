@@ -4,8 +4,7 @@ export const SERVER_INFO_CONFIG = config.get<ServerInfoConfig>("server");
 
 interface ServerInfoConfig {
   main: ServerConfig;
-  authentication?: ServerConfig;
-  authorization?: ServerConfig;
+  auth?: ServerConfig;
   user?: ServerConfig;
   chat?: ServerConfig;
   file?: ServerConfig;

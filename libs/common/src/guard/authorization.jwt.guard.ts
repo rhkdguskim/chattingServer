@@ -11,7 +11,7 @@ import { AUTHORIZATION_SERVICE } from "@app/auth/authorization.metadata";
 import {
   ServerException,
   ServerExceptionCode,
-} from "@app/common/exception/server.exception";
+} from "@lib/common/exception/server.exception";
 
 @Injectable()
 export class JwtGuard implements CanActivate {

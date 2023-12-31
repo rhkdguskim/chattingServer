@@ -16,7 +16,7 @@ import { ParticipantEntity } from "../entity/participant.entity";
 import {
   ServerException,
   ServerExceptionCode,
-} from "@app/common/exception/server.exception";
+} from "@lib/common/exception/server.exception";
 
 const INDIVIDUAL_CHAT_CNT = 1;
 const TWO_CHAT_CNT = 2;
