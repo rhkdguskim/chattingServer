@@ -17,6 +17,7 @@
 - [x] MySQL, Maria DB ( TypeORM )
 - [x] Redis ( Caching Interceptor )
 - [x] Swagger API
+- [x] Docker Deployment
       
 ## 기능
 ### 시연 이미지
@@ -24,10 +25,9 @@
 <img width="738" alt="image" src="https://github.com/rhkdguskim/chattingServer/assets/111857144/52d520df-44df-4d1d-bd9d-ffc2b63fd424">
 
 ### 세부 사항
-- 인증, 인가 서비스 기능
-- 유저, 친구 서비스 기능
-- 채팅, 채팅방, 참가자 서비스 기능
-- 이미지 파일 업로드 및 제공 기능
+- [인증, 인가 서비스 기능](apps/auth/readme.md)
+- [유저, 친구 서비스 기능](apps/user/readme.md)
+- [채팅, 채팅방, 참가자 서비스 기능](apps/chat/readme.md)
 
 ### 서비스 이용해보기
 -
