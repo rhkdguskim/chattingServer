@@ -5,7 +5,7 @@ import { Logger } from "@nestjs/common";
 import { RcpExceptionsFilter } from "@lib/common/exception/server.exception.filter";
 import winstonLogger from "@lib/common/logger/nest.winston.logger";
 import { MicroServiceLoggingInterceptor } from "@lib/common/interceptor/micro.service.logging.interceptor";
-import {LOG_CONFIG, SERVER_INFO_CONFIG} from "@config/config.interface";
+import { LOG_CONFIG, SERVER_INFO_CONFIG } from "@config/config.interface";
 
 async function bootstrap() {
   const logger = winstonLogger({

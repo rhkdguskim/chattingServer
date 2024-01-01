@@ -1,5 +1,5 @@
-import {FriendEntity} from "@app/user/entity/friend.entity";
-import {Role} from "@lib/common/guard/authorization.role.guard";
+import { FriendEntity } from "@app/user/entity/friend.entity";
+import { Role } from "@lib/common/guard/authorization.role.guard";
 
 export class UserEntity {
   constructor(user: UserEntity) {

@@ -27,7 +27,11 @@ import {
   DeleteFriendRequest,
   UpdateFriendRequest,
 } from "../dto/friend.dto";
-import {Role, Roles, RolesGuard} from "@lib/common/guard/authorization.role.guard";
+import {
+  Role,
+  Roles,
+  RolesGuard,
+} from "@lib/common/guard/authorization.role.guard";
 import { SelfGuard } from "@lib/common/guard/authorization.self.guard";
 import { FRIEND_SERVICE } from "@app/user/user.metadata";
 import { UserInfoResponse } from "@app/user/dto/user.dto";

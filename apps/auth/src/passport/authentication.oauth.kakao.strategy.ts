@@ -1,7 +1,7 @@
 import { PassportStrategy } from "@nestjs/passport";
 import { Strategy } from "passport-kakao";
 import { KakaoUserResponse } from "@app/auth/dto/authentication.kakao.dto";
-import {OAUTH_CONFIG} from "@config/config.interface";
+import { OAUTH_CONFIG } from "@config/config.interface";
 
 export class JwtKakaoStrategy extends PassportStrategy(Strategy, "kakao") {
   constructor() {

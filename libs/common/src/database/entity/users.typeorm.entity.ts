@@ -10,7 +10,7 @@ import { FriendTypeORM } from "@lib/common/database/entity/friend.typeorm.entity
 import { ChattingTypeORM } from "@lib/common/database/entity/chatting.typeorm.entity";
 import { ParticipantTypeORM } from "@lib/common/database/entity/participant.typeorm.entity";
 import { UserEntity } from "@app/user/entity/users.entity";
-import {Role} from "@lib/common/guard/authorization.role.guard";
+import { Role } from "@lib/common/guard/authorization.role.guard";
 
 @Entity({ name: "user" })
 export class UserTypeORM implements UserEntity {

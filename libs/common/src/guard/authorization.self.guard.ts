@@ -4,7 +4,7 @@ import {
   ServerException,
   ServerExceptionCode,
 } from "@lib/common/exception/server.exception";
-import {Role} from "@lib/common/guard/authorization.role.guard";
+import { Role } from "@lib/common/guard/authorization.role.guard";
 
 @Injectable()
 export class SelfGuard implements CanActivate {

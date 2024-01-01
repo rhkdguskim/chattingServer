@@ -2,7 +2,7 @@ import { RoomEntity } from "./room.entity";
 import { ReadByEntity } from "./readby.entity";
 
 export class ChatUserInfo {
-  id : number;
+  id: number;
 }
 
 export class ChatEntity {
@@ -24,7 +24,7 @@ export class ChatEntity {
   not_read_chat: number;
   createdAt: Date;
   updatedAt: Date;
-  user : ChatUserInfo;
+  user: ChatUserInfo;
   room: RoomEntity;
   readBys: ReadByEntity[];
 }

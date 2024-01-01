@@ -4,7 +4,7 @@ import { MicroserviceOptions, Transport } from "@nestjs/microservices";
 import { Logger } from "@nestjs/common";
 import winstonLogger from "@lib/common/logger/nest.winston.logger";
 import { MicroServiceLoggingInterceptor } from "@lib/common/interceptor/micro.service.logging.interceptor";
-import {LOG_CONFIG, SERVER_INFO_CONFIG} from "@config/config.interface";
+import { LOG_CONFIG, SERVER_INFO_CONFIG } from "@config/config.interface";
 
 async function bootstrap() {
   const app = await NestFactory.createMicroservice<MicroserviceOptions>(

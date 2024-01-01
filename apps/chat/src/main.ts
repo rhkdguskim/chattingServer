@@ -2,7 +2,7 @@ import { NestFactory } from "@nestjs/core";
 import { ChatModule } from "./module/chat.module";
 import { MicroserviceOptions, Transport } from "@nestjs/microservices";
 import winstonLogger from "@lib/common/logger/nest.winston.logger";
-import {LOG_CONFIG, SERVER_INFO_CONFIG} from "@config/config.interface";
+import { LOG_CONFIG, SERVER_INFO_CONFIG } from "@config/config.interface";
 import { MicroServiceLoggingInterceptor } from "@lib/common/interceptor/micro.service.logging.interceptor";
 import { Logger } from "@nestjs/common";
 

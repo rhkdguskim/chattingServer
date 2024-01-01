@@ -1,6 +1,6 @@
 import { PassportStrategy } from "@nestjs/passport";
 import { Strategy } from "passport-naver";
-import {OAUTH_CONFIG} from "@config/config.interface";
+import { OAUTH_CONFIG } from "@config/config.interface";
 
 export class JwtNaverStrategy extends PassportStrategy(Strategy, "naver") {
   constructor() {
