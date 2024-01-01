@@ -1,5 +1,3 @@
-![visitors](https://visitor-badge.glitch.me/badge?page_id=rhkdguskim.chattingServer)
-
 ## 프로젝트 개요
 > 나만의채팅, 1:1, 그룹 실시간 채팅 기능을 제공하며, 사용자 프로필을 통하여 상태메세지, 배경화면, 프로필화면을 꾸밀 수 있으며, 친구 기능을 통하여 자기자신의 상태메세지를 다른 친구에게 보여줄 수 있습니다.
 - 프로젝트 이름 : Chatting Server
