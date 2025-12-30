@@ -1,41 +1,66 @@
-## 프로젝트 개요
-> 나만의채팅, 1:1, 그룹 실시간 채팅 기능을 제공하며, 사용자 프로필을 통하여 상태메세지, 배경화면, 프로필화면을 꾸밀 수 있으며, 친구 기능을 통하여 자기자신의 상태메세지를 다른 친구에게 보여줄 수 있습니다.
-- 프로젝트 이름 : Chatting Server
-- 프로젝트 지속기간 : 2023. 06 ~ 2024. 01
-- 프로젝트 담당자 : 김광현
-  
-## 환경구성
-### 개발환경
-- 플랫폼 : NodeJS
-- 언어 : TypeScript
-- IDE : VSCode, WebStrom
-- CI/CD : CloudType, Git Action
-- 저장소 : 모노레포 형식
+# 🚀 Chatting Server
 
-### 핵심기술
-- [x] Websocket Realtime Chatting
-- [x] MySQL, Maria DB ( TypeORM )
-- [x] Redis ( Caching Interceptor )
-- [x] Swagger API
-- [x] Docker Deployment
-      
-## 기능
-### 시연 이미지
-<img width="721" alt="image" src="https://github.com/rhkdguskim/chattingServer/assets/111857144/50e7023d-f671-463b-a172-058eaca0fc52">
-<img width="738" alt="image" src="https://github.com/rhkdguskim/chattingServer/assets/111857144/52d520df-44df-4d1d-bd9d-ffc2b63fd424">
+<p align="center">
+  <img src="https://img.shields.io/badge/NestJS-E0234E?style=for-the-badge&logo=nestjs&logoColor=white" />
+  <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white" />
+  <img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white" />
+  <img src="https://img.shields.io/badge/Redis-DC382D?style=for-the-badge&logo=redis&logoColor=white" />
+  <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" />
+  <img src="https://img.shields.io/badge/Socket.io-010101?style=for-the-badge&logo=socket.io&logoColor=white" />
+</p>
 
-### 세부 사항
-- [인증, 인가 서비스 기능](apps/auth/README.md)
-- [유저, 친구 서비스 기능](apps/user/README.md)
-- [채팅, 채팅방, 참가자 서비스 기능](apps/chat/README.md)
+## 📝 프로젝트 개요
+> **나만의 채팅**, **1:1 채팅**, **그룹 실시간 채팅** 기능을 제공하는 고성능 백엔드 서버입니다.  
+> 사용자 프로필(상대 메시지, 배경, 프로필 화면) 커스터마이징과 친구 기능을 통한 실시간 상태 공유를 지원합니다.
 
-## Installation
+- **📅 프로젝트 기간**: 2023. 06 ~ 2024. 01
+- **👤 담당자**: 김광현 ([@rhkdguskim](https://github.com/rhkdguskim))
+- **🏗️ 아키텍처**: Monorepo 기반 Microservices Architecture (MSA) 지향
 
+---
+
+## 🛠️ 기술 스택 및 환경 구성
+
+### Core
+- **Framework**: NestJS (Node.js)
+- **Language**: TypeScript
+- **Communication**: WebSocket (Socket.io), gRPC (Internal)
+
+### Data & Storage
+- **Database**: MySQL / MariaDB (TypeORM)
+- **Caching**: Redis (Performance Optimization & Caching Interceptor)
+
+### DevOps & Tools
+- **Deployment**: Docker, CloudType
+- **CI/CD**: GitHub Actions
+- **API Documentation**: Swagger (OpenAPI)
+- **Repository**: Mono-repo structure
+
+---
+
+## ✨ 핵심 기능
+
+### 📺 서비스 시연
+<p align="center">
+  <img width="48%" alt="Demo 1" src="https://github.com/rhkdguskim/chattingServer/assets/111857144/50e7023d-f671-463b-a172-058eaca0fc52">
+  <img width="48%" alt="Demo 2" src="https://github.com/rhkdguskim/chattingServer/assets/111857144/52d520df-44df-4d1d-bd9d-ffc2b63fd424">
+</p>
+
+### 🔍 마이크로서비스 상세
+- 🔐 [**Auth Service**](apps/auth/README.md): 인증 및 인가 (JWT, Passport)
+- 👤 [**User Service**](apps/user/README.md): 유저 관리, 프로필 커스터마이징, 친구 시스템
+- 💬 [**Chat Service**](apps/chat/README.md): 실시간 채팅, 채팅방 관리, 참가자 제어
+
+---
+
+## 🚀 시작하기
+
+### 설치
 ```bash
 $ npm install
 ```
 
-## Running the app
+### 실행
 ```bash
 # development
 $ npm run start
@@ -47,8 +72,7 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
-## Test
-
+### 테스트
 ```bash
 # unit tests
 $ npm run test
@@ -59,3 +83,4 @@ $ npm run test:e2e
 # test coverage
 $ npm run test:cov
 ```
+
